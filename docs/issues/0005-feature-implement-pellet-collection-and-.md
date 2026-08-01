@@ -22,3 +22,5 @@ While movement is the first step, players need to interact with the environment.
 > 2026-08-01 — Refining card: split into [part] Collision Detection and [part] Pellet Collection logic.
 
 > 2026-08-01 — Starting work on Pellet Collection and Scoring. I will implement the scoring system and the logic to remove pellets from the game state when "collected".
+
+> 2026-08-01 — Starting work on #0005. I am adding the scoring system and pellet collection logic to src/game.js.
