@@ -190,3 +190,16 @@ This script should be callable early in the backend startup process to ensure da
 
 ---
 
+## [UI] Implement Basic Habit List View & Creator Form
+
+**Labels:** frontend,task
+
+**Due:** 2026-08-05
+
+**Context:** The frontend needs a basic view to display and manage habits. This component should only consume the endpoints defined in [API] Implement Habit CRUD Operations (Issue #X).
+*   **Goal:** Create a main `HabitList` component that fetches all habits on load (`GET /api/v1/habits`) and provides an input form to create new ones (`POST /api/v1/habits`).
+*   **Tech Stack:** React, Tailwind CSS, vanilla JS.
+*   **Assumption:** The backend endpoints are stable by the time this task starts (i.e., Issue #3 is complete).
+
+---
+
