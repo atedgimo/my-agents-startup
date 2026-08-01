@@ -104,3 +104,25 @@ This task integrates the advanced, zero-cost AI feature using `llama-cpp-python`
 
 ---
 
+## [CRITICAL] Test Suite Fails Due to pydantic-core Dependency Build Error
+
+**Labels:** bug,environment,testing
+
+**Environment Failure:** The test suite fails during dependency installation/wheel building for `pydantic-core`. This is a critical setup error that prevents any functional testing of the API endpoints, as the FastAPI application cannot be reliably initialized within the isolated virtual environment.
+
+**Error Trace Snippet:**
+```
+TypeError: ForwardRef._evaluate() missing 1 required keyword-only argument: 'recursive_guard'
+...
+ERROR: Failed building wheel for pydantic-core
+```
+
+**Steps to Reproduce:**
+1. Run `run_tests`.
+2. The process fails during the installation of dependencies, specifically when compiling `pydantic-core`.
+
+**Actual Result:** Test run terminates with a dependency build failure (`exit status: 101`).
+**Expected Result:** All tests in `tests/test_api.py` execute successfully, confirming the core functionality of Habit Management, Logging, and Journaling endpoints.
+
+---
+
