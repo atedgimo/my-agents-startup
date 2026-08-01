@@ -23,3 +23,13 @@ Create the HTML5 Canvas environment and render a basic maze with walls and pelle
 
 ---
 
+## [Frontend] Render Maze & Pellets
+
+**Labels:** frontend
+
+**Due:** 2026-08-03
+
+Create a simple 2D grid system and render walls/pellets on an HTML Canvas. Reference the maze layout in requirements.
+
+---
+
