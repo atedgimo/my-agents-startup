@@ -36,3 +36,19 @@ This task focuses on the CRUD operations for the `Habits` table using FastAPI an
 
 ---
 
+## [BACKEND] Implement Habit Logging & History API
+
+**Labels:** backend,task
+
+### Goal: Implement API endpoints for logging daily progress against habits.
+
+This task covers the core functionality of tracking habit completion.
+
+**Acceptance Criteria:**
+1.  Create `POST /api/v1/logs`: Must accept `{habit_id, date, is_completed, value}` and insert a record into `HabitLogs`. Should handle potential unique constraint violations gracefully (i.e., if the entry already exists for that habit/date).
+2.  Create `GET /api/v1/logs/history`: Must accept query parameters (`habit_id`, `start_date`, `end_date`) and retrieve all corresponding records from `HabitLogs`. The response should be structured to facilitate streak calculation on the frontend.
+
+**Labels:** backend, task
+
+---
+
