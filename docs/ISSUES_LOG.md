@@ -173,3 +173,20 @@ Focus on robust input validation within FastAPI using Pydantic models.
 
 ---
 
+## [DB] Implement Initial Database Schema Migration Script
+
+**Labels:** backend,task
+
+**Due:** 2026-08-04
+
+**Context:** Using the established database connection from the infrastructure setup task, we need to implement the initialization script for the core data model.
+*   **Goal:** Write and run a function/script that checks if the necessary tables exist in the SQLite DB and creates them if they do not (Idempotent schema migration).
+*   **Required Tables (based on ARCHITECTURE.md):**
+    1.  `Habits`: (`habit_id`, `name`, `description`, `creation_date`, `is_active`)
+    2.  `HabitLogs`: (`log_id`, `habit_id`, `date`, `is_completed`, `value`)
+    3.  `JournalEntries`: (`entry_id`, `user_id`, `date`, `content`, `related_habit_id`)
+
+This script should be callable early in the backend startup process to ensure data readiness.
+
+---
+
