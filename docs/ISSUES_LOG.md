@@ -10,3 +10,16 @@ Implement the basic game environment: a maze grid, walls, and pellet entities. T
 
 ---
 
+## [Frontend] Basic Maze & Pellet Rendering
+
+**Labels:** frontend
+
+**Due:** 2026-08-03
+
+Create the HTML5 Canvas environment and render a basic maze with walls and pellet entities. 
+- Use a grid-based system for navigation.
+- Ensure it renders at 60fps.
+- Data structure for pellets and walls should be easily configurable.
+
+---
+
