@@ -18,3 +18,21 @@ This task involves setting up the necessary tables and constraints defined in `A
 
 ---
 
+## [BACKEND] Implement Habit Management API (CRUD)
+
+**Labels:** backend,task
+
+### Goal: Implement API endpoints for managing user habits.
+
+This task focuses on the CRUD operations for the `Habits` table using FastAPI and SQLite.
+
+**Acceptance Criteria:**
+1.  Implement a function to connect to the database and execute SQL queries safely (using parameterized statements).
+2.  Create the `POST /api/v1/habits` endpoint: Must accept `{name, description}` and insert a new record into the `Habits` table, returning the new `habit_id`.
+3.  Create the `GET /api/v1/habits` endpoint: Must query and return an array of all active habits (Name, Description, ID).
+4.  Implement the PUT logic for updating habit details (optional but good practice to include now).
+
+**Labels:** backend, task
+
+---
+
