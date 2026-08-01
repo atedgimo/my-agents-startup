@@ -155,3 +155,21 @@ Please ensure all code remains clean, modular, and adheres to FastAPI best pract
 
 ---
 
+## [API] Implement Habit CRUD Operations (POST/GET)
+
+**Labels:** backend,task
+
+**Due:** 2026-08-05
+
+**Context:** Now that the `Habits` table exists, we must implement the full CRUD operations for creating and retrieving habits.
+*   **API Endpoint:** `POST /api/v1/habits` (Create a new habit)
+    *   *Payload:* `{name: string, description: string}`
+    *   *Expected Behavior:* Inserts into the `Habits` table and returns the newly created Habit object.
+*   **API Endpoint:** `GET /api/v1/habits` (List all active habits)
+    *   *Payload:* None.
+    *   *Expected Behavior:* Queries the entire `Habits` table and returns an array of habit objects.
+
+Focus on robust input validation within FastAPI using Pydantic models.
+
+---
+
