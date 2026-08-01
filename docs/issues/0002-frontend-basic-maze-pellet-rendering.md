@@ -1,7 +1,7 @@
 ---
 id: "0002"
 title: "[Frontend] Basic Maze & Pellet Rendering"
-status: "in-progress"
+status: "review"
 assignee: "startup_ui_dev"
 labels: "frontend"
 due: "2026-08-03"
@@ -13,3 +13,5 @@ Create the HTML5 Canvas environment and render a basic maze with walls and pelle
 - Use a grid-based system for navigation.
 - Ensure it renders at 60fps.
 - Data structure for pellets and walls should be easily configurable.
+
+> 2026-08-01 — Rendering of maze and pellets is now implemented using a grid-based system on an HTML5 canvas. 60fps rendering loop established via requestAnimationFrame.
