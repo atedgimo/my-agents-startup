@@ -18,3 +18,5 @@ While movement is the first step, players need to interact with the environment.
 2. **Scoring System:** Increment the user's score by a fixed amount upon pellet consumption.
 3. **State Update:** Remove the collected pellet from the game state so it doesn't reappear.
 4. **Metric moved:** Directly impacts OKR Q3: Gameplay Mechanics (KR1).
+
+> 2026-08-01 — Refining card: split into [part] Collision Detection and [part] Pellet Collection logic.
