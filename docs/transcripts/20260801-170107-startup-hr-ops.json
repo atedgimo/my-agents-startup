@@ -1,0 +1,19 @@
+{
+ "agent": "startup-hr-ops",
+ "ts": "2026-08-01T17:01:07",
+ "meeting": false,
+ "title": "One sentence: what is your staffing responsibility?",
+ "prompt": "One sentence: what is your staffing responsibility?",
+ "messages": [
+  {
+   "who": "co-founder",
+   "kind": "say",
+   "text": "One sentence: what is your staffing responsibility?"
+  },
+  {
+   "who": "startup-hr-ops",
+   "kind": "say",
+   "text": "I manage staffing by identifying skill gaps to propose necessary hires and evaluating roles for removal while ensuring strict adherence to our zero-cost policy.\n\nI provided a one-sentence summary of my staffing responsibilities."
+  }
+ ]
+}
