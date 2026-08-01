@@ -141,3 +141,17 @@ ERROR: Failed building wheel for pydantic-core
 
 ---
 
+## [INFRA] Set up FastAPI Boilerplate & SQLite Connection
+
+**Labels:** backend,task
+
+**Due:** 2026-08-03
+
+**Context:** This task is the foundational infrastructure for the entire application. We must set up a barebones FastAPI server running in local development mode that can connect to an SQLite database file (`app.db`).
+*   **Goal:** Initialize project structure and define basic DB connection logic (e.g., using SQLAlchemy or similar pattern).
+*   **Deliverable:** A minimal `main.py` accessible endpoint (e.g., `/health`) that confirms the backend is running and successfully connected to the local SQLite instance without throwing errors.
+
+Please ensure all code remains clean, modular, and adheres to FastAPI best practices. Focus only on structure and connectivity for now.
+
+---
+
