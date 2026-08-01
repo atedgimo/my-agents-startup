@@ -1,7 +1,7 @@
 ---
 id: 0001
 title: [Frontend] Maze and Pellet Rendering
-status: backlog
+status: todo
 assignee: 
 labels: feature
 due: 2026-08-05
