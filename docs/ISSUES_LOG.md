@@ -337,3 +337,16 @@ This ticket acts as a coordination point and acceptance check before considering
 
 ---
 
+## [Backend] API Endpoint: Create New Habit (POST /habits)
+
+**Labels:** backend,task
+
+**Due:** 2024-06-18
+
+*Requirement:* Implement the FastAPI logic for creating a new habit. This includes validating the input (`name`, `description`, `frequency`) and persisting the record correctly into the SQLite `Habits` table while associating it with the current user (assuming User ID 1 for initial development).
+
+*Endpoint:* `POST /api/v1/habits`
+*Test Case:* Verify successful habit creation and database insertion.
+
+---
+
