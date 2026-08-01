@@ -86,3 +86,21 @@ This task establishes the foundational frontend shell using React/Vite, ensuring
 
 ---
 
+## [BACKEND] Implement Local LLM Processing API Endpoint
+
+**Labels:** backend,advanced,task
+
+### Goal: Implement the local LLM processing endpoint.
+
+This task integrates the advanced, zero-cost AI feature using `llama-cpp-python`. It must run entirely locally and not rely on external APIs.
+
+**Acceptance Criteria:**
+1.  Create the `POST /api/v1/llm/process` endpoint in FastAPI.
+2.  The endpoint must accept `{prompt: string, text_content: string}`.
+3.  Implement the local model loading and inference logic using `llama-cpp-python`.
+4.  Return a structured JSON response containing the processed text (e.g., summary or analysis).
+
+**Labels:** backend, advanced, task
+
+---
+
