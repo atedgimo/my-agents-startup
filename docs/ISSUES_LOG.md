@@ -236,3 +236,19 @@ The FastAPI backend needs a robust implementation for managing user habits (pare
 
 ---
 
+## [Phase 2] Implement Journal Entry CRUD Endpoints (API v1/journal)
+
+**Labels:** backend,task
+
+**Due:** 2024-08-02
+
+This feature handles reflective journaling entries. It must be decoupled from specific habits but linked to a date for contextual retrieval.
+
+**Contract Definition:**
+*   **POST /api/v1/journal**: Create a new journal entry. *Request:* `{date: str (YYYY-MM-DD), content: str, related_habit_id?: int | null}`. The `related_habit_id` must be optional and handle the case where it's null (general reflection).
+*   **GET /api/v1/journal**: Retrieve all entries for a specific date. *Params:* `?date={date}`. *Response:* Array of `{entry_id: int, date: str, content: str, related_habit_id?: int | null}`.
+
+**Implementation Focus:** Ensure data validation on the required `date` and `content`. This endpoint is essential for generating historical reports/summaries later.
+
+---
+
