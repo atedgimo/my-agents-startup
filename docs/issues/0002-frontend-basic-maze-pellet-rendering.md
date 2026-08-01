@@ -1,7 +1,7 @@
 ---
 id: "0002"
 title: "[Frontend] Basic Maze & Pellet Rendering"
-status: "review"
+status: "done"
 assignee: "startup_ui_dev"
 labels: "frontend"
 due: "2026-08-03"
