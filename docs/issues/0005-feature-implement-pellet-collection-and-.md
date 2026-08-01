@@ -2,7 +2,7 @@
 id: "0005"
 title: "[Feature] Implement Pellet Collection and Scoring"
 type: "feature"
-status: "todo"
+status: "in-progress"
 assignee: "startup_ui_dev"
 labels: "feature"
 due: "2026-08-20"
