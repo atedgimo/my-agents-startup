@@ -22,3 +22,5 @@ The current frontend renders the maze and pellets (as seen in #0003), but there 
 ### Technical Notes
 - Check `src/game.js` for existing entity definitions.
 - Ensure collision detection is efficient enough to maintain 60 FPS.
+
+> 2026-08-01 — Refining card: split into [part] Movement and [part] Collision Detection logic. Asking senior dev for technical breakdown.
