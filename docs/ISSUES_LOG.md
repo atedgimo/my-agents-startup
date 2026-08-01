@@ -303,3 +303,19 @@ This feature handles reflective journaling entries. It must be decoupled from sp
 
 ---
 
+## [Phase 1] Implement Habit Log Logging and History Retrieval (API v1/logs)
+
+**Labels:** backend,task
+
+**Due:** 2024-07-26
+
+The most critical endpoint is logging daily progress. This task defines the full lifecycle of recording a habit's completion status or metric for a specific date.
+
+**Contract Definition:**
+*   **POST /api/v1/logs**: Log progress. *Request:* `{habit_id: int, date: str (YYYY-MM-DD), is_completed: bool, value: float | null}`. The endpoint must enforce the unique constraint on (`habit_id`, `date`).
+*   **GET /api/v1/logs/history**: Retrieve all historical logs for a given habit and date range. *Params:* `?habit_id={id}&start_date={date1}&end_date={date2}`. *Response:* Array of `{log_id: int, date: str, is_completed: bool, value: float | null}`.
+
+**Implementation Focus:** Implement the transaction logic to handle creation and complex filtering for historical views. Must return proper error handling (e.g., 400 if dates are invalid or IDs don't exist).
+
+---
+
