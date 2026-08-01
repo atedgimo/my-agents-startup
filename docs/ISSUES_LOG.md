@@ -52,3 +52,19 @@ This task covers the core functionality of tracking habit completion.
 
 ---
 
+## [BACKEND] Implement Journaling API (CRUD)
+
+**Labels:** backend,task
+
+### Goal: Implement API endpoints for journal entry management.
+
+This task covers the storage and retrieval of reflective thoughts, linking them optionally to a habit.
+
+**Acceptance Criteria:**
+1.  Create `POST /api/v1/journal`: Must accept `{date, content, related_habit_id}` and insert a new record into `JournalEntries`.
+2.  Create `GET /api/v1/journal?date={date}`: Must retrieve all journal entries for a specified date.
+
+**Labels:** backend, task
+
+---
+
