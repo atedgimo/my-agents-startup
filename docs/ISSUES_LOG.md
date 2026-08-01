@@ -68,3 +68,21 @@ This task covers the storage and retrieval of reflective thoughts, linking them 
 
 ---
 
+## [FRONTEND] Setup Core SPA Structure and Navigation Shell
+
+**Labels:** frontend,task
+
+### Goal: Build the core Single Page Application (SPA) structure and navigation.
+
+This task establishes the foundational frontend shell using React/Vite, ensuring it can load locally and communicate with the FastAPI backend running on `localhost`.
+
+**Acceptance Criteria:**
+1.  Set up the basic Vite + React project structure.
+2.  Implement core routing for the main views: Dashboard, Habits, Journaling.
+3.  Develop a consistent UI shell using Tailwind CSS (header, sidebar navigation).
+4.  Implement a global API service layer (e.g., Axios wrapper) to handle HTTP requests to `http://localhost:port/api/v1`.
+
+**Labels:** frontend, task
+
+---
+
