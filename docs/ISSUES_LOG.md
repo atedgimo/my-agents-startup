@@ -350,3 +350,17 @@ This ticket acts as a coordination point and acceptance check before considering
 
 ---
 
+## [Backend] API Endpoint: List All Habits (GET /habits)
+
+**Labels:** backend,task
+
+**Due:** 2024-06-18
+
+*Requirement:* Implement the FastAPI logic to retrieve all habits belonging to a user. This endpoint is crucial for populating the initial dashboard list.
+
+*Endpoint:* `GET /api/v1/habits`
+*Query Params:* None (Retrieves all).
+*Test Case:* Verify correct retrieval of Habit objects and proper JSON serialization.
+
+---
+
