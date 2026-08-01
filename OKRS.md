@@ -1,22 +1,21 @@
-# Objectives and Key Results (OKRs)
+# OKRs
 
-## Q3 - Project Launch: Chomp Core Experience
-**Objective: Establish a polished core gameplay loop for the "Chomp" arcade game.**
+## H1 (Current Phase): The Foundation of Chomp
 
-- **KR1: Gameplay Mechanics.** Achieve a fully playable level where movement is controlled by arrow keys, pellets are collectible, and winning/losing conditions trigger correctly.
-- **KR2: Enemy AI.** Implement 4 distinct ghost behaviors (chase, ambush, patrol, random) with functional power-pellet interactions.
-- **KR3: UI/State Feedback.** Ensure score, lives, and level progress are displayed in real-time with clear "Game Over" and "Level Up" visual states.
+**Objective 1: Establish a playable core loop in the browser.**
+- Key Result 1.1: Maze navigation with arrow keys functional and responsive at 60fps.
+- Key Result 1.2: Pellet collection system tracking current score and level progress accurately.
+- Key Result 1.3: Implementation of 4 distinct ghost AI behaviors (Chase, Ambush, Patrol, Random).
 
-## Q3 - Technical Foundation & Performance
-**Objective: Ensure the game is robust, performant, and technically sound for a broad user base.**
+**Objective 2: Provide persistent feedback for the player.**
+- Key Result 2.1: High scores persisted in a backend database accessible via API.
+- Key Result 2.2: Clear UI states for "Game Over" and "Level Up".
 
-- **KR1: Frame Stability.** Maintain a steady 60 FPS on standard laptop hardware during active gameplay.
-- **KR2: Error-Free Experience.** Achieve zero console errors in the production build of the game frontend.
-- **KR3: Data Persistence.** Successfully store and retrieve high scores via the backend API so they persist across page reloads.
+**Objective 3: Ensure stability and quality of core systems.**
+- Key Result 3.1: 0 critical bugs in collision detection or scoring logic.
+- Key Result 3.2: Successful internal demo meeting before requesting a co-founder review.
 
-## Q4 - Future Expansion (Planning)
-**Objective: Scale the game experience beyond the initial MVP.**
-
-- **KR1: Level Variety.** Introduce 5 additional unique maze layouts.
-- **KR2: Audio Integration.** Implement sound effects for pellet collection, ghost contact, and level completion.
-- **KR3: Reach broader audience.** (Reserved for marketing/growth phase).
+## Roadmap Progression
+Once the "One Maze" MVP is stable, we will move into:
+- **H2 (Expansion):** Dynamic level generation and multiple maze layouts.
+- **H3 (Polish):** Visual enhancements and basic audio effects (non-licensed).
