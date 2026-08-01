@@ -319,3 +319,21 @@ The most critical endpoint is logging daily progress. This task defines the full
 
 ---
 
+## [Phase 3] Integration Testing & API Contract Finalization (End-to-End Test Plan)
+
+**Labels:** backend,frontend,task
+
+**Due:** 2024-08-09
+
+The final tasks involve ensuring the full contract is tested and that the front end can consume the data effectively.
+
+**Backend Task:**
+*   Implement API documentation endpoints (`/api/v3/docs`) to verify all paths are correctly defined with schema validation (Swagger/Redoc generation).
+
+**Frontend Consumption task for UI Team:**
+*   Create mock services or dedicated dummy component screens that *consume* the final API contracts defined above. This allows the UI team to proceed with visual layout and state management while backend tasks are finalized, minimizing integration waiting time.
+
+This ticket acts as a coordination point and acceptance check before considering the system 'complete' for V1 release.
+
+---
+
