@@ -364,3 +364,16 @@ This ticket acts as a coordination point and acceptance check before considering
 
 ---
 
+## [Backend] DB Initialization and Schema Setup (Users, Habits, Entries)
+
+**Labels:** backend,task
+
+**Due:** 2024-06-17
+
+*Requirement:* Implement basic initialization logic for the SQLite database connection and ensure the `Users`, `Habits`, and `DailyEntries` tables are correctly created if they do not exist. This service must be callable before any API endpoint can run.
+
+*Dependencies:* None (Foundational).
+*Testing Focus:* Schema integrity, startup routine.
+
+---
+
