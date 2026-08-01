@@ -126,3 +126,18 @@ ERROR: Failed building wheel for pydantic-core
 
 ---
 
+## [API] Implement Habit Analytics/Stats Endpoint
+
+**Labels:** backend,task
+
+**Due:** 2026-08-07
+
+**Context:** We need a core utility function/module in the backend that calculates simple metrics (e.g., streak, total completion count) based on the `HabitLogs` table data. This will be necessary for any dashboard view.
+*   **Goal:** Create a helper service/function exposed via FastAPI endpoint (e.g., `/api/v1/habits/{habit_id}/stats`) that accepts a date range and calculates:
+    1.  Current Streak (Consecutive days of completion).
+    2.  Total Completion Rate (Completed logs / Total dates checked).
+*   **Input:** `habit_id`, `start_date`, `end_date`.
+*   **Output:** Structured JSON summary for these metrics.
+
+---
+
