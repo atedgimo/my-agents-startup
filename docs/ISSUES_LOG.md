@@ -270,3 +270,20 @@ This ticket acts as a coordination point and acceptance check before considering
 
 ---
 
+## [Phase 0] Implement Habit CRUD Endpoints (API v1/habits)
+
+**Labels:** backend,task
+
+**Due:** 2024-07-19
+
+The FastAPI backend needs a robust implementation for managing user habits (parent entity). This includes creating, retrieving all active habits, and updating habit details.
+
+**Contract Definition:**
+*   **GET /api/v1/habits**: List all active Habit objects. *Response:* `[{habit_id: int, name: str, description: str, is_active: bool}]`
+*   **POST /api/v1/habits**: Create a new habit. *Request:* `{name: str, description: str}`. *Success:* Returns the newly created object including its `habit_id`.
+*   **PUT /api/v1/habits/{habit_id}**: Update existing habit details. *Path:* Requires `habit_id`. *Request:* `{name?: str, description?: str}`.
+
+**Implementation Focus:** Use Pydantic models for strict request and response validation. Ensure all operations interact correctly with the `Habits` table in SQLite.
+
+---
+
