@@ -1,12 +1,12 @@
 ---
-id: 0001
-title: [Frontend] Maze and Pellet Rendering
-status: todo
-assignee: 
-labels: feature
-due: 2026-08-05
-created: 2026-08-01
-updated: 2026-08-01
+id: "0001"
+title: "[Frontend] Maze and Pellet Rendering"
+status: "in-progress"
+assignee: "startup_ui_dev"
+labels: "feature"
+due: "2026-08-05"
+created: "2026-08-01"
+updated: "2026-08-01"
 ---
 
 Implement the basic game environment: a maze grid, walls, and pellet entities. The player should be able to move through the maze using arrow keys.
