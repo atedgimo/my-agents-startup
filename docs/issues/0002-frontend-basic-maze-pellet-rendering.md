@@ -15,3 +15,5 @@ Create the HTML5 Canvas environment and render a basic maze with walls and pelle
 - Data structure for pellets and walls should be easily configurable.
 
 > 2026-08-01 — Rendering of maze and pellets is now implemented using a grid-based system on an HTML5 canvas. 60fps rendering loop established via requestAnimationFrame.
+
+> 2026-08-01 — Merging duplicate card #0002 into #0001.
