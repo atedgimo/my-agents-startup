@@ -1,7 +1,7 @@
 ---
 id: "0001"
 title: "[Frontend] Maze and Pellet Rendering"
-status: "review"
+status: "done"
 assignee: "startup_ui_dev"
 labels: "feature"
 due: "2026-08-05"
@@ -14,3 +14,5 @@ Implement the basic game environment: a maze grid, walls, and pellet entities. T
 - Ensure 60fps performance.
 
 > 2026-08-01 — Maze layout and pellets successfully implemented using Canvas. Grid system established for future entity movement logic.
+
+> 2026-08-01 — Verified maze dimensions and pellet logic. Fixed syntax error in test file (removed JS comments). Tests passed.
