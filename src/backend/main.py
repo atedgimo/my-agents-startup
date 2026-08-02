@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from enum import Enum
 import json
+import threading
 
 logging.basicConfig(level=logging.INFO)
 
@@ -46,6 +47,7 @@ current_position = {'x': 0, 'y': 0}
 DATA_DIR = os.getenv('DATA_DIR', '.')
 SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
 scores = []
+scores_lock = threading.Lock()
 
 input_buffer = InputBuffer()
 
@@ -53,13 +55,22 @@ input_buffer = InputBuffer()
 async def startup_event():
     global scores
     logging.info(f"Starting up app with DATA_DIR={DATA_DIR}")
-    if not os.path.isdir(DATA_DIR):
-        logging.warning(f"DATA_DIR {DATA_DIR} is not a directory or does not exist, creating it")
+    # Check if DATA_DIR is a directory or create it
+    if os.path.exists(DATA_DIR):
+        if not os.path.isdir(DATA_DIR):
+            logging.error(f"DATA_DIR {DATA_DIR} exists but is not a directory. Falling back to current directory.")
+            global DATA_DIR, SCORES_FILE
+            DATA_DIR = '.'
+            SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
+    else:
+        logging.info(f"DATA_DIR {DATA_DIR} does not exist, creating it")
         try:
             os.makedirs(DATA_DIR, exist_ok=True)
         except Exception as e:
             logging.error(f"Failed to create DATA_DIR {DATA_DIR}: {e}")
-            # We do not raise here to avoid crash, but scores persistence will fail
+            # Fallback to current directory
+            DATA_DIR = '.'
+            SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
 
     # Load scores from file or initialize
     try:
@@ -80,15 +91,18 @@ async def receive_input(request: Request):
     try:
         data = await request.json()
     except Exception as e:
+        logging.error(f"Invalid JSON input in /input: {e}")
         return JSONResponse(status_code=400, content={"error": "Invalid JSON input"})
 
     direction_str = data.get('direction', 'NONE').upper()
     try:
         direction = Direction[direction_str]
     except KeyError:
+        logging.error(f"Invalid direction received: {direction_str}")
         return JSONResponse(status_code=400, content={"error": "Invalid direction"})
 
     input_buffer.queue_input(direction)
+    logging.info(f"Direction {direction_str} queued")
     return {"message": f"Direction {direction_str} queued"}
 
 @app.get("/move")
@@ -107,6 +121,7 @@ async def get_movement():
     elif current_dir == Direction.RIGHT:
         current_position['x'] += 1
 
+    logging.info(f"Moved {current_dir.name} to position {current_position}")
     return {
         "position": current_position,
         "direction": current_dir.name
@@ -116,12 +131,14 @@ async def get_movement():
 async def clear_input_buffer():
     """Clear the input buffer and reset direction."""
     input_buffer.clear()
+    logging.info("Input buffer cleared")
     return {"message": "Input buffer cleared"}
 
 @app.get("/scores")
 async def get_scores():
     """Return the list of high scores as JSON."""
-    return scores
+    with scores_lock:
+        return scores
 
 @app.post("/submit-score")
 async def submit_score(request: Request):
@@ -129,28 +146,31 @@ async def submit_score(request: Request):
     try:
         data = await request.json()
     except Exception as e:
+        logging.error(f"Invalid JSON input in /submit-score: {e}")
         return JSONResponse(status_code=400, content={"error": "Invalid JSON input"})
 
     name = data.get('name', 'Anonymous')
     score_value = data.get('score')
     if score_value is None or not isinstance(score_value, int):
+        logging.error("Score must be an integer")
         return JSONResponse(status_code=400, content={"error": "Score must be an integer"})
 
-    # Append and save
-    scores.append({"name": name, "score": score_value})
-    # Sort descending
-    scores.sort(key=lambda x: x['score'], reverse=True)
-    # Keep top 10
-    scores[:] = scores[:10]
+    with scores_lock:
+        # Append and save
+        scores.append({"name": name, "score": score_value})
+        # Sort descending
+        scores.sort(key=lambda x: x['score'], reverse=True)
+        # Keep top 10
+        scores[:] = scores[:10]
 
-    # Persist
-    try:
-        with open(SCORES_FILE, 'w') as f:
-            json.dump(scores, f)
-        logging.info(f"Scores saved to {SCORES_FILE}")
-    except Exception as e:
-        logging.error(f"Failed to save scores to {SCORES_FILE}: {e}")
-        return JSONResponse(status_code=500, content={"error": f"Failed to save scores: {str(e)}"})
+        # Persist
+        try:
+            with open(SCORES_FILE, 'w') as f:
+                json.dump(scores, f)
+            logging.info(f"Scores saved to {SCORES_FILE}")
+        except Exception as e:
+            logging.error(f"Failed to save scores to {SCORES_FILE}: {e}")
+            return JSONResponse(status_code=500, content={"error": f"Failed to save scores: {str(e)}"})
 
     return {"message": "Score submitted successfully", "scores": scores}
 
@@ -163,6 +183,7 @@ async def submit_score(request: Request):
 static_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if os.path.isdir(static_dir):
     app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+    logging.info(f"Static files mounted from {static_dir}")
 else:
     logging.warning(f"Static directory {static_dir} does not exist, static files not mounted")
 
