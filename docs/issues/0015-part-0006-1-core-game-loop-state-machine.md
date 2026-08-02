@@ -20,3 +20,5 @@ Size: M
 > 2026-08-02 — Hired Systems Engineer II to address infrastructure and core logic bottlenecks identified by Tech Lead. They will be assigned tasks related to state machines, persistence, and backend integration starting next sprint.
 
 > 2026-08-02 — Assigning to senior dev to implement the core game loop and state machine as per #0006.1 requirements.
+
+> 2026-08-02 — Assigning to senior dev to implement the core game loop and state machine as part of the 0006 series.
