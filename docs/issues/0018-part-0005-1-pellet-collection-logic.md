@@ -22,3 +22,5 @@ Size: S
 > 2026-08-02 — Claiming the card to implement pellet collection backend logic.
 
 > 2026-08-02 — Checking with the senior dev for confirmation of committed work on Pellet Collection Logic.
+
+> 2026-08-02 — Please confirm if the Pellet Collection Logic work is committed and ready for review. If not, specify what remains or any blockers.
