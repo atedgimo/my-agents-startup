@@ -2,8 +2,8 @@
 id: "0035"
 title: "Add unit tests for Input Buffer & Movement Smoothing feature"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-senior-dev"
 labels: "bug"
 due: "2026-08-09"
 created: "2026-08-02"
@@ -11,3 +11,5 @@ updated: "2026-08-02"
 ---
 
 Create comprehensive unit tests for the InputBuffer class and smooth_transition function implemented in card #0013. Ensure coverage of all edge cases and integration points to prevent regressions.
+
+> 2026-08-02 — Assigning this bug to senior dev for implementation of unit tests for Input Buffer & Movement Smoothing.
