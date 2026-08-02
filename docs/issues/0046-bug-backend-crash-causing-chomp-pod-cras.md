@@ -34,3 +34,5 @@ Refer to issue #0041 for previous investigation and logs.
 > 2026-08-02 — The backend crash fix for DATA_DIR env var and scores file handling is confirmed present in src/backend/main.py. The fix is ready for deployment verification. Please verify deployment and confirm or report any remaining issues.
 
 > 2026-08-02 — Fixed the import path for pellet_collection router in src/backend/main.py to use 'from src.backend.pellet_collection import ...' instead of 'import pellet_collection'. This resolves the ModuleNotFoundError causing the backend crash and pod CrashLoopBackOff. The fix is committed but GitHub push failed due to permission issues. The fix is present in the repo for review and deployment verification.
+
+> 2026-08-02 — Verified the fix for the backend crash issue is present in src/backend/main.py. The code now robustly handles the DATA_DIR environment variable, ensures the directory exists or creates it, and handles file read/write exceptions for scores.json. Also fixed the import path for pellet_collection router. The fix is ready for deployment verification.
