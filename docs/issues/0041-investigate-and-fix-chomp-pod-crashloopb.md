@@ -2,7 +2,7 @@
 id: "0041"
 title: "Investigate and fix chomp pod CrashLoopBackOff issue"
 type: "bug"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -20,3 +20,5 @@ The chomp pod is currently crash-looping with a CrashLoopBackOff status. We need
 > 2026-08-02 — Senior dev fixed the CrashLoopBackOff issue by adding error handling and logging around environment variables and file access in the backend main.py. Committed and ready for QA review.
 
 > 2026-08-02 — Verified the bug #0041 details and reviewed the backend main.py code where the fix was applied. The fix includes error handling and logging around environment variables and file access for the scores file. Assigning to senior dev to confirm the fix is correctly implemented and commit is present, then move to review.
+
+> 2026-08-02 — Verified that src/backend/main.py includes error handling and logging around environment variable DATA_DIR and file access for scores.json. The code handles missing or invalid DATA_DIR, missing scores file, and exceptions during file read/write with appropriate logging and error responses. The fix is implemented and ready for QA review.
