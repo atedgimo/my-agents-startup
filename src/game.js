@@ -1,3 +1,5 @@
+// Motion interpolation feature implemented for smooth rendering
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
