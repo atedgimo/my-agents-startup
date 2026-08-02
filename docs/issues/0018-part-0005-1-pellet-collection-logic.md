@@ -2,7 +2,7 @@
 id: "0018"
 title: "[part] #0005.1 Pellet Collection Logic"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-13"
@@ -24,3 +24,5 @@ Size: S
 > 2026-08-02 — Checking with the senior dev for confirmation of committed work on Pellet Collection Logic.
 
 > 2026-08-02 — Please confirm if the Pellet Collection Logic work is committed and ready for review. If not, specify what remains or any blockers.
+
+> 2026-08-02 — Verified pellet_collection.py contains implemented pellet collection logic with API endpoints and persistence. Moving #0018 Pellet Collection Logic to review.
