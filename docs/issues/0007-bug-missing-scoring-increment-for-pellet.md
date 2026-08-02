@@ -8,6 +8,7 @@ labels: "bug"
 due: ""
 created: "2026-08-02"
 updated: "2026-08-02"
+started: "2026-08-02T08:53:24"
 ---
 
 The 'Scoring' component of this task is incomplete. While a `score` variable exists in `src/game.js`, there is no logic implemented to increment it when pellets are collected. 
