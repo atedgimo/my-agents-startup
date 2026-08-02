@@ -580,3 +580,15 @@ The chomp pod is currently crash-looping with a CrashLoopBackOff status. We need
 
 ---
 
+## Bug: Chomp backend crash causing CrashLoopBackOff in deployment
+
+**Labels:** bug
+
+**Due:** 2026-08-04
+
+The deployed product pods are crashing with CrashLoopBackOff errors, making the game unavailable. This is a critical issue preventing the product from running. Investigate the backend logs, identify the root cause, and fix the crash to restore service.
+
+No existing bug issue covers this crash, so this new issue tracks the urgent fix needed.
+
+---
+
