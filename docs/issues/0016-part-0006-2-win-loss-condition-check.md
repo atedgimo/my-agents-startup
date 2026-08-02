@@ -2,7 +2,7 @@
 id: "0016"
 title: "[part] #0006.2 Win/Loss Condition Check"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-19"
