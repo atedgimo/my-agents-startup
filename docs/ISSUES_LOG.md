@@ -564,3 +564,11 @@ Expected: one deployment serving the playable game plus both APIs. Actual: only 
 
 ---
 
+## Bug #0034: Add missing tests for Input Buffer & Movement Smoothing feature
+
+**Labels:** bug
+
+Implement proper test cases that cover the input buffering and movement smoothing functionality in the backend or game logic code to ensure the feature works correctly and prevent regressions. This will improve code reliability and maintainability.
+
+---
+
