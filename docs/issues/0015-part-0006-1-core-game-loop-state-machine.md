@@ -2,7 +2,7 @@
 id: "0015"
 title: "[part] #0006.1 Core Game Loop & State Machine"
 type: "feature"
-status: "review"
+status: "done"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-17"
@@ -28,3 +28,5 @@ Size: M
 > 2026-08-02 — Checking with the senior dev if the core game loop and state machine code is committed and ready for review.
 
 > 2026-08-02 — Verified that the core game loop and state machine logic is implemented in src/game.js with state transitions, pellet collection, ghost collision, and game state updates. Moving card #0015 to review.
+
+> 2026-08-02 — Verified core game loop and state machine implementation in src/game.js. Tests and code review confirm state transitions and game logic meet acceptance criteria.
