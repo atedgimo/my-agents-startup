@@ -5,7 +5,7 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from enum import Enum, auto
-from .input_buffer import InputBuffer, Direction, smooth_transition
+from src.backend.input_buffer import InputBuffer, Direction, smooth_transition
 
 app = FastAPI()
 
