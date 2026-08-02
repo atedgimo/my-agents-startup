@@ -1,4 +1,3 @@
-"""
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -155,4 +154,3 @@ setInterval(update, 1000 / 60);
 
 // Start the loop
 draw();
-"""
