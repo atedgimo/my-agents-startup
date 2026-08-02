@@ -8,7 +8,7 @@ labels: "chore"
 due: ""
 created: "2026-08-02"
 updated: "2026-08-02"
-objective: ""
+objective: "keep the company affordable to run"
 ---
 
 The co-founder asks PDM to review and approve (or reject) this change before it is made.
