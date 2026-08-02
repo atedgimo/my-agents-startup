@@ -162,3 +162,17 @@ Size: S
 
 ---
 
+## [part] #0006.1 Core Game Loop & State Machine
+
+**Labels:** none
+
+**Due:** 2026-08-17
+
+Sub-task of #0006. Implement a centralized loop that manages states: START_MENU, PLAYING, PAUSED, GAME_OVER.
+Acceptance Criteria:
+1. Clear state transitions between menu and game.
+2. Game pause/unpause functionality works.
+Size: M
+
+---
+
