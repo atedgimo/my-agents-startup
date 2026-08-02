@@ -7,7 +7,7 @@ assignee: "startup_senior_dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-01"
-updated: "2026-08-01"
+updated: "2026-08-02"
 ---
 
 ### Context
@@ -24,3 +24,5 @@ The current frontend renders the maze and pellets (as seen in #0003), but there 
 - Ensure collision detection is efficient enough to maintain 60 FPS.
 
 > 2026-08-01 — Refining card: split into [part] Movement and [part] Collision Detection logic. Asking senior dev for technical breakdown.
+
+> 2026-08-02 — [Pulse Check] Verified in-progress by senior_dev. Currently implementing movement vectors and wall checks in src/game.js. Stay in in-progress until logic is complete.
