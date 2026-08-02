@@ -38,3 +38,5 @@ Refer to issue #0041 for previous investigation and logs.
 > 2026-08-02 — Verified the fix for the backend crash issue is present in src/backend/main.py. The code now robustly handles the DATA_DIR environment variable, ensures the directory exists or creates it, and handles file read/write exceptions for scores.json. Also fixed the import path for pellet_collection router. The fix is ready for deployment verification.
 
 > 2026-08-02 — Verified the fix for backend crash is present in src/backend/main.py. The code now robustly handles the DATA_DIR environment variable including fallback, directory creation, and file read/write exception handling for scores.json. Also fixed import path for pellet_collection router. This fix should resolve the CrashLoopBackOff issue. Please proceed with deployment verification.
+
+> 2026-08-02 — Backend crash fix committed in src/backend/main.py: static files mounting paths corrected, DATA_DIR environment variable handling improved, and error handling added to prevent startup crashes. Please proceed with QA verification.
