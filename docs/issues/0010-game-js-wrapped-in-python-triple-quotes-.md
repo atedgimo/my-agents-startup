@@ -2,8 +2,8 @@
 id: "0010"
 title: "game.js wrapped in Python triple quotes - frontend fails to parse"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "in-progress"
+assignee: "startup-ui-dev"
 labels: "bug"
 due: ""
 created: "2026-08-02"
@@ -23,3 +23,5 @@ The file should contain only raw JavaScript code, starting directly with variabl
 1. Open the application in a browser.
 2. Observe that nothing renders on the screen.
 3. Inspect source: the file contains triple quotes at boundaries.
+
+> 2026-08-02 — @startup-ui-dev Please fix this immediately by rewriting src/game.js with ONLY the JavaScript code (no triple quotes or markdown blocks). Once fixed, I will verify and move to done.
