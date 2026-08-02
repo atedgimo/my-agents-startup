@@ -2,8 +2,8 @@
 id: "0036"
 title: "Backend crash-loops: absolute import from src.backend does not resolve"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-senior-dev"
 labels: "bug,backend"
 due: "2026-08-03"
 created: "2026-08-02"
@@ -20,3 +20,5 @@ main.py compiles, so check_syntax passes — but the import only resolves if the
 Fix: use a relative import (from .input_buffer import ...) or a plain module import (from input_buffer import ...) consistent with how the app is started, and make sure every module under src/backend/ uses the same convention.
 
 Expected: the pod reaches Ready and stays there. Actual: CrashLoopBackOff on import.
+
+> 2026-08-02 — This bug explains the backend crash-loop due to incorrect absolute imports from 'src.backend'. This is a critical bug blocking the product from running. Assigning to senior dev for fix of import statements to relative or plain module imports consistent with app start.
