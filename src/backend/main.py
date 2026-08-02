@@ -44,6 +44,8 @@ class InputBuffer:
 current_position = {'x': 0, 'y': 0}
 
 # Scores storage in memory for simplicity, persisted in file
+
+# Declare globals here
 DATA_DIR = os.getenv('DATA_DIR', '.')
 SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
 scores = []
@@ -54,12 +56,12 @@ input_buffer = InputBuffer()
 @app.on_event("startup")
 async def startup_event():
     global scores
+    global DATA_DIR, SCORES_FILE
     logging.info(f"Starting up app with DATA_DIR={DATA_DIR}")
     # Check if DATA_DIR is a directory or create it
     if os.path.exists(DATA_DIR):
         if not os.path.isdir(DATA_DIR):
             logging.error(f"DATA_DIR {DATA_DIR} exists but is not a directory. Falling back to current directory.")
-            global DATA_DIR, SCORES_FILE
             DATA_DIR = '.'
             SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
     else:
