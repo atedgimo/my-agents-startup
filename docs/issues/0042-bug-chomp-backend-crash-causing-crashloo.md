@@ -2,7 +2,7 @@
 id: "0042"
 title: "Bug: Chomp backend crash causing CrashLoopBackOff in deployment"
 type: "bug"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: "2026-08-04"
@@ -18,3 +18,5 @@ No existing bug issue covers this crash, so this new issue tracks the urgent fix
 > 2026-08-02 — Assigning to senior dev for urgent investigation and fix of backend crash causing CrashLoopBackOff in deployment.
 
 > 2026-08-02 — Assigning to senior dev to fix the backend crash causing CrashLoopBackOff as described in bug #0042.
+
+> 2026-08-02 — Fixed backend crash by ensuring DATA_DIR existence and safe static files mounting. Committed fix in src/backend/main.py.
