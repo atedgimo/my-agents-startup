@@ -19,3 +19,9 @@ updated: "2026-08-02"
 - Define a color palette for the 4 ghosts (Chase, Ambish, Patrol, Random) in `src/game.js`.
 - Implement logic to change ghost colors and add a "pulse" effect when `power_up` is true.
 - Update the drawing loop to render these states correctly.
+
+> 2026-08-02 — Acceptance criteria:
+- Implement ghost identity visuals (color, shape)
+- Ghosts display correct identity consistently
+Size: Medium
+Due date: 2026-08-15
