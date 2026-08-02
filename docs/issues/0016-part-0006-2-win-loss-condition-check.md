@@ -2,7 +2,7 @@
 id: "0016"
 title: "[part] #0006.2 Win/Loss Condition Check"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-19"
@@ -22,3 +22,5 @@ Size: M
 > 2026-08-02 — Assigning to senior dev to implement the win/loss condition check logic as part of the game loop state machine.
 
 > 2026-08-02 — Verified implementation of win/loss conditions in src/game.js. Logic correctly handles pellet count for wins, power-up status during ghost collisions for losses, and updates the game state machine accordingly. UI overlays are also confirmed.
+
+> 2026-08-02 — Reviewing card #0016 for Win/Loss Condition Check. Moving to in-progress for verification and finalization before review.
