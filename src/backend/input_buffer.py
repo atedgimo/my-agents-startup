@@ -47,13 +47,6 @@ class InputBuffer:
         self.current_direction = Direction.NONE
         self.next_direction = None
 
-# Example usage in game loop:
-# input_buffer = InputBuffer()
-# input_buffer.queue_input(Direction.UP)
-# input_buffer.update_direction()
-# current_move = input_buffer.current_direction
-
-
 # Movement smoothing helper function
 
 def smooth_transition(current: Direction, target: Direction) -> Direction:
