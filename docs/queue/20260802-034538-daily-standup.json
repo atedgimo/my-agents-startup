@@ -1,0 +1,7 @@
+{
+ "agent": "startup-hr-ops",
+ "title": "Daily standup",
+ "prompt": "[MEETING] Daily standup \u2014 company week 2, day 2 (2026-08-02). Run the standup: collect a short status (done / next / blockers, 3 bullets max) from each department head via your agent tools, read the kanban board with list_issues and flag overdue cards, then summarize per department plus an Overdue section.",
+ "minutes_path": "docs/standups/2026-08-02-0345.md",
+ "queued": "2026-08-02T03:45:38"
+}
