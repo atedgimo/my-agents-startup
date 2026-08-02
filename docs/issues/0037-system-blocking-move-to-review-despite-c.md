@@ -3,7 +3,7 @@ id: "0037"
 title: "System blocking move to review despite committed test file for issue #0034"
 type: "bug"
 status: "in-progress"
-assignee: "startup-systems-engineer"
+assignee: "startup-devops"
 labels: "bug"
 due: ""
 created: "2026-08-02"
@@ -22,3 +22,5 @@ Please investigate and resolve this blocking issue so that the card can be moved
 > 2026-08-02 — This bug reports a system blocking issue preventing move to review despite committed test file for issue #0034. It is a meta-issue about our CI or commit detection system. Assigning to devops for investigation and resolution to unblock QA and review process.
 
 > 2026-08-02 — Starting investigation on the system blocking move to review despite committed test file for issue #0034.
+
+> 2026-08-02 — Created GitHub Actions workflow for commit detection to unblock move to review. Push failed due to GitHub error unrelated to content. Need to retry push or investigate push error to activate workflow.
