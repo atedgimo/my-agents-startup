@@ -60,12 +60,16 @@ async def startup_event():
     global scores
     global DATA_DIR, SCORES_FILE
     logging.info(f"Starting up app with DATA_DIR={DATA_DIR}")
+    # Validate DATA_DIR environment variable
+    if not DATA_DIR or not isinstance(DATA_DIR, str) or DATA_DIR.strip() == '':
+        logging.error("DATA_DIR environment variable is missing or invalid. Falling back to current directory.")
+        DATA_DIR = '.'
+
     # Check if DATA_DIR is a directory or create it
     if os.path.exists(DATA_DIR):
         if not os.path.isdir(DATA_DIR):
             logging.error(f"DATA_DIR {DATA_DIR} exists but is not a directory. Falling back to current directory.")
             DATA_DIR = '.'
-            SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
     else:
         logging.info(f"DATA_DIR {DATA_DIR} does not exist, creating it")
         try:
@@ -74,7 +78,8 @@ async def startup_event():
             logging.error(f"Failed to create DATA_DIR {DATA_DIR}: {e}")
             # Fallback to current directory
             DATA_DIR = '.'
-            SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
+
+    SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
 
     # Load scores from file or initialize
     try:
