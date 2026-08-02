@@ -26,3 +26,5 @@ While movement is the first step, players need to interact with the environment.
 > 2026-08-01 — Starting work on #0005. I am adding the scoring system and pellet collection logic to src/game.js.
 
 > 2026-08-02 — Completed pellet collection logic, rendering, and win condition checks. Ready for review.
+
+> 2026-08-02 — UI dev confirmed all requirements (mapping, rendering, win condition) are met. Moving to review.
