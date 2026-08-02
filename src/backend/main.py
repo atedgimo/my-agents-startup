@@ -77,7 +77,11 @@ async def startup_event():
 @app.post("/input")
 async def receive_input(request: Request):
     """Receive player input direction and queue it."""
-    data = await request.json()
+    try:
+        data = await request.json()
+    except Exception as e:
+        return JSONResponse(status_code=400, content={"error": "Invalid JSON input"})
+
     direction_str = data.get('direction', 'NONE').upper()
     try:
         direction = Direction[direction_str]
@@ -122,7 +126,11 @@ async def get_scores():
 @app.post("/submit-score")
 async def submit_score(request: Request):
     """Accept a new score submission and persist it."""
-    data = await request.json()
+    try:
+        data = await request.json()
+    except Exception as e:
+        return JSONResponse(status_code=400, content={"error": "Invalid JSON input"})
+
     name = data.get('name', 'Anonymous')
     score_value = data.get('score')
     if score_value is None or not isinstance(score_value, int):
