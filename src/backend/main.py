@@ -16,11 +16,11 @@ DB_PATH = f"sqlite:///{os.path.join(DATA_DIR, 'game.db')}"
 app = FastAPI()
 
 # Serve frontend static files
-app.mount("/static", StaticFiles(directory="../"), name="static")
+app.mount("/static", StaticFiles(directory="../src"), name="static")
 
 @app.get("/")
 async def root():
-    return FileResponse("../index.html")
+    return FileResponse("../src/index.html")
 
 # Database setup (simple sqlite3 integration)
 def init_db():
