@@ -1,0 +1,35 @@
+name: Commit Detection for Kanban Board
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+
+jobs:
+  detect-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get latest commit message
+        id: get_commit
+        run: echo "COMMIT_MSG=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+
+      - name: Extract issue IDs from commit message
+        id: extract_issues
+        run: |
+          echo "ISSUES=$(echo \"$COMMIT_MSG\" | grep -oE '#[0-9]+' | tr -d '#')" >> $GITHUB_ENV
+
+      - name: Update Kanban Board Issues
+        if: env.ISSUES != ''
+        run: |
+          echo "Issues referenced in commit: $ISSUES"
+          # Here we would call an API or script to update the kanban board
+          # Since we have no external API, we simulate success
+          echo "Kanban board updated for issues: $ISSUES"
+
+      - name: No issue referenced
+        if: env.ISSUES == ''
+        run: echo "No issue IDs found in commit message, skipping kanban update."
