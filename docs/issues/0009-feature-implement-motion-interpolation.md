@@ -2,7 +2,7 @@
 id: "0009"
 title: "Feature: Implement Motion Interpolation"
 type: "feature"
-status: "backlog"
+status: "todo"
 assignee: ""
 labels: "feature"
 due: ""
