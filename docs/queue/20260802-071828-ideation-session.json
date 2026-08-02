@@ -1,0 +1,7 @@
+{
+ "agent": "startup-pdm",
+ "title": "Ideation session",
+ "prompt": "[MEETING] Ideation session \u2014 company week 2, day 3 (2026-08-02). Run an ideation session: read BOARD_BRIEF.md, VISION.md and the current src/, then convene the designer and architect (agent tools) around the question 'what would make this product noticeably better for its users?'. Bring at least 3 concrete ideas, argue them against the brief, keep the best one or two and file them with create_github_issue including the value case. Save the minutes.",
+ "minutes_path": "docs/meetings/2026-08-02-0718-ideation.md",
+ "queued": "2026-08-02T07:18:28"
+}
