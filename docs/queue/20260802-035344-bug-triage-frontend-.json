@@ -1,7 +1,0 @@
-{
- "agent": "startup-qa",
- "title": "Bug triage: frontend does not load",
- "prompt": "[URGENT BUG] The co-founder reports the game does not run at all. VERIFY IT YOURSELF FIRST: read_repo_file('src/game.js') and look at the very FIRST and LAST lines of the file. They contain a Python triple-quote (three double-quote characters) wrapping the whole JavaScript file, which makes the browser fail to parse it \u2014 the page renders nothing. The 116 lines between them are valid.\n\nDo all of this now:\n1. file_a bug issue with create_github_issue (labels 'bug') titled 'game.js wrapped in Python triple quotes - frontend fails to parse', with reproduction and expected vs actual.\n2. Ask startup-ui-dev via your agent tool to fix it: rewrite src/game.js with write_repo_file containing ONLY the JavaScript, with no triple quotes and no markdown code fences on the first or last line.\n3. Re-read the file and confirm the first line now starts with 'const canvas' and the last line is real JavaScript. Only then move the bug card to done.\n4. Write a lesson to docs/learning/qa-engineer.md: source files must be verified to parse, and cards must never be closed on unverified code \u2014 three cards were closed on this broken file.",
- "minutes_path": "docs/reviews/frontend-broken-triage.md",
- "queued": "2026-08-02T03:53:44"
-}
