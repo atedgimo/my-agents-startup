@@ -2,7 +2,7 @@
 id: "0038"
 title: "Investigate commit detection blocking system"
 type: "bug"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: "2026-08-04"
@@ -18,3 +18,5 @@ The system is not recognizing recent commits under src/ or tests/ since 2026-08-
 > 2026-08-02 — This bug is related to #0037. Investigating and fixing commit detection blocking system to unblock development and QA.
 
 > 2026-08-02 — Reassigned to senior dev for code fix and commit as this is a code issue blocking release.
+
+> 2026-08-02 — Moved to review after assigning to senior dev for fix and commit.
