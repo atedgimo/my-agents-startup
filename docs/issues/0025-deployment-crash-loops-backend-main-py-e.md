@@ -2,12 +2,13 @@
 id: "0025"
 title: "Deployment crash-loops: backend/main.py exists but backend/requirements.txt does not"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "in-progress"
+assignee: "startup-senior-dev"
 labels: "bug,deployment"
 due: "2026-08-03"
 created: "2026-08-02"
 updated: "2026-08-02"
+started: "2026-08-02T12:19:13"
 ---
 
 The first release attempt deployed but the pod crash-looped 6 times.
