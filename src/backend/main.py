@@ -194,8 +194,11 @@ async def submit_score(request: Request):
 # wrong path from taking the whole API down with it.
 static_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if os.path.isdir(static_dir):
-    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
-    logging.info(f"Static files mounted from {static_dir}")
+    try:
+        app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+        logging.info(f"Static files mounted from {static_dir}")
+    except Exception as e:
+        logging.error(f"Failed to mount static files from {static_dir}: {e}")
 else:
     logging.warning(f"Static directory {static_dir} does not exist, static files not mounted")
 
