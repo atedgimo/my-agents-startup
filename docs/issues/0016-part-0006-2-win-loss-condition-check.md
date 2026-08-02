@@ -20,3 +20,5 @@ Size: M
 > 2026-08-02 — Hired Systems Engineer II to handle backend infrastructure and state machines. They will focus on the core loop and persistence logic.
 
 > 2026-08-02 — Assigning to senior dev to implement the win/loss condition check logic as part of the game loop state machine.
+
+> 2026-08-02 — Verified implementation of win/loss conditions in src/game.js. Logic correctly handles pellet count for wins, power-up status during ghost collisions for losses, and updates the game state machine accordingly. UI overlays are also confirmed.
