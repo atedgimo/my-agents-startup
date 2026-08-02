@@ -353,3 +353,13 @@ Expected: python -m py_compile passes and the deployed pod starts. Actual: the p
 
 ---
 
+## QA task: Verify tile-based collision logic implementation
+
+**Labels:** qa
+
+**Due:** 2026-08-05
+
+Verify the implementation of tile-based collision logic once the senior dev moves the card #0012 to review. Check for correctness, completeness, and code quality.
+
+---
+
