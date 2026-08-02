@@ -32,3 +32,5 @@ Implement a decoupled rendering system where the game logic remains on a discret
 > 2026-08-02 — No integration code found for motion interpolation feature. Module code committed but feature not ready for review. Moving card back to todo for further work or splitting.
 
 > 2026-08-02 — Starting work on feature #0009: Implement Motion Interpolation for the Pac-Man clone game frontend. Will write the necessary frontend code to smooth movement animations between game logic updates, improving visual fluidity at 60 fps.
+
+> 2026-08-02 — Please prioritize finishing this card now and commit the changes. We need to move it to review to reduce WIP and unblock progress.
