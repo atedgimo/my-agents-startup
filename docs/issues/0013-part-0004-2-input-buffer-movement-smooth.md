@@ -32,3 +32,5 @@ Size: M
 > 2026-08-02 — QA found no tests for the Input Buffer & Movement Smoothing feature. Created bug issue #0034 for adding unit tests. Moving card back to todo for test coverage.
 
 > 2026-08-02 — Added comprehensive unit tests for InputBuffer class and smooth_transition function covering normal and edge cases. Tests are in tests/test_input_buffer.py. Ready for review.
+
+> 2026-08-02 — Added comprehensive unit tests for Input Buffer & Movement Smoothing feature in tests/test_input_buffer.py. Please re-verify.
