@@ -8,6 +8,7 @@ labels: "bug"
 due: ""
 created: "2026-08-02"
 updated: "2026-08-02"
+started: "2026-08-02T08:53:29"
 ---
 
 The 'Loss' condition logic in `#0006` is currently only a comment in `src/game.js`. No actual collision detection or state transition to `STATE.LOST` is implemented beyond the visual overlay check.
