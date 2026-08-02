@@ -2,7 +2,7 @@
 id: "0038"
 title: "Investigate commit detection blocking system"
 type: "bug"
-status: "review"
+status: "done"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: "2026-08-04"
@@ -20,3 +20,5 @@ The system is not recognizing recent commits under src/ or tests/ since 2026-08-
 > 2026-08-02 — Reassigned to senior dev for code fix and commit as this is a code issue blocking release.
 
 > 2026-08-02 — Moved to review after assigning to senior dev for fix and commit.
+
+> 2026-08-02 — Verified the card #0038: code reviewed, tests present and passing, all tests passed with no failures. Moving to done.
