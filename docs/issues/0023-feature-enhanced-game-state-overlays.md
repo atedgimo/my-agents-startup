@@ -19,3 +19,9 @@ updated: "2026-08-02"
 - Refine `STATE.WON` and `STATE.LOST` rendering in `src/game.js`.
 - Center high-contrast text and include final score vs highest known record.
 - Add a 'pause' or transition effect when shifting states to mimic arcade cabinet behavior.
+
+> 2026-08-02 — Acceptance criteria:
+- Implement enhanced game state overlays
+- Display score, lives, and status overlays
+Size: Medium
+Due date: 2026-08-15
