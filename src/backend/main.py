@@ -146,9 +146,13 @@ async def submit_score(request: Request):
 
     return {"message": "Score submitted successfully", "scores": scores}
 
-# Mount static files for frontend
-# Changed to mount from current directory 'src/backend/static' assuming static files are here or adjust as needed
-static_dir = os.path.join(os.path.dirname(__file__), 'static')
+# Mount static files for frontend.
+# index.html and game.js live in src/, one level above this file. Resolve from
+# __file__ rather than the working directory: the app is started with
+# `cd src/backend`, so a relative "src" pointed at src/backend/src and
+# StaticFiles raised at import, crash-looping the pod. The isdir guard keeps a
+# wrong path from taking the whole API down with it.
+static_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if os.path.isdir(static_dir):
     app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 else:
