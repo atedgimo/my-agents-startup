@@ -2,11 +2,14 @@
 Main backend FastAPI app integration for game logic including input buffer and movement smoothing.
 """
 import os
+import logging
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from enum import Enum
 import json
+
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 
@@ -37,13 +40,16 @@ DATA_DIR = os.getenv('DATA_DIR', '.')
 SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
 
 # Load scores from file or initialize
-if os.path.exists(SCORES_FILE):
-    with open(SCORES_FILE, 'r') as f:
-        try:
+scores = []
+try:
+    if os.path.exists(SCORES_FILE):
+        with open(SCORES_FILE, 'r') as f:
             scores = json.load(f)
-        except Exception:
-            scores = []
-else:
+        logging.info(f"Loaded scores from {SCORES_FILE}")
+    else:
+        logging.info(f"Scores file {SCORES_FILE} does not exist, starting with empty scores")
+except Exception as e:
+    logging.error(f"Failed to load scores from {SCORES_FILE}: {e}")
     scores = []
 
 class Direction(str, Enum):
@@ -54,6 +60,12 @@ class Direction(str, Enum):
     NONE = 'NONE'
 
 input_buffer = InputBuffer()
+
+@app.on_event("startup")
+async def startup_event():
+    logging.info(f"Starting up app with DATA_DIR={DATA_DIR}")
+    if not os.path.isdir(DATA_DIR):
+        logging.warning(f"DATA_DIR {DATA_DIR} is not a directory or does not exist")
 
 @app.post("/input")
 async def receive_input(request: Request):
@@ -120,7 +132,9 @@ async def submit_score(request: Request):
     try:
         with open(SCORES_FILE, 'w') as f:
             json.dump(scores, f)
+        logging.info(f"Scores saved to {SCORES_FILE}")
     except Exception as e:
+        logging.error(f"Failed to save scores to {SCORES_FILE}: {e}")
         return JSONResponse(status_code=500, content={"error": f"Failed to save scores: {str(e)}"})
 
     return {"message": "Score submitted successfully", "scores": scores}
