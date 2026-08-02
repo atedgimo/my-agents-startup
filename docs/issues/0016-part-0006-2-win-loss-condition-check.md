@@ -2,7 +2,7 @@
 id: "0016"
 title: "[part] #0006.2 Win/Loss Condition Check"
 type: "feature"
-status: "backlog"
+status: "todo"
 assignee: ""
 labels: ""
 due: "2026-08-19"
@@ -15,3 +15,5 @@ Acceptance Criteria:
 1. Win state triggered correctly by pellet count.
 2. Loss state triggered on collision without power_pellet flag.
 Size: M
+
+> 2026-08-02 — Hired Systems Engineer II to handle backend infrastructure and state machines. They will focus on the core loop and persistence logic.
