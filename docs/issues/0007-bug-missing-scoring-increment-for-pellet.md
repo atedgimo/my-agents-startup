@@ -25,3 +25,5 @@ The 'Scoring' component of this task is incomplete. While a `score` variable exi
 AC: When a player touches a pellet, the score counter increments by 10.
 Size: S
 Due: 2026-08-10
+
+> 2026-08-02 — [Pulse Check] Verified in-progress by senior_dev. This is being addressed as part of the movement integration package. Stay in in-progress for now.
