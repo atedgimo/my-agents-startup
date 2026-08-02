@@ -17,3 +17,4 @@
 | 1.1.2 | 2026-08-02 | Redeployed product with backend and frontend served at port 8000; product is ready and live. | http://chomp.company-product.k8s.orb.local:8080 |
 | 1.1.3 | 2026-08-02 | Redeployed product with backend and frontend served at port 8000; product is ready and live. | http://chomp.company-product.k8s.orb.local:8080 |
 | 1.1.4 | 2026-08-02 | Redeployed product with backend and frontend served at port 8000; product is ready and live. | http://chomp.company-product.k8s.orb.local:8080 |
+| 1.2.0 | 2026-08-02 | Initial deployment of product "Chomp" with backend and frontend served at port 8000; product is live and ready. | http://chomp.company-product.k8s.orb.local:8080 |
