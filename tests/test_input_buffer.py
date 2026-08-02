@@ -1,5 +1,3 @@
-# This file contains unit tests for InputBuffer and smooth_transition
-
 import unittest
 from src.backend.input_buffer import InputBuffer, Direction, smooth_transition
 
