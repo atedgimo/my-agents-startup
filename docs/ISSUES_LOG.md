@@ -303,3 +303,16 @@ By giving each ghost a distinct color (Red, Pink, Cyan, Orange) and a 'scared' v
 
 ---
 
+## feat: integrate frontend with backend for score persistence
+
+**Labels:** none
+
+The frontend (`src/game.js`) currently does not make any network requests to the backend. To meet the requirement of "High scores persist across page reloads," we need a bridge between the game loop and the FastAPI server.
+
+**Plan:**
+1. Define an API client or a simple fetch wrapper in `src/game.js`.
+2. Connect the `score` variable update to a call to `/submit-score`.
+3. Optionally, load initial high scores on page load using `/scores`.
+
+---
+
