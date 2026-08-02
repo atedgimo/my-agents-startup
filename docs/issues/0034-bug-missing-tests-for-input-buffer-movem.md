@@ -19,3 +19,5 @@ The backend feature for Input Buffer & Movement Smoothing (card #0013) has been 
 Request: Add comprehensive unit tests for the InputBuffer class and the smooth_transition function to verify correctness and integration.
 
 > 2026-08-02 — This bug is about missing tests for Input Buffer & Movement Smoothing. It is a test coverage gap, not a code bug causing the product to be down. We should prioritize code bugs that block the product running first. Moving this to todo for QA to add tests later.
+
+> 2026-08-02 — This bug is about missing tests for Input Buffer & Movement Smoothing feature. It is a test coverage gap, not a code bug blocking the product. Prioritizing other blocking bugs first.
