@@ -18,3 +18,9 @@ updated: "2026-08-02"
 ### Tasks
 - Implement a "pulse" effect or frame-buffer for pellet collection in `src/game.js`.
 - Add a visual indicator (aura/outline) around the player when `power_up` is true.
+
+> 2026-08-02 — Acceptance criteria:
+- Add visual feedback effects for game events
+- Implement animations and effects for player and ghosts
+Size: Medium
+Due date: 2026-08-15
