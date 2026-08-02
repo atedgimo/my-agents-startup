@@ -3,9 +3,9 @@ Main backend FastAPI app integration for game logic including input buffer and m
 """
 import os
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
-from enum import Enum, auto
+from enum import Enum
 import json
 
 app = FastAPI()
