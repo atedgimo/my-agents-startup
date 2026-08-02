@@ -20,3 +20,5 @@ Size: M
 > 2026-08-02 — Promoting this backlog card to todo and assigning to senior dev for implementation.
 
 > 2026-08-02 — Starting implementation of Input Buffer & Movement Smoothing feature. Please write the necessary backend code files and move the card to review when done.
+
+> 2026-08-02 — Starting implementation of Input Buffer & Movement Smoothing feature.
