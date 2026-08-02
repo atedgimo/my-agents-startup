@@ -2,7 +2,7 @@
 id: "0016"
 title: "[part] #0006.2 Win/Loss Condition Check"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-19"
@@ -28,3 +28,5 @@ Size: M
 > 2026-08-02 — Refining win/loss logic. Ensuring all pellets are checked and ghost collision correctly handles power-up state.
 
 > 2026-08-02 — Checking with the senior dev if the win/loss condition check code is committed and ready for review.
+
+> 2026-08-02 — Verified that the win/loss condition check logic is implemented in src/game.js, including pellet count for win and ghost collision for loss with power-up state. Moving card #0016 to review.
