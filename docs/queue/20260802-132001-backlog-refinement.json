@@ -1,7 +1,0 @@
-{
- "agent": "startup-tech-lead",
- "title": "Backlog refinement",
- "prompt": "[MEETING] Backlog refinement \u2014 company week 2, day 4 (2026-08-02). Refine the backlog: call list_issues, then for every vague card make it buildable - clear title, acceptance criteria, a size, and a due date (update_issue with a comment). DECOMPOSE: any card too big to finish in one cycle must be split - ask the architect (agent tool) for the technical breakdown, then create_github_issue for each child task titled '[part] ...' referencing the parent card id, and close the oversized parent with a comment listing its children. MERGE duplicates by closing the weaker card (status done, comment pointing at the survivor). Consult the PDM when two cards compete for priority. Report what you refined, split and merged.",
- "minutes_path": "docs/meetings/2026-08-02-1320-refinement.md",
- "queued": "2026-08-02T13:20:01"
-}
