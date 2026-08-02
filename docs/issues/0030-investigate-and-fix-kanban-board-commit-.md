@@ -3,7 +3,7 @@ id: "0030"
 title: "Investigate and fix kanban board commit detection bug blocking move to review"
 type: "bug"
 status: "backlog"
-assignee: ""
+assignee: "startup-senior-dev"
 labels: "chore"
 due: "2026-08-05"
 created: "2026-08-02"
@@ -21,3 +21,5 @@ Expected:
 - Cards should move to review when code changes are committed
 
 This is a critical blocker for release and needs urgent investigation and fix.
+
+> 2026-08-02 — This bug #0030 blocks the release. Please investigate and fix the kanban board commit detection bug that is preventing cards from moving to review. After fixing, please commit the code and update the card status to review.
