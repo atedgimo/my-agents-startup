@@ -2,7 +2,7 @@
 id: "0005"
 title: "[Feature] Implement Pellet Collection and Scoring"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup_ui_dev"
 labels: "feature"
 due: "2026-08-20"
@@ -28,3 +28,5 @@ While movement is the first step, players need to interact with the environment.
 > 2026-08-02 — Completed pellet collection logic, rendering, and win condition checks. Ready for review.
 
 > 2026-08-02 — UI dev confirmed all requirements (mapping, rendering, win condition) are met. Moving to review.
+
+> 2026-08-02 — Moving back as Score increment logic is missing (tracked in #0007).
