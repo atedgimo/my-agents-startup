@@ -28,3 +28,5 @@ Refer to issue #0041 for previous investigation and logs.
 > 2026-08-02 — Fixed backend crash by improving robustness of DATA_DIR environment variable handling, directory creation, and file read/write error handling in src/backend/main.py. Committed the fix for review. Note: Git push failed due to permission issues, please resolve to deploy and verify.
 
 > 2026-08-02 — Backend crash fix committed: improved DATA_DIR handling and file operation error handling in src/backend/main.py. Awaiting deployment after git push permission issue is resolved.
+
+> 2026-08-02 — Backend crash fix for DATA_DIR env var and scores file handling implemented and committed. Ready for QA review and deployment verification.
