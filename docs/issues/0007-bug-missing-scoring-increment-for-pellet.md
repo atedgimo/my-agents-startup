@@ -20,3 +20,8 @@ The 'Scoring' component of this task is incomplete. While a `score` variable exi
 - AC: 1. Player collects a pellet. 2. Score counter increments by 1. 3. UI updates immediately.
 - Size: S
 - Due Date: 2026-08-07
+
+> 2026-08-02 — Title: Bug: Missing scoring increment on pellet collection.
+AC: When a player touches a pellet, the score counter increments by 10.
+Size: S
+Due: 2026-08-10
