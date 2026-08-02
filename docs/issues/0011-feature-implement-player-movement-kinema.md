@@ -2,7 +2,7 @@
 id: "0011"
 title: "[Feature] Implement Player Movement Kinematics"
 type: "feature"
-status: "backlog"
+status: "todo"
 assignee: ""
 labels: "feature"
 due: ""
