@@ -2,8 +2,8 @@
 id: "0012"
 title: "[part] #0004.1 Tile-Based Collision Logic"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-10"
 created: "2026-08-02"
@@ -15,3 +15,5 @@ Acceptance Criteria:
 1. Player cannot move into wall tiles.
 2. Movement is rejected if it crosses a boundary.
 Size: S
+
+> 2026-08-02 — Promoting this backlog card to todo and assigning to senior dev for implementation.
