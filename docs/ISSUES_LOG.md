@@ -53,3 +53,14 @@ Once the player can move and collect pellets, the game needs a state machine to 
 
 ---
 
+## Bug: Missing scoring increment for pellet collection
+
+**Labels:** bug
+
+The 'Scoring' component of this task is incomplete. While a `score` variable exists in `src/game.js`, there is no logic implemented to increment it when pellets are collected. 
+
+**Expected:** Score increases upon pellet collection.
+**Actual:** Score remains at 0 regardless of game actions.
+
+---
+
