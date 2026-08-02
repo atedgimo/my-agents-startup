@@ -2,12 +2,13 @@
 id: "0026"
 title: "src/backend/main.py does not compile: IndentationError line 22"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "in-progress"
+assignee: "startup-senior-dev"
 labels: "bug,backend"
 due: "2026-08-03"
 created: "2026-08-02"
 updated: "2026-08-02"
+started: "2026-08-02T17:31:26"
 ---
 
 The release is blocked. src/backend/main.py fails to parse:
