@@ -2,7 +2,7 @@
 id: "0004"
 title: "[Feature] Implement Player Movement and Collision Detection"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup_senior_dev"
 labels: "feature"
 due: "2026-08-15"
