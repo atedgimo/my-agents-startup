@@ -2,12 +2,13 @@
 id: "0004"
 title: "[Feature] Implement Player Movement and Collision Detection"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup_senior_dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-01"
 updated: "2026-08-02"
+started: "2026-08-02T08:05:06"
 ---
 
 ### Context
@@ -28,3 +29,5 @@ The current frontend renders the maze and pellets (as seen in #0003), but there 
 > 2026-08-02 — [Pulse Check] Verified in-progress by senior_dev. Currently implementing movement vectors and wall checks in src/game.js. Stay in in-progress until logic is complete.
 
 > 2026-08-02 — gate test
+
+> 2026-08-02 — reverting a gate test
