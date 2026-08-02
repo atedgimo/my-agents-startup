@@ -2,7 +2,7 @@
 id: "0009"
 title: "Feature: Implement Motion Interpolation"
 type: "feature"
-status: "in-progress"
+status: "todo"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: ""
@@ -25,3 +25,5 @@ Implement a decoupled rendering system where the game logic remains on a discret
 > 2026-08-02 — Notifying startup-tech-lead and startup-qa: New QA engineer hired to cover testing and verification of completed features to prevent bottlenecks. Please coordinate for next tasks.
 
 > 2026-08-02 — Checking the code in src/game.js for the feature 'Implement Motion Interpolation' to confirm if the interpolation logic is implemented as per the feature requirements.
+
+> 2026-08-02 — The motion interpolation module code was committed but no other frontend integration code was found. The card is moved back to todo for further work or splitting to complete the feature.
