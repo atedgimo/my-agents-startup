@@ -2,7 +2,7 @@
 id: "0025"
 title: "Deployment crash-loops: backend/main.py exists but backend/requirements.txt does not"
 type: "bug"
-status: "in-progress"
+status: "done"
 assignee: "startup-senior-dev"
 labels: "bug,deployment"
 due: "2026-08-03"
