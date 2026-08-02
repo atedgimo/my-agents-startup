@@ -2,7 +2,7 @@
 id: "0006"
 title: "[Feature] Implement Game Loop & Win/Loss Logic"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup_senior_dev"
 labels: "feature"
 due: "2026-08-25"
@@ -24,3 +24,5 @@ Once the player can move and collect pellets, the game needs a state machine to 
 > 2026-08-02 — Senior Dev completed implementation of Game Loop & Win/Loss Logic. Backend API for high scores (FastAPI/SQLite) is live, and frontend state machine handles win/loss conditions. Moving to review.
 
 > 2026-08-02 — Senior dev reports that the game loop and win/loss logic are complete. Moving to review.
+
+> 2026-08-02 — Moving back as game loss transition is currently just a comment (tracked in #0008).
