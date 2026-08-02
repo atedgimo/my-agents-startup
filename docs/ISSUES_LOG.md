@@ -491,3 +491,13 @@ Request: Add comprehensive unit tests for the InputBuffer class and the smooth_t
 
 ---
 
+## Add unit tests for Input Buffer & Movement Smoothing feature
+
+**Labels:** bug
+
+**Due:** 2026-08-09
+
+Create comprehensive unit tests for the InputBuffer class and smooth_transition function implemented in card #0013. Ensure coverage of all edge cases and integration points to prevent regressions.
+
+---
+
