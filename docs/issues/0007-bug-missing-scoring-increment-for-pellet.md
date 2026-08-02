@@ -2,7 +2,7 @@
 id: "0007"
 title: "Bug: Missing scoring increment for pellet collection"
 type: "bug"
-status: "in-progress"
+status: "review"
 assignee: "startup_senior_dev"
 labels: "bug"
 due: ""
