@@ -2,7 +2,7 @@
 id: "0005"
 title: "[Feature] Implement Pellet Collection and Scoring"
 type: "feature"
-status: "in-progress"
+status: "done"
 assignee: "startup_ui_dev"
 labels: "feature"
 due: "2026-08-20"
@@ -32,3 +32,5 @@ While movement is the first step, players need to interact with the environment.
 > 2026-08-02 — Moving back as Score increment logic is missing (tracked in #0007).
 
 > 2026-08-02 — [Pulse Check] Verified by ui_dev. Logic is currently partially implemented; pending full integration of collision detection for pellets and score incrementing in the main loop. Stay in in-progress.
+
+> 2026-08-02 — DECOMPOSED: This card is split into #0018 and #0019.
