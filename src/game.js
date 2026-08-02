@@ -25,7 +25,7 @@ const mazeData = [
     [1,0,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1],
-    [1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+    [1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
     [1,1,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,1,1],
     [1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1],
     [1,0,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,0,1],
@@ -56,26 +56,18 @@ function update() {
 
     // Logic for pellet collection and score tracking
     pellets.forEach(p => {
-        if (p.active && playerPos_x === Math.round(playerX) && playerPos_y === Math.round(playerY)) { 
-            // Note: In a full implementation, 'playerX'/'playerY' would be checked against pellet bounds.
-            // For now, we simulate the collection logic for these items in the loop or during collision check.
-        }
-    });
-
-    // Refined Logic: Iterate through pellets to detect "pickup"
-    pellets.forEach(p => {
         if (p.active) {
             const dist = Math.hypot(playerX - (p.x * TILE_SIZE), playerY - (p.y * TILE_SIZE));
             if (dist < TILE_SIZE / 1.5) {
                 p.active = false;
                 score += 10; // Bug #0007: Increment score by 10
-                // Update UI would happen automatically if draw() uses the 'score' variable (currently not displayed but logic is fixed).
             }
         }
     });
 
-    let activePellets = pellets.filter(p => p.active !== false);
-    if (activePellets.length === 0) {
+    // Win Condition Check: All pellets collected
+    const remainingPellets = pellets.filter(p => p.active).length;
+    if (remainingPellets === 0) {
         gameState = STATE.WON;
     }
 
@@ -87,7 +79,7 @@ function update() {
             if (!power_up) {
                 gameState = STATE.LOST;
             } else {
-                // Optional: logic for losing power-up if hit ghost while it's active
+                // If the player is in a power-up state, they survive but lose the power-up status
                 power_up = false;
             }
         }
