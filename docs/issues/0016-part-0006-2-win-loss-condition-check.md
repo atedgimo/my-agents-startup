@@ -26,3 +26,5 @@ Size: M
 > 2026-08-02 — Reviewing card #0016 for Win/Loss Condition Check. Moving to in-progress for verification and finalization before review.
 
 > 2026-08-02 — Refining win/loss logic. Ensuring all pellets are checked and ghost collision correctly handles power-up state.
+
+> 2026-08-02 — Checking with the senior dev if the win/loss condition check code is committed and ready for review.
