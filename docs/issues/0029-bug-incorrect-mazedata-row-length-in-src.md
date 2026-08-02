@@ -2,7 +2,7 @@
 id: "0029"
 title: "Bug: Incorrect mazeData row length in src/game.js causes potential rendering/logic errors"
 type: "bug"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -33,3 +33,5 @@ This bug is critical to fix for correct game behavior and rendering consistency.
 > 2026-08-02 — Assigning to senior dev to fix the critical bug in src/game.js where mazeData row 5 has 21 elements instead of 20, causing rendering and logic errors. Fix by correcting the mazeData array to have consistent row lengths.
 
 > 2026-08-02 — Leaving bug #0029 in progress due to system issue blocking move to review despite fix committed. Created issue #0030 to investigate and fix this blocker.
+
+> 2026-08-02 — Fixed bug #0029 by ensuring all rows in mazeData have consistent length matching COLS in src/game.js. Committed the fix for rendering and logic correctness.
