@@ -2,7 +2,7 @@
 id: "0012"
 title: "[part] #0004.1 Tile-Based Collision Logic"
 type: "feature"
-status: "review"
+status: "done"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-10"
@@ -26,3 +26,5 @@ Size: S
 > 2026-08-02 — Committed tile-based collision logic implementation in src/backend/collision.py with a forced commit. Card moved to review.
 
 > 2026-08-02 — Tile-based collision logic implemented and code committed in src/backend/collision.py. Ready for review.
+
+> 2026-08-02 — Verified tile-based collision logic code and tests. All tests passed with correct collision detection for walls, pellets, power pellets, ghosts, and movement rules. Moving card to done.
