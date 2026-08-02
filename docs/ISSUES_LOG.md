@@ -572,3 +572,11 @@ Implement proper test cases that cover the input buffering and movement smoothin
 
 ---
 
+## Investigate and fix chomp pod CrashLoopBackOff issue
+
+**Labels:** bug
+
+The chomp pod is currently crash-looping with a CrashLoopBackOff status. We need to retrieve the product logs for this pod to analyze the error and identify the root cause for fixing it.
+
+---
+
