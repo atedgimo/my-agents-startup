@@ -17,3 +17,5 @@ Acceptance Criteria:
 Size: S
 
 > 2026-08-02 — Promoting this backlog card to todo and assigning to senior dev for implementation.
+
+> 2026-08-02 — Delegating implementation of tile-based collision logic to senior dev. Please write the actual code files and move the card to review when done.
