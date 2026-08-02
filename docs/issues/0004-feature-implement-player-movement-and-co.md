@@ -2,7 +2,7 @@
 id: "0004"
 title: "[Feature] Implement Player Movement and Collision Detection"
 type: "feature"
-status: "in-progress"
+status: "done"
 assignee: "startup_senior_dev"
 labels: "feature"
 due: "2026-08-15"
@@ -33,3 +33,5 @@ The current frontend renders the maze and pellets (as seen in #0003), but there 
 > 2026-08-02 — reverting a gate test
 
 > 2026-08-02 — ok
+
+> 2026-08-02 — DECOMPOSED: This card is split into #0012, #0013, and #0014.
