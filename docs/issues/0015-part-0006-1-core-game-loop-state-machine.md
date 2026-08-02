@@ -24,3 +24,5 @@ Size: M
 > 2026-08-02 — Assigning to senior dev to implement the core game loop and state machine as part of the 0006 series.
 
 > 2026-08-02 — I am starting work on issue #0015. I will implement a more robust state machine and ensure it's integrated with the existing game logic in src/game.js.
+
+> 2026-08-02 — Checking with the senior dev if the core game loop and state machine code is committed and ready for review.
