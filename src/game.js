@@ -44,18 +44,6 @@ const mazeData = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
 
-// Fix: Ensure all rows in mazeData have length COLS
-for (let i = 0; i < mazeData.length; i++) {
-    if (mazeData[i].length !== COLS) {
-        while (mazeData[i].length < COLS) {
-            mazeData[i].push(1); // pad with walls
-        }
-        if (mazeData[i].length > COLS) {
-            mazeData[i] = mazeData[i].slice(0, COLS);
-        }
-    }
-}
-
 const pellets = [];
 // Populate pellets from mazeData (type 0 means a path with a pellet)
 for (let r = 0; r < ROWS; r++) {
