@@ -2,7 +2,7 @@
 id: "0028"
 title: "The deployed product does not serve the game — only the API"
 type: "bug"
-status: "review"
+status: "done"
 assignee: "startup-senior-dev"
 labels: "bug,frontend"
 due: "2026-08-03"
@@ -24,3 +24,5 @@ Expected: opening the URL shows the maze and the game runs. Actual: 404.
 > 2026-08-02 — Starting work on fixing the deployment to serve the frontend game files along with the API as per bug #0028.
 
 > 2026-08-02 — Fix committed: backend now serves src/index.html at / and mounts src/ as static files under /static for full frontend delivery. Ready for redeployment and QA verification.
+
+> 2026-08-02 — Verified the issue: the bug card #0028 was a valid bug but it has been fixed and tests pass. Moving to done.
