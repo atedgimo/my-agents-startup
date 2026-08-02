@@ -51,3 +51,5 @@ async def submit_score(submission: ScoreSubmission):
     conn.commit()
     conn.close()
     return {"message": "Score submitted"}
+
+# End of file
