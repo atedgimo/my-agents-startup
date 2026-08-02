@@ -2,7 +2,7 @@
 id: "0013"
 title: "[part] #0004.2 Input Buffer & Movement Smoothing"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-12"
@@ -22,3 +22,5 @@ Size: M
 > 2026-08-02 — Starting implementation of Input Buffer & Movement Smoothing feature. Please write the necessary backend code files and move the card to review when done.
 
 > 2026-08-02 — Starting implementation of Input Buffer & Movement Smoothing feature.
+
+> 2026-08-02 — Implemented input buffer and movement smoothing feature with backend API endpoints for input queuing, movement update, and buffer clearing. Ready for review.
