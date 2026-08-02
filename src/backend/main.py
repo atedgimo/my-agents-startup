@@ -10,6 +10,8 @@ from enum import Enum
 import json
 import threading
 
+from pellet_collection import router as pellet_router
+
 logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
@@ -86,6 +88,9 @@ async def startup_event():
     except Exception as e:
         logging.error(f"Failed to load scores from {SCORES_FILE}: {e}")
         scores = []
+
+# Register pellet collection router
+app.include_router(pellet_router)
 
 @app.post("/input")
 async def receive_input(request: Request):
