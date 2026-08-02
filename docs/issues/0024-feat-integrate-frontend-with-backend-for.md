@@ -2,7 +2,7 @@
 id: "0024"
 title: "feat: integrate frontend with backend for score persistence"
 type: "feature"
-status: "backlog"
+status: "done"
 assignee: ""
 labels: ""
 due: ""
@@ -16,3 +16,5 @@ The frontend (`src/game.js`) currently does not make any network requests to the
 1. Define an API client or a simple fetch wrapper in `src/game.js`.
 2. Connect the `score` variable update to a call to `/submit-score`.
 3. Optionally, load initial high scores on page load using `/scores`.
+
+> 2026-08-02 — QA passed, product deployed. Waiting for pod to reach ready state before finalizing RELEASES.md entry.
