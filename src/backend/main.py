@@ -10,8 +10,24 @@ import json
 
 app = FastAPI()
 
-# Initialize input buffer
-input_buffer = InputBuffer()
+# Input buffer class to queue and smooth input directions
+class InputBuffer:
+    def __init__(self):
+        self.queue = []
+        self.current_direction = Direction.NONE
+
+    def queue_input(self, direction):
+        self.queue.append(direction)
+
+    def update_direction(self):
+        if self.queue:
+            self.current_direction = self.queue.pop(0)
+        else:
+            self.current_direction = Direction.NONE
+
+    def clear(self):
+        self.queue.clear()
+        self.current_direction = Direction.NONE
 
 # Game state placeholder
 current_position = {'x': 0, 'y': 0}
@@ -30,12 +46,14 @@ if os.path.exists(SCORES_FILE):
 else:
     scores = []
 
-class MoveDirection(str, Enum):
+class Direction(str, Enum):
     UP = 'UP'
     DOWN = 'DOWN'
     LEFT = 'LEFT'
     RIGHT = 'RIGHT'
     NONE = 'NONE'
+
+input_buffer = InputBuffer()
 
 @app.post("/input")
 async def receive_input(request: Request):
