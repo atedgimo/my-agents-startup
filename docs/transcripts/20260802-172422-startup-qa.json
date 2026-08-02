@@ -1,0 +1,19 @@
+{
+ "agent": "startup-qa",
+ "ts": "2026-08-02T17:24:22",
+ "meeting": false,
+ "title": "Reply with exactly: OPENAI OK",
+ "prompt": "Reply with exactly: OPENAI OK",
+ "messages": [
+  {
+   "who": "co-founder",
+   "kind": "say",
+   "text": "Reply with exactly: OPENAI OK"
+  },
+  {
+   "who": "startup-qa",
+   "kind": "say",
+   "text": "OPENAI OK"
+  }
+ ]
+}
