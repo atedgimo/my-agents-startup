@@ -2,8 +2,8 @@
 id: "0019"
 title: "[part] #0005.2 Score Persistence & Sync"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-14"
 created: "2026-08-02"
@@ -15,3 +15,5 @@ Acceptance Criteria:
 1. Score data is sent to the /high-scores endpoint (or equivalent) on completion.
 2. Persistence is verified after refresh.
 Size: M
+
+> 2026-08-02 — Promoting this backlog card to todo for sprint planning. This is important for score persistence across sessions.
