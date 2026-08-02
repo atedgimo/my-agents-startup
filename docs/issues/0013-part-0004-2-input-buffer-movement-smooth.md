@@ -2,7 +2,7 @@
 id: "0013"
 title: "[part] #0004.2 Input Buffer & Movement Smoothing"
 type: "feature"
-status: "todo"
+status: "review"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-12"
@@ -30,3 +30,5 @@ Size: M
 > 2026-08-02 — Reviewed the Input Buffer & Movement Smoothing backend feature. Code is correct and integrates well, but there are no tests covering this feature. Created bug issue #0034 to add necessary tests before approval.
 
 > 2026-08-02 — QA found no tests for the Input Buffer & Movement Smoothing feature. Created bug issue #0034 for adding unit tests. Moving card back to todo for test coverage.
+
+> 2026-08-02 — Added comprehensive unit tests for InputBuffer class and smooth_transition function covering normal and edge cases. Tests are in tests/test_input_buffer.py. Ready for review.
