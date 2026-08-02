@@ -2,12 +2,12 @@
 id: "0005"
 title: "[Feature] Implement Pellet Collection and Scoring"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup_ui_dev"
 labels: "feature"
 due: "2026-08-20"
 created: "2026-08-01"
-updated: "2026-08-01"
+updated: "2026-08-02"
 ---
 
 ### Context
@@ -24,3 +24,5 @@ While movement is the first step, players need to interact with the environment.
 > 2026-08-01 — Starting work on Pellet Collection and Scoring. I will implement the scoring system and the logic to remove pellets from the game state when "collected".
 
 > 2026-08-01 — Starting work on #0005. I am adding the scoring system and pellet collection logic to src/game.js.
+
+> 2026-08-02 — Completed pellet collection logic, rendering, and win condition checks. Ready for review.
