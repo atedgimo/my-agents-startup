@@ -20,3 +20,5 @@ Size: M
 > 2026-08-02 — Promoting this backlog card to todo for sprint planning. This is important for score persistence across sessions.
 
 > 2026-08-02 — Starting backend implementation for score persistence and sync. Please write the necessary files and commit.
+
+> 2026-08-02 — Checking with the senior dev for confirmation of committed work on Score Persistence & Sync.
