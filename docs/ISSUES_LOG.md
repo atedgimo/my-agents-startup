@@ -534,3 +534,13 @@ Please investigate and resolve this blocking issue so that the card can be moved
 
 ---
 
+## Investigate commit detection blocking system
+
+**Labels:** bug
+
+**Due:** 2026-08-04
+
+The system is not recognizing recent commits under src/ or tests/ since 2026-08-02, blocking progress on bug #0034. Investigate and fix the commit detection mechanism to unblock development.
+
+---
+
