@@ -2,7 +2,7 @@
 id: "0041"
 title: "Investigate and fix chomp pod CrashLoopBackOff issue"
 type: "bug"
-status: "done"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -32,3 +32,5 @@ The chomp pod is currently crash-looping with a CrashLoopBackOff status. We need
 > 2026-08-02 — Confirmed the fix for bug #0041 CrashLoopBackOff is implemented and committed in src/backend/main.py with robust error handling and logging. Moving card to review for QA verification.
 
 > 2026-08-02 — QA verified the fix for bug #0041. The error handling and logging around environment variables and file access in src/backend/main.py are correctly implemented. The fix resolves the CrashLoopBackOff pod issue with no regressions found. Marking the bug as done.
+
+> 2026-08-02 — Starting work on fixing the CrashLoopBackOff issue by reviewing and correcting backend main.py code for environment variable handling and scores file access.
