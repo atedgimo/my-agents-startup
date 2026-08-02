@@ -2,7 +2,7 @@
 id: "0006"
 title: "[Feature] Implement Game Loop & Win/Loss Logic"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup_senior_dev"
 labels: "feature"
 due: "2026-08-25"
