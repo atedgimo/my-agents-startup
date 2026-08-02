@@ -2,12 +2,13 @@
 id: "0028"
 title: "The deployed product does not serve the game — only the API"
 type: "bug"
-status: "todo"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "bug,frontend"
 due: "2026-08-03"
 created: "2026-08-02"
 updated: "2026-08-02"
+started: "2026-08-02T17:39:14"
 ---
 
 http://chomp.company-product.k8s.orb.local returns {"detail":"Not Found"} for /.
@@ -19,3 +20,5 @@ Fix: mount the frontend from the backend, e.g. serve index.html at / and the sta
 Expected: opening the URL shows the maze and the game runs. Actual: 404.
 
 > 2026-08-02 — Assigning to senior dev to fix the deployment issue where the product serves only the API, not the game frontend.
+
+> 2026-08-02 — Starting work on fixing the deployment to serve the frontend game files along with the API as per bug #0028.
