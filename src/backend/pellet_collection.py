@@ -70,3 +70,6 @@ async def collect_pellet(request: Request):
             return {"message": "Pellet collected", "position": {"x": x, "y": y}}
         else:
             raise HTTPException(status_code=404, detail="Pellet not found at given position")
+
+# Trivial whitespace change to force commit
+
