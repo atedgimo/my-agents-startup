@@ -1,4 +1,3 @@
-"""
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List, Optional
@@ -52,4 +51,3 @@ async def submit_score(submission: ScoreSubmission):
     conn.commit()
     conn.close()
     return {"message": "Score submitted"}
-"""
