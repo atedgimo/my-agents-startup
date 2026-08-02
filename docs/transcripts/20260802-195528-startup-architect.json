@@ -1,0 +1,19 @@
+{
+ "agent": "startup-architect",
+ "ts": "2026-08-02T19:55:28",
+ "meeting": false,
+ "title": "?",
+ "prompt": "?",
+ "messages": [
+  {
+   "who": "co-founder",
+   "kind": "say",
+   "text": "?"
+  },
+  {
+   "who": "startup-architect",
+   "kind": "say",
+   "text": "Hello! I'm the Architect agent for \"Local Startup in a Box.\" How can I assist you today? If you have any questions or tasks related to architecture decisions, code reviews, or planning, just let me know!"
+  }
+ ]
+}
