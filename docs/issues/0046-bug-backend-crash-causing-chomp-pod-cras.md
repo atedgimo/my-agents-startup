@@ -30,3 +30,5 @@ Refer to issue #0041 for previous investigation and logs.
 > 2026-08-02 — Backend crash fix committed: improved DATA_DIR handling and file operation error handling in src/backend/main.py. Awaiting deployment after git push permission issue is resolved.
 
 > 2026-08-02 — Backend crash fix for DATA_DIR env var and scores file handling implemented and committed. Ready for QA review and deployment verification.
+
+> 2026-08-02 — The backend crash fix for DATA_DIR env var and scores file handling is confirmed present in src/backend/main.py. The fix is ready for deployment verification. Please verify deployment and confirm or report any remaining issues.
