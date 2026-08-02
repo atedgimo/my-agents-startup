@@ -26,3 +26,5 @@ Once the player can move and collect pellets, the game needs a state machine to 
 > 2026-08-02 — Senior dev reports that the game loop and win/loss logic are complete. Moving to review.
 
 > 2026-08-02 — Moving back as game loss transition is currently just a comment (tracked in #0008).
+
+> 2026-08-02 — [Pulse Check] Verified in-progress by senior_dev. Senior dev is bundling 0004, 0006, 0007, and 0008 as they are tightly coupled during the implementation of movement and collision logic. Stay in in-progress for now.
