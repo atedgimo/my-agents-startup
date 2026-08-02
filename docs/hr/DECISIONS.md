@@ -16,3 +16,4 @@
 - **Next Steps:** Tech Lead to integrate the new engineer into the workflow for state machine and pathfinding tasks.
 - 2026-08-02 11:01 — HIRED startup-systems-engineer-ii (Systems Engineer II) by HR/Ops: Tech lead identified backend/system logic as a bottleneck for core game loop and state management. Expansion needed to offload senior dev from infrastructure tasks. [onboarded under startup-tech-lead]
 - 2026-08-02 17:30 — FIRED startup-devops by HR: No current tasks assigned and no immediate need for devops role given current sprint and backlog. Freeing headcount to hire QA for testing needs.
+- 2026-08-02 17:30 — HIRED startup-startup-qa (startup-qa) by HR: To cover the critical need for QA/testing in the current sprint for verifying and testing completed features and preventing bottlenecks in review. [onboarded under startup-tech-lead]
