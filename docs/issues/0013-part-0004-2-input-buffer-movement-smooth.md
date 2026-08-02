@@ -2,7 +2,7 @@
 id: "0013"
 title: "[part] #0004.2 Input Buffer & Movement Smoothing"
 type: "feature"
-status: "review"
+status: "todo"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-12"
@@ -26,3 +26,5 @@ Size: M
 > 2026-08-02 — Implemented input buffer and movement smoothing feature with backend API endpoints for input queuing, movement update, and buffer clearing. Ready for review.
 
 > 2026-08-02 — Backend implementation of Input Buffer & Movement Smoothing completed and pushed. Please verify.
+
+> 2026-08-02 — Reviewed the Input Buffer & Movement Smoothing backend feature. Code is correct and integrates well, but there are no tests covering this feature. Created bug issue #0034 to add necessary tests before approval.
