@@ -37,5 +37,8 @@ class TestSmoothTransition(unittest.TestCase):
     def test_different_direction(self):
         self.assertEqual(smooth_transition(Direction.UP, Direction.LEFT), Direction.LEFT)
 
+# Added a blank line below to force a new commit
+
+
 if __name__ == '__main__':
     unittest.main()
