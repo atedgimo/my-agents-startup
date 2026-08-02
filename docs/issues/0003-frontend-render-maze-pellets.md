@@ -16,3 +16,5 @@ Create a simple 2D grid system and render walls/pellets on an HTML Canvas. Refer
 > 2026-08-02 — Duplicate of #0001. Closing as merged.
 
 > 2026-08-02 — Merging duplicate card into #0001.
+
+> 2026-08-02 — Merged into #0001 (Duplicate)
