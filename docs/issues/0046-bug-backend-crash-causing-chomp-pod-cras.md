@@ -2,8 +2,8 @@
 id: "0046"
 title: "Bug: Backend crash causing chomp pod CrashLoopBackOff"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
 created: "2026-08-02"
@@ -17,3 +17,5 @@ The backend code must be fixed to properly handle the DATA_DIR environment varia
 This bug blocks the product from running and must be fixed urgently.
 
 Refer to issue #0041 for previous investigation and logs.
+
+> 2026-08-02 — Assigning to senior dev for urgent fix of backend crash causing pod CrashLoopBackOff.
