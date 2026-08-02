@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
 import sqlite3
@@ -12,6 +14,13 @@ if not os.path.exists(DATA_DIR):
 DB_PATH = f"sqlite:///{os.path.join(DATA_DIR, 'game.db')}"
 
 app = FastAPI()
+
+# Serve frontend static files
+app.mount("/static", StaticFiles(directory="../"), name="static")
+
+@app.get("/")
+async def root():
+    return FileResponse("../index.html")
 
 # Database setup (simple sqlite3 integration)
 def init_db():
