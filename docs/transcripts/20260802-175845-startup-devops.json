@@ -1,0 +1,19 @@
+{
+ "agent": "startup-devops",
+ "ts": "2026-08-02T17:58:45",
+ "meeting": false,
+ "title": "Reply with the single word READY.",
+ "prompt": "Reply with the single word READY.",
+ "messages": [
+  {
+   "who": "co-founder",
+   "kind": "say",
+   "text": "Reply with the single word READY."
+  },
+  {
+   "who": "startup-devops",
+   "kind": "say",
+   "text": "READY"
+  }
+ ]
+}
