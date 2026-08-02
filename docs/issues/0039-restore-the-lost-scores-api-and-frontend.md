@@ -2,7 +2,7 @@
 id: "0039"
 title: "Restore the lost scores API and frontend serving in main.py"
 type: "bug"
-status: "review"
+status: "done"
 assignee: "startup-senior-dev"
 labels: "bug,backend"
 due: "2026-08-03"
@@ -26,3 +26,5 @@ Expected: one deployment serving the playable game plus both APIs. Actual: only 
 > 2026-08-02 — Starting work on restoring the lost scores API and frontend serving in main.py. Will implement backend API endpoints for high scores and frontend serving logic.
 
 > 2026-08-02 — Bug #0039 fixed: Restored the lost scores API and frontend serving in main.py. Backend endpoints for scores and submit-score are working, and static files serving is restored. Ready for QA review.
+
+> 2026-08-02 — Verified the fix for restoring the lost scores API and frontend serving in main.py. Added comprehensive tests for scores API and input buffer endpoints. All tests passed successfully.
