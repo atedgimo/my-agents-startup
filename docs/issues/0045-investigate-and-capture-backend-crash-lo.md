@@ -2,8 +2,8 @@
 id: "0045"
 title: "Investigate and capture backend crash logs for chomp-5c5c974c58-8h6s7 CrashLoopBackOff"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-senior-dev"
 labels: "bug"
 due: "2026-08-04"
 created: "2026-08-02"
@@ -23,3 +23,5 @@ Actual outcome:
 - Backend pod crash loops and product is not available
 
 This is blocking the product from running and needs urgent attention.
+
+> 2026-08-02 — This bug blocks release. Please investigate and capture backend crash logs for chomp-5c5c974c58-8h6s7 CrashLoopBackOff. Fix and commit the code to resolve the issue.
