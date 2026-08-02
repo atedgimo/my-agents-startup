@@ -190,3 +190,17 @@ Size: M
 
 ---
 
+## [part] #0006.3 UI State Overlay Integration
+
+**Labels:** none
+
+**Due:** 2026-08-21
+
+Sub-task of #0006. Coordinate with the frontend to trigger overlays (e.g., "You Win!" or "Game Over") based on state changes in the logic engine.
+Acceptance Criteria:
+1. UI displays win/loss messages appropriately.
+2. Transition back to start menu after game over is functional.
+Size: S
+
+---
+
