@@ -2,8 +2,8 @@
 id: "0018"
 title: "[part] #0005.1 Pellet Collection Logic"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-13"
 created: "2026-08-02"
@@ -15,3 +15,5 @@ Acceptance Criteria:
 1. Pellet collision detection is consistent with movement.
 2. Score increments correctly on valid capture.
 Size: S
+
+> 2026-08-02 — Promoting this backlog card to todo for sprint planning. This is core gameplay logic for pellet collection.
