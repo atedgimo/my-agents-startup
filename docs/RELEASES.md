@@ -13,3 +13,4 @@
 | 1.0.8 | 2026-08-02 | Redeployed with correct backend start command and port 8000; product is ready and live. | http://chomp.company-product.k8s.orb.local:8080 |
 | 1.0.9 | 2026-08-02 | Redeployed with correct backend start command and port 8000; product is ready and live. | http://chomp.company-product.k8s.orb.local:8080 |
 | 1.1.0 | 2026-08-02 | Fixed product not ready issue by correcting deployment start command and ensuring backend serves frontend; product is ready and live. | http://chomp.company-product.k8s.orb.local:8080 |
+| 1.1.1 | 2026-08-02 | Redeployed product with backend and frontend served at port 8080; product is live. | http://chomp.company-product.k8s.orb.local:8080 |
