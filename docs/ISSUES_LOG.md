@@ -618,3 +618,25 @@ No code changes are expected unless issues are found.
 
 ---
 
+## Investigate and capture backend crash logs for chomp-5c5c974c58-8h6s7 CrashLoopBackOff
+
+**Labels:** bug
+
+**Due:** 2026-08-04
+
+The chomp backend pod (chomp-5c5c974c58-8h6s7) is in CrashLoopBackOff state and the product is not running. There are no logs or tracebacks found in the repo or issue files. We need to investigate the deployment environment or container orchestration platform logs to capture the crash details and identify the root cause.
+
+Steps to reproduce:
+- Deploy the current backend code
+- Observe pod crash and CrashLoopBackOff state
+
+Expected outcome:
+- Backend pod runs without crashing
+
+Actual outcome:
+- Backend pod crash loops and product is not available
+
+This is blocking the product from running and needs urgent attention.
+
+---
+
