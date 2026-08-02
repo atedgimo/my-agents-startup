@@ -24,3 +24,5 @@ Size: M
 > 2026-08-02 — Verified implementation of win/loss conditions in src/game.js. Logic correctly handles pellet count for wins, power-up status during ghost collisions for losses, and updates the game state machine accordingly. UI overlays are also confirmed.
 
 > 2026-08-02 — Reviewing card #0016 for Win/Loss Condition Check. Moving to in-progress for verification and finalization before review.
+
+> 2026-08-02 — Refining win/loss logic. Ensuring all pellets are checked and ghost collision correctly handles power-up state.
