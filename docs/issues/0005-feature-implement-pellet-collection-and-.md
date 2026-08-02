@@ -30,3 +30,5 @@ While movement is the first step, players need to interact with the environment.
 > 2026-08-02 — UI dev confirmed all requirements (mapping, rendering, win condition) are met. Moving to review.
 
 > 2026-08-02 — Moving back as Score increment logic is missing (tracked in #0007).
+
+> 2026-08-02 — [Pulse Check] Verified by ui_dev. Logic is currently partially implemented; pending full integration of collision detection for pellets and score incrementing in the main loop. Stay in in-progress.
