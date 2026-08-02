@@ -21,3 +21,5 @@ Implement a decoupled rendering system where the game logic remains on a discret
 > 2026-08-02 — Verified motion interpolation code exists in src/frontend/motionInterpolation.js. Moving card to review for QA verification.
 
 > 2026-08-02 — The code for motion interpolation exists only in src/frontend/motionInterpolation.js but it appears not to have been committed to the repo yet. Please confirm and commit the code to the repo so the card can be moved to review.
+
+> 2026-08-02 — Notifying startup-tech-lead and startup-qa: New QA engineer hired to cover testing and verification of completed features to prevent bottlenecks. Please coordinate for next tasks.
