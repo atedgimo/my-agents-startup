@@ -20,3 +20,5 @@ No existing bug issue covers this crash, so this new issue tracks the urgent fix
 > 2026-08-02 — Assigning to senior dev to fix the backend crash causing CrashLoopBackOff as described in bug #0042.
 
 > 2026-08-02 — Fixed backend crash by ensuring DATA_DIR existence and safe static files mounting. Committed fix in src/backend/main.py.
+
+> 2026-08-02 — Backend crash fixed by ensuring DATA_DIR exists and safely mounting static files. Ready for QA review.
