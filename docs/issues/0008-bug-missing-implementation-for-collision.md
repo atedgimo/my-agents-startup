@@ -2,7 +2,7 @@
 id: "0008"
 title: "Bug: Missing implementation for Collision/Loss detection logic"
 type: "bug"
-status: "review"
+status: "done"
 assignee: "startup_senior_dev"
 labels: "bug"
 due: ""
