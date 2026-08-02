@@ -13,6 +13,13 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 
+class Direction(str, Enum):
+    UP = 'UP'
+    DOWN = 'DOWN'
+    LEFT = 'LEFT'
+    RIGHT = 'RIGHT'
+    NONE = 'NONE'
+
 # Input buffer class to queue and smooth input directions
 class InputBuffer:
     def __init__(self):
@@ -38,34 +45,34 @@ current_position = {'x': 0, 'y': 0}
 # Scores storage in memory for simplicity, persisted in file
 DATA_DIR = os.getenv('DATA_DIR', '.')
 SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
-
-# Load scores from file or initialize
 scores = []
-try:
-    if os.path.exists(SCORES_FILE):
-        with open(SCORES_FILE, 'r') as f:
-            scores = json.load(f)
-        logging.info(f"Loaded scores from {SCORES_FILE}")
-    else:
-        logging.info(f"Scores file {SCORES_FILE} does not exist, starting with empty scores")
-except Exception as e:
-    logging.error(f"Failed to load scores from {SCORES_FILE}: {e}")
-    scores = []
-
-class Direction(str, Enum):
-    UP = 'UP'
-    DOWN = 'DOWN'
-    LEFT = 'LEFT'
-    RIGHT = 'RIGHT'
-    NONE = 'NONE'
 
 input_buffer = InputBuffer()
 
 @app.on_event("startup")
 async def startup_event():
+    global scores
     logging.info(f"Starting up app with DATA_DIR={DATA_DIR}")
     if not os.path.isdir(DATA_DIR):
-        logging.warning(f"DATA_DIR {DATA_DIR} is not a directory or does not exist")
+        logging.warning(f"DATA_DIR {DATA_DIR} is not a directory or does not exist, creating it")
+        try:
+            os.makedirs(DATA_DIR, exist_ok=True)
+        except Exception as e:
+            logging.error(f"Failed to create DATA_DIR {DATA_DIR}: {e}")
+            # We do not raise here to avoid crash, but scores persistence will fail
+
+    # Load scores from file or initialize
+    try:
+        if os.path.exists(SCORES_FILE):
+            with open(SCORES_FILE, 'r') as f:
+                scores = json.load(f)
+            logging.info(f"Loaded scores from {SCORES_FILE}")
+        else:
+            logging.info(f"Scores file {SCORES_FILE} does not exist, starting with empty scores")
+            scores = []
+    except Exception as e:
+        logging.error(f"Failed to load scores from {SCORES_FILE}: {e}")
+        scores = []
 
 @app.post("/input")
 async def receive_input(request: Request):
@@ -140,9 +147,12 @@ async def submit_score(request: Request):
     return {"message": "Score submitted successfully", "scores": scores}
 
 # Mount static files for frontend
-app.mount("/", StaticFiles(directory="src", html=True), name="static")
-
-# Note: The app reads data directory from DATA_DIR env var if needed for persistence or config
+# Changed to mount from current directory 'src/backend/static' assuming static files are here or adjust as needed
+static_dir = os.path.join(os.path.dirname(__file__), 'static')
+if os.path.isdir(static_dir):
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+else:
+    logging.warning(f"Static directory {static_dir} does not exist, static files not mounted")
 
 
 if __name__ == "__main__":
