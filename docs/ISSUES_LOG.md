@@ -268,3 +268,20 @@ By giving each ghost a distinct color (Red, Pink, Cyan, Orange) and a 'scared' v
 
 ---
 
+## Feature: Visual Juice & Feedback Mechanisms
+
+**Labels:** feature
+
+**Due:** 2026-08-15
+
+### Value Case
+**Target Audience:** Casual Players.
+**Metric:** User Retention/Retention of Flow.
+**Reasoning:** Since audio is forbidden, visual "pops" and a "glow" on the player are essential to communicate state changes (like power-ups) and successful interactions (eating pellets). This ensures the game feels responsive and polished without adding complex mechanics.
+
+### Tasks
+- Implement a "pulse" effect or frame-buffer for pellet collection in `src/game.js`.
+- Add a visual indicator (aura/outline) around the player when `power_up` is true.
+
+---
+
