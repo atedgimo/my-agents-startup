@@ -20,3 +20,5 @@ Size: S
 > 2026-08-02 — Promoting this backlog card to todo for sprint planning. This is core gameplay logic for pellet collection.
 
 > 2026-08-02 — Claiming the card to implement pellet collection backend logic.
+
+> 2026-08-02 — Checking with the senior dev for confirmation of committed work on Pellet Collection Logic.
