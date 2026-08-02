@@ -148,3 +148,17 @@ Size: M
 
 ---
 
+## [part] #0004.3 Boundary Enforcement
+
+**Labels:** none
+
+**Due:** 2026-08-14
+
+Sub-task of #0004. Ensure player cannot "jitter" or phase through corners by implementing stricter grid-aligned movement constraints.
+Acceptance Criteria:
+1. Player remains in the center of the tile during turn transitions.
+2. No 'corner cutting' is possible unless explicitly allowed by game logic.
+Size: S
+
+---
+
