@@ -2,7 +2,7 @@
 id: "0011"
 title: "[Feature] Implement Player Movement Kinematics"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: ""
@@ -19,3 +19,5 @@ Implement the core movement logic for the player character, focusing on transfor
 - Note: This task does NOT include wall collision; it assumes an open field.
 
 > 2026-08-02 — Assigning to senior dev for implementation of movement kinematics logic.
+
+> 2026-08-02 — Verified that the player movement kinematics feature code exists in src/game.js with interpolation and basic movement logic. Moving card #0011 to review for QA testing.
