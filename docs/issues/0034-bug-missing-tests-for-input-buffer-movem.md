@@ -2,7 +2,7 @@
 id: "0034"
 title: "Bug: Missing tests for Input Buffer & Movement Smoothing feature"
 type: "bug"
-status: "in-progress"
+status: "review"
 assignee: "startup-qa"
 labels: "bug"
 due: ""
@@ -30,3 +30,5 @@ Request: Add comprehensive unit tests for the InputBuffer class and the smooth_t
 However, there is a GitHub workflow permission issue blocking pushing the commit to the remote repo. Please advise on how to resolve the push permission issue or if an alternative approach is preferred.
 
 The release is blocked until these tests are reviewed in the repo.
+
+> 2026-08-02 — Added and committed comprehensive tests for Input Buffer & Movement Smoothing feature in tests/test_input_buffer_and_movement_smoothing.py. Commit references bug #0034. Marking this bug as ready for review.
