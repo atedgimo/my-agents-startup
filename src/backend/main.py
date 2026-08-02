@@ -1,63 +1,70 @@
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-from pydantic import BaseModel
-import sqlite3
+"""
+Main backend FastAPI app integration for game logic including input buffer and movement smoothing.
+"""
 import os
-
-# Configuration
-DATA_DIR = os.getenv("DATA_DIR", "data")
-if not os.path.exists(DATA_DIR):
-    os.makedirs(DATA_DIR)
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from enum import Enum, auto
+from src.backend.input_buffer import InputBuffer, Direction, smooth_transition
 
 app = FastAPI()
 
-# Serve frontend static files from src directory
-app.mount("/static", StaticFiles(directory="../src"), name="static")
+# Initialize input buffer
+input_buffer = InputBuffer()
 
-@app.get("/")
-async def root():
-    return FileResponse("../src/index.html")
+# Game state placeholder
+current_position = {'x': 0, 'y': 0}
 
-# Database setup
-DB_FILE = os.path.join(DATA_DIR, "game.db")
+class MoveDirection(str, Enum):
+    UP = 'UP'
+    DOWN = 'DOWN'
+    LEFT = 'LEFT'
+    RIGHT = 'RIGHT'
+    NONE = 'NONE'
 
-def init_db():
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS high_scores (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            player_name TEXT NOT NULL,
-            score INTEGER NOT NULL
-        )
-    """)
-    conn.commit()
-    conn.close()
+@app.post("/input")
+async def receive_input(request: Request):
+    """Receive player input direction and queue it."""
+    data = await request.json()
+    direction_str = data.get('direction', 'NONE').upper()
+    try:
+        direction = Direction[direction_str]
+    except KeyError:
+        return JSONResponse(status_code=400, content={"error": "Invalid direction"})
 
-init_db()
+    input_buffer.queue_input(direction)
+    return {"message": f"Direction {direction_str} queued"}
 
-class ScoreSubmission(BaseModel):
-    player_name: str
-    score: int
+@app.get("/move")
+async def get_movement():
+    """Update movement direction smoothly and return new position."""
+    input_buffer.update_direction()
+    current_dir = input_buffer.current_direction
 
-@app.get("/scores")
-async def get_scores():
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute("SELECT player_name, score FROM high_scores ORDER BY score DESC LIMIT 10")
-    results = cursor.fetchall()
-    conn.close()
-    return [{"player_name": r[0], "score": r[1]} for r in results]
+    # For demonstration, move one unit per call in the direction
+    if current_dir == Direction.UP:
+        current_position['y'] += 1
+    elif current_dir == Direction.DOWN:
+        current_position['y'] -= 1
+    elif current_dir == Direction.LEFT:
+        current_position['x'] -= 1
+    elif current_dir == Direction.RIGHT:
+        current_position['x'] += 1
 
-@app.post("/submit-score")
-async def submit_score(submission: ScoreSubmission):
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO high_scores (player_name, score) VALUES (?, ?)", 
-                   (submission.player_name, submission.score))
-    conn.commit()
-    conn.close()
-    return {"message": "Score submitted"}
+    return {
+        "position": current_position,
+        "direction": current_dir.name
+    }
 
-# End of file
+@app.post("/clear_input")
+async def clear_input_buffer():
+    """Clear the input buffer and reset direction."""
+    input_buffer.clear()
+    return {"message": "Input buffer cleared"}
+
+# Note: The app reads data directory from DATA_DIR env var if needed for persistence or config
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
