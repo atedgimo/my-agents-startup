@@ -2,7 +2,7 @@
 id: "0035"
 title: "Add unit tests for Input Buffer & Movement Smoothing feature"
 type: "bug"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: "2026-08-09"
@@ -16,3 +16,5 @@ Create comprehensive unit tests for the InputBuffer class and smooth_transition 
 > 2026-08-02 — Assigning this bug to senior dev for implementation of unit tests for Input Buffer & Movement Smoothing.
 
 > 2026-08-02 — Please implement or confirm comprehensive unit tests for InputBuffer class and smooth_transition function to cover all edge cases and integration points, as requested in bug #0035. This overlaps with bug #0034 which already has tests added. Confirm no duplication and commit the tests to unblock this card.
+
+> 2026-08-02 — Fixed the input_buffer.py module to restore the Input Buffer & Movement Smoothing feature. Added comprehensive unit tests in tests/test_input_buffer.py to cover the input buffer functionality and smooth transition helper function. This resolves the blocking issues preventing the product from running.
