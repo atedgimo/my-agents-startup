@@ -107,3 +107,16 @@ The file should contain only raw JavaScript code, starting directly with variabl
 
 ---
 
+## [Feature] Implement Player Movement Kinematics
+
+**Labels:** feature
+
+Implement the core movement logic for the player character, focusing on transforming input into kinematics.
+
+- Map keyboard inputs (Arrow keys/WASD) to a normalized direction vector.
+- Implement a velocity system where input influences a position update over time.
+- Ensure smooth transition between directions.
+- Note: This task does NOT include wall collision; it assumes an open field.
+
+---
+
