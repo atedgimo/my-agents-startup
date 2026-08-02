@@ -670,3 +670,11 @@ The co-founder asks PDM to review and approve (or reject) this change before it 
 
 ---
 
+## TEMP objective wiring check
+
+**Labels:** chore
+
+temp
+
+---
+
