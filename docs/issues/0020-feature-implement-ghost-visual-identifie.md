@@ -19,3 +19,10 @@ By giving each ghost a distinct color (Red, Pink, Cyan, Orange) and a 'scared' v
 - Assign unique colors/shades to each of the 4 ghost types based on their movement logic.
 - Implement a visual change (e.g., turning gray or blue) when `power_up` is true.
 - Update `src/game.js` to handle these color shifts in the drawing loop.
+
+> 2026-08-02 — Acceptance criteria:
+- Implement visual identifiers for ghosts
+- Implement ghost state logic (normal, frightened, eaten)
+- Visuals update correctly based on state
+Size: Medium
+Due date: 2026-08-15
