@@ -51,42 +51,74 @@ for (let r = 0; r < ROWS; r++) {
     }
 }
 
+// Player and ghost positions for logic (discrete grid positions)
+let playerPos = { x: 5, y: 5 };
+let prevPlayerPos = { ...playerPos };
+
+const ghosts = [
+    { pos: { x: 10, y: 10 }, prevPos: { x: 10, y: 10 } },
+    { pos: { x: 15, y: 15 }, prevPos: { x: 15, y: 15 } }
+];
+
+// Timing for interpolation
+let lastUpdateTime = performance.now();
+const LOGIC_UPDATE_INTERVAL = 1000 / 60; // 60 logic updates per second
+
+function lerp(a, b, t) {
+    return a + (b - a) * t;
+}
+
 function update() {
     if (gameState !== STATE.PLAYING) return;
 
-    // Logic for pellet collection and score tracking
+    // Save previous positions for interpolation
+    prevPlayerPos = { ...playerPos };
+    ghosts.forEach(g => {
+        g.prevPos = { ...g.pos };
+    });
+
+    // Example logic update: move player right by one tile every second
+    // (Replace with actual input handling and movement logic)
+    // For demonstration, we just cycle playerPos.x
+    playerPos.x += 1;
+    if (playerPos.x >= COLS - 1) playerPos.x = 1;
+
+    // Pellets collection logic
     pellets.forEach(p => {
         if (p.active) {
-            const dist = Math.hypot(playerX - (p.x * TILE_SIZE), playerY - (p.y * TILE_SIZE));
-            if (dist < TILE_SIZE / 1.5) {
+            if (p.x === playerPos.x && p.y === playerPos.y) {
                 p.active = false;
-                score += 10; // Bug #0007: Increment score by 10
+                score += 10;
             }
         }
     });
 
-    // Win Condition Check: All pellets collected
+    // Win Condition Check
     const remainingPellets = pellets.filter(p => p.active).length;
     if (remainingPellets === 0) {
         gameState = STATE.WON;
     }
 
-    // Collision Detection logic for Loss Condition
-    // Bug #0008: Detect ghost collision and state transition to LOST if no power_up
+    // Collision Detection for ghosts
     ghosts.forEach(g => {
-        const dist = Math.hypot(playerX - g.x, playerY - g.y);
-        if (dist < 20) { // Simplified radius check
+        const dist = Math.hypot(playerPos.x - g.pos.x, playerPos.y - g.pos.y);
+        if (dist < 1) { // Same tile
             if (!power_up) {
                 gameState = STATE.LOST;
             } else {
-                // If the player is in a power-up state, they survive but lose the power-up status
                 power_up = false;
             }
         }
     });
+
+    lastUpdateTime = performance.now();
 }
 
 function draw() {
+    const now = performance.now();
+    const delta = now - lastUpdateTime;
+    const t = Math.min(delta / LOGIC_UPDATE_INTERVAL, 1);
+
     // Clear canvas
     ctx.fillStyle = '#111';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -104,14 +136,34 @@ function draw() {
     // Draw pellets
     ctx.fillStyle = '#facc15'; // Tailwind yellow-400
     pellets.forEach(p => {
-        if (p.active !== false) {
+        if (p.active) {
             ctx.beginPath();
             ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, 4, 0, Math.PI * 2);
             ctx.fill();
         }
     });
 
-    // Draw Score (Added for completeness as per #0007 "updates the UI immediately")
+    // Interpolated player position
+    const interpPlayerX = lerp(prevPlayerPos.x, playerPos.x, t) * TILE_SIZE;
+    const interpPlayerY = lerp(prevPlayerPos.y, playerPos.y, t) * TILE_SIZE;
+
+    // Draw player
+    ctx.fillStyle = '#f59e0b'; // Tailwind amber-500
+    ctx.beginPath();
+    ctx.arc(interpPlayerX + TILE_SIZE / 2, interpPlayerY + TILE_SIZE / 2, TILE_SIZE / 2 - 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Draw ghosts with interpolation
+    ghosts.forEach(g => {
+        const interpGhostX = lerp(g.prevPos.x, g.pos.x, t) * TILE_SIZE;
+        const interpGhostY = lerp(g.prevPos.y, g.pos.y, t) * TILE_SIZE;
+        ctx.fillStyle = '#ef4444'; // Tailwind red-500
+        ctx.beginPath();
+        ctx.arc(interpGhostX + TILE_SIZE / 2, interpGhostY + TILE_SIZE / 2, TILE_SIZE / 2 - 2, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    // Draw Score
     ctx.fillStyle = '#facc15';
     ctx.font = '16px Arial';
     ctx.fillText(`Score: ${score}`, 10, 20);
@@ -128,7 +180,7 @@ function draw() {
     if (gameState === STATE.LOST) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ef4444'; // Tailwind red-500
+        ctx.fillStyle = '#ef4444';
         ctx.font = '30px Arial';
         ctx.fillText('GAME OVER', canvas.width/2 - 100, canvas.height/2);
     }
@@ -136,13 +188,6 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
-// Mock data for ghosts and player (since they aren't fully defined in the snippet but needed for collision check)
-let playerX = 100;
-let playerY = 100;
-const ghosts = [{x: 200, y: 200}, {x: 300, y: 400}];
-
-// Logic to handle game loop state updates (ticked every frame or on event)
-setInterval(update, 1000 / 60);
-
-// Start the loop
+// Game loop
+setInterval(update, LOGIC_UPDATE_INTERVAL);
 draw();
