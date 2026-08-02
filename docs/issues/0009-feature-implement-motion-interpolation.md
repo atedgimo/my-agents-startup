@@ -19,3 +19,5 @@ Implement a decoupled rendering system where the game logic remains on a discret
 > 2026-08-02 — Refined Title & AC: [Feature] Implement Frame-Independent Motion Interpolation. Criteria: 1. Motion is smooth across varying frame rates. 2. Removed stuttering during high system load. Size: M.
 
 > 2026-08-02 — Verified motion interpolation code exists in src/frontend/motionInterpolation.js. Moving card to review for QA verification.
+
+> 2026-08-02 — The code for motion interpolation exists only in src/frontend/motionInterpolation.js but it appears not to have been committed to the repo yet. Please confirm and commit the code to the repo so the card can be moved to review.
