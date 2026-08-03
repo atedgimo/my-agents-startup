@@ -175,7 +175,13 @@ async def submit_score(request: Request):
         logging.error(f"Invalid JSON input in /submit-score: {e}")
         return JSONResponse(status_code=400, content={"error": "Invalid JSON input"})
 
-    name = data.get('name', 'Anonymous')
+    # Bound and sanitise the name before it is persisted. Nothing renders the
+    # leaderboard yet, so this is not exploitable today — but the whole point
+    # of the endpoint is to be displayed, and an unbounded, unescaped string
+    # sitting in a JSON file is stored XSS waiting for a frontend.
+    name = str(data.get('name', 'Anonymous'))[:24]
+    name = ''.join(c for c in name if c.isprintable() and c not in '<>&"\'')
+    name = name.strip() or 'Anonymous'
     score_value = data.get('score')
     if score_value is None or not isinstance(score_value, int):
         logging.error("Score must be an integer")
