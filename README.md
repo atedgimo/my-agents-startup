@@ -11,6 +11,35 @@ setting the brief, answering questions, and approving hires.
 
 The product is **Chomp**, a browser-playable Pac-Man clone.
 
+![Chomp](docs/screenshots/01-the-product.png)
+
+Look closely: the canvas reads **Score: 160** while the label underneath reads
+**Score: 0**. Two agents built those two things and neither knew about the
+other. That single frame is the honest summary of this repository.
+
+## How it was built
+
+The company was run from a dashboard. These are not mockups — they are the
+live tool, mid-project.
+
+**The board.** 51 cards, moved by agents, every change a git commit.
+
+![The board](docs/screenshots/02-the-board.png)
+
+**Why this agent, this cycle.** The left column is every work cycle; the right
+is the decision ladder that chose who to wake, with the matched rung
+highlighted and everything below it marked "not reached". The repeated
+*"the product is down and 1 bug(s) explain why"* rows are a livelock, caught
+and fixed.
+
+![Why this agent](docs/screenshots/03-why-this-agent.png)
+
+**The queue of things only a human could decide.** HR announcing that it fired
+the DevOps engineer, that it hired a replacement it named `startup-startup-qa`,
+and an agent asking the co-founder to fix its SSH keys.
+
+![Needs you](docs/screenshots/04-hr-fires-devops.png)
+
 ## What's in here
 
 ```
