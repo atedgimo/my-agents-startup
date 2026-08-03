@@ -216,3 +216,27 @@ else:
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+# Card 0021: Add endpoint to list all startups
+from fastapi import HTTPException
+import sqlite3
+
+@app.get("/startups")
+async def list_startups():
+    data_dir = os.getenv("DATA_DIR")
+    if not data_dir:
+        raise HTTPException(status_code=500, detail="DATA_DIR environment variable not set")
+
+    db_path = f"{data_dir}/startups.db"
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, name, description FROM startups")
+        rows = cursor.fetchall()
+        startups = [{"id": row[0], "name": row[1], "description": row[2]} for row in rows]
+        conn.close()
+        return startups
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
