@@ -6,6 +6,7 @@
 - Key Result 1.1: Maze navigation with arrow keys functional and responsive at 60fps.
 - Key Result 1.2: Pellet collection system tracking current score and level progress accurately.
 - Key Result 1.3: Implementation of 4 distinct ghost AI behaviors (Chase, Ambush, Patrol, Random).
+- Key Result 1.4: Implement power-pellet interaction system making ghosts flee and be edible for a limited time.
 
 **Objective 2: Provide persistent feedback for the player.**
 - Key Result 2.1: High scores persisted in a backend database accessible via API.
