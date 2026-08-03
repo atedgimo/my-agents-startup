@@ -2,12 +2,12 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-02"
+updated: "2026-08-03"
 ---
 
 ### Value Case
@@ -26,3 +26,5 @@ By giving each ghost a distinct color (Red, Pink, Cyan, Orange) and a 'scared' v
 - Visuals update correctly based on state
 Size: Medium
 Due date: 2026-08-15
+
+> 2026-08-03 — Prioritize implementation of power-pellet interaction system where ghosts flee and become edible for a limited time. This completes the ghost AI behaviors and is the highest priority for the next cycle to meet the playable core loop success criteria.
