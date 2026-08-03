@@ -2,12 +2,12 @@
 id: "0021"
 title: "Feature: Ghost Identity & State Visuals"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-02"
+updated: "2026-08-03"
 ---
 
 ### Value Case
@@ -25,3 +25,5 @@ updated: "2026-08-02"
 - Ghosts display correct identity consistently
 Size: Medium
 Due date: 2026-08-15
+
+> 2026-08-03 — Coordinate with senior dev on visual state changes for ghosts during power-pellet interaction. This is critical to complete ghost AI behavior and player feedback for the next cycle.
