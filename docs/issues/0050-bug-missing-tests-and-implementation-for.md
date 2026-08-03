@@ -2,12 +2,13 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "in-progress"
+assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
 created: "2026-08-03"
 updated: "2026-08-03"
+started: "2026-08-03T16:20:33"
 objective: "Four ghosts with distinct behaviours (chase, ambush, patrol, random), and power-pellets that make them flee and edible for a limited time."
 accept: "pytest -q tests/test_ghost_visuals.py"
 ---
@@ -28,3 +29,5 @@ Actual:
 - Missing test and source files
 
 This issue blocks release until resolved.
+
+> 2026-08-03 — Assigning to senior dev to fix the missing tests and implementation for ghost visual identifiers and state logic as this bug blocks the release.
