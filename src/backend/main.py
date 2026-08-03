@@ -6,55 +6,8 @@ import logging
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
-from enum import Enum
-from ghost_state import GhostManager, GhostIdentity, GhostState
-from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-
-app = FastAPI()
-
-# Allow CORS for frontend development
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Initialize the ghost manager
-ghost_manager = GhostManager()
-
-@app.get("/api/ghosts")
-async def get_all_ghosts_visual_states():
-    """API endpoint to get the visual states of all ghosts."""
-    states = ghost_manager.get_all_ghosts_visual_states()
-    return JSONResponse(content=states)
-
-@app.get("/api/ghosts/{ghost_id}")
-async def get_ghost_visual_state(ghost_id: str):
-    """API endpoint to get the visual state of a specific ghost."""
-    try:
-        identity = GhostIdentity(ghost_id)
-    except ValueError:
-        return JSONResponse(status_code=404, content={"error": "Ghost not found"})
-    visual_state = ghost_manager.get_ghost_visual_state(identity)
-    if visual_state is None:
-        return JSONResponse(status_code=404, content={"error": "Ghost not found"})
-    return JSONResponse(content={"ghost": ghost_id, "visual_state": visual_state})
-
-@app.post("/api/ghosts/{ghost_id}/state")
-async def set_ghost_state(ghost_id: str, state: GhostState):
-    """API endpoint to set the state of a specific ghost."""
-    try:
-        identity = GhostIdentity(ghost_id)
-    except ValueError:
-        return JSONResponse(status_code=404, content={"error": "Ghost not found"})
-    ghost_manager.set_ghost_state(identity, state)
-    return JSONResponse(content={"ghost": ghost_id, "new_state": state.name})
-
-# Keep existing code below unchanged
-
+from enum import Enum
 import json
 import threading
 
@@ -63,6 +16,15 @@ from src.backend.pellet_collection import router as pellet_router
 logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
+
+# Allow the browser frontend to call this API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Direction(str, Enum):
     UP = 'UP'
