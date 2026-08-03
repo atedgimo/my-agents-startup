@@ -30,3 +30,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Coordinate with senior dev on visual state changes for ghosts during power-pellet interaction. This is critical to complete ghost AI behavior and player feedback for the next cycle.
 
 > 2026-08-03 — Starting frontend implementation of ghost identity and state visuals for the Pac-Man game. Will write necessary files and move to review when done.
+
+> 2026-08-03 — The frontend file src/frontend/ghosts.html has been created and committed with the implementation for ghost visuals and real-time state updates. Now moving the card to review.
