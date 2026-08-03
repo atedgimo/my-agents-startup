@@ -39,3 +39,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Starting implementation of ghost visual identifiers and state logic as per the card requirements.
 
 > 2026-08-03 — Implemented backend logic for ghost states (chase, ambush, patrol, random, flee) and visual identifiers for each ghost. This supports frontend rendering and integrates with existing game logic.
+
+> 2026-08-03 — Ghost visual identifiers and state logic implemented and committed in src/backend/ghosts.py. Ready for review.
