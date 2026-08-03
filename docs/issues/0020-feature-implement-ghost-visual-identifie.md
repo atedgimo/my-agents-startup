@@ -33,3 +33,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Starting implementation of ghost visual identifiers and state logic as backend functionality. Will write necessary files and move to review when done.
 
 > 2026-08-03 — Implemented ghost visual identifiers and state logic including GhostState and GhostIdentity enums, Ghost and GhostManager classes, and API endpoints to get and set ghost states. Committed src/backend/ghost_state.py and updated src/backend/main.py to expose the API.
+
+> 2026-08-03 — Backend logic for ghost visual identifiers and state logic implemented and ready for review.
