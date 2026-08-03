@@ -2,12 +2,13 @@
 id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
-status: "todo"
+status: "in-progress"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
 updated: "2026-08-03"
+started: "2026-08-03T03:28:00"
 ---
 
 ### Value Case
@@ -26,3 +27,5 @@ Size: Medium
 Due date: 2026-08-15
 
 > 2026-08-03 — Begin work on visual juice and feedback mechanisms related to power-pellet effects and ghost state changes. This supports the key result for the next cycle.
+
+> 2026-08-03 — Claiming card #0022 for implementation of Visual Juice & Feedback Mechanisms as it is a frontend feature.
