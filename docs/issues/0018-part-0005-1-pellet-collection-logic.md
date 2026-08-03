@@ -2,7 +2,7 @@
 id: "0018"
 title: "[part] #0005.1 Pellet Collection Logic"
 type: "feature"
-status: "todo"
+status: "done"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-13"
