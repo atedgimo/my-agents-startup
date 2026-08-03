@@ -1,0 +1,30 @@
+---
+id: "0050"
+title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
+type: "bug"
+status: "backlog"
+assignee: ""
+labels: "bug"
+due: ""
+created: "2026-08-03"
+updated: "2026-08-03"
+objective: "Four ghosts with distinct behaviours (chase, ambush, patrol, random), and power-pellets that make them flee and edible for a limited time."
+accept: "pytest -q tests/test_ghost_visuals.py"
+---
+
+The card #0020 for ghost visual identifiers and state logic lacks corresponding test files and backend implementation files. No tests/test_ghost_visuals.py or src/backend/ghost_visuals.py exist.
+
+This blocks verification and release of this feature as per QA gate.
+
+Steps to reproduce:
+- Check repo for ghost visuals test and source files
+- Run pytest to verify no tests exist for this feature
+
+Expected:
+- Tests covering ghost visual identifiers and state logic
+- Backend implementation supporting this feature
+
+Actual:
+- Missing test and source files
+
+This issue blocks release until resolved.

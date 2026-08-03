@@ -698,3 +698,26 @@ Complete the implementation and polish of ghost AI behaviors and their visual re
 
 ---
 
+## Bug: Missing tests and implementation for ghost visual identifiers and state logic
+
+**Labels:** bug
+
+The card #0020 for ghost visual identifiers and state logic lacks corresponding test files and backend implementation files. No tests/test_ghost_visuals.py or src/backend/ghost_visuals.py exist.
+
+This blocks verification and release of this feature as per QA gate.
+
+Steps to reproduce:
+- Check repo for ghost visuals test and source files
+- Run pytest to verify no tests exist for this feature
+
+Expected:
+- Tests covering ghost visual identifiers and state logic
+- Backend implementation supporting this feature
+
+Actual:
+- Missing test and source files
+
+This issue blocks release until resolved.
+
+---
+
