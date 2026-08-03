@@ -2,12 +2,13 @@
 id: "0023"
 title: "Feature: Enhanced Game State Overlays"
 type: "feature"
-status: "todo"
+status: "in-progress"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
 updated: "2026-08-03"
+started: "2026-08-03T03:28:42"
 ---
 
 ### Value Case
@@ -27,3 +28,5 @@ Size: Medium
 Due date: 2026-08-15
 
 > 2026-08-03 — Prepare enhanced game state overlays for power-pellet and ghost edible states. This is part of the next cycle's focus on completing ghost AI and player feedback.
+
+> 2026-08-03 — Starting work on feature #0023: Enhanced Game State Overlays. This serves the success criterion 'Score, lives and level shown live; game over and level-up states work.'
