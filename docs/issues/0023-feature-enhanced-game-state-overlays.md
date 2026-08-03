@@ -30,3 +30,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Prepare enhanced game state overlays for power-pellet and ghost edible states. This is part of the next cycle's focus on completing ghost AI and player feedback.
 
 > 2026-08-03 — Starting work on feature #0023: Enhanced Game State Overlays. This serves the success criterion 'Score, lives and level shown live; game over and level-up states work.'
+
+> 2026-08-03 — This card has had no commits or progress updates. Please clarify what is blocking you or move this card back to todo if you cannot continue now.
