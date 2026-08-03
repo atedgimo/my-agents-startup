@@ -2,12 +2,13 @@
 id: "0021"
 title: "Feature: Ghost Identity & State Visuals"
 type: "feature"
-status: "todo"
+status: "in-progress"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
 updated: "2026-08-03"
+started: "2026-08-03T03:24:41"
 ---
 
 ### Value Case
@@ -27,3 +28,5 @@ Size: Medium
 Due date: 2026-08-15
 
 > 2026-08-03 — Coordinate with senior dev on visual state changes for ghosts during power-pellet interaction. This is critical to complete ghost AI behavior and player feedback for the next cycle.
+
+> 2026-08-03 — Starting frontend implementation of ghost identity and state visuals for the Pac-Man game. Will write necessary files and move to review when done.
