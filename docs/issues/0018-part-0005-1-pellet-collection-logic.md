@@ -2,12 +2,12 @@
 id: "0018"
 title: "[part] #0005.1 Pellet Collection Logic"
 type: "feature"
-status: "review"
+status: "done"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-13"
 created: "2026-08-02"
-updated: "2026-08-02"
+updated: "2026-08-03"
 started: "2026-08-02T19:53:15"
 ---
 
@@ -26,3 +26,5 @@ Size: S
 > 2026-08-02 — Please confirm if the Pellet Collection Logic work is committed and ready for review. If not, specify what remains or any blockers.
 
 > 2026-08-02 — Verified pellet_collection.py contains implemented pellet collection logic with API endpoints and persistence. Moving #0018 Pellet Collection Logic to review.
+
+> 2026-08-03 — Pellet collection logic tests pass and API works as expected. Verified functionality and tests.
