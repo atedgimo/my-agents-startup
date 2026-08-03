@@ -2,12 +2,12 @@
 id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-02"
+updated: "2026-08-03"
 ---
 
 ### Value Case
@@ -24,3 +24,5 @@ updated: "2026-08-02"
 - Implement animations and effects for player and ghosts
 Size: Medium
 Due date: 2026-08-15
+
+> 2026-08-03 — Begin work on visual juice and feedback mechanisms related to power-pellet effects and ghost state changes. This supports the key result for the next cycle.
