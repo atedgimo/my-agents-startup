@@ -18,12 +18,16 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI()
 
 # Allow the browser frontend to call this API
+# allow_credentials=True together with allow_origins=["*"] is the classic CORS
+# mistake: Starlette then echoes the caller's own origin back, so ANY site can
+# make credentialed requests to this API. This app has no cookies or auth, so
+# credentials are simply switched off rather than pretended to be safe.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 class Direction(str, Enum):
