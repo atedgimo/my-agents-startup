@@ -2,12 +2,13 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "todo"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
 updated: "2026-08-03"
+started: "2026-08-03T03:23:51"
 ---
 
 ### Value Case
@@ -28,3 +29,5 @@ Size: Medium
 Due date: 2026-08-15
 
 > 2026-08-03 — Prioritize implementation of power-pellet interaction system where ghosts flee and become edible for a limited time. This completes the ghost AI behaviors and is the highest priority for the next cycle to meet the playable core loop success criteria.
+
+> 2026-08-03 — Starting implementation of ghost visual identifiers and state logic as backend functionality. Will write necessary files and move to review when done.
