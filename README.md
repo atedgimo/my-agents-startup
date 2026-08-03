@@ -42,17 +42,43 @@ and an agent asking the co-founder to fix its SSH keys.
 
 ## What's in here
 
-```
-src/          the product: FastAPI backend + canvas frontend
-tests/        tests the agents wrote for it
-docs/issues/  the kanban board — one Markdown file per card
-docs/pulse/   one record per work cycle: who was woken, why, what they did
-docs/meetings/ standups, retros, code reviews, capacity reviews
-docs/cofounder/ questions the agents asked the human, and hiring decisions
-```
-
 `docs/` is the interesting part. It is a complete, unedited record of how the
 work actually happened — including the parts that went wrong.
+
+**What the company decided it was building**
+
+| Document | Written by | Why it is worth opening |
+|---|---|---|
+| [VISION.md](VISION.md) | CEO | A genuinely good product vision. Its own success metrics include *"High scores saved via backend API"* — the one thing the company never connected |
+| [OKRS.md](OKRS.md) | CEO | Objectives and key results. Key Result 1.4 appears twice, verbatim |
+| [ROADMAP.md](ROADMAP.md) | PDM | The roadmap the company set itself |
+| [BOARD_BRIEF.md](BOARD_BRIEF.md) | *the human* | The founding brief. The one document agents may read but are forbidden to edit |
+
+**Decisions and records**
+
+| Document | Why it is worth opening |
+|---|---|
+| [ADR 0001 — Core integration architecture](docs/adr/0001-integration-architecture.md) | How the agents decided the pieces should fit together |
+| [ADR 0002 — Frontend/backend integration](docs/adr/0002-frontend-backend-integration.md) | An architecture decision record for the integration they then never built |
+| [ADR 0038 — Commit detection blocking system](docs/adr/0038-investigate-commit-detection-blocking-system.md) | The company formally investigating the quality gate that was stopping it |
+| [docs/hr/DECISIONS.md](docs/hr/DECISIONS.md) | HR firing the DevOps engineer, in flawless corporate prose |
+| [docs/RELEASES.md](docs/RELEASES.md) | Every release DevOps cut, with live URLs |
+| [docs/architecture_review.md](docs/architecture_review.md) | The Architect reviewing the company's own work |
+
+**The raw record**
+
+| Where | What is in it |
+|---|---|
+| [docs/pulse/](docs/pulse) | One file per work cycle — the trigger, who was woken, the task, the outcome. 120 of them |
+| [docs/issues/](docs/issues) | The kanban board. One Markdown file per card, with its full comment trail |
+| [docs/meetings/](docs/meetings) | Standups, product reviews, ideation, capacity reviews |
+| [docs/cofounder/inbox.jsonl](docs/cofounder/inbox.jsonl) | Every question the agents asked the human, and every hire they announced |
+| [docs/reviews/](docs/reviews) | Code reviews the agents ran on their own work |
+| [docs/learning/](docs/learning) | The agents' own notes. 1 of 13 ever wrote one, which is a finding in itself |
+| [src/](src) · [tests/](tests) | The product: FastAPI backend, canvas frontend, and the tests they wrote |
+
+If you only read one thing, read [docs/pulse/](docs/pulse) — the unedited
+account of what an autonomous company does with its time.
 
 ## Read the failures, not just the code
 
