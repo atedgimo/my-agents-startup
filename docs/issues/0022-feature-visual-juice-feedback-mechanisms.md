@@ -29,3 +29,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Begin work on visual juice and feedback mechanisms related to power-pellet effects and ghost state changes. This supports the key result for the next cycle.
 
 > 2026-08-03 — Claiming card #0022 for implementation of Visual Juice & Feedback Mechanisms as it is a frontend feature.
+
+> 2026-08-03 — This card has had no commits or progress updates. Please clarify what is blocking you or move this card back to todo if you cannot continue now.
