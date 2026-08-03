@@ -678,3 +678,13 @@ temp
 
 ---
 
+## Complete UI State Overlays for Game Over and Level Up
+
+**Labels:** feature
+
+**Due:** 2026-08-16
+
+Implement and finalize the UI state overlays for the Game Over and Level Up states. These overlays must provide clear, persistent feedback to the player about the game status, meeting the playable core loop and persistent feedback objectives.
+
+---
+
