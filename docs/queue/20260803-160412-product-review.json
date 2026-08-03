@@ -1,0 +1,7 @@
+{
+ "agent": "startup-pdm",
+ "title": "Product review",
+ "prompt": "[MEETING] Product review \u2014 company week 3, day 5 (2026-08-03). FIRST call list_issues: if the backlog already holds more than 8 cards, create NOTHING new this cycle \u2014 instead improve, merge or sharpen existing cards and say so. A backlog nobody can build is waste. Then run the product review: check the co-founder inbox for answers, read VISION.md and the board, then update ROADMAP.md with write_repo_file \u2014 each feature with an explicit value case (who benefits, what metric moves). Kill or defer features without one. File new accepted features as issues with due dates.",
+ "minutes_path": "docs/meetings/2026-08-03-product-review.md",
+ "queued": "2026-08-03T16:04:12"
+}
