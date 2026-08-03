@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -37,3 +37,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Backend logic for ghost visual identifiers and state logic implemented and ready for review.
 
 > 2026-08-03 — Starting implementation of ghost visual identifiers and state logic as per the card requirements.
+
+> 2026-08-03 — Implemented backend logic for ghost states (chase, ambush, patrol, random, flee) and visual identifiers for each ghost. This supports frontend rendering and integrates with existing game logic.
