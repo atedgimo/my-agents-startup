@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -41,3 +41,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Implemented backend logic for ghost states (chase, ambush, patrol, random, flee) and visual identifiers for each ghost. This supports frontend rendering and integrates with existing game logic.
 
 > 2026-08-03 — Ghost visual identifiers and state logic implemented and committed in src/backend/ghosts.py. Ready for review.
+
+> 2026-08-03 — Moving back to in-progress due to missing tests and backend implementation for ghost visual identifiers and state logic. See bug #0050.
