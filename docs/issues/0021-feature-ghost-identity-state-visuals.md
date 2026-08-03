@@ -32,3 +32,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Starting frontend implementation of ghost identity and state visuals for the Pac-Man game. Will write necessary files and move to review when done.
 
 > 2026-08-03 — The frontend file src/frontend/ghosts.html has been created and committed with the implementation for ghost visuals and real-time state updates. Now moving the card to review.
+
+> 2026-08-03 — Card #0021 is still in progress. The backend and frontend implementations are mostly done, but the test suite is failing due to a timeout error. There is a related bug #0050 about missing tests and implementation for ghost visual identifiers and state logic. Please complete the implementation and fix the tests so this card can be moved to review.
