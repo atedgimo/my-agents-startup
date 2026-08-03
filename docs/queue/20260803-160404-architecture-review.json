@@ -1,0 +1,7 @@
+{
+ "agent": "startup-architect",
+ "title": "Architecture review",
+ "prompt": "[MEETING] Architecture review \u2014 company week 3, day 5 (2026-08-03). Run the architecture review: read the recent source under src/ and ARCHITECTURE.md, challenge drift, record significant decisions as ADRs under docs/adr/ (write_repo_file), educate the team with short principle explainers inside the ADRs, and file correction issues where needed.",
+ "minutes_path": "docs/meetings/2026-08-03-architecture-review.md",
+ "queued": "2026-08-03T16:04:04"
+}
