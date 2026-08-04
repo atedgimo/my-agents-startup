@@ -1,6 +1,7 @@
 // Motion interpolation feature implemented for smooth rendering
 
-import { drawGhost } from './frontend/ghostVisuals.js';
+// Removed import of drawGhost from non-existent frontend module
+// Ghost drawing handled inline in render function now
 
 // Added power_up state to track power pellet effect
 let power_up = false;
