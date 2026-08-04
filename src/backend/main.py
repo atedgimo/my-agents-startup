@@ -14,6 +14,8 @@ import threading
 app = FastAPI()
 
 from src.backend.pellet_collection import router as pellet_router
+from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState
+
 
 # Temporarily comment out ghost_ai import to fix startup crash
 # from src.backend.ghost_ai import GhostAI
