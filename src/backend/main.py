@@ -84,7 +84,22 @@ class InputBuffer:
 # Game state placeholder
 current_position = {'x': 0, 'y': 0}
 
-from src.backend.boundary_enforcement import enforce_boundaries  # noqa: F401
+# from src.backend.boundary_enforcement import enforce_boundaries  # Temporarily commented out to avoid import error
+
+from src.backend.boundary_enforcement import enforce_boundaries
+
+
+@app.post("/enforce_boundaries")
+async def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int, desired_y: int):
+    """API endpoint to enforce boundaries on a desired position."""
+    current_pos = {'x': current_x, 'y': current_y}
+    desired_pos = {'x': desired_x, 'y': desired_y}
+    # Maze dimensions placeholder (should be set from actual maze data)
+    MAZE_WIDTH = 28
+    MAZE_HEIGHT = 31
+    new_pos = enforce_boundaries(current_pos, desired_pos, MAZE_WIDTH, MAZE_HEIGHT)
+    return new_pos
+
 
 # Maze dimensions placeholder (should be set from actual maze data)
 MAZE_WIDTH = 28
