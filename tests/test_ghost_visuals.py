@@ -1,4 +1,7 @@
 import pytest
+from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState
+
+
 from src.backend.ghosts import GhostManager, GhostIdentity, GhostState
 
 def test_initial_ghost_states():
