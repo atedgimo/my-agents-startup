@@ -1,40 +1,23 @@
-"""Boundary enforcement logic to prevent player from jittering or corner cutting."""
+"""
+Boundary enforcement module for player movement within maze limits.
+"""
 
-def enforce_boundaries(current_pos, desired_pos, maze_width, maze_height):
+from typing import Dict
+
+
+def enforce_boundaries(current_pos: Dict[str, int], desired_pos: Dict[str, int], maze_width: int, maze_height: int) -> Dict[str, int]:
     """
-    Enforce strict grid-aligned movement constraints.
-    Player must remain in center of tile during turn transitions.
-    No corner cutting allowed.
+    Enforce the boundaries of the maze so the player cannot move outside.
 
     Args:
-        current_pos (dict): {'x': int, 'y': int} current player position
-        desired_pos (dict): {'x': int, 'y': int} desired new position
-        maze_width (int): width of maze in tiles
-        maze_height (int): height of maze in tiles
+        current_pos: Current position dictionary with 'x' and 'y' keys.
+        desired_pos: Desired position dictionary with 'x' and 'y' keys.
+        maze_width: Width of the maze (max x coordinate).
+        maze_height: Height of the maze (max y coordinate).
 
     Returns:
-        dict: new valid position after enforcement
+        New position dictionary with 'x' and 'y' keys, adjusted to stay within boundaries.
     """
-    # Clamp desired position to maze boundaries
-    x = max(0, min(desired_pos['x'], maze_width - 1))
-    y = max(0, min(desired_pos['y'], maze_height - 1))
-
-    # Enforce player remains centered on tile (integer coordinates)
-    x = int(round(x))
-    y = int(round(y))
-
-    # Prevent corner cutting: only allow moves that are strictly horizontal or vertical
-    dx = x - current_pos['x']
-    dy = y - current_pos['y']
-
-    if dx != 0 and dy != 0:
-        # Diagonal move attempted, reject and keep current position
-        return current_pos
-
-    return {'x': x, 'y': y}
-
-
-# End of boundary_enforcement.py
-
-# Added a comment line to force commit
-# End of file
+    new_x = max(0, min(desired_pos['x'], maze_width - 1))
+    new_y = max(0, min(desired_pos['y'], maze_height - 1))
+    return {'x': new_x, 'y': new_y}
