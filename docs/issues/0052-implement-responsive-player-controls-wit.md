@@ -9,7 +9,7 @@ due: "2026-08-10"
 created: "2026-08-04"
 updated: "2026-08-04"
 objective: ""
-accept: ""
+accept: "pytest tests/ -q -k \"responsive or control\""
 ---
 
 Add real-time player movement controls using arrow keys and WASD keys for accessibility.
@@ -30,3 +30,5 @@ Acceptance Criteria:
 accept: curl -sf http://localhost:8000/api/player-move-test | jq -e '.success == true'
 
 objective: "Playable end to end in a browser: arrow keys move Pac-Man"
+
+**2026-08-04 17:31** — acceptance repaired: `pytest tests/ -q -k "responsive or control"` — planner omitted the check: responsive player controls
