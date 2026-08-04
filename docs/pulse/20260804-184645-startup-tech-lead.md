@@ -1,0 +1,18 @@
+# Pulse 2026-08-04 18:46
+
+**Trigger:** your card #0021 is in-progress  
+**Dispatched to:** startup-tech-lead
+
+## Task
+
+Card #0021 is yours: Feature: Ghost Identity & State Visuals. Write the actual files with write_repo_file or edit_repo_file (pass card="0021"), then move it to review with update_issue. If it is genuinely blocked, say exactly what blocks it and move it back to todo with a comment. One card this cycle.
+
+WARNING: this is attempt 26 at the SAME task — the previous attempt did not change the repository. Do the concrete tool call that fixes it, and do not repeat work already done.
+
+ESCALATED to you: the previous owner attempted this twice with no change to the repository. Diagnose why it is stuck rather than retrying it, and if it cannot be fixed this cycle, say so on the card.
+
+Note: 4 question(s) await the co-founder. Do not block on them — proceed with your best judgement and state your assumption.
+
+## Outcome
+
+Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-fNy7aB1Vt2bem0177dkjnnRp on tokens per min (TPM): Limit 200000, Used 192594, Requested 10260. Please try again in 856ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
