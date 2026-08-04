@@ -1,0 +1,7 @@
+{
+ "agent": "startup-ceo",
+ "title": "CEO strategy review",
+ "prompt": "[MEETING] CEO strategy review \u2014 company week 4, day 6 (2026-08-04). Run the weekly strategy review: check the co-founder inbox, consult your executives (agent tools) briefly, update OKRS.md with write_repo_file (progress per objective), and escalate any existential risk to the co-founder via ask_cofounder.",
+ "minutes_path": "docs/meetings/2026-08-04-ceo-strategy.md",
+ "queued": "2026-08-04T18:36:15"
+}
