@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visual Juice Test</title>
+<style>
+  #game-area { position: relative; width: 300px; height: 200px; background: #222; color: white; font-family: sans-serif; }
+  .visual-juice-effect {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+  }
+  .fade-out {
+    opacity: 0;
+  }
+</style>
+</head>
+<body>
+<div id="game-area"></div>
+<script src="../src/game.js"></script>
+<script>
+  function dispatchEvent(type, detail) {
+    const event = new CustomEvent('game-event', { detail });
+    window.dispatchEvent(event);
+  }
+
+  // Test visual juice effects
+  setTimeout(() => dispatchEvent('game-event', { type: 'score', points: 100 }), 1000);
+  setTimeout(() => dispatchEvent('game-event', { type: 'hit' }), 3000);
+  setTimeout(() => dispatchEvent('game-event', { type: 'level-up' }), 5000);
+</script>
+</body>
+</html>
