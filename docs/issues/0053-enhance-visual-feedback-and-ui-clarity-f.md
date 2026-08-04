@@ -9,7 +9,7 @@ due: "2026-08-12"
 created: "2026-08-04"
 updated: "2026-08-04"
 objective: ""
-accept: ""
+accept: "pytest tests/ -q -k \"feedback or visual\""
 ---
 
 Improve the game UI to clearly show:
@@ -29,3 +29,5 @@ Acceptance Criteria:
 accept: curl -sf http://localhost:8000/api/ui-feedback-test | jq -e '.uiCorrect == true'
 
 objective: "Score, lives and level shown live; game over and level-up states work."
+
+**2026-08-04 17:31** — acceptance repaired: `pytest tests/ -q -k "feedback or visual"` — planner omitted the check: visual feedback and UI polish
