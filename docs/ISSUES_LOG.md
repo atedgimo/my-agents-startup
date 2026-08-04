@@ -1060,3 +1060,26 @@ Investigate import paths, module visibility, and app initialization order. Fix t
 
 ---
 
+## Bug: Investigate and fix import errors and app initialization NameError blocking acceptance tests for card #0050
+
+**Labels:** bug
+
+Acceptance tests for card #0050 fail due to import errors and app initialization NameError in src/backend/main.py.
+
+These errors prevent the app from starting and the tests from running.
+
+Steps to reproduce:
+- Run acceptance test for card #0050
+- Observe import errors and NameError
+
+Expected:
+- No import errors
+- App initialized correctly
+- Acceptance tests pass
+
+This bug blocks completion of card #0050 and the release.
+
+Assign to senior dev to investigate and fix.
+
+---
+
