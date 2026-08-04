@@ -1,7 +1,4 @@
-# This module is required by src/backend/main.py import but does not exist yet.
-# It will be implemented later to provide ghost AI behavior.
-
-# For now, provide a placeholder to avoid import errors.
+# Placeholder ghost_ai module to fix import error in main.py
 
 class GhostAI:
     def __init__(self):
