@@ -7,7 +7,7 @@ assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
 created: "2026-08-03"
-updated: "2026-08-03"
+updated: "2026-08-04"
 started: "2026-08-03T16:20:33"
 objective: "Four ghosts with distinct behaviours (chase, ambush, patrol, random), and power-pellets that make them flee and edible for a limited time."
 accept: "pytest -q tests/test_ghost_visuals.py"
@@ -31,3 +31,5 @@ Actual:
 This issue blocks release until resolved.
 
 > 2026-08-03 — Assigning to senior dev to fix the missing tests and implementation for ghost visual identifiers and state logic as this bug blocks the release.
+
+> 2026-08-04 — Card #0050 was moved back to in-progress because the acceptance test did not pass due to missing pytest in requirements. Added pytest to requirements.txt and committed. Ready for QA to retest.
