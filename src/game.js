@@ -139,7 +139,7 @@ function update() {
     // Win Condition Check
     const remainingPellets = pellets.filter(p => p.active).length;
     if (remainingPellets === 0) {
-        gameState = STATE.WON;
+        activateOverlay(STATE.WON);
     }
 
     // Collision Detection for ghosts
@@ -147,7 +147,7 @@ function update() {
         const dist = Math.hypot(playerPos.x - g.pos.x, playerPos.y - g.pos.y);
         if (dist < 1) { // Same tile
             if (!power_up) {
-                gameState = STATE.LOST;
+                activateOverlay(STATE.LOST);
             } else {
                 power_up = false;
             }
