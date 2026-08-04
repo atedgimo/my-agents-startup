@@ -13,6 +13,15 @@ def test_initial_ghost_states():
     states = gm.get_all_states()
     assert states == {
         'Blinky': 'chase',
+        'Pinky': 'ambush',
+        'Inky': 'patrol',
+        'Clyde': 'random'
+    }
+
+    gm = GhostManager()
+    states = gm.get_all_states()
+    assert states == {
+        'Blinky': 'chase',
         'Pinky': 'chase',
         'Inky': 'chase',
         'Clyde': 'chase'
