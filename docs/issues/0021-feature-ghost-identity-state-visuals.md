@@ -42,3 +42,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Card #0021 finished and moved to review after confirming all changes committed and ready for QA.
 
 > 2026-08-04 — Frontend files for ghost identity and state visuals missing, tests failing due to timeout. Blocked by bug #0050 on backend implementation and tests.
+
+> 2026-08-04 — Please finish and commit the work on this card now, then move it to review.
