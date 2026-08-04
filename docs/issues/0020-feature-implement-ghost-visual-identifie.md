@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -55,3 +55,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Moving card back to in-progress due to blocking bug #0056: missing src.backend.ghost_ai module causing import errors and test failures. Cannot verify until fixed.
 
 > 2026-08-04 — Implemented backend module src/backend/ghosts.py for ghost visual identifiers and state logic with GhostState and GhostIdentity enums, Ghost and GhostManager classes. Added API endpoints in src/backend/main.py for getting and setting ghost states. Added pytest tests in tests/test_ghost_visuals.py to verify ghost states and identities. Ready for QA review.
+
+> 2026-08-04 — Card #0020 cannot be verified due to blocking bug #0060: missing src.backend.ghosts module causing import errors and test failures. Moving back to in-progress.
