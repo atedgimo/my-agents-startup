@@ -47,3 +47,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Senior dev has committed the backend implementation and tests for ghost visual identifiers and state logic. Moving card #0020 to review for QA verification.
 
 > 2026-08-04 — Backend implementation and tests for ghost visual identifiers and state logic are missing, blocking release. See bug #0050.
+
+> 2026-08-04 — Please finish and commit the work on this card now, then move it to review.
