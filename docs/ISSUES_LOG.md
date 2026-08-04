@@ -926,3 +926,28 @@ The backend main.py imports src.backend.ghosts module which is missing from the 
 
 ---
 
+## Bug: Missing module 'src.backend.ghosts' causing test import errors
+
+**Labels:** bug
+
+The acceptance tests for bug #0050 failed due to missing module errors. The module 'src.backend.ghosts' is not found, causing import errors in the test files:
+- tests/test_ghost_visuals.py
+- tests/test_pellet_collection.py
+- tests/test_scores_api.py
+
+This blocks running the acceptance tests and verifying the fix for ghost visual identifiers and state logic.
+
+Steps to reproduce:
+1. Run pytest on the tests/ folder
+2. Observe ImportError for 'src.backend.ghosts'
+
+Expected:
+- Tests should import all necessary modules and run without import errors.
+
+Actual:
+- ImportError: No module named 'src.backend.ghosts'
+
+Please investigate and fix the missing module or adjust imports accordingly.
+
+---
+
