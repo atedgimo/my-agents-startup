@@ -11,57 +11,22 @@ from enum import Enum
 import json
 import threading
 
-app = FastAPI()
-
 from src.backend.pellet_collection import router as pellet_router
-# Removed import of non-existent ghost_ai module to fix import errors
-# Removed ghost_visuals import to fix missing module error
-# # Removed ghost_visuals import to fix missing module error
-# # Removed ghost_visuals import to fix missing module error
-# from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState
-
-
-# Temporarily comment out ghost_ai import to fix startup crash
-# # Removed ghost_ai import to fix missing module error
-# # Removed ghost_ai import to fix missing module error
-# # Removed ghost_ai import to fix missing module error
-# # Removed ghost_ai import to fix missing module error
-# # Removed ghost_ai import to fix missing module error
-# from src.backend.ghost_ai import GhostAI
-
 from fastapi import APIRouter, Query
-# from src.backend.ghosts import GhostManager, GhostIdentity, GhostState  # Removed to fix missing module error
+
+# Commented out ghost imports to fix missing module errors
+# from src.backend.ghost_ai import GhostAI
+# from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState
 
 router = APIRouter()
 
-# Initialize ghost manager with starting positions
-# ghost_start_positions = {
-#     GhostIdentity.BLINKY: {'x': 5, 'y': 5},
-#     GhostIdentity.PINKY: {'x': 10, 'y': 5},
-#     GhostIdentity.INKY: {'x': 5, 'y': 10},
-#     GhostIdentity.CLYDE: {'x': 10, 'y': 10}
-# }
-# ghost_manager = GhostManager(ghost_start_positions)
-
-# @app.get("/ghosts")
-# async def get_ghosts():
-#     return ghost_manager.get_all_states()
-
-# @app.post("/ghost_state")
-# async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
-#     ghost_manager.set_ghost_state(identity, state)
-#     return {"status": "success"}
-
 # Register pellet collection router
+app = FastAPI()
 app.include_router(pellet_router)
 
 logging.basicConfig(level=logging.INFO)
 
 # Allow the browser frontend to call this API
-# allow_credentials=True together with allow_origins=["*"] is the classic CORS
-# mistake: Starlette then echoes the caller's own origin back, so ANY site can
-# make credentialed requests to this API. This app has no cookies or auth, so
-# credentials are simply switched off rather than pretended to be safe.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -99,15 +64,9 @@ class InputBuffer:
 # Game state placeholder
 current_position = {'x': 0, 'y': 0}
 
-# from src.backend.boundary_enforcement import enforce_boundaries  # Temporarily commented out to avoid import error
-
-# from src.backend.boundary_enforcement import enforce_boundaries
-
-
 @app.post("/enforce_boundaries")
 async def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int, desired_y: int):
     """API endpoint to enforce boundaries on a desired position."""
-    # Implement boundary enforcement here directly
     MAZE_WIDTH = 28
     MAZE_HEIGHT = 31
 
@@ -126,38 +85,7 @@ async def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int,
 
     return {"x": x, "y": y}
 
-
 # Maze dimensions placeholder (should be set from actual maze data)
 MAZE_WIDTH = 28
 MAZE_HEIGHT = 31
 
-@app.post("/move_player")
-async def move_player(new_x: int, new_y: int):
-    global current_position
-    # Enforce boundary rules
-    x = new_x
-    y = new_y
-
-    if x < 0:
-        x = 0
-    elif x >= MAZE_WIDTH:
-        x = MAZE_WIDTH - 1
-
-    if y < 0:
-        y = 0
-    elif y >= MAZE_HEIGHT:
-        y = MAZE_HEIGHT - 1
-
-    new_pos = {'x': x, 'y': y}
-    current_position = new_pos
-    return {"position": current_position}
-
-
-# Scores storage in memory for simplicity, persisted in file
-
-# Declare globals here
-DATA_DIR = os.getenv('DATA_DIR', '.')
-SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
-
-
-[... truncated ...]
