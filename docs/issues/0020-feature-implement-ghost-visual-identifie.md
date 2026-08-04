@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -51,3 +51,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Please finish and commit the work on this card now, then move it to review.
 
 > 2026-08-04 — Senior dev has finished and committed the backend implementation and tests for ghost visual identifiers and state logic. Moving card #0020 to review for QA verification.
+
+> 2026-08-04 — Moving card back to in-progress due to blocking bug #0056: missing src.backend.ghost_ai module causing import errors and test failures. Cannot verify until fixed.
