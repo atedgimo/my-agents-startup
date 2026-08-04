@@ -918,3 +918,11 @@ This bug blocks release of the ghost visual identifiers and state logic features
 
 ---
 
+## Bug: Missing src/backend/ghosts.py module for ghost visual identifiers and state logic
+
+**Labels:** bug
+
+The backend main.py imports src.backend.ghosts module which is missing from the repo. This blocks the implementation of ghost visual identifiers and state logic as required by card #0020. The missing module should define GhostManager, GhostIdentity, and GhostState classes/enums to manage ghost states and identities as per the product requirements.
+
+---
+
