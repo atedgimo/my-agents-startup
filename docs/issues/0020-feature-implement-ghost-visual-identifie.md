@@ -67,3 +67,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Implemented src/backend/ghosts.py with GhostIdentity, GhostState enums and GhostManager class managing ghost states as per tests and card requirements.
 
 > 2026-08-04 — Reopening card to continue development as it is still in review.
+
+> 2026-08-04 — Cannot verify due to blocking bug #0065: missing src.backend.ghosts module causing import errors and test failures. Moving card back to in-progress.
