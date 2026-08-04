@@ -35,3 +35,5 @@ This issue blocks release until resolved.
 > 2026-08-04 — Card #0050 was moved back to in-progress because the acceptance test did not pass due to missing pytest in requirements. Added pytest to requirements.txt and committed. Ready for QA to retest.
 
 > 2026-08-04 — Noted the bug #0050 about missing tests and implementation for ghost visual identifiers and state logic. Assigning to senior dev to implement the missing backend code and tests as this blocks the release.
+
+> 2026-08-04 — Acceptance test for card #0050 still fails due to import errors and app initialization NameError. Created bug card #0068 to investigate and fix these blocking issues. Card #0050 remains in progress until #0068 is resolved.
