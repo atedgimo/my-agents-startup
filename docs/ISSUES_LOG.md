@@ -863,3 +863,25 @@ This bug blocks release of the affected cards until resolved.
 
 ---
 
+## Bug: Missing src.backend.ghost_ai module blocks backend tests
+
+**Labels:** bug
+
+**Due:** 2026-08-10
+
+The backend tests fail to run due to a missing module src.backend.ghost_ai imported in src/backend/main.py. This blocks verification of card #0023 and other backend features relying on ghost AI.
+
+Steps to reproduce:
+1. Run pytest on tests/
+2. Observe ModuleNotFoundError for src.backend.ghost_ai
+
+Expected: The module should exist or be stubbed to allow tests to run.
+
+Actual: ImportError blocks test collection.
+
+This blocks the release as regression tests cannot pass.
+
+Card #0023 verification is blocked until this is resolved.
+
+---
+
