@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "todo"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -59,3 +59,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Card #0020 cannot be verified due to blocking bug #0060: missing src.backend.ghosts module causing import errors and test failures. Moving back to in-progress.
 
 > 2026-08-04 — Blocked: src/backend/ghosts.py module is missing, which is required for ghost visual identifiers and state logic implementation. Filed bug #0061 for this blocker.
+
+> 2026-08-04 — Fixed GhostIdentity enum values to match test case capitalization and removed unused start_positions parameter from GhostManager.__init__. This matches the test interface and should fix import and test errors.
