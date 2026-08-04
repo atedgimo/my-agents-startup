@@ -800,3 +800,17 @@ This is blocking acceptance testing and release for backend cards that require p
 
 ---
 
+## Define acceptance test for card 0049: Finalize Ghost AI Behaviors and Visuals
+
+**Labels:** chore
+
+The card #0049 was implemented to finalize ghost AI behaviors and visuals, but it lacks an acceptance test command.
+
+Please define a shell command that fails until the ghost AI behaviors and visuals are correctly implemented and passes when they work as expected.
+
+This acceptance test should verify that the backend API for ghost states and positions behaves correctly based on player position input.
+
+This is required to move card #0049 to review and completion.
+
+---
+
