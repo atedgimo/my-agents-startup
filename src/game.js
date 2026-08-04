@@ -20,6 +20,45 @@ let score = 0;
 let lives = 3;
 let power_up = false; // Track if player has a power-up for ghost logic
 
+// Overlay control
+let overlayActive = false;
+
+// Function to activate overlay and pause game logic
+function activateOverlay(state) {
+    gameState = state;
+    overlayActive = true;
+}
+
+// Function to dismiss overlay and reset or advance game
+function dismissOverlay() {
+    if (gameState === STATE.LOST) {
+        // Reset game
+        resetGame();
+    } else if (gameState === STATE.WON) {
+        // Advance to next level or reset
+        nextLevel();
+    }
+    overlayActive = false;
+    gameState = STATE.PLAYING;
+}
+
+// Reset game state
+function resetGame() {
+    score = 0;
+    lives = 3;
+    power_up = false;
+    playerPos = { x: 5, y: 5 };
+    ghosts.forEach(g => g.pos = { x: 10, y: 10 });
+    pellets.forEach(p => p.active = true);
+}
+
+// Advance to next level (simplified as reset for now)
+function nextLevel() {
+    // Could add level increment logic here
+    resetGame();
+}
+
+
 // Maze Layout - 1=Wall, 0=Path/Pellet, 2=Power Pellet
 const mazeData = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
