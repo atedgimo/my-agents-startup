@@ -1,23 +1,20 @@
-"""
-Boundary enforcement module for player movement within maze limits.
-"""
-
 from typing import Dict
 
 
 def enforce_boundaries(current_pos: Dict[str, int], desired_pos: Dict[str, int], maze_width: int, maze_height: int) -> Dict[str, int]:
-    """
-    Enforce the boundaries of the maze so the player cannot move outside.
+    """Clamp the desired position within the maze boundaries."""
+    x = desired_pos.get('x', 0)
+    y = desired_pos.get('y', 0)
 
-    Args:
-        current_pos: Current position dictionary with 'x' and 'y' keys.
-        desired_pos: Desired position dictionary with 'x' and 'y' keys.
-        maze_width: Width of the maze (max x coordinate).
-        maze_height: Height of the maze (max y coordinate).
+    # Clamp x and y to maze boundaries
+    if x < 0:
+        x = 0
+    elif x >= maze_width:
+        x = maze_width - 1
 
-    Returns:
-        New position dictionary with 'x' and 'y' keys, adjusted to stay within boundaries.
-    """
-    new_x = max(0, min(desired_pos['x'], maze_width - 1))
-    new_y = max(0, min(desired_pos['y'], maze_height - 1))
-    return {'x': new_x, 'y': new_y}
+    if y < 0:
+        y = 0
+    elif y >= maze_height:
+        y = maze_height - 1
+
+    return {'x': x, 'y': y}
