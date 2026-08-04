@@ -1,95 +1,57 @@
-from enum import Enum
+from enum import Enum, auto
 import time
 
+class GhostIdentity(Enum):
+    BLINKY = auto()
+    PINKY = auto()
+    INKY = auto()
+    CLYDE = auto()
+
 class GhostState(Enum):
-    CHASE = 'chase'
-    AMBUSH = 'ambush'
-    PATROL = 'patrol'
-    RANDOM = 'random'
-    FLEE = 'flee'
-    EATEN = 'eaten'
+    CHASE = auto()
+    AMBUSH = auto()
+    PATROL = auto()
+    RANDOM = auto()
+    FLEE = auto()
+    EDIBLE = auto()
 
 class Ghost:
-    def __init__(self, name, initial_state):
-        self.name = name
-        self.initial_state = initial_state
-        self.state = initial_state
-        self.edible_timer = None
+    def __init__(self, identity: GhostIdentity):
+        self.identity = identity
+        self.state = GhostState.PATROL
+        self.edible_until = 0
 
-    def set_state(self, state):
+    def set_state(self, state: GhostState):
         self.state = state
-        if state == GhostState.FLEE:
-            self.edible_timer = time.time() + 10  # 10 seconds edible
-        elif state != GhostState.FLEE:
-            self.edible_timer = None
 
-    def is_edible(self):
-        if self.state == GhostState.FLEE:
-            return True
-        if self.state == GhostState.EATEN:
-            return False
-        if self.edible_timer and time.time() <= self.edible_timer:
-            return True
-        return False
+    def activate_power_pellet(self):
+        self.state = GhostState.FLEE
+        self.edible_until = time.time() + 10  # Edible for 10 seconds
 
     def update(self):
-        if self.state == GhostState.FLEE and self.edible_timer and time.time() > self.edible_timer:
-            self.state = self.initial_state
-            self.edible_timer = None
+        if self.state == GhostState.FLEE and time.time() > self.edible_until:
+            self.state = GhostState.PATROL
 
 class GhostManager:
     def __init__(self):
         self.ghosts = {
-            'Blinky': Ghost('Blinky', GhostState.CHASE),
-            'Pinky': Ghost('Pinky', GhostState.AMBUSH),
-            'Inky': Ghost('Inky', GhostState.PATROL),
-            'Clyde': Ghost('Clyde', GhostState.RANDOM),
+            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY),
+            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY),
+            GhostIdentity.INKY: Ghost(GhostIdentity.INKY),
+            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE),
         }
-        self.power_pellet_active = False
+
+    def get_all_states(self):
+        return {identity.name: ghost.state.name for identity, ghost in self.ghosts.items()}
+
+    def set_ghost_state(self, identity: GhostIdentity, state: GhostState):
+        if identity in self.ghosts:
+            self.ghosts[identity].set_state(state)
 
     def activate_power_pellet(self):
-        self.power_pellet_active = True
         for ghost in self.ghosts.values():
-            ghost.set_state(GhostState.FLEE)
-
-    def deactivate_power_pellet(self):
-        self.power_pellet_active = False
+            ghost.activate_power_pellet()
 
     def update(self):
         for ghost in self.ghosts.values():
             ghost.update()
-
-    def get_ghost_state(self, name):
-        return self.ghosts[name].state
-
-    def set_ghost_state(self, name, state):
-        self.ghosts[name].set_state(state)
-
-    def get_all_states(self):
-        return {name: ghost.state.value for name, ghost in self.ghosts.items()}
-
-    def get_ghost_states(self):
-        return {name: ghost.state for name, ghost in self.ghosts.items()}
-
-    @property
-    def ghosts_list(self):
-        return list(self.ghosts.values())
-
-    @property
-    def ghosts(self):
-        return self._ghosts
-
-    @ghosts.setter
-    def ghosts(self, value):
-        self._ghosts = value
-
-    def get_ghost_visuals(self):
-        visuals = {}
-        for name, ghost in self.ghosts.items():
-            if ghost.state == GhostState.FLEE:
-                visuals[name] = f"{name} (Fleeing)"
-            elif ghost.state == GhostState.EATEN:
-                visuals[name] = f"{name} (Eaten)"
-            else:
-                visuals[name] = f"{name} ({ghost.state.value})"
-        return visuals
