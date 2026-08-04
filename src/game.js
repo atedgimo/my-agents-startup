@@ -173,19 +173,27 @@ function draw() {
 
     // Draw Overlays
     if (gameState === STATE.WON) {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        // Draw Level Up overlay
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.85)'; // Tailwind green-500 with opacity
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#facc15';
-        ctx.font = '30px Arial';
-        ctx.fillText('LEVEL CLEAR!', canvas.width/2 - 100, canvas.height/2);
+        ctx.fillStyle = '#d1fae5'; // Tailwind green-100
+        ctx.font = 'bold 36px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('LEVEL UP!', canvas.width / 2, canvas.height / 2 - 20);
+        ctx.font = '20px Arial';
+        ctx.fillText('Great job! Get ready for the next level.', canvas.width / 2, canvas.height / 2 + 20);
     }
 
     if (gameState === STATE.LOST) {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        // Draw Game Over overlay
+        ctx.fillStyle = 'rgba(220, 38, 38, 0.85)'; // Tailwind red-600 with opacity
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ef4444';
-        ctx.font = '30px Arial';
-        ctx.fillText('GAME OVER', canvas.width/2 - 100, canvas.height/2);
+        ctx.fillStyle = '#fee2e2'; // Tailwind red-200
+        ctx.font = 'bold 36px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
+        ctx.font = '20px Arial';
+        ctx.fillText('Try again! Click to restart.', canvas.width / 2, canvas.height / 2 + 20);
     }
 
     requestAnimationFrame(draw);
