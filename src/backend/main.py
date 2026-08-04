@@ -84,6 +84,22 @@ class InputBuffer:
 # Game state placeholder
 current_position = {'x': 0, 'y': 0}
 
+from src.backend.boundary_enforcement import enforce_boundaries
+
+# Maze dimensions placeholder (should be set from actual maze data)
+MAZE_WIDTH = 28
+MAZE_HEIGHT = 31
+
+@app.post("/move_player")
+async def move_player(new_x: int, new_y: int):
+    global current_position
+    desired_pos = {'x': new_x, 'y': new_y}
+    # Enforce boundary rules
+    new_pos = enforce_boundaries(current_position, desired_pos, MAZE_WIDTH, MAZE_HEIGHT)
+    current_position = new_pos
+    return {"position": current_position}
+
+
 # Scores storage in memory for simplicity, persisted in file
 
 # Declare globals here
