@@ -1,3 +1,4 @@
 fastapi
 uvicorn
 pytest
+# Note: pytest is added for testing ghost visuals and state logic
