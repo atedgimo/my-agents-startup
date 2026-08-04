@@ -1,5 +1,12 @@
 import pytest
-from src.backend.ghosts import GhostManager, GhostIdentity, GhostState
+from src.backend.ghost_visuals import GhostManager, GhostState
+
+class GhostIdentity:
+    BLINKY = 'Blinky'
+    PINKY = 'Pinky'
+    INKY = 'Inky'
+    CLYDE = 'Clyde'
+
 
 def test_initial_ghost_states():
     gm = GhostManager()
