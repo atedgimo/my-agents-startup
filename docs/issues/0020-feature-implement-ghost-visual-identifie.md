@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -45,3 +45,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Moving back to in-progress due to missing tests and backend implementation for ghost visual identifiers and state logic. See bug #0050.
 
 > 2026-08-04 — Senior dev has committed the backend implementation and tests for ghost visual identifiers and state logic. Moving card #0020 to review for QA verification.
+
+> 2026-08-04 — Backend implementation and tests for ghost visual identifiers and state logic are missing, blocking release. See bug #0050.
