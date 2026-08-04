@@ -24,9 +24,9 @@ async def get_ghosts():
 
 from src.backend.pellet_collection import router as pellet_router
 
-logging.basicConfig(level=logging.INFO)
-
 app = FastAPI()
+
+logging.basicConfig(level=logging.INFO)
 
 # Allow the browser frontend to call this API
 # allow_credentials=True together with allow_origins=["*"] is the classic CORS
