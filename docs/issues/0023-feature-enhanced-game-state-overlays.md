@@ -2,7 +2,7 @@
 id: "0023"
 title: "Feature: Enhanced Game State Overlays"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -34,3 +34,5 @@ Due date: 2026-08-15
 > 2026-08-03 — This card has had no commits or progress updates. Please clarify what is blocking you or move this card back to todo if you cannot continue now.
 
 > 2026-08-04 — Please finish and commit the work on this card now, then move it to review.
+
+> 2026-08-04 — Completed frontend implementation for enhanced game state overlays including refined STATE.WON and STATE.LOST rendering in src/game.js, added score and status overlays, and created unit tests for overlays. Ready for review.
