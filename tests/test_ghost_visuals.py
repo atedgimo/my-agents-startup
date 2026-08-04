@@ -2,16 +2,37 @@ import pytest
 import time
 from src.backend.ghost_visuals import GhostManager, GhostState
 
-# Retain existing tests but adapt to new GhostManager interface
-
 def test_initial_states():
     gm = GhostManager()
-    ghosts = gm.get_ghosts()
-    assert len(ghosts) == 4
-    assert ghosts[0].state == GhostState.CHASE
-    assert ghosts[1].state == GhostState.AMBUSH
-    assert ghosts[2].state == GhostState.PATROL
-    assert ghosts[3].state == GhostState.RANDOM
+    states = gm.get_all_states()
+    assert states == {
+        'Blinky': 'chase',
+        'Pinky': 'ambush',
+        'Inky': 'patrol',
+        'Clyde': 'random'
+    }
+
+def test_set_and_get_ghost_state():
+    gm = GhostManager()
+    gm.set_ghost_state('Blinky', GhostState.FLEE)
+    assert gm.get_ghost_state('Blinky') == GhostState.FLEE
+    states = gm.get_all_states()
+    assert states['Blinky'] == 'flee'
+
+    gm.set_ghost_state('Clyde', GhostState.EATEN)
+    assert gm.get_ghost_state('Clyde') == GhostState.EATEN
+    states = gm.get_all_states()
+    assert states['Clyde'] == 'eaten'
+
+@pytest.mark.parametrize("name,state", [
+    ('Pinky', GhostState.PATROL),
+    ('Inky', GhostState.AMBUSH),
+])
+def test_parametrized_states(name, state):
+    gm = GhostManager()
+    gm.set_ghost_state(name, state)
+    assert gm.get_ghost_state(name) == state
+
 
 def test_power_pellet_activation():
     gm = GhostManager()
@@ -39,39 +60,4 @@ def test_power_pellet_deactivation_and_edible_timeout(monkeypatch):
     for ghost in ghosts:
         assert ghost.state == ghost.behaviour
         assert not ghost.is_edible()
-
-# Preserve original tests for compatibility
-from src.backend.ghosts import GhostManager as OldGhostManager, GhostIdentity, GhostState as OldGhostState
-
-def test_initial_ghost_states():
-    gm = OldGhostManager()
-    states = gm.get_all_states()
-    assert states == {
-        'Blinky': 'chase',
-        'Pinky': 'chase',
-        'Inky': 'chase',
-        'Clyde': 'chase'
-    }
-
-def test_set_and_get_ghost_state():
-    gm = OldGhostManager()
-    gm.set_ghost_state(GhostIdentity.BLINKY, OldGhostState.FLEE)
-    assert gm.get_ghost_state(GhostIdentity.BLINKY) == OldGhostState.FLEE
-    states = gm.get_all_states()
-    assert states['Blinky'] == 'flee'
-
-    gm.set_ghost_state(GhostIdentity.CLYDE, OldGhostState.EATEN)
-    assert gm.get_ghost_state(GhostIdentity.CLYDE) == OldGhostState.EATEN
-    states = gm.get_all_states()
-    assert states['Clyde'] == 'eaten'
-
-import pytest
-@pytest.mark.parametrize("identity,state", [
-    (GhostIdentity.PINKY, OldGhostState.PATROL),
-    (GhostIdentity.INKY, OldGhostState.AMBUSH),
-])
-def test_parametrized_states(identity, state):
-    gm = OldGhostManager()
-    gm.set_ghost_state(identity, state)
-    assert gm.get_ghost_state(identity) == state
 
