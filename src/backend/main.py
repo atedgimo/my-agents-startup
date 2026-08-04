@@ -92,13 +92,24 @@ current_position = {'x': 0, 'y': 0}
 @app.post("/enforce_boundaries")
 async def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int, desired_y: int):
     """API endpoint to enforce boundaries on a desired position."""
-    current_pos = {'x': current_x, 'y': current_y}
-    desired_pos = {'x': desired_x, 'y': desired_y}
-    # Maze dimensions placeholder (should be set from actual maze data)
+    # Implement boundary enforcement here directly
     MAZE_WIDTH = 28
     MAZE_HEIGHT = 31
-    new_pos = enforce_boundaries(current_pos, desired_pos, MAZE_WIDTH, MAZE_HEIGHT)
-    return new_pos
+
+    x = desired_x
+    y = desired_y
+
+    if x < 0:
+        x = 0
+    elif x >= MAZE_WIDTH:
+        x = MAZE_WIDTH - 1
+
+    if y < 0:
+        y = 0
+    elif y >= MAZE_HEIGHT:
+        y = MAZE_HEIGHT - 1
+
+    return {"x": x, "y": y}
 
 
 # Maze dimensions placeholder (should be set from actual maze data)
