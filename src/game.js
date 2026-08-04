@@ -135,6 +135,52 @@ function update() {
         if (ghost.pos.x <= 0) ghost.pos.x = COLS - 2;
     });
 
+    // Draw game elements
+    draw();
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw maze walls
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+            if (mazeData[r][c] === 1) {
+                ctx.fillStyle = '#0000FF';
+                ctx.fillRect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            }
+        }
+    }
+
+    // Draw pellets
+    pellets.forEach(p => {
+        if (p.active) {
+            ctx.fillStyle = '#FFFF00';
+            ctx.beginPath();
+            ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, 5, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    });
+
+    // Draw player
+    ctx.fillStyle = '#FFFF00';
+    ctx.beginPath();
+    ctx.arc(playerPos.x * TILE_SIZE + TILE_SIZE / 2, playerPos.y * TILE_SIZE + TILE_SIZE / 2, 12, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // Draw ghosts with identity and state visuals
+    ghosts.forEach((ghost, index) => {
+        // For demo: assign ghost identities cyclically
+        const identities = ['chase', 'ambush', 'patrol', 'random'];
+        const identity = identities[index % identities.length];
+        const state = power_up ? 'frightened' : 'normal';
+        drawGhost(ctx, ghost.pos.x * TILE_SIZE + TILE_SIZE / 2, ghost.pos.y * TILE_SIZE + TILE_SIZE / 2, state, identity);
+    });
+
+    // Draw score
+    document.getElementById('scoreLabel').textContent = score;
+}
+
     // Pellets collection logic
     pellets.forEach(p => {
         if (p.active) {
