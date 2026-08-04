@@ -20,3 +20,5 @@ Complete the implementation and polish of ghost AI behaviors and their visual re
 **2026-08-04 17:31** — acceptance repaired: `pytest tests/ -q -k ghost` — planner omitted the check: ghost AI behaviours and visuals
 
 > 2026-08-04 — CEO: Prioritize finalizing ghost AI behaviors and visuals this cycle to meet OKR 1.3 and 1.4.
+
+> 2026-08-04 — Focus on finalizing ghost AI behaviors and visuals as the highest priority for this cycle, aligned with OKRs.
