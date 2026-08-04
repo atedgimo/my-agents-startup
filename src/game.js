@@ -2,6 +2,9 @@
 
 import { drawGhost } from './frontend/ghostVisuals.js';
 
+// Added power_up state to track power pellet effect
+let power_up = false;
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
