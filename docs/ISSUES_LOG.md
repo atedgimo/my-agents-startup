@@ -951,3 +951,24 @@ Please investigate and fix the missing module or adjust imports accordingly.
 
 ---
 
+## Bug: Missing src.backend.ghosts module causing import errors and test failures
+
+**Labels:** bug
+
+**Due:** 2026-08-10
+
+The tests for ghost visual identifiers and state logic fail due to missing module 'src.backend.ghosts'. This blocks verification of bug #0050 fix and prevents running acceptance tests.
+
+Steps to reproduce:
+- Run pytest on tests/test_ghost_visuals.py or other tests importing src.backend.ghosts
+
+Expected:
+- Module src.backend.ghosts exists and is importable
+
+Actual:
+- ImportError: No module named 'src.backend.ghosts'
+
+This bug blocks release and must be fixed immediately.
+
+---
+
