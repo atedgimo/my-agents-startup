@@ -1,32 +1,20 @@
 import pytest
-from src.backend.ghost_visuals import GhostVisualIdentifier, GhostState
+from src.backend.ghost_visuals import GhostVisual
 
+def test_ghost_visual_initial_state():
+    ghost = GhostVisual('ghost1')
+    assert ghost.get_state() == 'inactive'
 
-def test_initial_state():
-    ghost = GhostVisualIdentifier(1)
-    assert ghost.state == GhostState.NORMAL
-    assert ghost.get_visual_identifier() == "ghost_1_normal"
+def test_ghost_visual_valid_state_changes():
+    ghost = GhostVisual('ghost1')
+    ghost.set_state('active')
+    assert ghost.get_state() == 'active'
+    ghost.set_state('fading')
+    assert ghost.get_state() == 'fading'
+    ghost.set_state('inactive')
+    assert ghost.get_state() == 'inactive'
 
-
-def test_set_state_valid():
-    ghost = GhostVisualIdentifier(2)
-    ghost.set_state(GhostState.FRIGHTENED)
-    assert ghost.state == GhostState.FRIGHTENED
-    assert ghost.get_visual_identifier() == "ghost_2_frightened"
-
-    ghost.set_state(GhostState.EATEN)
-    assert ghost.state == GhostState.EATEN
-    assert ghost.get_visual_identifier() == "ghost_2_eaten"
-
-
-def test_set_state_invalid():
-    ghost = GhostVisualIdentifier(3)
+def test_ghost_visual_invalid_state_change():
+    ghost = GhostVisual('ghost1')
     with pytest.raises(ValueError):
-        ghost.set_state("invalid_state")
-
-
-def test_get_visual_identifier_unknown_state(monkeypatch):
-    ghost = GhostVisualIdentifier(4)
-    # Force an invalid state to test fallback
-    ghost.state = "invalid"
-    assert ghost.get_visual_identifier() == "ghost_4_unknown"
+        ghost.set_state('invalid')
