@@ -119,9 +119,21 @@ MAZE_HEIGHT = 31
 @app.post("/move_player")
 async def move_player(new_x: int, new_y: int):
     global current_position
-    desired_pos = {'x': new_x, 'y': new_y}
     # Enforce boundary rules
-    new_pos = enforce_boundaries(current_position, desired_pos, MAZE_WIDTH, MAZE_HEIGHT)
+    x = new_x
+    y = new_y
+
+    if x < 0:
+        x = 0
+    elif x >= MAZE_WIDTH:
+        x = MAZE_WIDTH - 1
+
+    if y < 0:
+        y = 0
+    elif y >= MAZE_HEIGHT:
+        y = MAZE_HEIGHT - 1
+
+    new_pos = {'x': x, 'y': y}
     current_position = new_pos
     return {"position": current_position}
 
