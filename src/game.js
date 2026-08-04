@@ -1,5 +1,7 @@
 // Motion interpolation feature implemented for smooth rendering
 
+import { drawGhost } from './frontend/ghostVisuals.js';
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
