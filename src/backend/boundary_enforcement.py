@@ -1,15 +1,5 @@
 """Boundary enforcement logic to prevent player from jittering or corner cutting."""
 
-from enum import Enum
-
-class Direction(str, Enum):
-    UP = 'UP'
-    DOWN = 'DOWN'
-    LEFT = 'LEFT'
-    RIGHT = 'RIGHT'
-    NONE = 'NONE'
-
-
 def enforce_boundaries(current_pos, desired_pos, maze_width, maze_height):
     """
     Enforce strict grid-aligned movement constraints.
