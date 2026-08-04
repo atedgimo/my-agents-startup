@@ -237,6 +237,13 @@ function draw() {
     }
 
     requestAnimationFrame(draw);
+
+// Add event listener for dismissing overlays
+canvas.addEventListener('click', () => {
+    if (overlayActive) {
+        dismissOverlay();
+    }
+});
 }
 
 // Game loop
