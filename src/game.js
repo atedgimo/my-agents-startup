@@ -20,6 +20,45 @@ let score = 0;
 let lives = 3;
 let power_up = false; // Track if player has a power-up for ghost logic
 
+// Overlay control
+let overlayActive = false;
+
+// Function to activate overlay and pause game logic
+function activateOverlay(state) {
+    gameState = state;
+    overlayActive = true;
+}
+
+// Function to dismiss overlay and reset or advance game
+function dismissOverlay() {
+    if (gameState === STATE.LOST) {
+        // Reset game
+        resetGame();
+    } else if (gameState === STATE.WON) {
+        // Advance to next level or reset
+        nextLevel();
+    }
+    overlayActive = false;
+    gameState = STATE.PLAYING;
+}
+
+// Reset game state
+function resetGame() {
+    score = 0;
+    lives = 3;
+    power_up = false;
+    playerPos = { x: 5, y: 5 };
+    ghosts.forEach(g => g.pos = { x: 10, y: 10 });
+    pellets.forEach(p => p.active = true);
+}
+
+// Advance to next level (simplified as reset for now)
+function nextLevel() {
+    // Could add level increment logic here
+    resetGame();
+}
+
+
 // Maze Layout - 1=Wall, 0=Path/Pellet, 2=Power Pellet
 const mazeData = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -59,8 +98,8 @@ let playerPos = { x: 5, y: 5 };
 let prevPlayerPos = { ...playerPos };
 
 const ghosts = [
-    { pos: { x: 10, y: 10 }, prevPos: { x: 10, y: 10 } },
-    { pos: { x: 15, y: 15 }, prevPos: { x: 15, y: 15 } }
+    { pos: { x: 10, y: 10 }, prevPos: { x: 10, y: 10 }, state: 'normal' },
+    { pos: { x: 15, y: 15 }, prevPos: { x: 15, y: 15 }, state: 'normal' }
 ];
 
 // Timing for interpolation
@@ -72,6 +111,7 @@ function lerp(a, b, t) {
 }
 
 function update() {
+    if (overlayActive) return; // Pause updates when overlay active
     if (gameState !== STATE.PLAYING) return;
 
     // Save previous positions for interpolation
@@ -92,6 +132,15 @@ function update() {
             if (p.x === playerPos.x && p.y === playerPos.y) {
                 p.active = false;
                 score += 10;
+                // If power pellet, activate power_up state
+                if (mazeData[p.y][p.x] === 2) {
+                    power_up = true;
+                    ghosts.forEach(g => g.state = 'frightened');
+                    setTimeout(() => {
+                        power_up = false;
+                        ghosts.forEach(g => g.state = 'normal');
+                    }, 7000); // Power up lasts 7 seconds
+                }
             }
         }
     });
@@ -99,98 +148,145 @@ function update() {
     // Win Condition Check
     const remainingPellets = pellets.filter(p => p.active).length;
     if (remainingPellets === 0) {
-        gameState = STATE.WON;
+        activateOverlay(STATE.WON);
     }
 
-    // Collision Detection for ghosts
+    // Ghost state logic example
     ghosts.forEach(g => {
-        const dist = Math.hypot(playerPos.x - g.pos.x, playerPos.y - g.pos.y);
-        if (dist < 1) { // Same tile
-            if (!power_up) {
-                gameState = STATE.LOST;
-            } else {
-                power_up = false;
-            }
+        if (g.state === 'frightened') {
+            // Ghosts move randomly or flee player (simplified here)
+            g.pos.x += (Math.random() > 0.5 ? 1 : -1);
+            g.pos.y += (Math.random() > 0.5 ? 1 : -1);
+            // Clamp positions
+            g.pos.x = Math.max(1, Math.min(COLS - 2, g.pos.x));
+            g.pos.y = Math.max(1, Math.min(ROWS - 2, g.pos.y));
+        } else {
+            // Normal ghost AI (simplified chase)
+            if (g.pos.x < playerPos.x) g.pos.x++;
+            else if (g.pos.x > playerPos.x) g.pos.x--;
+            if (g.pos.y < playerPos.y) g.pos.y++;
+            else if (g.pos.y > playerPos.y) g.pos.y--;
         }
     });
 
-    lastUpdateTime = performance.now();
+    // Collision detection with ghosts
+    ghosts.forEach(g => {
+        if (g.pos.x === playerPos.x && g.pos.y === playerPos.y) {
+            if (g.state === 'frightened') {
+                // Ghost eaten
+                score += 50;
+                g.pos = { x: 10, y: 10 };
+                g.state = 'normal';
+            } else {
+                // Player loses a life
+                lives--;
+                if (lives <= 0) {
+                    activateOverlay(STATE.LOST);
+                } else {
+                    // Reset positions
+                    playerPos = { x: 5, y: 5 };
+                    ghosts.forEach(g => g.pos = { x: 10, y: 10 });
+                }
+            }
+        }
+    });
 }
 
-function draw() {
-    const now = performance.now();
-    const delta = now - lastUpdateTime;
-    const t = Math.min(delta / LOGIC_UPDATE_INTERVAL, 1);
-
-    // Clear canvas
-    ctx.fillStyle = '#111';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw maze
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
             if (mazeData[r][c] === 1) {
-                ctx.fillStyle = '#2d3748'; // Tailwind gray-800
+                ctx.fillStyle = 'blue';
                 ctx.fillRect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            } else if (mazeData[r][c] === 2) {
+                ctx.fillStyle = 'orange';
+                ctx.beginPath();
+                ctx.arc(c * TILE_SIZE + TILE_SIZE/2, r * TILE_SIZE + TILE_SIZE/2, TILE_SIZE/3, 0, 2 * Math.PI);
+                ctx.fill();
             }
         }
     }
 
     // Draw pellets
-    ctx.fillStyle = '#facc15'; // Tailwind yellow-400
     pellets.forEach(p => {
         if (p.active) {
+            ctx.fillStyle = 'white';
             ctx.beginPath();
-            ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, 4, 0, Math.PI * 2);
+            ctx.arc(p.x * TILE_SIZE + TILE_SIZE/2, p.y * TILE_SIZE + TILE_SIZE/2, TILE_SIZE/6, 0, 2 * Math.PI);
             ctx.fill();
         }
     });
 
-    // Interpolated player position
-    const interpPlayerX = lerp(prevPlayerPos.x, playerPos.x, t) * TILE_SIZE;
-    const interpPlayerY = lerp(prevPlayerPos.y, playerPos.y, t) * TILE_SIZE;
+    // Interpolate player position
+    const now = performance.now();
+    const t = Math.min(1, (now - lastUpdateTime) / LOGIC_UPDATE_INTERVAL);
+    const interpX = lerp(prevPlayerPos.x, playerPos.x, t);
+    const interpY = lerp(prevPlayerPos.y, playerPos.y, t);
 
     // Draw player
-    ctx.fillStyle = '#f59e0b'; // Tailwind amber-500
+    ctx.fillStyle = 'yellow';
     ctx.beginPath();
-    ctx.arc(interpPlayerX + TILE_SIZE / 2, interpPlayerY + TILE_SIZE / 2, TILE_SIZE / 2 - 2, 0, Math.PI * 2);
+    ctx.arc(interpX * TILE_SIZE + TILE_SIZE/2, interpY * TILE_SIZE + TILE_SIZE/2, TILE_SIZE/2, 0, 2 * Math.PI);
     ctx.fill();
 
-    // Draw ghosts with interpolation
+    // Draw ghosts with visual identifiers based on state
     ghosts.forEach(g => {
-        const interpGhostX = lerp(g.prevPos.x, g.pos.x, t) * TILE_SIZE;
-        const interpGhostY = lerp(g.prevPos.y, g.pos.y, t) * TILE_SIZE;
-        ctx.fillStyle = '#ef4444'; // Tailwind red-500
+        const interpGhostX = lerp(g.prevPos.x, g.pos.x, t);
+        const interpGhostY = lerp(g.prevPos.y, g.pos.y, t);
+        if (g.state === 'frightened') {
+            ctx.fillStyle = 'lightblue';
+        } else {
+            ctx.fillStyle = 'red';
+        }
         ctx.beginPath();
-        ctx.arc(interpGhostX + TILE_SIZE / 2, interpGhostY + TILE_SIZE / 2, TILE_SIZE / 2 - 2, 0, Math.PI * 2);
+        ctx.arc(interpGhostX * TILE_SIZE + TILE_SIZE/2, interpGhostY * TILE_SIZE + TILE_SIZE/2, TILE_SIZE/2, 0, 2 * Math.PI);
         ctx.fill();
     });
 
-    // Draw Score
-    ctx.fillStyle = '#facc15';
-    ctx.font = '16px Arial';
-    ctx.fillText(`Score: ${score}`, 10, 20);
+    // Draw score and lives
+    ctx.fillStyle = 'white';
+    ctx.font = '20px Arial';
+    ctx.fillText(`Score: ${score}`, 10, canvas.height - 40);
+    ctx.fillText(`Lives: ${lives}`, 10, canvas.height - 10);
 
-    // Draw Overlays
-    if (gameState === STATE.WON) {
+    // Draw overlay if active
+    if (overlayActive) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#facc15';
-        ctx.font = '30px Arial';
-        ctx.fillText('LEVEL CLEAR!', canvas.width/2 - 100, canvas.height/2);
+        ctx.fillStyle = 'white';
+        ctx.font = '40px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(gameState === STATE.WON ? 'You Win!' : 'Game Over', canvas.width / 2, canvas.height / 2);
     }
-
-    if (gameState === STATE.LOST) {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ef4444';
-        ctx.font = '30px Arial';
-        ctx.fillText('GAME OVER', canvas.width/2 - 100, canvas.height/2);
-    }
-
-    requestAnimationFrame(draw);
 }
 
-// Game loop
-setInterval(update, LOGIC_UPDATE_INTERVAL);
-draw();
+function gameLoop() {
+    const now = performance.now();
+    if (now - lastUpdateTime > LOGIC_UPDATE_INTERVAL) {
+        update();
+        lastUpdateTime = now;
+    }
+    render();
+    requestAnimationFrame(gameLoop);
+}
+
+// Start the game loop
+gameLoop();
+
+// Export for testing
+if (typeof module !== 'undefined') {
+    module.exports = {
+        update,
+        resetGame,
+        activateOverlay,
+        dismissOverlay,
+        ghosts,
+        playerPos,
+        pellets,
+        gameState,
+        STATE
+    };
+}
