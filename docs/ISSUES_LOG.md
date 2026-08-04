@@ -993,3 +993,24 @@ This bug blocks release of the ghost visual identifiers and state logic features
 
 ---
 
+## Bug: Missing src.backend.ghosts module causing import errors and test failures
+
+**Labels:** bug
+
+The backend module src/backend/ghosts.py is missing, causing import errors in multiple test files and src/backend/main.py. This blocks verification and release of card #0020 (Feature: Implement Ghost Visual Identifiers & State Logic).
+
+Steps to reproduce:
+1. Run pytest on tests/test_ghost_visuals.py or other affected tests.
+2. Observe ModuleNotFoundError for src.backend.ghosts.
+
+Expected:
+- The module src/backend/ghosts.py exists and is importable.
+- Tests run without import errors.
+
+Actual:
+- ModuleNotFoundError: No module named 'src.backend.ghosts'
+
+This blocks card #0020 verification and release.
+
+---
+
