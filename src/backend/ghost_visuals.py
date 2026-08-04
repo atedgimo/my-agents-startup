@@ -1,57 +1,78 @@
-from enum import Enum, auto
-import time
-
-class GhostIdentity(Enum):
-    BLINKY = auto()
-    PINKY = auto()
-    INKY = auto()
-    CLYDE = auto()
+from enum import Enum
 
 class GhostState(Enum):
-    CHASE = auto()
-    AMBUSH = auto()
-    PATROL = auto()
-    RANDOM = auto()
-    FLEE = auto()
-    EDIBLE = auto()
+    NORMAL = 'normal'
+    FRIGHTENED = 'frightened'
+    EATEN = 'eaten'
+
+class GhostIdentity(Enum):
+    BLINKY = 'blinky'
+    PINKY = 'pinky'
+    INKY = 'inky'
+    CLYDE = 'clyde'
 
 class Ghost:
-    def __init__(self, identity: GhostIdentity):
+    def __init__(self, identity, start_pos):
         self.identity = identity
-        self.state = GhostState.PATROL
-        self.edible_until = 0
+        self.pos = start_pos
+        self.state = GhostState.NORMAL
+        self.respawn_timer = 0
 
-    def set_state(self, state: GhostState):
+    def set_state(self, state):
         self.state = state
-
-    def activate_power_pellet(self):
-        self.state = GhostState.FLEE
-        self.edible_until = time.time() + 10  # Edible for 10 seconds
+        if state == GhostState.EATEN:
+            self.respawn_timer = 180  # frames or ticks until respawn
 
     def update(self):
-        if self.state == GhostState.FLEE and time.time() > self.edible_until:
-            self.state = GhostState.PATROL
+        if self.state == GhostState.EATEN:
+            if self.respawn_timer > 0:
+                self.respawn_timer -= 1
+            else:
+                self.state = GhostState.NORMAL
+
+    def to_dict(self):
+        return {
+            'identity': self.identity.value,
+            'pos': self.pos,
+            'state': self.state.value
+        }
 
 class GhostManager:
     def __init__(self):
         self.ghosts = {
-            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY),
-            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY),
-            GhostIdentity.INKY: Ghost(GhostIdentity.INKY),
-            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE),
+            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY, {'x': 5, 'y': 5}),
+            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY, {'x': 10, 'y': 5}),
+            GhostIdentity.INKY: Ghost(GhostIdentity.INKY, {'x': 5, 'y': 10}),
+            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE, {'x': 10, 'y': 10}),
         }
+        self.power_pellet_active = False
+        self.power_pellet_timer = 0
 
     def get_all_states(self):
-        return {identity.name: ghost.state.name for identity, ghost in self.ghosts.items()}
+        return {identity.value: ghost.to_dict() for identity, ghost in self.ghosts.items()}
 
-    def set_ghost_state(self, identity: GhostIdentity, state: GhostState):
+    def set_ghost_state(self, identity, state):
         if identity in self.ghosts:
             self.ghosts[identity].set_state(state)
 
     def activate_power_pellet(self):
+        self.power_pellet_active = True
+        self.power_pellet_timer = 600  # duration in frames
         for ghost in self.ghosts.values():
-            ghost.activate_power_pellet()
+            if ghost.state == GhostState.NORMAL:
+                ghost.set_state(GhostState.FRIGHTENED)
 
     def update(self):
+        if self.power_pellet_active:
+            self.power_pellet_timer -= 1
+            if self.power_pellet_timer <= 0:
+                self.power_pellet_active = False
+                for ghost in self.ghosts.values():
+                    if ghost.state == GhostState.FRIGHTENED:
+                        ghost.set_state(GhostState.NORMAL)
+
         for ghost in self.ghosts.values():
             ghost.update()
+
+        # TODO: Add ghost movement AI and collision logic here
+
