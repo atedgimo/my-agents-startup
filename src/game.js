@@ -261,7 +261,26 @@ function render() {
 
     // Draw ghosts with visual identifiers based on state
     ghosts.forEach(ghost => {
-        drawGhost(ctx, ghost.pos.x, ghost.pos.y, TILE_SIZE, ghost.state);
+        // Draw ghost body
+        ctx.fillStyle = ghost.state === 'frightened' ? 'blue' : ghost.state === 'eaten' ? 'gray' : 'red';
+        ctx.beginPath();
+        ctx.arc(ghost.pos.x * TILE_SIZE + TILE_SIZE / 2, ghost.pos.y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 - 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Draw eyes for normal and frightened ghosts
+        if (ghost.state !== 'eaten') {
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(ghost.pos.x * TILE_SIZE + TILE_SIZE / 3, ghost.pos.y * TILE_SIZE + TILE_SIZE / 3, 5, 0, 2 * Math.PI);
+            ctx.arc(ghost.pos.x * TILE_SIZE + 2 * TILE_SIZE / 3, ghost.pos.y * TILE_SIZE + TILE_SIZE / 3, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = 'black';
+            ctx.beginPath();
+            ctx.arc(ghost.pos.x * TILE_SIZE + TILE_SIZE / 3, ghost.pos.y * TILE_SIZE + TILE_SIZE / 3, 2, 0, 2 * Math.PI);
+            ctx.arc(ghost.pos.x * TILE_SIZE + 2 * TILE_SIZE / 3, ghost.pos.y * TILE_SIZE + TILE_SIZE / 3, 2, 0, 2 * Math.PI);
+            ctx.fill();
+        }
     });
 }
 
