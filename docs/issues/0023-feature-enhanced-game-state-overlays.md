@@ -2,7 +2,7 @@
 id: "0023"
 title: "Feature: Enhanced Game State Overlays"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -38,3 +38,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Completed frontend implementation for enhanced game state overlays including refined STATE.WON and STATE.LOST rendering in src/game.js, added score and status overlays, and created unit tests for overlays. Ready for review.
 
 > 2026-08-04 — Frontend dev has finished and committed the frontend implementation and tests for enhanced game state overlays. Moving card #0023 to review for QA verification.
+
+> 2026-08-04 — Blocked on missing module src.backend.ghost_ai causing import errors in tests. Filed bug #0056 to track and unblock verification.
