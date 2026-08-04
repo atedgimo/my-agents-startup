@@ -9,6 +9,12 @@ class GhostState(Enum):
     FLEE = 'flee'
     EATEN = 'eaten'
 
+class GhostIdentity:
+    BLINKY = 'Blinky'
+    PINKY = 'Pinky'
+    INKY = 'Inky'
+    CLYDE = 'Clyde'
+
 class Ghost:
     def __init__(self, identity, initial_state):
         self.identity = identity
@@ -32,10 +38,10 @@ class GhostManager:
 
     def __init__(self):
         self.ghosts = {
-            'Blinky': Ghost('Blinky', GhostState.CHASE),
-            'Pinky': Ghost('Pinky', GhostState.AMBUSH),
-            'Inky': Ghost('Inky', GhostState.PATROL),
-            'Clyde': Ghost('Clyde', GhostState.RANDOM),
+            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY, GhostState.CHASE),
+            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY, GhostState.AMBUSH),
+            GhostIdentity.INKY: Ghost(GhostIdentity.INKY, GhostState.PATROL),
+            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE, GhostState.RANDOM),
         }
         self.power_pellet_active = False
         self.power_pellet_activated_at = None
@@ -74,8 +80,7 @@ class GhostManager:
             if elapsed > self.POWER_PELLET_DURATION:
                 self.deactivate_power_pellet()
                 # Revert ghosts to original states
-                self.ghosts['Blinky'].set_state(GhostState.CHASE)
-                self.ghosts['Pinky'].set_state(GhostState.AMBUSH)
-                self.ghosts['Inky'].set_state(GhostState.PATROL)
-                self.ghosts['Clyde'].set_state(GhostState.RANDOM)
-
+                self.ghosts[GhostIdentity.BLINKY].set_state(GhostState.CHASE)
+                self.ghosts[GhostIdentity.PINKY].set_state(GhostState.AMBUSH)
+                self.ghosts[GhostIdentity.INKY].set_state(GhostState.PATROL)
+                self.ghosts[GhostIdentity.CLYDE].set_state(GhostState.RANDOM)
