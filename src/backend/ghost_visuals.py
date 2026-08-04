@@ -82,3 +82,14 @@ class GhostManager:
     @ghosts.setter
     def ghosts(self, value):
         self._ghosts = value
+
+    def get_ghost_visuals(self):
+        visuals = {}
+        for name, ghost in self.ghosts.items():
+            if ghost.state == GhostState.FLEE:
+                visuals[name] = f"{name} (Fleeing)"
+            elif ghost.state == GhostState.EATEN:
+                visuals[name] = f"{name} (Eaten)"
+            else:
+                visuals[name] = f"{name} ({ghost.state.value})"
+        return visuals
