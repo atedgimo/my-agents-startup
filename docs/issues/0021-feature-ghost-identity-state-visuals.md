@@ -2,7 +2,7 @@
 id: "0021"
 title: "Feature: Ghost Identity & State Visuals"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -44,3 +44,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Frontend files for ghost identity and state visuals missing, tests failing due to timeout. Blocked by bug #0050 on backend implementation and tests.
 
 > 2026-08-04 — Please finish and commit the work on this card now, then move it to review.
+
+> 2026-08-04 — Frontend dev has finished and committed the frontend implementation and tests for ghost identity and state visuals. Moving card #0021 to review for QA verification.
