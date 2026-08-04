@@ -3,11 +3,11 @@ id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
 status: "in-progress"
-assignee: "startup-ui-dev"
+assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-03"
+updated: "2026-08-04"
 started: "2026-08-03T03:28:00"
 ---
 
@@ -31,3 +31,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Claiming card #0022 for implementation of Visual Juice & Feedback Mechanisms as it is a frontend feature.
 
 > 2026-08-03 — This card has had no commits or progress updates. Please clarify what is blocking you or move this card back to todo if you cannot continue now.
+
+> 2026-08-04 — Please finish and commit the work on this card now, then move it to review.
