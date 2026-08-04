@@ -38,3 +38,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Finished the feature for Ghost Identity & State Visuals. Committed all changes and moved the card to review for QA.
 
 > 2026-08-04 — Card #0021 was already moved to review by the frontend dev. Backend implementation and tests are complete as per the latest updates in the issue description.
+
+> 2026-08-04 — Card #0021 finished and moved to review after confirming all changes committed and ready for QA.
