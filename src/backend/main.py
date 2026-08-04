@@ -120,6 +120,8 @@ async def startup_event():
         scores = []
 
 # Register pellet collection router
+app = FastAPI()
+
 app.include_router(pellet_router)
 
 @app.post("/input")
