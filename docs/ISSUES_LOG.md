@@ -1024,3 +1024,13 @@ Develop and polish ghost AI behaviors and their visual representations to improv
 
 ---
 
+## Implement UI state overlays for Game Over and Level Up
+
+**Labels:** feature,ui
+
+**Due:** 2024-06-10
+
+Create and integrate UI overlays for the Game Over and Level Up states to enhance user experience and game feedback.
+
+---
+
