@@ -84,7 +84,7 @@ class InputBuffer:
 # Game state placeholder
 current_position = {'x': 0, 'y': 0}
 
-from src.backend.boundary_enforcement import enforce_boundaries
+from src.backend.boundary_enforcement import enforce_boundaries  # noqa: F401
 
 # Maze dimensions placeholder (should be set from actual maze data)
 MAZE_WIDTH = 28
