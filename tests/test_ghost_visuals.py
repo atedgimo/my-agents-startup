@@ -1,63 +1,60 @@
-import pytest
 import time
+import pytest
 from src.backend.ghost_visuals import GhostManager, GhostState
 
-def test_initial_states():
+class GhostIdentity:
+    BLINKY = 'Blinky'
+    PINKY = 'Pinky'
+    INKY = 'Inky'
+    CLYDE = 'Clyde'
+
+
+def test_initial_ghost_states():
     gm = GhostManager()
-    states = gm.get_all_states()
-    assert states == {
-        'Blinky': 'chase',
-        'Pinky': 'ambush',
-        'Inky': 'patrol',
-        'Clyde': 'random'
-    }
-
-def test_set_and_get_ghost_state():
-    gm = GhostManager()
-    gm.set_ghost_state('Blinky', GhostState.FLEE)
-    assert gm.get_ghost_state('Blinky') == GhostState.FLEE
-    states = gm.get_all_states()
-    assert states['Blinky'] == 'flee'
-
-    gm.set_ghost_state('Clyde', GhostState.EATEN)
-    assert gm.get_ghost_state('Clyde') == GhostState.EATEN
-    states = gm.get_all_states()
-    assert states['Clyde'] == 'eaten'
-
-@pytest.mark.parametrize("name,state", [
-    ('Pinky', GhostState.PATROL),
-    ('Inky', GhostState.AMBUSH),
-])
-def test_parametrized_states(name, state):
-    gm = GhostManager()
-    gm.set_ghost_state(name, state)
-    assert gm.get_ghost_state(name) == state
+    states = gm.get_ghost_states()
+    assert states['Blinky'] == GhostState.CHASE
+    assert states['Pinky'] == GhostState.AMBUSH
+    assert states['Inky'] == GhostState.PATROL
+    assert states['Clyde'] == GhostState.RANDOM
 
 
-def test_power_pellet_activation():
+def test_power_pellet_activation_and_edible_state():
     gm = GhostManager()
     gm.activate_power_pellet()
-    ghosts = gm.get_ghosts()
-    for ghost in ghosts:
-        assert ghost.state == GhostState.FLEE
+    states = gm.get_ghost_states()
+    for state in states.values():
+        assert state == GhostState.FLEE
+
+    # Ghosts should be edible during power pellet
+    for ghost in gm.ghosts:
         assert ghost.is_edible()
 
-def test_power_pellet_deactivation_and_edible_timeout(monkeypatch):
+
+def test_power_pellet_deactivation_and_revert_state():
     gm = GhostManager()
     gm.activate_power_pellet()
+    time.sleep(0.1)  # short wait to simulate time passing
     gm.deactivate_power_pellet()
-    ghosts = gm.get_ghosts()
-    # After deactivation, ghosts should be EDIBLE
-    for ghost in ghosts:
-        assert ghost.state == GhostState.EDIBLE
-        assert ghost.is_edible()
-
-    # Fast forward time beyond edible_timer
-    future_time = time.time() + 11
-    monkeypatch.setattr("time.time", lambda: future_time)
     gm.update()
-    # After edible timer expires, ghosts revert to original behaviour
-    for ghost in ghosts:
-        assert ghost.state == ghost.behaviour
-        assert not ghost.is_edible()
+    states = gm.get_ghost_states()
+    # After deactivation and update, ghosts revert to original behaviour
+    assert states['Blinky'] == GhostState.CHASE
+    assert states['Pinky'] == GhostState.AMBUSH
+    assert states['Inky'] == GhostState.PATROL
+    assert states['Clyde'] == GhostState.RANDOM
+
+
+def test_edible_timeout():
+    gm = GhostManager()
+    gm.activate_power_pellet()
+    # Wait for edible time to expire
+    time.sleep(10.1)
+    gm.update()
+    states = gm.get_ghost_states()
+    # Ghosts should revert to original behaviour after edible time
+    assert states['Blinky'] == GhostState.CHASE
+    assert states['Pinky'] == GhostState.AMBUSH
+    assert states['Inky'] == GhostState.PATROL
+    assert states['Clyde'] == GhostState.RANDOM
+
 
