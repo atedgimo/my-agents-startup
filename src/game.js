@@ -126,6 +126,13 @@ function update() {
     playerPos.x += 1;
     if (playerPos.x >= COLS - 1) playerPos.x = 1;
 
+    // Update ghost states and positions (dummy example)
+    ghosts.forEach((ghost, index) => {
+        ghost.pos.x += (index % 2 === 0 ? 1 : -1);
+        if (ghost.pos.x >= COLS - 1) ghost.pos.x = 1;
+        if (ghost.pos.x <= 0) ghost.pos.x = COLS - 2;
+    });
+
     // Pellets collection logic
     pellets.forEach(p => {
         if (p.active) {
