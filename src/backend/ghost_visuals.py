@@ -1,72 +1,89 @@
-"""
-Module for ghost visual identifiers and state logic.
-
-Four ghosts with distinct behaviours:
-- chase
-- ambush
-- patrol
-- random
-
-Power-pellets make ghosts flee and edible for a limited time.
-"""
-import random
+from enum import Enum
 import time
 
-class GhostState:
+class GhostState(str, Enum):
     CHASE = 'chase'
     AMBUSH = 'ambush'
     PATROL = 'patrol'
     RANDOM = 'random'
     FLEE = 'flee'
-    EDIBLE = 'edible'
+    EATEN = 'eaten'
 
 class Ghost:
-    def __init__(self, name, behaviour):
-        self.name = name
-        self.behaviour = behaviour
-        self.state = behaviour
-        self.edible_until = 0
+    def __init__(self, identity, initial_state):
+        self.identity = identity
+        self.state = initial_state
+        self.original_state = initial_state
+        self.edible_until = None
 
-    def update_state(self, power_pellet_active):
-        now = time.time()
-        if power_pellet_active:
-            if self.state != GhostState.FLEE and self.state != GhostState.EDIBLE:
-                self.state = GhostState.FLEE
-                self.edible_until = now + 10  # Edible for 10 seconds
-        if self.state == GhostState.FLEE and now > self.edible_until:
-            self.state = self.behaviour
+    def set_state(self, state):
+        self.state = state
+
+    def get_state(self):
+        return self.state
+
+    def make_edible(self, duration):
+        self.set_state(GhostState.FLEE)
+        self.edible_until = time.time() + duration
 
     def is_edible(self):
-        return self.state == GhostState.FLEE
+        if self.edible_until is None:
+            return False
+        return time.time() < self.edible_until
 
-    def __repr__(self):
-        return f"<Ghost {self.name} state={self.state}>"
+    def update(self):
+        if self.edible_until and time.time() > self.edible_until:
+            self.edible_until = None
+            self.set_state(self.original_state)
 
 class GhostManager:
+    POWER_PELLET_DURATION = 10  # seconds
+
     def __init__(self):
-        self.ghosts = [
-            Ghost('Blinky', GhostState.CHASE),
-            Ghost('Pinky', GhostState.AMBUSH),
-            Ghost('Inky', GhostState.PATROL),
-            Ghost('Clyde', GhostState.RANDOM),
-        ]
+        self.ghosts = {
+            'Blinky': Ghost('Blinky', GhostState.CHASE),
+            'Pinky': Ghost('Pinky', GhostState.CHASE),
+            'Inky': Ghost('Inky', GhostState.CHASE),
+            'Clyde': Ghost('Clyde', GhostState.CHASE),
+        }
+        # Set distinct original states for demonstration
+        self.ghosts['Pinky'].original_state = GhostState.AMBUSH
+        self.ghosts['Inky'].original_state = GhostState.PATROL
+        self.ghosts['Clyde'].original_state = GhostState.RANDOM
+        for ghost in self.ghosts.values():
+            ghost.set_state(ghost.original_state)
+
         self.power_pellet_active = False
+        self.power_pellet_activated_at = None
+
+    def get_ghost_state(self, identity):
+        return self.ghosts[identity].get_state()
+
+    def get_all_states(self):
+        return {identity: ghost.get_state() for identity, ghost in self.ghosts.items()}
+
+    def set_ghost_state(self, identity, state):
+        self.ghosts[identity].set_state(state)
 
     def activate_power_pellet(self):
         self.power_pellet_active = True
-        for ghost in self.ghosts:
-            ghost.update_state(True)
+        self.power_pellet_activated_at = time.time()
+        for ghost in self.ghosts.values():
+            ghost.make_edible(self.POWER_PELLET_DURATION)
 
     def deactivate_power_pellet(self):
         self.power_pellet_active = False
-        for ghost in self.ghosts:
-            ghost.update_state(False)
 
     def update(self):
-        for ghost in self.ghosts:
-            ghost.update_state(self.power_pellet_active)
+        if self.power_pellet_active:
+            elapsed = time.time() - self.power_pellet_activated_at
+            if elapsed > self.POWER_PELLET_DURATION:
+                self.deactivate_power_pellet()
+
+        for ghost in self.ghosts.values():
+            ghost.update()
 
     def get_ghost_states(self):
-        return {ghost.name: ghost.state for ghost in self.ghosts}
+        return {identity: ghost.get_state() for identity, ghost in self.ghosts.items()}
 
 
