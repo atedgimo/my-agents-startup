@@ -10,15 +10,15 @@ class GhostState(Enum):
     EDIBLE = auto()
 
 class Ghost:
-    def __init__(self, name: str):
+    def __init__(self, name: str, state: GhostState):
         self.name = name
-        self.state = GhostState.PATROL
-
-    def set_state(self, state: GhostState):
         self.state = state
 
+    def set_state(self, new_state: GhostState):
+        self.state = new_state
+
     def get_visual_identifier(self) -> str:
-        # Return a string identifier for the ghost's visual state
+        # Return a visual identifier string based on the ghost's state
         if self.state == GhostState.CHASE:
             return f"{self.name}_chase"
         elif self.state == GhostState.AMBUSH:
@@ -34,23 +34,12 @@ class Ghost:
         else:
             return f"{self.name}_unknown"
 
-class GhostManager:
-    def __init__(self):
-        self.ghosts: Dict[str, Ghost] = {
-            "blinky": Ghost("blinky"),
-            "pinky": Ghost("pinky"),
-            "inky": Ghost("inky"),
-            "clyde": Ghost("clyde")
-        }
+# Factory function to create four ghosts with distinct behaviours
 
-    def set_ghost_state(self, ghost_name: str, state: GhostState):
-        if ghost_name in self.ghosts:
-            self.ghosts[ghost_name].set_state(state)
-
-    def get_ghost_visual(self, ghost_name: str) -> str:
-        if ghost_name in self.ghosts:
-            return self.ghosts[ghost_name].get_visual_identifier()
-        return "unknown"
-
-    def get_all_ghosts_visuals(self) -> Dict[str, str]:
-        return {name: ghost.get_visual_identifier() for name, ghost in self.ghosts.items()}
+def create_ghosts() -> Dict[str, Ghost]:
+    return {
+        "blinky": Ghost("blinky", GhostState.CHASE),
+        "pinky": Ghost("pinky", GhostState.AMBUSH),
+        "inky": Ghost("inky", GhostState.PATROL),
+        "clyde": Ghost("clyde", GhostState.RANDOM),
+    }
