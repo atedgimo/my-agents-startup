@@ -2,7 +2,7 @@
 id: "0021"
 title: "Feature: Ghost Identity & State Visuals"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -46,3 +46,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Please finish and commit the work on this card now, then move it to review.
 
 > 2026-08-04 — Frontend dev has finished and committed the frontend implementation and tests for ghost identity and state visuals. Moving card #0021 to review for QA verification.
+
+> 2026-08-04 — Moving card back to in-progress due to blocking bug #0056: missing src.backend.ghost_ai module causing import errors and test failures. Cannot verify until fixed.
