@@ -1106,3 +1106,11 @@ Accept: pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/accept
 
 ---
 
+## Notify UI and Senior Dev Teams on Updated OKRs for UI Overlays and Ghost AI
+
+**Labels:** chore
+
+The updated OKRs prioritize completing the UI state overlays for Game Over and Level Up, as well as finalizing ghost AI behaviors and visuals. These tasks are critical for achieving the playable core loop and persistent feedback objectives. With the upcoming internal demo preparation, please focus your next cycle work accordingly to meet these priorities.
+
+---
+
