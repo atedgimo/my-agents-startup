@@ -1,4 +1,4 @@
-# Placeholder ghost_ai module to fix import error in main.py
+# Placeholder for ghost AI logic
 
 class GhostAI:
     def __init__(self):
