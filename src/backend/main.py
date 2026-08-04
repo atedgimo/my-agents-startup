@@ -14,6 +14,7 @@ import threading
 app = FastAPI()
 
 from src.backend.pellet_collection import router as pellet_router
+# Removed import of non-existent ghost_ai module to fix import errors
 from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState
 
 
