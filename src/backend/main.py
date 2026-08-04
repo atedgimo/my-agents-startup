@@ -14,15 +14,55 @@ import threading
 from src.backend.pellet_collection import router as pellet_router
 from fastapi import APIRouter, Query
 
-# Commented out ghost imports to fix missing module errors
-# from src.backend.ghost_ai import GhostAI
-# from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState
+# Removed import of missing ghost_ai module to fix parse error
+from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState
 
 router = APIRouter()
+
+# Initialize ghost manager with starting positions
+# ghost_start_positions = {
+#     GhostIdentity.BLINKY: {'x': 5, 'y': 5},
+#     GhostIdentity.PINKY: {'x': 10, 'y': 5},
+#     GhostIdentity.INKY: {'x': 5, 'y': 10},
+#     GhostIdentity.CLYDE: {'x': 10, 'y': 10}
+# }
+# ghost_manager = GhostManager(ghost_start_positions)
+
+# @app.get("/ghosts")
+# async def get_ghosts():
+#     return ghost_manager.get_all_states()
+
+# @app.post("/ghost_state")
+# async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
+#     ghost_manager.set_ghost_state(identity, state)
+#     return {"status": "success"}
 
 # Register pellet collection router
 app = FastAPI()
 app.include_router(pellet_router)
+
+# Initialize ghost manager
+
+ghost_manager = GhostManager()
+
+@app.get("/ghosts")
+async def get_ghosts():
+    return ghost_manager.get_all_states()
+
+@app.post("/ghost_state")
+async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
+    ghost_manager.set_ghost_state(identity, state)
+    return {"status": "success"}
+
+@app.post("/activate_power_pellet")
+async def activate_power_pellet():
+    ghost_manager.activate_power_pellet()
+    return {"status": "power pellet activated"}
+
+@app.post("/update_ghosts")
+async def update_ghosts():
+    ghost_manager.update()
+    return {"status": "ghosts updated"}
 
 logging.basicConfig(level=logging.INFO)
 
@@ -88,4 +128,3 @@ async def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int,
 # Maze dimensions placeholder (should be set from actual maze data)
 MAZE_WIDTH = 28
 MAZE_HEIGHT = 31
-
