@@ -18,22 +18,22 @@ from fastapi import APIRouter, Query
 router = APIRouter()
 
 # Initialize ghost manager with starting positions
-ghost_start_positions = {
-    GhostIdentity.BLINKY: {'x': 5, 'y': 5},
-    GhostIdentity.PINKY: {'x': 10, 'y': 5},
-    GhostIdentity.INKY: {'x': 5, 'y': 10},
-    GhostIdentity.CLYDE: {'x': 10, 'y': 10}
-}
-ghost_manager = GhostManager(ghost_start_positions)
+# ghost_start_positions = {
+#     GhostIdentity.BLINKY: {'x': 5, 'y': 5},
+#     GhostIdentity.PINKY: {'x': 10, 'y': 5},
+#     GhostIdentity.INKY: {'x': 5, 'y': 10},
+#     GhostIdentity.CLYDE: {'x': 10, 'y': 10}
+# }
+# ghost_manager = GhostManager(ghost_start_positions)
 
-@app.get("/ghosts")
-async def get_ghosts():
-    return ghost_manager.get_all_states()
+# @app.get("/ghosts")
+# async def get_ghosts():
+#     return ghost_manager.get_all_states()
 
-@app.post("/ghost_state")
-async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
-    ghost_manager.set_ghost_state(identity, state)
-    return {"status": "success"}
+# @app.post("/ghost_state")
+# async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
+#     ghost_manager.set_ghost_state(identity, state)
+#     return {"status": "success"}
 
 # Register pellet collection router
 app.include_router(pellet_router)
