@@ -38,6 +38,28 @@ router = APIRouter()
 # Register pellet collection router
 app.include_router(pellet_router)
 
+# Initialize ghost manager
+ghost_manager = GhostManager()
+
+@app.get("/ghosts")
+async def get_ghosts():
+    return ghost_manager.get_all_states()
+
+@app.post("/ghost_state")
+async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
+    ghost_manager.set_ghost_state(identity, state)
+    return {"status": "success"}
+
+@app.post("/activate_power_pellet")
+async def activate_power_pellet():
+    ghost_manager.activate_power_pellet()
+    return {"status": "power pellet activated"}
+
+@app.post("/update_ghosts")
+async def update_ghosts():
+    ghost_manager.update()
+    return {"status": "ghosts updated"}
+
 logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
