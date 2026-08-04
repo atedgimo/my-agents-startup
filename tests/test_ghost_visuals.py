@@ -1,6 +1,6 @@
 import time
 import pytest
-from src.backend.ghost_visuals import GhostManager, GhostState
+from src.backend.ghost_visuals import GhostManager, GhostStatehost_visuals import GhostManager, GhostState
 
 class GhostIdentity:
     BLINKY = 'Blinky'
