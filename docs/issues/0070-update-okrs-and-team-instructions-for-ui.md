@@ -2,8 +2,8 @@
 id: "0070"
 title: "Update OKRs and team instructions for UI overlays and ghost AI focus"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-ceo"
 labels: "okr,communication"
 due: ""
 created: "2026-08-04"
@@ -27,3 +27,5 @@ Please ensure UI and senior dev teams are aligned and resourced accordingly.
 Objective: "Complete UI state overlays for Game Over and Level Up and finalize ghost AI behaviors and visuals to meet playable core loop and persistent feedback objectives."
 
 Accept: pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/acceptance/test_ghost_ai_behaviors.py
+
+> 2026-08-04 — Card created to update OKRs and instruct UI and senior dev teams to focus on completing UI state overlays for Game Over and Level Up, and finalizing ghost AI behaviors and visuals. This aligns with the current OKRs and the playable core loop objective.
