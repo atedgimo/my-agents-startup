@@ -788,3 +788,15 @@ objective: "Score, lives and level shown live; game over and level-up states wor
 
 ---
 
+## DevOps: Ensure backend test environment installs requirements.txt dependencies
+
+**Labels:** devops
+
+Acceptance tests for backend cards fail because pytest is not found, even though it is listed in src/backend/requirements.txt. This indicates the test environment does not install backend dependencies before running tests.
+
+Task: Fix the CI/test environment setup to install dependencies from src/backend/requirements.txt before running backend tests, so pytest and other dependencies are available.
+
+This is blocking acceptance testing and release for backend cards that require pytest.
+
+---
+
