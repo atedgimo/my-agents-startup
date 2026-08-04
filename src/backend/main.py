@@ -111,6 +111,27 @@ async def startup_event():
 # Register pellet collection router
 app.include_router(pellet_router)
 
+from fastapi import Query
+from src.backend.ghost_ai import GhostManager
+
+# Initialize ghost manager with starting positions
+ghost_start_positions = {
+    'Blinky': {'x': 5, 'y': 5},
+    'Pinky': {'x': 10, 'y': 5},
+    'Inky': {'x': 5, 'y': 10},
+    'Clyde': {'x': 10, 'y': 10}
+}
+ghost_manager = GhostManager(ghost_start_positions)
+
+@app.get("/ghosts")
+async def get_ghosts(player_x: int = Query(0), player_y: int = Query(0)):
+    """Get current ghost states and positions based on player position."""
+    player_position = {'x': player_x, 'y': player_y}
+    ghost_manager.update(player_position)
+    ghosts_info = ghost_manager.get_ghosts_info()
+    return {"ghosts": ghosts_info}
+
+
 @app.post("/input")
 async def receive_input(request: Request):
     """Receive player input direction and queue it."""
