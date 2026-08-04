@@ -138,6 +138,19 @@ function update() {
         if (ghost.pos.x <= 0) ghost.pos.x = COLS - 2;
     });
 
+    // Example logic update: move player right by one tile every second
+    // (Replace with actual input handling and movement logic)
+    // For demonstration, we just cycle playerPos.x
+    playerPos.x += 1;
+    if (playerPos.x >= COLS - 1) playerPos.x = 1;
+
+    // Update ghost states and positions (dummy example)
+    ghosts.forEach((ghost, index) => {
+        ghost.pos.x += (index % 2 === 0 ? 1 : -1);
+        if (ghost.pos.x >= COLS - 1) ghost.pos.x = 1;
+        if (ghost.pos.x <= 0) ghost.pos.x = COLS - 2;
+    });
+
     // Draw game elements
     draw();
 }
