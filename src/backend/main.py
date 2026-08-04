@@ -11,6 +11,17 @@ from enum import Enum
 import json
 import threading
 
+from src.backend.ghost_visuals import GhostManager
+
+ghost_manager = GhostManager()
+
+from fastapi import Query
+
+@app.get("/ghosts")
+async def get_ghosts():
+    return ghost_manager.get_ghost_states()
+
+
 from src.backend.pellet_collection import router as pellet_router
 
 logging.basicConfig(level=logging.INFO)
