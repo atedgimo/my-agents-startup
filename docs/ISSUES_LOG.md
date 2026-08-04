@@ -814,3 +814,27 @@ This is required to move card #0049 to review and completion.
 
 ---
 
+## Bug: Missing module src.backend.ghost_ai causing test import errors
+
+**Labels:** bug
+
+The tests for pellet collection and scores API fail to run due to a missing module `src.backend.ghost_ai`.
+
+This causes import errors and blocks running the full test suite, including verification of card #0023.
+
+Steps to reproduce:
+1. Run pytest on tests/test_pellet_collection.py or tests/test_scores_api.py
+2. Observe ImportError for `src.backend.ghost_ai`
+
+Expected:
+- All tests should run without import errors.
+
+Actual:
+- ImportError: No module named 'src.backend.ghost_ai'
+
+This issue blocks QA verification of features dependent on these modules and the overall test suite.
+
+Please fix or provide the missing module or adjust imports to unblock testing.
+
+---
+
