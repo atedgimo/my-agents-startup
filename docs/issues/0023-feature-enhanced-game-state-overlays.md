@@ -7,7 +7,7 @@ assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-03"
+updated: "2026-08-04"
 started: "2026-08-03T03:28:42"
 ---
 
@@ -32,3 +32,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Starting work on feature #0023: Enhanced Game State Overlays. This serves the success criterion 'Score, lives and level shown live; game over and level-up states work.'
 
 > 2026-08-03 — This card has had no commits or progress updates. Please clarify what is blocking you or move this card back to todo if you cannot continue now.
+
+> 2026-08-04 — Please finish and commit the work on this card now, then move it to review.
