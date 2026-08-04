@@ -111,6 +111,7 @@ function lerp(a, b, t) {
 }
 
 function update() {
+    if (overlayActive) return; // Pause updates when overlay active
     if (gameState !== STATE.PLAYING) return;
 
     // Save previous positions for interpolation
