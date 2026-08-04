@@ -13,7 +13,7 @@ import threading
 
 from src.backend.pellet_collection import router as pellet_router
 from fastapi import APIRouter, Query
-from src.backend.ghosts import GhostManager, GhostIdentity, GhostState
+# from src.backend.ghosts import GhostManager, GhostIdentity, GhostState  # Removed to fix missing module error
 
 router = APIRouter()
 
