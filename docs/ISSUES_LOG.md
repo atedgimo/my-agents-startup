@@ -1014,3 +1014,13 @@ This blocks card #0020 verification and release.
 
 ---
 
+## Finalize ghost AI behaviors and visuals
+
+**Labels:** feature,ai
+
+**Due:** 2024-06-10
+
+Develop and polish ghost AI behaviors and their visual representations to improve gameplay dynamics and visual clarity.
+
+---
+
