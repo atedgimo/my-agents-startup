@@ -1,44 +1,32 @@
 import pytest
-from src.backend.ghost_visuals import Ghost, GhostState, create_ghosts
+from src.backend.ghost_visuals import GhostVisualIdentifier, GhostState
 
 
-def test_ghost_initial_states():
-    ghosts = create_ghosts()
-    assert ghosts["blinky"].state == GhostState.CHASE
-    assert ghosts["pinky"].state == GhostState.AMBUSH
-    assert ghosts["inky"].state == GhostState.PATROL
-    assert ghosts["clyde"].state == GhostState.RANDOM
+def test_initial_state():
+    ghost = GhostVisualIdentifier(1)
+    assert ghost.state == GhostState.NORMAL
+    assert ghost.get_visual_identifier() == "ghost_1_normal"
 
 
-def test_ghost_state_transitions():
-    ghost = Ghost("blinky", GhostState.CHASE)
-    ghost.set_state(GhostState.FLEE)
-    assert ghost.state == GhostState.FLEE
-    ghost.set_state(GhostState.EDIBLE)
-    assert ghost.state == GhostState.EDIBLE
+def test_set_state_valid():
+    ghost = GhostVisualIdentifier(2)
+    ghost.set_state(GhostState.FRIGHTENED)
+    assert ghost.state == GhostState.FRIGHTENED
+    assert ghost.get_visual_identifier() == "ghost_2_frightened"
+
+    ghost.set_state(GhostState.EATEN)
+    assert ghost.state == GhostState.EATEN
+    assert ghost.get_visual_identifier() == "ghost_2_eaten"
 
 
-def test_ghost_visual_identifiers():
-    ghost = Ghost("pinky", GhostState.AMBUSH)
-    assert ghost.get_visual_identifier() == "pinky_ambush"
-    ghost.set_state(GhostState.FLEE)
-    assert ghost.get_visual_identifier() == "pinky_flee"
-    ghost.set_state(GhostState.EDIBLE)
-    assert ghost.get_visual_identifier() == "pinky_edible"
-
-    ghost.set_state(GhostState.RANDOM)
-    assert ghost.get_visual_identifier() == "pinky_random"
-
-    ghost.set_state(GhostState.PATROL)
-    assert ghost.get_visual_identifier() == "pinky_patrol"
-
-    ghost.set_state(GhostState.CHASE)
-    assert ghost.get_visual_identifier() == "pinky_chase"
+def test_set_state_invalid():
+    ghost = GhostVisualIdentifier(3)
+    with pytest.raises(ValueError):
+        ghost.set_state("invalid_state")
 
 
-def test_create_ghosts_factory():
-    ghosts = create_ghosts()
-    assert set(ghosts.keys()) == {"blinky", "pinky", "inky", "clyde"}
-    for name, ghost in ghosts.items():
-        assert ghost.name == name
-        assert isinstance(ghost.state, GhostState)
+def test_get_visual_identifier_unknown_state(monkeypatch):
+    ghost = GhostVisualIdentifier(4)
+    # Force an invalid state to test fallback
+    ghost.state = "invalid"
+    assert ghost.get_visual_identifier() == "ghost_4_unknown"
