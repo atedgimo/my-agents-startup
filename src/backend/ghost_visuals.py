@@ -1,45 +1,30 @@
-from enum import Enum, auto
-from typing import Dict
+from enum import Enum
+from typing import Optional
 
 class GhostState(Enum):
-    CHASE = auto()
-    AMBUSH = auto()
-    PATROL = auto()
-    RANDOM = auto()
-    FLEE = auto()
-    EDIBLE = auto()
+    NORMAL = "normal"
+    FRIGHTENED = "frightened"
+    EATEN = "eaten"
 
-class Ghost:
-    def __init__(self, name: str, state: GhostState):
-        self.name = name
-        self.state = state
+class GhostVisualIdentifier:
+    def __init__(self, ghost_id: int):
+        self.ghost_id = ghost_id
+        self.state = GhostState.NORMAL
 
     def set_state(self, new_state: GhostState):
+        if not isinstance(new_state, GhostState):
+            raise ValueError("Invalid ghost state")
         self.state = new_state
 
     def get_visual_identifier(self) -> str:
-        # Return a visual identifier string based on the ghost's state
-        if self.state == GhostState.CHASE:
-            return f"{self.name}_chase"
-        elif self.state == GhostState.AMBUSH:
-            return f"{self.name}_ambush"
-        elif self.state == GhostState.PATROL:
-            return f"{self.name}_patrol"
-        elif self.state == GhostState.RANDOM:
-            return f"{self.name}_random"
-        elif self.state == GhostState.FLEE:
-            return f"{self.name}_flee"
-        elif self.state == GhostState.EDIBLE:
-            return f"{self.name}_edible"
+        # Return a string identifier for the ghost visual based on its state
+        if self.state == GhostState.NORMAL:
+            return f"ghost_{self.ghost_id}_normal"
+        elif self.state == GhostState.FRIGHTENED:
+            return f"ghost_{self.ghost_id}_frightened"
+        elif self.state == GhostState.EATEN:
+            return f"ghost_{self.ghost_id}_eaten"
         else:
-            return f"{self.name}_unknown"
+            return f"ghost_{self.ghost_id}_unknown"
 
-# Factory function to create four ghosts with distinct behaviours
-
-def create_ghosts() -> Dict[str, Ghost]:
-    return {
-        "blinky": Ghost("blinky", GhostState.CHASE),
-        "pinky": Ghost("pinky", GhostState.AMBUSH),
-        "inky": Ghost("inky", GhostState.PATROL),
-        "clyde": Ghost("clyde", GhostState.RANDOM),
-    }
+# Additional logic for ghost visual state transitions could be added here
