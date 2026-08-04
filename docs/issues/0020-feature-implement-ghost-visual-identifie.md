@@ -2,12 +2,12 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-03"
+updated: "2026-08-04"
 started: "2026-08-03T03:23:51"
 ---
 
@@ -43,3 +43,5 @@ Due date: 2026-08-15
 > 2026-08-03 — Ghost visual identifiers and state logic implemented and committed in src/backend/ghosts.py. Ready for review.
 
 > 2026-08-03 — Moving back to in-progress due to missing tests and backend implementation for ghost visual identifiers and state logic. See bug #0050.
+
+> 2026-08-04 — Senior dev has committed the backend implementation and tests for ghost visual identifiers and state logic. Moving card #0020 to review for QA verification.
