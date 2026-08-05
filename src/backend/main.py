@@ -89,61 +89,7 @@ async def update_ghosts():
     ghost_manager.update()
     return {"status": "ghosts updated"}
 
-# Other existing backend code continues here...
-
-import os
-import logging
-from fastapi import Request
-from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles
-import json
-import threading
-
-# Other existing imports and code
-
-
-# Other existing backend code continues here...
-
-import os
-import logging
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
-from enum import Enum
-import json
-import threading
-
-from src.backend.pellet_collection import router as pellet_router
-from fastapi import APIRouter, Query
-
-# Removed import of ghost_ai to fix ModuleNotFoundError
-# from src.backend.ghost_ai import GhostManager, GhostIdentity, GhostState
-
-# Dummy ghost manager class to allow app to start
-class GhostManager:
-    def __init__(self):
-        self.ghosts = {}
-
-    def get_all_states(self):
-        return {}
-
-    def set_ghost_state(self, identity, state):
-        pass
-
-    def activate_power_pellet(self):
-        pass
-
-    def update(self):
-        pass
-
-
-# Initialize dummy ghost manager
-from src.backend.ghost_ai import Ghost, GhostState
-
-class GhostManager:
-    def __init__(self):
-        self.ghosts = {
+osts = {
             'Blinky': Ghost('Blinky'),
             'Pinky': Ghost('Pinky'),
             'Inky': Ghost('Inky'),
