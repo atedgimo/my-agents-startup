@@ -1,7 +1,0 @@
-{
- "agent": "startup-qa",
- "title": "QA regression",
- "prompt": "[MEETING] QA regression \u2014 company week 4, day 1 (2026-08-04). Run the regression: execute run_tests, compare against known open bugs on the board (list_issues), file one 'bug' issue per NEW real failure with reproduction, and report the quality-gate verdict (release blocked or clear).",
- "minutes_path": "docs/meetings/2026-08-04-0324-qa-regression.md",
- "queued": "2026-08-04T03:24:58"
-}
