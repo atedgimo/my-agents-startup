@@ -1386,3 +1386,11 @@ Focus on delivering the UI overlays for Game Over and Level Up states to enhance
 
 ---
 
+## Finalize ghost AI behaviors and visuals
+
+**Labels:** feature,senior-dev
+
+Complete the development and polish of ghost AI behaviors and visuals to align with the playable core loop and persistent feedback objectives, ensuring readiness for the internal demo.
+
+---
+
