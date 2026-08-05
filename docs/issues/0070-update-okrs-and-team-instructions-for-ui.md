@@ -2,12 +2,13 @@
 id: "0070"
 title: "Update OKRs and team instructions for UI overlays and ghost AI focus"
 type: "feature"
-status: "todo"
+status: "in-progress"
 assignee: "startup-ceo"
 labels: "okr,communication"
 due: ""
 created: "2026-08-04"
 updated: "2026-08-05"
+started: "2026-08-05T17:23:28"
 objective: "Complete UI state overlays for Game Over and Level Up and finalize ghost AI behaviors and visuals to meet playable core loop and persistent feedback objectives."
 accept: "pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/acceptance/test_ghost_ai_behaviors.py"
 ---
@@ -33,3 +34,5 @@ Accept: pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/accept
 > 2026-08-05 — Updating OKRs and team instructions to prioritize completion of UI state overlays for Game Over and Level Up, and finalizing ghost AI behaviors and visuals as the single most important focus for the next cycle.
 
 > 2026-08-05 — This card cannot be marked done because its acceptance test command fails due to missing test files. The card is superseded by #0072 and #0073 which have proper acceptance tests and clearer scope. Continuing to focus on #0072 and #0073 for next cycle priorities.
+
+> 2026-08-05 — Claiming this card to update OKRs and team instructions for better focus on UI overlays and ghost AI as part of immediate management actions.
