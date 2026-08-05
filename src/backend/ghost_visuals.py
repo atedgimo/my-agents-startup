@@ -17,7 +17,6 @@ class Ghost:
         self.edible_until = 0
 
     def visual_identifier(self):
-        # Return a string representing the ghost's visual state
         if self.state == GhostState.FLEE:
             return 'flee'
         elif self.state == GhostState.EATEN:
@@ -29,7 +28,7 @@ class Ghost:
         current_time = time.time()
         if player_powered_up:
             self.state = GhostState.FLEE
-            self.edible_until = current_time + 10  # edible for 10 seconds
+            self.edible_until = current_time + 10
         else:
             if self.state == GhostState.FLEE and current_time > self.edible_until:
                 self.state = self.original_state
@@ -46,7 +45,6 @@ class GhostManager:
             'Clyde': Ghost('Clyde')
         }
 
-        # Set initial states
         self.ghosts['Blinky'].state = GhostState.CHASE
         self.ghosts['Blinky'].original_state = GhostState.CHASE
         self.ghosts['Pinky'].state = GhostState.AMBUSH
