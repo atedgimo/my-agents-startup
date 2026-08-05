@@ -2,16 +2,52 @@
 Main backend FastAPI app integration for game logic including input buffer and movement smoothing.
 """
 
+# Import ghost_visuals module for ghost state logic
+# Removed ghost_visuals import to fix ModuleNotFoundError
+# from src.backend.ghost_visuals import GhostManager, GhostState
+
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.backend.ghost_visuals import GhostIdentity, GhostState
+from src.backend.ghost_ai import Ghost, GhostState
 from src.backend.pellet_collection import router as pellet_router
 
+class GhostManager:
+    def __init__(self):
+        self.ghosts = {
+            'Blinky': Ghost('Blinky'),
+            'Pinky': Ghost('Pinky'),
+            'Inky': Ghost('Inky'),
+            'Clyde': Ghost('Clyde')
+        }
+
+    def get_all_states(self):
+        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
+
+    def set_ghost_state(self, identity, state):
+        if identity in self.ghosts:
+            self.ghosts[identity].state = state
+            self.ghosts[identity].original_state = state
+
+    def activate_power_pellet(self):
+        for ghost in self.ghosts.values():
+            ghost.update_state(player_powered_up=True)
+
+    def deactivate_power_pellet(self):
+        # Reset ghosts to their original states
+        for ghost in self.ghosts.values():
+            ghost.state = ghost.original_state
+
+    def update(self):
+        for ghost in self.ghosts.values():
+            ghost.update_state(player_powered_up=False)
+
+# Initialize ghost manager
+ghost_manager = GhostManager()
+
+# Register pellet collection router
 app = FastAPI()
-
 app.include_router(pellet_router)
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,31 +55,6 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
-
-class GhostManager:
-    def __init__(self):
-        self.ghosts = {identity: GhostState.CHASING for identity in GhostIdentity}
-
-    def get_all_states(self):
-        return {ghost.name: state.name for ghost, state in self.ghosts.items()}
-
-    def set_ghost_state(self, identity, state):
-        if identity in self.ghosts:
-            self.ghosts[identity] = state
-
-    def activate_power_pellet(self):
-        for ghost in self.ghosts:
-            self.ghosts[ghost] = GhostState.FRIGHTENED
-
-    def deactivate_power_pellet(self):
-        for ghost in self.ghosts:
-            self.ghosts[ghost] = GhostState.CHASING
-
-    def update(self):
-        # Placeholder for ghost state update logic
-        pass
-
-ghost_manager = GhostManager()
 
 @app.get("/ghosts")
 async def get_ghosts():
@@ -74,16 +85,3 @@ async def update_ghosts():
     return {"status": "ghosts updated"}
 
 # Other existing backend code continues here...
-
-import os
-import logging
-from fastapi import Request
-from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles
-from enum import Enum
-import json
-import threading
-
-from fastapi import APIRouter
-
-# Additional backend code can be added below as needed
