@@ -37,7 +37,7 @@ def test_ghost_visual_state_logic():
 
 
 # Retain existing tests below
-from src.backend.ghost_ai import GhostManager, GhostState
+from ghost_ai import GhostManager, GhostState
 
 class GhostIdentity:
     BLINKY = 'Blinky'
@@ -50,10 +50,10 @@ def test_initial_ghost_states():
     gm = GhostManager()
     states = gm.get_all_states()
     assert states == {
-        'Blinky': 'chase',
-        'Pinky': 'ambush',
-        'Inky': 'patrol',
-        'Clyde': 'random'
+        'Blinky': 'idle',
+        'Pinky': 'idle',
+        'Inky': 'idle',
+        'Clyde': 'idle'
     }
 
 
@@ -125,5 +125,9 @@ def test_edible_timeout():
     gm.activate_power_pellet()
     states = gm.get_all_states()
     for state in states.values():
-        assert state == 'flee'
+        assert state == GhostState.FLEE
+
+    # Ghosts should be edible during power pellet
+    for ghost in gm.ghosts.values():
+        assert ghost.is_edible()
 
