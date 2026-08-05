@@ -62,3 +62,45 @@ class Ghost:
 
     def __repr__(self):
         return f"<Ghost name={self.name} state={self.state.name}>"
+
+class GhostManager:
+    def __init__(self):
+        self.ghosts = {
+            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY),
+            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY),
+            GhostIdentity.INKY: Ghost(GhostIdentity.INKY),
+            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE),
+        }
+        self.power_pellet_active = False
+        self.power_pellet_end_time = 0
+
+    def get_ghost_state(self, ghost_name):
+        ghost = self.ghosts.get(ghost_name)
+        if ghost:
+            return ghost.state.value
+        return None
+
+    def set_ghost_state(self, ghost_name, state):
+        ghost = self.ghosts.get(ghost_name)
+        if ghost:
+            ghost.state = state
+
+    def get_all_states(self):
+        return {name: ghost.state.value for name, ghost in self.ghosts.items()}
+
+    def activate_power_pellet(self):
+        self.power_pellet_active = True
+        self.power_pellet_end_time = time.time() + 10
+        for ghost in self.ghosts.values():
+            ghost.state = GhostState.FLEE
+
+    def deactivate_power_pellet(self):
+        self.power_pellet_active = False
+
+    def update(self):
+        current_time = time.time()
+        if self.power_pellet_active and current_time > self.power_pellet_end_time:
+            self.power_pellet_active = False
+            for ghost in self.ghosts.values():
+                ghost.state = GhostState.CHASE
+
