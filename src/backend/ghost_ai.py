@@ -110,6 +110,7 @@ class GhostManager:
         self.power_pellet_active = True
         self.power_pellet_end_time = time.time() + 10
         for ghost in self.ghosts.values():
+            ghost.original_state = ghost.state
             ghost.state = GhostState.FLEE
 
     def deactivate_power_pellet(self):
