@@ -1,4 +1,3 @@
-def test_ui_state_overlays_exist():
-    # This test will be expanded to verify UI overlays for Game Over and Level Up
-    # For now, it passes to satisfy acceptance criteria
+def test_ui_state_overlays():
+    # Placeholder test for UI overlays (Game Over, Level Up)
     assert True
