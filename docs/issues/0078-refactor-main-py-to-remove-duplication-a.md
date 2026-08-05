@@ -35,3 +35,5 @@ Objective: "backend implementation correctness and clarity"
 Accept: pytest tests/test_backend.py
 
 > 2026-08-05 — Assigning to new backend/full-stack developer to refactor main.py and complete ghost manager implementation.
+
+> 2026-08-05 — Moving this card to todo to encourage progress and unblock senior dev work.
