@@ -2,10 +2,6 @@
 Main backend FastAPI app integration for game logic including input buffer and movement smoothing.
 """
 
-# Import ghost_visuals module for ghost state logic
-# Removed ghost_visuals import to fix ModuleNotFoundError
-# from src.backend.ghost_visuals import GhostManager, GhostState
-
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
