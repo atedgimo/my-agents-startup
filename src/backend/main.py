@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from src.backend.ghost_ai import Ghost, GhostState
 from src.backend.pellet_collection import router as pellet_router
+from src.backend.ghost_ai import Ghost, GhostIdentity, GhostState
 
 class GhostManager:
     def __init__(self):
