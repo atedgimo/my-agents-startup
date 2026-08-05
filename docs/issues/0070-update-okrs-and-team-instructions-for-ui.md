@@ -31,3 +31,5 @@ Accept: pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/accept
 > 2026-08-04 — Card created to update OKRs and instruct UI and senior dev teams to focus on completing UI state overlays for Game Over and Level Up, and finalizing ghost AI behaviors and visuals. This aligns with the current OKRs and the playable core loop objective.
 
 > 2026-08-05 — Updating OKRs and team instructions to prioritize completion of UI state overlays for Game Over and Level Up, and finalizing ghost AI behaviors and visuals as the single most important focus for the next cycle.
+
+> 2026-08-05 — This card cannot be marked done because its acceptance test command fails due to missing test files. The card is superseded by #0072 and #0073 which have proper acceptance tests and clearer scope. Continuing to focus on #0072 and #0073 for next cycle priorities.
