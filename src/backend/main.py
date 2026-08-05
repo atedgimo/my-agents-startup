@@ -12,8 +12,8 @@ import json
 import threading
 
 from src.backend.pellet_collection import router as pellet_router
-import src.backend.ghost_ai
-from src.backend.ghost_visuals import GhostManager, GhostState
+from ghost_ai import *
+from ghost_visuals import GhostManager, GhostState
 import ghost_ai
 from ghost_visuals import GhostManager, GhostState
 
