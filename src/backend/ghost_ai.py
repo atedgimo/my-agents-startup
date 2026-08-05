@@ -1,5 +1,5 @@
-# ghost_ai.py
-# Placeholder module to satisfy import in main.py
+# src/backend/ghost_ai.py
+# This module is a placeholder for ghost AI logic to prevent import errors.
 
-# Actual ghost AI logic will be implemented in future cards
+# Future implementation will include ghost movement and behavior algorithms.
 
