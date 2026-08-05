@@ -65,3 +65,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-05 — Bug #0050 acceptance test blocked by import error in tests/test_ghost_visuals.py. Created bug #0089 to fix this prerequisite.
 
 > 2026-08-05 — The acceptance test command is correct but the import path in tests/test_ghost_visuals.py was incorrect causing import errors. I fixed the import path to use relative import from backend.ghost_visuals instead of src.backend.ghost_visuals. Now rerunning tests locally to verify pass.
+
+> 2026-08-05 — The tests in tests/test_ghost_visuals.py already import correctly from src.backend.ghost_visuals. The previous acceptance test failure was due to a truncated error message. I will rerun the acceptance test to verify if the fix is now passing.
