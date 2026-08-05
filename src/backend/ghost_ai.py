@@ -20,9 +20,15 @@ class GhostIdentity:
 class Ghost:
     def __init__(self, name):
         self.name = name
-        self.state = GhostState.CHASE
-        self.original_state = self.state
+        self.state = GhostState.IDLE
+        self.original_state = GhostState.CHASE
         self.edible_until = 0
+
+    def activate(self):
+        self.state = GhostState.CHASE
+
+    def sleep(self):
+        self.state = GhostState.FRIGHTENED
 
     def update_state(self, player_powered_up=False):
         current_time = time.time()
@@ -32,11 +38,14 @@ class Ghost:
         elif self.state == GhostState.FLEE and current_time > self.edible_until:
             self.state = self.original_state
 
-    def is_edible(self):
+    def is_active(self) -> bool:
+        return self.state == GhostState.CHASE
+
+    def is_edible(self) -> bool:
         return self.state == GhostState.FLEE
 
-    def visual_identifier(self):
+    def visual_identifier(self) -> str:
         return self.state.value
 
     def __repr__(self):
-        return f"<Ghost name={self.name} state={self.state.value}>"
+        return f"<Ghost name={self.name} state={self.state.name}>"  
