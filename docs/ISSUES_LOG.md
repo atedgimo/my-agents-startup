@@ -1741,3 +1741,17 @@ This ensures compliance with the success criterion: "The player cannot move outs
 
 ---
 
+## Implement boundary enforcement for player movement to prevent out-of-bounds moves
+
+**Labels:** feature
+
+**Due:** 2026-08-14
+
+The current player movement implementation wraps around when reaching the boundary instead of enforcing boundaries as required by card #0014.
+
+Update the player movement logic to prevent moving beyond the maze boundary (e.g., x >= 19 should stop at 18, not wrap to 1).
+
+This fixes the boundary enforcement feature so it passes the acceptance test defined in #0014.
+
+---
+
