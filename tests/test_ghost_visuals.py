@@ -1,11 +1,6 @@
+import time
 import pytest
-from backend.ghost_visuals import GhostManager, GhostState
-
-class GhostIdentity:
-    BLINKY = 'Blinky'
-    PINKY = 'Pinky'
-    INKY = 'Inky'
-    CLYDE = 'Clyde'
+from src.backend.ghost_ai import GhostManager, GhostState, GhostIdentity
 
 
 def test_initial_ghost_states():
@@ -57,8 +52,6 @@ def test_power_pellet_activation_and_edible_state():
 def test_power_pellet_deactivation_and_revert_state():
     gm = GhostManager()
     gm.activate_power_pellet()
-    import time
-    time.sleep(0.1)  # short wait to simulate time passing
     gm.deactivate_power_pellet()
     gm.update()
     states = gm.get_all_states()
@@ -72,9 +65,8 @@ def test_power_pellet_deactivation_and_revert_state():
 def test_edible_timeout():
     gm = GhostManager()
     gm.activate_power_pellet()
-    import time
-    # Wait for edible time to expire
-    time.sleep(10.1)
+    # Simulate time passing by adjusting the power_pellet_end_time
+    gm.power_pellet_end_time = time.time() - 1
     gm.update()
     states = gm.get_all_states()
     # Ghosts should revert to original behaviour after edible time
@@ -83,42 +75,3 @@ def test_edible_timeout():
     assert states['Inky'] == 'patrol'
     assert states['Clyde'] == 'random'
 
-    gm = GhostManager()
-    gm.activate_power_pellet()
-    states = gm.get_all_states()
-    for state in states.values():
-        assert state == GhostState.FLEE
-
-    # Ghosts should be edible during power pellet
-    for ghost in gm.ghosts.values():
-        assert ghost.is_edible()
-
-
-def test_power_pellet_deactivation_and_revert_state():
-    gm = GhostManager()
-    gm.activate_power_pellet()
-    import time
-    time.sleep(0.1)  # short wait to simulate time passing
-    gm.deactivate_power_pellet()
-    gm.update()
-    states = gm.get_all_states()
-    # After deactivation and update, ghosts revert to original behaviour
-    assert states['Blinky'] == GhostState.CHASE
-    assert states['Pinky'] == GhostState.AMBUSH
-    assert states['Inky'] == GhostState.PATROL
-    assert states['Clyde'] == GhostState.RANDOM
-
-
-def test_edible_timeout():
-    gm = GhostManager()
-    gm.activate_power_pellet()
-    import time
-    # Wait for edible time to expire
-    time.sleep(10.1)
-    gm.update()
-    states = gm.get_all_states()
-    # Ghosts should revert to original behaviour after edible time
-    assert states['Blinky'] == GhostState.CHASE
-    assert states['Pinky'] == GhostState.AMBUSH
-    assert states['Inky'] == GhostState.PATROL
-    assert states['Clyde'] == GhostState.RANDOM
