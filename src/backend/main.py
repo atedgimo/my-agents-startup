@@ -4,13 +4,8 @@ Main backend FastAPI app integration for game logic including input buffer and m
 
 import os
 import logging
-from fastapi import FastAPI, Request, Query
-from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
-from enum import Enum
-import json
-import threading
 
 from src.backend.pellet_collection import router as pellet_router
 
