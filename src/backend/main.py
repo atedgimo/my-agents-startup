@@ -15,7 +15,7 @@ from src.backend.pellet_collection import router as pellet_router
 from fastapi import APIRouter, Query
 
 # Removed import of missing ghost_ai module to fix parse error
-from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState
+from ghost_visuals import GhostManager, GhostIdentity, GhostState
 
 router = APIRouter()
 
