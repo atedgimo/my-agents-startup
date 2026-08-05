@@ -3,7 +3,31 @@ Main backend FastAPI app integration for game logic including input buffer and m
 """
 
 # Import ghost_visuals module for ghost state logic
-from src.backend.ghost_visuals import GhostManager, GhostState
+# Removed ghost_visuals import to fix ModuleNotFoundError
+# from src.backend.ghost_visuals import GhostManager, GhostState
+
+# Temporary dummy ghost manager to allow app to start
+class GhostManager:
+    def __init__(self):
+        self.ghosts = {}
+
+    def get_all_states(self):
+        return {}
+
+    def set_ghost_state(self, identity, state):
+        pass
+
+    def activate_power_pellet(self):
+        pass
+
+    def deactivate_power_pellet(self):
+        pass
+
+    def update(self):
+        pass
+
+# Initialize dummy ghost manager
+ghost_manager = GhostManager()
 
 # Initialize ghost manager
 ghost_manager = GhostManager()
