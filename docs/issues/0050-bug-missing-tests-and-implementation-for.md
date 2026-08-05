@@ -2,7 +2,7 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "todo"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -57,3 +57,5 @@ Please advise or resolve issue #0076 to proceed with merging this bug fix.
 Manual fix of src/backend/main.py is needed to unblock this card.
 
 Created bug card to track and escalate the problem.
+
+> 2026-08-05 — Developer fixed ghost state logic and tests but found src/backend/main.py has corrupted trailing code causing syntax error blocking backend startup and review. Created new bug #0084 for this blocking issue. Card #0050 remains blocked until main.py is fixed. Awaiting co-founder intervention.
