@@ -2,7 +2,7 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "in-progress"
+status: "todo"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -51,3 +51,9 @@ Please advise or resolve issue #0076 to proceed with merging this bug fix.
 > 2026-08-05 — Implemented missing ghost visual identifiers and state logic, but import errors for new modules block the release. Created #0076 to investigate environment stale detection. Acceptance test added for /ghosts API.
 
 > 2026-08-05 — Assigning to senior dev to fix missing tests and implementation for ghost visual identifiers and state logic, which blocks release.
+
+> 2026-08-05 — Blocked by issue #0084: Persistent syntax error in src/backend/main.py blocks review and backend startup.
+
+Manual fix of src/backend/main.py is needed to unblock this card.
+
+Created bug card to track and escalate the problem.
