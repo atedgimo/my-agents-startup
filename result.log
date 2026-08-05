@@ -2,7 +2,7 @@
 platform linux -- Python 3.13.14, pytest-9.1.1, pluggy-1.6.0
 rootdir: /workspace/company_output
 plugins: anyio-4.14.2
-collected 3 items / 7 errors
+collected 12 items / 6 errors
 
 ==================================== ERRORS ====================================
 _____________ ERROR collecting tests/acceptance/test_ghost_api.py ______________
@@ -24,16 +24,6 @@ Traceback:
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 tests/test_collision.py:2: in <module>
     from src.backend.collision import CollisionDetector, WALL, PELLET, POWER_PELLET, GHOST, EMPTY
-E   ModuleNotFoundError: No module named 'src'
-_________________ ERROR collecting tests/test_ghost_visuals.py _________________
-ImportError while importing test module '/workspace/company_output/tests/test_ghost_visuals.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/usr/local/lib/python3.13/importlib/__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-tests/test_ghost_visuals.py:2: in <module>
-    from src.backend.ghost_visuals import GhostManager, GhostState
 E   ModuleNotFoundError: No module named 'src'
 _________________ ERROR collecting tests/test_input_buffer.py __________________
 ImportError while importing test module '/workspace/company_output/tests/test_input_buffer.py'.
@@ -84,10 +74,9 @@ E   ModuleNotFoundError: No module named 'src'
 =========================== short test summary info ============================
 ERROR tests/acceptance/test_ghost_api.py
 ERROR tests/test_collision.py
-ERROR tests/test_ghost_visuals.py
 ERROR tests/test_input_buffer.py
 ERROR tests/test_input_buffer_and_movement_smoothing.py
 ERROR tests/test_pellet_collection.py
 ERROR tests/test_scores_api.py
-!!!!!!!!!!!!!!!!!!! Interrupted: 7 errors during collection !!!!!!!!!!!!!!!!!!!!
-========================= 1 warning, 7 errors in 0.19s =========================
+!!!!!!!!!!!!!!!!!!! Interrupted: 6 errors during collection !!!!!!!!!!!!!!!!!!!!
+========================= 1 warning, 6 errors in 0.20s =========================
