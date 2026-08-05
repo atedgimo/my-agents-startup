@@ -1469,3 +1469,11 @@ This will unblock bug #0050 and align implementation with tests.
 
 ---
 
+## Implement GhostManager and GhostState logic for ghost visual identifiers and state logic
+
+**Labels:** feature
+
+The existing tests in tests/test_ghost_visuals.py require a GhostManager class to manage multiple ghosts and their states, which is missing. This card implements the GhostManager and GhostState logic to support ghost visual identifiers and state transitions as required by the tests and game logic.
+
+---
+
