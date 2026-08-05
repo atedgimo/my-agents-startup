@@ -78,6 +78,8 @@ def test_power_pellet_activation_and_edible_state():
 def test_power_pellet_deactivation_and_revert_state():
     gm = GhostManager()
     gm.activate_power_pellet()
+    import time
+    time.sleep(0.1)  # short wait to simulate time passing
     gm.deactivate_power_pellet()
     gm.update()
     states = gm.get_all_states()
