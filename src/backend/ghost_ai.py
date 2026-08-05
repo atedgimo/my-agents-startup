@@ -10,11 +10,14 @@ class Ghost:
         self.name = name
         self.state = GhostState.IDLE
 
-    def visual_identifier(self):
-        return f"{self.name}-{self.state.name}"
+    def activate(self):
+        self.state = GhostState.CHASE
 
-    def update_state(self, player_powered_up=False):
-        if player_powered_up:
-            self.state = GhostState.FRIGHTENED
-        else:
-            self.state = GhostState.CHASE
+    def sleep(self):
+        self.state = GhostState.FRIGHTENED
+
+    def is_active(self) -> bool:
+        return self.state == GhostState.CHASE
+
+    def __repr__(self):
+        return f"<Ghost name={self.name} state={self.state.name}>"
