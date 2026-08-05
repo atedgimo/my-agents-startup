@@ -7,7 +7,7 @@ assignee: "startup-ceo"
 labels: "okr,communication"
 due: ""
 created: "2026-08-04"
-updated: "2026-08-04"
+updated: "2026-08-05"
 objective: "Complete UI state overlays for Game Over and Level Up and finalize ghost AI behaviors and visuals to meet playable core loop and persistent feedback objectives."
 accept: "pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/acceptance/test_ghost_ai_behaviors.py"
 ---
@@ -29,3 +29,5 @@ Objective: "Complete UI state overlays for Game Over and Level Up and finalize g
 Accept: pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/acceptance/test_ghost_ai_behaviors.py
 
 > 2026-08-04 — Card created to update OKRs and instruct UI and senior dev teams to focus on completing UI state overlays for Game Over and Level Up, and finalizing ghost AI behaviors and visuals. This aligns with the current OKRs and the playable core loop objective.
+
+> 2026-08-05 — Updating OKRs and team instructions to prioritize completion of UI state overlays for Game Over and Level Up, and finalizing ghost AI behaviors and visuals as the single most important focus for the next cycle.
