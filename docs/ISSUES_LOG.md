@@ -1131,3 +1131,20 @@ Accept: "pytest tests/acceptance/test_ui_overlays.py"
 
 ---
 
+## Finalize ghost AI behaviors and visuals
+
+**Labels:** feature
+
+**Due:** 2024-07-05
+
+Complete the implementation and polish of ghost AI behaviors and their visual representations. This is critical to enhance gameplay challenge and meet the playable core loop objective.
+
+- Implement final ghost AI behavior logic
+- Refine ghost visuals and animations
+- Test ghost interactions with player and environment
+
+Objective: "playable core loop and persistent feedback"
+Accept: "pytest tests/acceptance/test_ghost_ai.py"
+
+---
+
