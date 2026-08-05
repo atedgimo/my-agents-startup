@@ -111,6 +111,38 @@ async def startup_event():
 # Register pellet collection router
 app.include_router(pellet_router)
 
+@app.post("/submit-score")
+async def submit_score(request: Request):
+    """Submit a new score to be saved."""
+    global scores
+    try:
+        data = await request.json()
+        score_value = data.get('score')
+        if not isinstance(score_value, int) or score_value < 0:
+            return JSONResponse(status_code=400, content={"error": "Invalid score value"})
+
+        with scores_lock:
+            scores.append(score_value)
+            scores.sort(reverse=True)
+            # Keep top 10 scores
+            scores = scores[:10]
+            # Persist to file
+            with open(SCORES_FILE, 'w') as f:
+                json.dump(scores, f)
+
+        return {"message": "Score submitted successfully", "scores": scores}
+    except Exception as e:
+        logging.error(f"Error submitting score: {e}")
+        return JSONResponse(status_code=500, content={"error": "Internal server error"})
+
+@app.get("/scores")
+async def get_scores():
+    """Return the list of high scores."""
+    global scores
+    with scores_lock:
+        return {"scores": scores}
+
+
 @app.post("/input")
 async def receive_input(request: Request):
     """Receive player input direction and queue it."""
