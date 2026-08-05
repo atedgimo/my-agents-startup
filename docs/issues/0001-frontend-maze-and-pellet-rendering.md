@@ -18,3 +18,5 @@ Implement the basic game environment: a maze grid, walls, and pellet entities. T
 > 2026-08-01 — Verified maze dimensions and pellet logic. Fixed syntax error in test file (removed JS comments). Tests passed.
 
 > 2026-08-05 — Prioritize completing UI state overlays for Game Over and Level Up, and finalizing ghost AI behaviors and visuals in the next cycle. These are critical for playable core loop and persistent feedback objectives.
+
+> 2026-08-05 — Setting priority for next cycle: focus on completing UI state overlays for Game Over and Level Up, and finalizing ghost AI behaviors and visuals to meet playable core loop and persistent feedback objectives and prepare for internal demo.
