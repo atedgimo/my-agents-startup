@@ -1,7 +1,7 @@
 from enum import Enum
 import time
 
-class GhostState(Enum):
+class GhostState(str, Enum):
     CHASE = 'chase'
     AMBUSH = 'ambush'
     PATROL = 'patrol'
@@ -15,11 +15,15 @@ class Ghost:
         self.state = initial_state
         self.edible_until = 0
 
-    def visual_identifier(self):
-        return self.state.value
-
     def is_edible(self):
-        return self.state == GhostState.FLEE and time.time() < self.edible_until
+        return time.time() < self.edible_until
+
+    def set_state(self, state):
+        self.state = state
+        if state == GhostState.FLEE:
+            self.edible_until = time.time() + 10  # edible for 10 seconds
+        else:
+            self.edible_until = 0
 
 class GhostManager:
     def __init__(self):
@@ -27,38 +31,46 @@ class GhostManager:
             'Blinky': Ghost('Blinky', GhostState.CHASE),
             'Pinky': Ghost('Pinky', GhostState.AMBUSH),
             'Inky': Ghost('Inky', GhostState.PATROL),
-            'Clyde': Ghost('Clyde', GhostState.RANDOM)
+            'Clyde': Ghost('Clyde', GhostState.RANDOM),
         }
+        self.power_pellet_active = False
+
+    def get_ghost_state(self, name):
+        return self.ghosts[name].state
 
     def get_all_states(self):
-        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
+        return {name: ghost.state for name, ghost in self.ghosts.items()}
 
-    def get_ghost_state(self, identity):
-        return self.ghosts[identity].state
-
-    def set_ghost_state(self, identity, state):
-        self.ghosts[identity].state = state
+    def set_ghost_state(self, name, state):
+        self.ghosts[name].set_state(state)
 
     def activate_power_pellet(self):
-        now = time.time()
+        self.power_pellet_active = True
         for ghost in self.ghosts.values():
-            ghost.state = GhostState.FLEE
-            ghost.edible_until = now + 10
+            ghost.set_state(GhostState.FLEE)
 
     def deactivate_power_pellet(self):
-        # No immediate change, update() will revert states
-        pass
+        self.power_pellet_active = False
 
     def update(self):
-        now = time.time()
-        for ghost in self.ghosts.values():
-            if ghost.state == GhostState.FLEE and now > ghost.edible_until:
-                # revert to original state
-                if ghost.name == 'Blinky':
-                    ghost.state = GhostState.CHASE
-                elif ghost.name == 'Pinky':
-                    ghost.state = GhostState.AMBUSH
-                elif ghost.name == 'Inky':
-                    ghost.state = GhostState.PATROL
-                elif ghost.name == 'Clyde':
-                    ghost.state = GhostState.RANDOM
+        if not self.power_pellet_active:
+            # revert ghosts to original states if power pellet inactive
+            self.ghosts['Blinky'].set_state(GhostState.CHASE)
+            self.ghosts['Pinky'].set_state(GhostState.AMBUSH)
+            self.ghosts['Inky'].set_state(GhostState.PATROL)
+            self.ghosts['Clyde'].set_state(GhostState.RANDOM)
+        else:
+            # check if edible time expired
+            now = time.time()
+            for ghost in self.ghosts.values():
+                if ghost.state == GhostState.FLEE and now > ghost.edible_until:
+                    # revert to original state
+                    if ghost.name == 'Blinky':
+                        ghost.set_state(GhostState.CHASE)
+                    elif ghost.name == 'Pinky':
+                        ghost.set_state(GhostState.AMBUSH)
+                    elif ghost.name == 'Inky':
+                        ghost.set_state(GhostState.PATROL)
+                    elif ghost.name == 'Clyde':
+                        ghost.set_state(GhostState.RANDOM)
+
