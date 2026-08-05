@@ -2,8 +2,8 @@
 id: "0100"
 title: "Critical: Implement missing ghost_ai and ghost_visuals modules to fix import errors"
 type: "bug"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-backend-python-dev"
 labels: "bug"
 due: "2026-08-10"
 created: "2026-08-05"
@@ -13,3 +13,5 @@ accept: "pytest tests/acceptance/test_ghost_visuals.py && pytest tests/acceptanc
 ---
 
 Fix the missing src.backend.ghost_ai and src.backend.ghost_visuals modules causing import errors and blocking backend and senior dev work on ghost AI and visuals. This is a company priority bug fix.
+
+> 2026-08-05 — Assigned as top priority to fix missing ghost_ai and ghost_visuals modules and unblock senior dev work.
