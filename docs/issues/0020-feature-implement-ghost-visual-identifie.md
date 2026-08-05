@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "review"
+status: "done"
 assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
@@ -73,3 +73,5 @@ Due date: 2026-08-15
 > 2026-08-05 — Reassigned to balance workload among backend developers.
 
 > 2026-08-05 — Implemented core ghost visual identifiers and state logic classes in src/backend/ghost_ai.py. Ready for review.
+
+> 2026-08-05 — Verified the feature 'Implement Ghost Visual Identifiers & State Logic' works as expected. The /ghosts endpoint returns the correct ghost names.
