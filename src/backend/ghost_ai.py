@@ -18,17 +18,11 @@ class GhostIdentity:
     CLYDE = 'Clyde'
 
 class Ghost:
-    def __init__(self, name):
+    def __init__(self, name, initial_state=GhostState.CHASE):
         self.name = name
-        self.state = GhostState.IDLE
-        self.original_state = GhostState.CHASE
+        self.state = initial_state
+        self.original_state = initial_state
         self.edible_until = 0
-
-    def activate(self):
-        self.state = GhostState.CHASE
-
-    def sleep(self):
-        self.state = GhostState.FRIGHTENED
 
     def update_state(self, player_powered_up=False):
         current_time = time.time()
@@ -38,14 +32,51 @@ class Ghost:
         elif self.state == GhostState.FLEE and current_time > self.edible_until:
             self.state = self.original_state
 
-    def is_active(self) -> bool:
-        return self.state == GhostState.CHASE
-
-    def is_edible(self) -> bool:
+    def is_edible(self):
         return self.state == GhostState.FLEE
 
-    def visual_identifier(self) -> str:
+    def visual_identifier(self):
         return self.state.value
 
     def __repr__(self):
-        return f"<Ghost name={self.name} state={self.state.name}>"  
+        return f"<Ghost name={self.name} state={self.state.value}>"
+
+class GhostManager:
+    def __init__(self):
+        self.ghosts = {
+            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY, GhostState.CHASE),
+            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY, GhostState.AMBUSH),
+            GhostIdentity.INKY: Ghost(GhostIdentity.INKY, GhostState.PATROL),
+            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE, GhostState.RANDOM),
+        }
+        self.power_pellet_active = False
+
+    def get_ghost_state(self, name):
+        ghost = self.ghosts.get(name)
+        if ghost:
+            return ghost.state
+        return None
+
+    def set_ghost_state(self, name, state):
+        ghost = self.ghosts.get(name)
+        if ghost:
+            ghost.state = state
+            ghost.original_state = state
+
+    def get_all_states(self):
+        return {name: ghost.state.value for name, ghost in self.ghosts.items()}
+
+    def activate_power_pellet(self):
+        self.power_pellet_active = True
+        for ghost in self.ghosts.values():
+            ghost.update_state(player_powered_up=True)
+
+    def deactivate_power_pellet(self):
+        self.power_pellet_active = False
+
+    def update(self):
+        for ghost in self.ghosts.values():
+            ghost.update_state(player_powered_up=self.power_pellet_active)
+
+    def __repr__(self):
+        return f"<GhostManager ghosts={self.ghosts}>"
