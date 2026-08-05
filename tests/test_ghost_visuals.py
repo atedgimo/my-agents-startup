@@ -3,7 +3,6 @@ import pytest
 from src.backend.ghost_ai import GhostManager, GhostState, GhostIdentity
 
 
-
 def test_initial_ghost_states():
     gm = GhostManager()
     states = gm.get_all_states()
