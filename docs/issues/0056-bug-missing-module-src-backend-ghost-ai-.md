@@ -2,12 +2,13 @@
 id: "0056"
 title: "Bug: Missing module src.backend.ghost_ai causing test import errors"
 type: "bug"
-status: "backlog"
+status: "in-progress"
 assignee: ""
 labels: "bug"
 due: ""
 created: "2026-08-04"
-updated: "2026-08-04"
+updated: "2026-08-05"
+started: "2026-08-05T09:21:09"
 objective: "The product builds and tests run without import errors, enabling QA verification."
 accept: "pytest tests/test_pellet_collection.py tests/test_scores_api.py"
 ---
@@ -29,3 +30,5 @@ Actual:
 This issue blocks QA verification of features dependent on these modules and the overall test suite.
 
 Please fix or provide the missing module or adjust imports to unblock testing.
+
+> 2026-08-05 — Added __init__.py to tests directory to make it a package and fix import errors in pytest. Moving back to in-progress for retesting.
