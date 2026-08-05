@@ -44,9 +44,11 @@ class GhostManager:
             GhostIdentity.INKY: Ghost(GhostIdentity.INKY),
             GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE),
         }
-        # Initialize all ghosts to IDLE to match test expectation
-        for ghost in self.ghosts.values():
-            ghost.state = GhostState.IDLE
+        # Initialize ghosts to expected initial states
+        self.ghosts[GhostIdentity.BLINKY].state = GhostState.CHASE
+        self.ghosts[GhostIdentity.PINKY].state = GhostState.AMBUSH
+        self.ghosts[GhostIdentity.INKY].state = GhostState.PATROL
+        self.ghosts[GhostIdentity.CLYDE].state = GhostState.RANDOM
         self.power_pellet_active = False
         self.power_pellet_end_time = 0
 
