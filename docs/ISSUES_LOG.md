@@ -1160,3 +1160,18 @@ This card serves to unblock the import error preventing backend startup.
 
 ---
 
+## Add automated tests for ghost visual identifiers and state logic
+
+**Labels:** bug,tests
+
+Add unit tests to verify the ghost visual identifiers and state update logic in the backend.
+
+Tests should cover:
+- Ghost state transitions when power_up_active is True or False
+- Correct visual identifiers returned for each ghost state ('normal', 'frightened', 'eaten')
+- GhostManager updates and returns correct visuals
+
+This completes bug #0050 by ensuring ghost logic is tested and verified.
+
+---
+
