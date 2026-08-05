@@ -59,3 +59,5 @@ Manual fix of src/backend/main.py is needed to unblock this card.
 Created bug card to track and escalate the problem.
 
 > 2026-08-05 — Developer fixed ghost state logic and tests but found src/backend/main.py has corrupted trailing code causing syntax error blocking backend startup and review. Created new bug #0084 for this blocking issue. Card #0050 remains blocked until main.py is fixed. Awaiting co-founder intervention.
+
+> 2026-08-05 — Starting work on fixing missing tests and implementation for ghost visual identifiers and state logic as per bug description.
