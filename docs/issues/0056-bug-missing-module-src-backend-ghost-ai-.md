@@ -34,3 +34,5 @@ Please fix or provide the missing module or adjust imports to unblock testing.
 > 2026-08-05 — Added __init__.py to tests directory to make it a package and fix import errors in pytest. Moving back to in-progress for retesting.
 
 > 2026-08-05 — Moved back to todo due to blocking issue #0083: missing import line for GhostIdentity in main.py prevents fixing import error.
+
+> 2026-08-05 — Bug #0056 cannot be fixed until the import line in src/backend/main.py referencing GhostIdentity is clarified or corrected. Created new bug #0074 to create ghost_ai.py module properly and fix import error. Moving back to todo.
