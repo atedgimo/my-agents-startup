@@ -36,25 +36,34 @@ class GhostManager:
 
 
 # Initialize dummy ghost manager
-# Dummy ghost manager class to allow app to start
+from src.backend.ghost_ai import Ghost, GhostState
+
 class GhostManager:
     def __init__(self):
-        self.ghosts = {}
+        self.ghosts = {
+            'Blinky': Ghost('Blinky'),
+            'Pinky': Ghost('Pinky'),
+            'Inky': Ghost('Inky'),
+            'Clyde': Ghost('Clyde')
+        }
 
     def get_all_states(self):
-        return {}
+        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
 
     def set_ghost_state(self, identity, state):
-        pass
+        if identity in self.ghosts:
+            self.ghosts[identity].state = GhostState[state]
 
     def activate_power_pellet(self):
-        pass
+        for ghost in self.ghosts.values():
+            ghost.update_state(player_powered_up=True)
 
     def update(self):
-        pass
+        for ghost in self.ghosts.values():
+            ghost.update_state(player_powered_up=False)
 
 
-# Initialize dummy ghost manager
+# Initialize ghost manager
 ghost_manager = GhostManager()
 
 # Register pellet collection router
