@@ -62,12 +62,12 @@ def test_set_and_get_ghost_state():
     gm.set_ghost_state(GhostIdentity.BLINKY, GhostState.FLEE)
     assert gm.get_ghost_state(GhostIdentity.BLINKY) == GhostState.FLEE
     states = gm.get_all_states()
-    assert states['Blinky'] == 'flee'
+    assert states['Blinky'] == GhostState.FLEE
 
     gm.set_ghost_state(GhostIdentity.CLYDE, GhostState.EATEN)
     assert gm.get_ghost_state(GhostIdentity.CLYDE) == GhostState.EATEN
     states = gm.get_all_states()
-    assert states['Clyde'] == 'eaten'
+    assert states['Clyde'] == GhostState.EATEN
 
 
 @pytest.mark.parametrize("identity,state", [
