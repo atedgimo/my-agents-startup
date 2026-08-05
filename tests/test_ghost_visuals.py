@@ -85,7 +85,7 @@ def test_power_pellet_activation_and_edible_state():
     gm.activate_power_pellet()
     states = gm.get_all_states()
     for state in states.values():
-        assert state == 'flee'
+        assert state == GhostState.FLEE
 
     # Ghosts should be edible during power pellet
     for ghost in gm.ghosts.values():
