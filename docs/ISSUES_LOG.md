@@ -1525,3 +1525,15 @@ This command currently fails due to the missing GhostVisual enum and will pass w
 
 ---
 
+## Hire one backend/full-stack developer to balance workload and accelerate backend features
+
+**Labels:** hiring, feature
+
+**Due:** 2024-07-15
+
+Hire one additional developer with backend or full-stack skills to reduce the senior dev's heavy workload and accelerate progress on backend features. This hire should also help with frontend tasks if possible to support the UI dev.
+
+Assign backlog cards such as #0078, #0079, #0080, #0081, #0094, and #0095 for backend module completion and ghost AI logic implementation to this new hire.
+
+---
+
