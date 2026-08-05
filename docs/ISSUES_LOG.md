@@ -1394,3 +1394,16 @@ Complete the development and polish of ghost AI behaviors and visuals to align w
 
 ---
 
+## Fix import error for ghost_visuals module in test_ghost_visuals.py
+
+**Labels:** bug
+
+The test file tests/test_ghost_visuals.py fails to import the module src.backend.ghost_visuals, causing test collection to error out.
+
+Error details:
+ModuleNotFoundError: No module named 'src.backend.ghost_visuals'
+
+This blocks running the acceptance tests for bug #0050 and needs to be fixed to verify the bug resolution.
+
+---
+
