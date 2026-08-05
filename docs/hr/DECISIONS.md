@@ -12,3 +12,4 @@ Rationale: QA is essential to maintain quality and avoid review bottlenecks. Dev
 - 2026-08-02 18:03 — FROZEN by co-founder: button test
 - 2026-08-02 18:03 — RESUMED by co-founder
 - 2026-08-05 17:47 — FIRED startup-systems-engineer by HR: Role is redundant and currently unused, no open cards assigned, to free capacity for active roles.
+- 2026-08-05 17:47 — FIRED startup-systems-engineer-ii by HR: Role is redundant and currently unused, no open cards assigned, to free capacity for active roles.
