@@ -1,4 +1,4 @@
-# This module is a placeholder for ghost AI logic.
-# It is currently empty but must exist to satisfy imports.
+# Placeholder module for ghost AI logic
+# This file must exist to prevent import errors
 
-# Future implementation will include ghost movement and chasing logic.
+# No implementation yet
