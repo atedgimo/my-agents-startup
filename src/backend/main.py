@@ -1,7 +1,3 @@
-"""
-Main backend FastAPI app integration for game logic including input buffer and movement smoothing.
-"""
-
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -30,7 +26,6 @@ class GhostManager:
             ghost.update_state(player_powered_up=True)
 
     def deactivate_power_pellet(self):
-        # Reset ghosts to their original states
         for ghost in self.ghosts.values():
             ghost.state = ghost.original_state
 
@@ -38,10 +33,6 @@ class GhostManager:
         for ghost in self.ghosts.values():
             ghost.update_state(player_powered_up=False)
 
-# Initialize ghost manager
-ghost_manager = GhostManager()
-
-# Register pellet collection router
 app = FastAPI()
 app.include_router(pellet_router)
 app.add_middleware(
@@ -51,6 +42,8 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
+
+ghost_manager = GhostManager()
 
 @app.get("/ghosts")
 async def get_ghosts():
@@ -79,5 +72,3 @@ async def deactivate_power_pellet():
 async def update_ghosts():
     ghost_manager.update()
     return {"status": "ghosts updated"}
-
-# Other existing backend code continues here...
