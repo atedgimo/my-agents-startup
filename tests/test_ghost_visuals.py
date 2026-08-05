@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 from ghost_ai import GhostVisual, GhostManager, GhostState
 
 
+
 def test_ghost_visual_identifiers():
     # Test that the GhostVisual enum has the expected members
     expected_members = [
