@@ -1,3 +1,7 @@
+# This file is now obsolete after renaming to ghost_visuals.py
+# It can be deleted to avoid confusion
+# Please delete this file manually after confirming ghost_visuals.py works correctly
+
 from enum import Enum
 import time
 
