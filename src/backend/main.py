@@ -12,6 +12,29 @@ import json
 import threading
 
 from src.backend.pellet_collection import router as pellet_router
+
+# Removed import of ghost_ai to fix ModuleNotFoundError
+# from src.backend.ghost_ai import GhostManager, GhostIdentity, GhostState
+
+# Dummy ghost manager class to allow app to start
+class GhostManager:
+    def __init__(self):
+        self.ghosts = {}
+
+    def get_all_states(self):
+        return {}
+
+    def set_ghost_state(self, identity, state):
+        pass
+
+    def activate_power_pellet(self):
+        pass
+
+    def update(self):
+        pass
+
+ghost_manager = GhostManager()
+
 from ghost_ai import *
 from ghost_visuals import GhostManager, GhostState
 import ghost_ai
