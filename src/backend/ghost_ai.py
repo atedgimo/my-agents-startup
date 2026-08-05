@@ -12,15 +12,10 @@ class GhostState(Enum):
     RANDOM = 'random'
 
 class GhostVisual(Enum):
-    BLINKY = 'blinky'
-    PINKY = 'pinky'
-    INKY = 'inky'
-    CLYDE = 'clyde'
-    FRIGHTENED = 'frightened'
-    EYES_UP = 'eyes_up'
-    EYES_DOWN = 'eyes_down'
-    EYES_LEFT = 'eyes_left'
-    EYES_RIGHT = 'eyes_right'
+    BLINKY = 'red'
+    PINKY = 'pink'
+    INKY = 'cyan'
+    CLYDE = 'orange'
 
 class GhostIdentity:
     BLINKY = 'Blinky'
@@ -33,6 +28,7 @@ class Ghost:
         self.name = name
         self.state = GhostState.IDLE
         self.original_state = self.state
+        self.visual = GhostVisual[name.upper()]
 
     def activate(self):
         self.state = GhostState.CHASE
@@ -45,7 +41,7 @@ class Ghost:
         return self.state == GhostState.CHASE
 
     def __repr__(self):
-        return f"<Ghost name={self.name} state={self.state.name}>"
+        return f"<Ghost name={self.name} state={self.state.name} visual={self.visual.value}>"
 
 class GhostManager:
     def __init__(self):
