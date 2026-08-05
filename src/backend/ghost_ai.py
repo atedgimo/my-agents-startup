@@ -93,7 +93,7 @@ class GhostManager:
     def get_ghost_state(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
         if ghost:
-            return ghost.state.value
+            return ghost.state
         return None
 
     def set_ghost_state(self, ghost_name, state):
