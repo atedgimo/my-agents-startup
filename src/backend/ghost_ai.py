@@ -46,6 +46,17 @@ class Ghost:
     CHASE = 2
     FRIGHTENED = 3
 
+class GhostVisual(Enum):
+    BLINKY = 'blinky'
+    PINKY = 'pinky'
+    INKY = 'inky'
+    CLYDE = 'clyde'
+    FRIGHTENED = 'frightened'
+    EYES_UP = 'eyes_up'
+    EYES_DOWN = 'eyes_down'
+    EYES_LEFT = 'eyes_left'
+    EYES_RIGHT = 'eyes_right'
+
 class Ghost:
     def __init__(self, name):
         self.name = name
