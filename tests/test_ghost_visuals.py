@@ -1,5 +1,5 @@
 import pytest
-from backend.ghost_visuals import GhostManager, GhostState
+from src.backend.ghost_visuals import GhostManager, GhostState
 
 class GhostIdentity:
     BLINKY = 'Blinky'
@@ -12,10 +12,10 @@ def test_initial_ghost_states():
     gm = GhostManager()
     states = gm.get_all_states()
     assert states == {
-        'Blinky': GhostState.CHASE,
-        'Pinky': GhostState.AMBUSH,
-        'Inky': GhostState.PATROL,
-        'Clyde': GhostState.RANDOM
+        'Blinky': 'chase',
+        'Pinky': 'ambush',
+        'Inky': 'patrol',
+        'Clyde': 'random'
     }
 
 
@@ -24,12 +24,12 @@ def test_set_and_get_ghost_state():
     gm.set_ghost_state(GhostIdentity.BLINKY, GhostState.FLEE)
     assert gm.get_ghost_state(GhostIdentity.BLINKY) == GhostState.FLEE
     states = gm.get_all_states()
-    assert states['Blinky'] == GhostState.FLEE
+    assert states['Blinky'] == 'flee'
 
     gm.set_ghost_state(GhostIdentity.CLYDE, GhostState.EATEN)
     assert gm.get_ghost_state(GhostIdentity.CLYDE) == GhostState.EATEN
     states = gm.get_all_states()
-    assert states['Clyde'] == GhostState.EATEN
+    assert states['Clyde'] == 'eaten'
 
 
 @pytest.mark.parametrize("identity,state", [
@@ -47,7 +47,7 @@ def test_power_pellet_activation_and_edible_state():
     gm.activate_power_pellet()
     states = gm.get_all_states()
     for state in states.values():
-        assert state == GhostState.FLEE
+        assert state == 'flee'
 
     # Ghosts should be edible during power pellet
     for ghost in gm.ghosts.values():
@@ -63,10 +63,10 @@ def test_power_pellet_deactivation_and_revert_state():
     gm.update()
     states = gm.get_all_states()
     # After deactivation and update, ghosts revert to original behaviour
-    assert states['Blinky'] == GhostState.CHASE
-    assert states['Pinky'] == GhostState.AMBUSH
-    assert states['Inky'] == GhostState.PATROL
-    assert states['Clyde'] == GhostState.RANDOM
+    assert states['Blinky'] == 'chase'
+    assert states['Pinky'] == 'ambush'
+    assert states['Inky'] == 'patrol'
+    assert states['Clyde'] == 'random'
 
 
 def test_edible_timeout():
@@ -78,7 +78,7 @@ def test_edible_timeout():
     gm.update()
     states = gm.get_all_states()
     # Ghosts should revert to original behaviour after edible time
-    assert states['Blinky'] == GhostState.CHASE
-    assert states['Pinky'] == GhostState.AMBUSH
-    assert states['Inky'] == GhostState.PATROL
-    assert states['Clyde'] == GhostState.RANDOM
+    assert states['Blinky'] == 'chase'
+    assert states['Pinky'] == 'ambush'
+    assert states['Inky'] == 'patrol'
+    assert states['Clyde'] == 'random'
