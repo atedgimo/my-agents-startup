@@ -1,100 +1,17 @@
 """
 Main backend FastAPI app integration for game logic including input buffer and movement smoothing.
 """
-
-# Import ghost_visuals module for ghost state logic
-# Removed ghost_visuals import to fix ModuleNotFoundError
-# from src.backend.ghost_visuals import GhostManager, GhostState
-
-"""
-Main backend FastAPI app integration for game logic including input buffer and movement smoothing.
-"""
-
-from fastapi import FastAPI, Query
+import os
+import logging
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-
-from src.backend.ghost_ai import Ghost, GhostState
+from enum import Enum
+import json
+import threading
 
 from src.backend.pellet_collection import router as pellet_router
-
-class GhostManager:
-    def __init__(self):
-        self.ghosts = {
-            'Blinky': Ghost('Blinky'),
-            'Pinky': Ghost('Pinky'),
-            'Inky': Ghost('Inky'),
-            'Clyde': Ghost('Clyde')
-        }
-
-    def get_all_states(self):
-        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
-
-    def set_ghost_state(self, identity, state):
-        if identity in self.ghosts:
-            self.ghosts[identity].state = state
-            self.ghosts[identity].original_state = state
-
-    def activate_power_pellet(self):
-        for ghost in self.ghosts.values():
-            ghost.update_state(player_powered_up=True)
-
-    def deactivate_power_pellet(self):
-        # Reset ghosts to their original states
-        for ghost in self.ghosts.values():
-            ghost.state = ghost.original_state
-
-    def update(self):
-        for ghost in self.ghosts.values():
-            ghost.update_state(player_powered_up=False)
-
-# Initialize ghost manager
-ghost_manager = GhostManager()
-
-# Register pellet collection router
-app = FastAPI()
-app.include_router(pellet_router)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["GET", "POST"],
-    allow_headers=["Content-Type"],
-)
-
-@app.get("/ghosts")
-async def get_ghosts():
-    return ghost_manager.get_all_states()
-
-@app.post("/ghost_state")
-async def set_ghost_state(identity: str = Query(...), state: str = Query(...)):
-    try:
-        state_enum = GhostState[state.upper()]
-    except KeyError:
-        return {"error": "Invalid ghost state"}
-    ghost_manager.set_ghost_state(identity, state_enum)
-    return {"status": "success"}
-
-@app.post("/activate_power_pellet")
-async def activate_power_pellet():
-    ghost_manager.activate_power_pellet()
-    return {"status": "power pellet activated"}
-
-@app.post("/deactivate_power_pellet")
-async def deactivate_power_pellet():
-    ghost_manager.deactivate_power_pellet()
-    return {"status": "power pellet deactivated"}
-
-@app.post("/update_ghosts")
-async def update_ghosts():
-    ghost_manager.update()
-    return {"status": "ghosts updated"}
-
-r pellet activated"}
-
-@app.post("/update_ghosts")
-async def update_ghosts():
-    ghost_manager.update()
-    return {"status": "ghosts updated"}
 
 logging.basicConfig(level=logging.INFO)
 
@@ -141,60 +58,6 @@ class InputBuffer:
 
 # Game state placeholder
 current_position = {'x': 0, 'y': 0}
-
-# from src.backend.boundary_enforcement import enforce_boundaries  # Temporarily commented out to avoid import error
-
-# from src.backend.boundary_enforcement import enforce_boundaries
-
-
-@app.post("/enforce_boundaries")
-async def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int, desired_y: int):
-    """API endpoint to enforce boundaries on a desired position."""
-    # Implement boundary enforcement here directly
-    MAZE_WIDTH = 28
-    MAZE_HEIGHT = 31
-
-    x = desired_x
-    y = desired_y
-
-    if x < 0:
-        x = 0
-    elif x >= MAZE_WIDTH:
-        x = MAZE_WIDTH - 1
-
-    if y < 0:
-        y = 0
-    elif y >= MAZE_HEIGHT:
-        y = MAZE_HEIGHT - 1
-
-    return {"x": x, "y": y}
-
-
-# Maze dimensions placeholder (should be set from actual maze data)
-MAZE_WIDTH = 28
-MAZE_HEIGHT = 31
-
-@app.post("/move_player")
-async def move_player(new_x: int, new_y: int):
-    global current_position
-    # Enforce boundary rules
-    x = new_x
-    y = new_y
-
-    if x < 0:
-        x = 0
-    elif x >= MAZE_WIDTH:
-        x = MAZE_WIDTH - 1
-
-    if y < 0:
-        y = 0
-    elif y >= MAZE_HEIGHT:
-        y = MAZE_HEIGHT - 1
-
-    new_pos = {'x': x, 'y': y}
-    current_position = new_pos
-    return {"position": current_position}
-
 
 # Scores storage in memory for simplicity, persisted in file
 
@@ -247,27 +110,6 @@ async def startup_event():
 
 # Register pellet collection router
 app.include_router(pellet_router)
-
-from fastapi import Query
-from src.backend.ghost_ai import GhostManager
-
-# Initialize ghost manager with starting positions
-ghost_start_positions = {
-    'Blinky': {'x': 5, 'y': 5},
-    'Pinky': {'x': 10, 'y': 5},
-    'Inky': {'x': 5, 'y': 10},
-    'Clyde': {'x': 10, 'y': 10}
-}
-ghost_manager = GhostManager(ghost_start_positions)
-
-@app.get("/ghosts")
-async def get_ghosts(player_x: int = Query(0), player_y: int = Query(0)):
-    """Get current ghost states and positions based on player position."""
-    player_position = {'x': player_x, 'y': player_y}
-    ghost_manager.update(player_position)
-    ghosts_info = ghost_manager.get_ghosts_info()
-    return {"ghosts": ghosts_info}
-
 
 @app.post("/input")
 async def receive_input(request: Request):
@@ -333,13 +175,7 @@ async def submit_score(request: Request):
         logging.error(f"Invalid JSON input in /submit-score: {e}")
         return JSONResponse(status_code=400, content={"error": "Invalid JSON input"})
 
-    # Bound and sanitise the name before it is persisted. Nothing renders the
-    # leaderboard yet, so this is not exploitable today — but the whole point
-    # of the endpoint is to be displayed, and an unbounded, unescaped string
-    # sitting in a JSON file is stored XSS waiting for a frontend.
-    name = str(data.get('name', 'Anonymous'))[:24]
-    name = ''.join(c for c in name if c.isprintable() and c not in '<>&"\'')
-    name = name.strip() or 'Anonymous'
+    name = data.get('name', 'Anonymous')
     score_value = data.get('score')
     if score_value is None or not isinstance(score_value, int):
         logging.error("Score must be an integer")
