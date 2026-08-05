@@ -1724,3 +1724,20 @@ This blocks the release until resolved.
 
 ---
 
+## Define acceptance test for card #0014 Boundary Enforcement
+
+**Labels:** chore
+
+Acceptance test for Boundary Enforcement must verify that the player cannot move beyond the defined maze boundaries.
+
+This includes:
+- Attempting to move the player character into walls or outside the maze should be blocked.
+- The player position should remain within valid bounds after movement input.
+
+The acceptance command should run an automated test that tries to move the player beyond boundaries and asserts no position change beyond those boundaries.
+
+This ensures compliance with the success criterion: "The player cannot move outside the maze boundaries."
+
+
+---
+
