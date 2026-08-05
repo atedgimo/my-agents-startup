@@ -1,4 +1,36 @@
 import pytest
+from src.backend.ghost_ai import GhostVisual
+
+
+def test_ghost_visual_identifiers():
+    # Test that the GhostVisual enum has the expected members
+    expected_members = [
+        'BLINKY', 'PINKY', 'INKY', 'CLYDE',
+        'FRIGHTENED', 'EYES_UP', 'EYES_DOWN', 'EYES_LEFT', 'EYES_RIGHT'
+    ]
+    for member in expected_members:
+        assert hasattr(GhostVisual, member), f"GhostVisual missing member {member}"
+
+
+def test_ghost_visual_state_logic():
+    # Test the state logic of GhostVisual
+    # For example, check if FRIGHTENED is a special state
+    assert GhostVisual.FRIGHTENED.name == 'FRIGHTENED'
+    assert GhostVisual.FRIGHTENED.value is not None
+
+    # Check that eyes directions are correctly named
+    assert GhostVisual.EYES_UP.name == 'EYES_UP'
+    assert GhostVisual.EYES_DOWN.name == 'EYES_DOWN'
+    assert GhostVisual.EYES_LEFT.name == 'EYES_LEFT'
+    assert GhostVisual.EYES_RIGHT.name == 'EYES_RIGHT'
+
+    # Check that the normal ghost visuals are distinct from special states
+    normal_ghosts = {GhostVisual.BLINKY, GhostVisual.PINKY, GhostVisual.INKY, GhostVisual.CLYDE}
+    special_states = {GhostVisual.FRIGHTENED, GhostVisual.EYES_UP, GhostVisual.EYES_DOWN, GhostVisual.EYES_LEFT, GhostVisual.EYES_RIGHT}
+    assert normal_ghosts.isdisjoint(special_states)
+
+
+# Retain existing tests below
 from src.backend.ghost_ai import GhostManager, GhostState
 
 class GhostIdentity:
