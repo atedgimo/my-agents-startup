@@ -1707,3 +1707,20 @@ Distribute the workload of fixing backend bugs and implementing missing modules 
 
 ---
 
+## Bug: Test suite times out after 180 seconds blocking regression verification
+
+**Labels:** bug
+
+The automated test suite repeatedly times out after 180 seconds without producing failure details. This prevents regression verification and blocks the quality gate for release.
+
+Steps to reproduce:
+1. Run `pytest tests/ -q --maxfail=20` or the equivalent test command.
+2. Observe the timeout after 180 seconds with no detailed failure output.
+
+Actual: Test suite times out, no failure details.
+Expected: Test suite completes or fails with detailed output to identify regressions.
+
+This blocks the release until resolved.
+
+---
+
