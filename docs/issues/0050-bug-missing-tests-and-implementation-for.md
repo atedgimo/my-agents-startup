@@ -73,3 +73,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-05 — Fixed Ghost class implementation and added tests for ghost state logic. However, existing tests require a GhostManager implementation missing in ghost_ai.py. Created new card #0094 for GhostManager implementation. Moving this bug back to todo pending that work.
 
 > 2026-08-05 — Bug #0050 requires implementing the missing src.backend.ghost_visuals module with GhostManager and GhostState to pass tests. Created new card #0097 for this work and assigned to senior dev.
+
+> 2026-08-05 — Fixed import in test_ghost_visuals.py to import from ghost_ai instead of ghost_visuals.
