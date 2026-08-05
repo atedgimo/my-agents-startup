@@ -12,6 +12,7 @@ import json
 import threading
 
 from src.backend.pellet_collection import router as pellet_router
+from src.backend.ghost_ai import GhostManager, GhostState, GhostIdentity
 
 logging.basicConfig(level=logging.INFO)
 
@@ -68,6 +69,7 @@ scores = []
 scores_lock = threading.Lock()
 
 input_buffer = InputBuffer()
+ghost_manager = GhostManager()
 
 @app.on_event("startup")
 async def startup_event():
@@ -123,156 +125,38 @@ async def submit_score(request: Request):
 
         with scores_lock:
             scores.append(score_value)
-            scores.sort(reverse=True)
             # Keep top 10 scores
+            scores.sort(reverse=True)
             scores = scores[:10]
             # Persist to file
-            with open(SCORES_FILE, 'w') as f:
-                json.dump(scores, f)
+            try:
+                with open(SCORES_FILE, 'w') as f:
+                    json.dump(scores, f)
+            except Exception as e:
+                logging.error(f"Failed to save scores to {SCORES_FILE}: {e}")
 
-        return {"message": "Score submitted successfully", "scores": scores}
+        return JSONResponse(status_code=200, content={"message": "Score submitted successfully"})
     except Exception as e:
-        logging.error(f"Error submitting score: {e}")
+        logging.error(f"Error processing submit-score request: {e}")
         return JSONResponse(status_code=500, content={"error": "Internal server error"})
 
-@app.get("/scores")
-async def get_scores():
-    """Return the list of high scores."""
-    global scores
-    with scores_lock:
-        return {"scores": scores}
+@app.get("/ghost-states")
+async def get_ghost_states():
+    """Return the current states of all ghosts."""
+    ghost_manager.update()  # Update ghost states based on timing
+    states = {name: state.value for name, state in ghost_manager.get_all_states().items()}
+    return states
 
+@app.post("/activate-power-pellet")
+async def activate_power_pellet():
+    """Activate power pellet mode for ghosts."""
+    ghost_manager.activate_power_pellet()
+    return {"message": "Power pellet activated"}
 
-@app.post("/input")
-async def receive_input(request: Request):
-    """Receive player input direction and queue it."""
-    try:
-        data = await request.json()
-    except Exception as e:
-        logging.error(f"Invalid JSON input in /input: {e}")
-        return JSONResponse(status_code=400, content={"error": "Invalid JSON input"})
+@app.post("/deactivate-power-pellet")
+async def deactivate_power_pellet():
+    """Deactivate power pellet mode for ghosts."""
+    ghost_manager.deactivate_power_pellet()
+    return {"message": "Power pellet deactivated"}
 
-    direction_str = data.get('direction', 'NONE').upper()
-    try:
-        direction = Direction[direction_str]
-    except KeyError:
-        logging.error(f"Invalid direction received: {direction_str}")
-        return JSONResponse(status_code=400, content={"error": "Invalid direction"})
-
-    input_buffer.queue_input(direction)
-    logging.info(f"Direction {direction_str} queued")
-    return {"message": f"Direction {direction_str} queued"}
-
-@app.get("/move")
-async def get_movement():
-    """Update movement direction smoothly and return new position."""
-    input_buffer.update_direction()
-    current_dir = input_buffer.current_direction
-
-    # For demonstration, move one unit per call in the direction
-    if current_dir == Direction.UP:
-        current_position['y'] += 1
-    elif current_dir == Direction.DOWN:
-        current_position['y'] -= 1
-    elif current_dir == Direction.LEFT:
-        current_position['x'] -= 1
-    elif current_dir == Direction.RIGHT:
-        current_position['x'] += 1
-
-    logging.info(f"Moved {current_dir.name} to position {current_position}")
-    return {
-        "position": current_position,
-        "direction": current_dir.name
-    }
-
-@app.post("/clear_input")
-async def clear_input_buffer():
-    """Clear the input buffer and reset direction."""
-    input_buffer.clear()
-    logging.info("Input buffer cleared")
-    return {"message": "Input buffer cleared"}
-
-@app.get("/scores")
-async def get_scores():
-    """Return the list of high scores as JSON."""
-    with scores_lock:
-        return scores
-
-@app.post("/submit-score")
-async def submit_score(request: Request):
-    """Accept a new score submission and persist it."""
-    try:
-        data = await request.json()
-    except Exception as e:
-        logging.error(f"Invalid JSON input in /submit-score: {e}")
-        return JSONResponse(status_code=400, content={"error": "Invalid JSON input"})
-
-    name = data.get('name', 'Anonymous')
-    score_value = data.get('score')
-    if score_value is None or not isinstance(score_value, int):
-        logging.error("Score must be an integer")
-        return JSONResponse(status_code=400, content={"error": "Score must be an integer"})
-
-    with scores_lock:
-        # Append and save
-        scores.append({"name": name, "score": score_value})
-        # Sort descending
-        scores.sort(key=lambda x: x['score'], reverse=True)
-        # Keep top 10
-        scores[:] = scores[:10]
-
-        # Persist
-        try:
-            with open(SCORES_FILE, 'w') as f:
-                json.dump(scores, f)
-            logging.info(f"Scores saved to {SCORES_FILE}")
-        except Exception as e:
-            logging.error(f"Failed to save scores to {SCORES_FILE}: {e}")
-            return JSONResponse(status_code=500, content={"error": f"Failed to save scores: {str(e)}"})
-
-    return {"message": "Score submitted successfully", "scores": scores}
-
-# Mount static files for frontend.
-# index.html and game.js live in src/, one level above this file. Resolve from
-# __file__ rather than the working directory: the app is started with
-# `cd src/backend`, so a relative "src" pointed at src/backend/src and
-# StaticFiles raised at import, crash-looping the pod. The isdir guard keeps a
-# wrong path from taking the whole API down with it.
-static_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if os.path.isdir(static_dir):
-    try:
-        app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
-        logging.info(f"Static files mounted from {static_dir}")
-    except Exception as e:
-        logging.error(f"Failed to mount static files from {static_dir}: {e}")
-else:
-    logging.warning(f"Static directory {static_dir} does not exist, static files not mounted")
-
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
-
-# Card 0021: Add endpoint to list all startups
-from fastapi import HTTPException
-import sqlite3
-
-@app.get("/startups")
-async def list_startups():
-    data_dir = os.getenv("DATA_DIR")
-    if not data_dir:
-        raise HTTPException(status_code=500, detail="DATA_DIR environment variable not set")
-
-    db_path = f"{data_dir}/startups.db"
-    try:
-        conn = sqlite3.connect(db_path)
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, name, description FROM startups")
-        rows = cursor.fetchall()
-        startups = [{"id": row[0], "name": row[1], "description": row[2]} for row in rows]
-        conn.close()
-        return startups
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
+# Additional endpoints can be added here for ghost state manipulation, input buffer, etc.
