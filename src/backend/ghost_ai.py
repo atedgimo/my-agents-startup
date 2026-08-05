@@ -115,17 +115,17 @@ class GhostManager:
 
     def deactivate_power_pellet(self):
         self.power_pellet_active = False
+        for ghost in self.ghosts.values():
+            # Revert to original state if stored
+            if hasattr(ghost, 'original_state') and ghost.original_state:
+                ghost.state = ghost.original_state
+            else:
+                ghost.state = GhostState.CHASE
 
     def update(self):
         current_time = time.time()
         if self.power_pellet_active and current_time > self.power_pellet_end_time:
-            self.power_pellet_active = False
-            for ghost in self.ghosts.values():
-                # Revert to original state if stored
-                if hasattr(ghost, 'original_state') and ghost.original_state:
-                    ghost.state = ghost.original_state
-                else:
-                    ghost.state = GhostState.CHASE
+            self.deactivate_power_pellet()
 
     def is_edible(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
