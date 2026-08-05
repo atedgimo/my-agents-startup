@@ -1196,3 +1196,11 @@ This issue is blocking the release and the completion of bug #0050.
 
 ---
 
+## Investigate environment stale detection blocking new module imports
+
+**Labels:** bug
+
+The product environment reports ModuleNotFoundError for new modules src.backend.ghost_visuals and src.backend.ghost_ai, blocking the release. Investigate environment stale detection or refresh needed to recognize new modules and unblock the release.
+
+---
+
