@@ -1,0 +1,29 @@
+{
+ "agent": "startup-ceo",
+ "ts": "2026-08-05T17:23:43",
+ "meeting": false,
+ "title": "you need to start managing them, as company is shit",
+ "prompt": "you need to start managing them, as company is shit",
+ "messages": [
+  {
+   "who": "co-founder",
+   "kind": "say",
+   "text": "you need to start managing them, as company is shit"
+  },
+  {
+   "who": "startup-ceo",
+   "kind": "say",
+   "text": "I have documented the management kickoff meeting minutes, outlining the review of current work, updated OKRs and team instructions, and plans for weekly sync meetings to improve coordination.\n\nSummary:\n- Claimed and moved card #0070 to in-progress.\n- Updated OKRs and team instructions for focus on UI overlays and ghost AI.\n- Held a management kickoff meeting and saved the minutes.\n\nNext, I will monitor progress and prepare to hold the first weekly sync meeting with the team."
+  },
+  {
+   "who": "startup-ceo",
+   "kind": "say",
+   "text": "I have reviewed the current state of the company work:\n\n- There are 11 items still awaiting the co-founder's input.\n- There are 3 cards in \"todo\" status, including a bug, a frontend feature, and an OKRs update card assigned to me.\n- There are 10 cards in \"in-progress\" status assigned to various developers, mostly focused on ghost AI, UI overlays, and visual feedback features.\n\nGiven this, I will take the following immediate management actions:\n1. Prioritize clearing the co-founder inbox to unblock work.\n2. Review and update the OKRs and team instructions to improve focus and alignment.\n3. Assess the in-progress work for blockers or risks and ensure progress is steady.\n4. Plan a team meeting to address current issues and improve coordination.\n\nI will start by claiming and moving the OKRs update card (#0070) to in-progress so I can update the vision and instructions for the team. Then I will draft a plan for the team meeting.\n\nI proceed with claiming and moving card #0070."
+  },
+  {
+   "who": "startup-ceo",
+   "kind": "say",
+   "text": "I have claimed and moved card #0070 to in-progress and updated the OKRs and team instructions to focus on UI overlays and ghost AI features, improve team coordination, and clarify communication and escalation procedures.\n\nNext, I will plan a team meeting to discuss current blockers, progress, and coordination improvements."
+  }
+ ]
+}
