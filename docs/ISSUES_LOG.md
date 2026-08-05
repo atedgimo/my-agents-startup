@@ -1378,3 +1378,11 @@ This serves the objective: "The game logic correctly handles player lives and po
 
 ---
 
+## Complete UI state overlays for Game Over and Level Up
+
+**Labels:** feature,UI
+
+Focus on delivering the UI overlays for Game Over and Level Up states to enhance player feedback and meet the playable core loop and persistent feedback objectives. This is critical for the upcoming internal demo.
+
+---
+
