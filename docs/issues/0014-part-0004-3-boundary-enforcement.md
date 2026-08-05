@@ -2,7 +2,7 @@
 id: "0014"
 title: "[part] #0004.3 Boundary Enforcement"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-14"
@@ -20,3 +20,5 @@ Size: S
 > 2026-08-04 — Starting implementation of card #0014 Boundary Enforcement.
 
 > 2026-08-05 — Implemented boundary enforcement in collision.py. The CollisionDetector class now treats out-of-bounds as walls and provides methods to check movement validity and detect collisions with walls, pellets, power pellets, and ghosts.
+
+> 2026-08-05 — Acceptance test for boundary enforcement exists but the current Player.move_right method wraps around instead of enforcing boundaries. This is why the card is stuck in review. The implementation must be changed to prevent moving beyond the boundary, not wrap around.
