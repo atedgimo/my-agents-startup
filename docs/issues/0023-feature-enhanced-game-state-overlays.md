@@ -2,7 +2,7 @@
 id: "0023"
 title: "Feature: Enhanced Game State Overlays"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -48,3 +48,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Verification blocked due to missing module src.backend.ghost_ai causing import errors in backend tests. See bug #0056.
 
 > 2026-08-05 — Implemented enhanced game state overlays UI module in src/frontend/game_overlays.js and integrated it with main game logic in src/game.js. Provided functions to activate, update, and dismiss overlays showing score, lives, level, and power pellet status. Ready for review.
+
+> 2026-08-05 — Acceptance test failed due to timeout after 180 seconds. The test suite may be hanging or running indefinitely. Moving card back to in-progress for investigation.
