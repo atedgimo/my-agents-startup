@@ -89,48 +89,7 @@ async def update_ghosts():
     ghost_manager.update()
     return {"status": "ghosts updated"}
 
-osts = {
-            'Blinky': Ghost('Blinky'),
-            'Pinky': Ghost('Pinky'),
-            'Inky': Ghost('Inky'),
-            'Clyde': Ghost('Clyde')
-        }
-
-    def get_all_states(self):
-        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
-
-    def set_ghost_state(self, identity, state):
-        if identity in self.ghosts:
-            self.ghosts[identity].state = GhostState[state]
-
-    def activate_power_pellet(self):
-        for ghost in self.ghosts.values():
-            ghost.update_state(player_powered_up=True)
-
-    def update(self):
-        for ghost in self.ghosts.values():
-            ghost.update_state(player_powered_up=False)
-
-
-# Initialize ghost manager
-ghost_manager = GhostManager()
-
-# Register pellet collection router
-app.include_router(pellet_router)
-
-@app.get("/ghosts")
-async def get_ghosts():
-    return ghost_manager.get_all_states()
-
-@app.post("/ghost_state")
-async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
-    ghost_manager.set_ghost_state(identity, state)
-    return {"status": "success"}
-
-@app.post("/activate_power_pellet")
-async def activate_power_pellet():
-    ghost_manager.activate_power_pellet()
-    return {"status": "power pellet activated"}
+r pellet activated"}
 
 @app.post("/update_ghosts")
 async def update_ghosts():
