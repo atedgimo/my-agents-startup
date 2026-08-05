@@ -11,12 +11,6 @@ class GhostState(Enum):
     PATROL = 'patrol'
     RANDOM = 'random'
 
-class GhostIdentity:
-    BLINKY = 'Blinky'
-    PINKY = 'Pinky'
-    INKY = 'Inky'
-    CLYDE = 'Clyde'
-
 class GhostVisual(Enum):
     BLINKY = 'blinky'
     PINKY = 'pinky'
@@ -27,6 +21,12 @@ class GhostVisual(Enum):
     EYES_DOWN = 'eyes_down'
     EYES_LEFT = 'eyes_left'
     EYES_RIGHT = 'eyes_right'
+
+class GhostIdentity:
+    BLINKY = 'Blinky'
+    PINKY = 'Pinky'
+    INKY = 'Inky'
+    CLYDE = 'Clyde'
 
 class Ghost:
     def __init__(self, name):
@@ -55,11 +55,11 @@ class GhostManager:
             GhostIdentity.INKY: Ghost(GhostIdentity.INKY),
             GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE),
         }
-        # Initialize all ghosts to IDLE to match test expectation
-        self.ghosts[GhostIdentity.BLINKY].state = GhostState.IDLE
-        self.ghosts[GhostIdentity.PINKY].state = GhostState.IDLE
-        self.ghosts[GhostIdentity.INKY].state = GhostState.IDLE
-        self.ghosts[GhostIdentity.CLYDE].state = GhostState.IDLE
+        # Initialize ghosts to expected initial states
+        self.ghosts[GhostIdentity.BLINKY].state = GhostState.CHASE
+        self.ghosts[GhostIdentity.PINKY].state = GhostState.AMBUSH
+        self.ghosts[GhostIdentity.INKY].state = GhostState.PATROL
+        self.ghosts[GhostIdentity.CLYDE].state = GhostState.RANDOM
         self.power_pellet_active = False
         self.power_pellet_end_time = 0
 
@@ -93,7 +93,7 @@ class GhostManager:
             self.power_pellet_active = False
             for ghost in self.ghosts.values():
                 # Revert to original state if stored
-                if hasattr(ghost, 'original_state') and ghost.original_state:
+                if hasattr(ghost, 'original_state') and ghost.original_state is not None:
                     ghost.state = ghost.original_state
                 else:
                     ghost.state = GhostState.CHASE
