@@ -13,7 +13,7 @@ Main backend FastAPI app integration for game logic including input buffer and m
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.backend.ghost_ai import Ghost, GhostState
+from src.backend.ghost_ai import Ghost, GhostState, GhostIdentity
 from src.backend.pellet_collection import router as pellet_router
 
 class GhostManager:
