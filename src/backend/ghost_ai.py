@@ -1,32 +1,20 @@
-# Ghost AI logic for visual identifiers and state management
+from enum import Enum
+
+class GhostState(Enum):
+    IDLE = 1
+    CHASE = 2
+    FRIGHTENED = 3
 
 class Ghost:
-    def __init__(self, id):
-        self.id = id
-        self.state = 'normal'  # could be 'normal', 'frightened', 'eaten'
+    def __init__(self, name):
+        self.name = name
+        self.state = GhostState.IDLE
 
-    def update_state(self, power_up_active):
-        if power_up_active:
-            self.state = 'frightened'
+    def visual_identifier(self):
+        return f"{self.name}-{self.state.name}"
+
+    def update_state(self, player_powered_up=False):
+        if player_powered_up:
+            self.state = GhostState.FRIGHTENED
         else:
-            self.state = 'normal'
-
-    def get_visual_identifier(self):
-        if self.state == 'frightened':
-            return 'blue'
-        elif self.state == 'eaten':
-            return 'eyes'
-        else:
-            return 'normal'
-
-
-class GhostManager:
-    def __init__(self):
-        self.ghosts = [Ghost(i) for i in range(4)]
-
-    def update_ghosts(self, power_up_active):
-        for ghost in self.ghosts:
-            ghost.update_state(power_up_active)
-
-    def get_ghost_visuals(self):
-        return [ghost.get_visual_identifier() for ghost in self.ghosts]
+            self.state = GhostState.CHASE
