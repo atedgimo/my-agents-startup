@@ -1,3 +1,5 @@
+import { showGameOver, showLevelUp, hideOverlay } from './frontend/uiStateOverlays.js';
+
 // Motion interpolation feature implemented for smooth rendering
 
 // drawGhost was imported from './frontend/ghostVisuals.js', which was never
