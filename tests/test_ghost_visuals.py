@@ -50,10 +50,10 @@ def test_initial_ghost_states():
     gm = GhostManager()
     states = gm.get_all_states()
     assert states == {
-        'Blinky': 'idle',
-        'Pinky': 'idle',
-        'Inky': 'idle',
-        'Clyde': 'idle'
+        'Blinky': GhostState.IDLE,
+        'Pinky': GhostState.IDLE,
+        'Inky': GhostState.IDLE,
+        'Clyde': GhostState.IDLE
     }
 
 
