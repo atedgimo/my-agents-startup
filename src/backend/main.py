@@ -6,7 +6,15 @@ Main backend FastAPI app integration for game logic including input buffer and m
 # Removed ghost_visuals import to fix ModuleNotFoundError
 # from src.backend.ghost_visuals import GhostManager, GhostState
 
-from src.backend.ghost_ai import Ghost, GhostState, GhostIdentity
+"""
+Main backend FastAPI app integration for game logic including input buffer and movement smoothing.
+"""
+
+from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
+
+from src.backend.ghost_ai import Ghost, GhostState
+from src.backend.pellet_collection import router as pellet_router
 
 class GhostManager:
     def __init__(self):
@@ -42,14 +50,8 @@ class GhostManager:
 ghost_manager = GhostManager()
 
 # Register pellet collection router
-from src.backend.pellet_collection import router as pellet_router
-from fastapi import FastAPI, Query
-from fastapi.middleware.cors import CORSMiddleware
-
 app = FastAPI()
-
 app.include_router(pellet_router)
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -85,6 +87,19 @@ async def deactivate_power_pellet():
 async def update_ghosts():
     ghost_manager.update()
     return {"status": "ghosts updated"}
+
+# Other existing backend code continues here...
+
+import os
+import logging
+from fastapi import Request
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+import json
+import threading
+
+# Other existing imports and code
+
 
 # Other existing backend code continues here...
 
