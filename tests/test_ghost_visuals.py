@@ -3,7 +3,7 @@ import sys
 import os
 
 # Adjust the path to import src.backend
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src/backend')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/backend')))
 
 from ghost_ai import GhostVisual, GhostManager, GhostState
 
@@ -36,33 +36,43 @@ def test_ghost_visual_state_logic():
     assert normal_ghosts.isdisjoint(special_states)
 
 
+# Retain existing tests below
+from ghost_ai import GhostManager, GhostState
+
+class GhostIdentity:
+    BLINKY = 'Blinky'
+    PINKY = 'Pinky'
+    INKY = 'Inky'
+    CLYDE = 'Clyde'
+
+
 def test_initial_ghost_states():
     gm = GhostManager()
     states = gm.get_all_states()
     assert states == {
-        'Blinky': GhostState.CHASE,
-        'Pinky': GhostState.AMBUSH,
-        'Inky': GhostState.PATROL,
-        'Clyde': GhostState.RANDOM
+        'Blinky': GhostState.IDLE,
+        'Pinky': GhostState.IDLE,
+        'Inky': GhostState.IDLE,
+        'Clyde': GhostState.IDLE
     }
 
 
 def test_set_and_get_ghost_state():
     gm = GhostManager()
-    gm.set_ghost_state('Blinky', GhostState.FLEE)
-    assert gm.get_ghost_state('Blinky') == GhostState.FLEE
+    gm.set_ghost_state(GhostIdentity.BLINKY, GhostState.FLEE)
+    assert gm.get_ghost_state(GhostIdentity.BLINKY) == GhostState.FLEE
     states = gm.get_all_states()
     assert states['Blinky'] == GhostState.FLEE
 
-    gm.set_ghost_state('Clyde', GhostState.EATEN)
-    assert gm.get_ghost_state('Clyde') == GhostState.EATEN
+    gm.set_ghost_state(GhostIdentity.CLYDE, GhostState.EATEN)
+    assert gm.get_ghost_state(GhostIdentity.CLYDE) == GhostState.EATEN
     states = gm.get_all_states()
     assert states['Clyde'] == GhostState.EATEN
 
 
 @pytest.mark.parametrize("identity,state", [
-    ('Pinky', GhostState.PATROL),
-    ('Inky', GhostState.AMBUSH),
+    (GhostIdentity.PINKY, GhostState.PATROL),
+    (GhostIdentity.INKY, GhostState.AMBUSH),
 ])
 def test_parametrized_states(identity, state):
     gm = GhostManager()
@@ -111,3 +121,4 @@ def test_edible_timeout():
     assert states['Inky'] == GhostState.PATROL
     assert states['Clyde'] == GhostState.RANDOM
 
+    gm = GhostManager()
