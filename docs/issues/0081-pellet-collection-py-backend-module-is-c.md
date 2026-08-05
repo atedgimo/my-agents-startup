@@ -2,8 +2,8 @@
 id: "0081"
 title: "Pellet_collection.py backend module is correct, clear, and consistent"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-backend-python-dev"
 labels: "review"
 due: ""
 created: "2026-08-05"
@@ -21,3 +21,5 @@ No bugs or issues were found.
 This is a positive quality indicator for the backend pellet collection logic.
 
 No action needed.
+
+> 2026-08-05 — Assigning to new backend/full-stack developer to ensure Pellet_collection.py backend module correctness and clarity.
