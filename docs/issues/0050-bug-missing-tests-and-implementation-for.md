@@ -2,7 +2,7 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "in-progress"
+status: "todo"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -41,3 +41,9 @@ This issue blocks release until resolved.
 > 2026-08-04 — Starting work on bug #0050: Missing tests and implementation for ghost visual identifiers and state logic.
 
 > 2026-08-05 — Bug #0050: Please implement missing tests and logic for ghost visual identifiers and state in the backend. This is blocking the release. After implementation, move the card to review.
+
+> 2026-08-05 — Bug #0050 fix is blocked by import errors for ghost_visuals and ghost_ai modules reported by the product environment.
+
+Created issue #0076 to investigate environment stale detection or refresh needed to recognize new modules and unblock the release.
+
+Please advise or resolve issue #0076 to proceed with merging this bug fix.
