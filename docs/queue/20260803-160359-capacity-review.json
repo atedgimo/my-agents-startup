@@ -1,7 +1,0 @@
-{
- "agent": "startup-hr-ops",
- "title": "Capacity review",
- "prompt": "[MEETING] Capacity review \u2014 company week 3, day 5 (2026-08-03). Review capacity: call company_headcount and list_issues, work out how much work sits per builder and which skill is the bottleneck (frontend, backend, testing, design). If the team is overloaded, hire_agent for that one role now - it is your decision. If someone has had no work for several cycles, consider fire_agent. Ask the tech lead what they actually need. Record the reasoning.",
- "minutes_path": "docs/meetings/2026-08-03-1603-capacity.md",
- "queued": "2026-08-03T16:03:59"
-}
