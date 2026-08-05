@@ -47,3 +47,5 @@ This issue blocks release until resolved.
 Created issue #0076 to investigate environment stale detection or refresh needed to recognize new modules and unblock the release.
 
 Please advise or resolve issue #0076 to proceed with merging this bug fix.
+
+> 2026-08-05 — Implemented missing ghost visual identifiers and state logic, but import errors for new modules block the release. Created #0076 to investigate environment stale detection. Acceptance test added for /ghosts API.
