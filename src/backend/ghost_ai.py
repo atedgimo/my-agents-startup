@@ -61,9 +61,11 @@ class Ghost:
     def __init__(self, name):
         self.name = name
         self.state = GhostState.IDLE
+        self.original_state = self.state
 
     def activate(self):
         self.state = GhostState.CHASE
+        self.original_state = self.state
 
     def sleep(self):
         self.state = GhostState.FRIGHTENED
