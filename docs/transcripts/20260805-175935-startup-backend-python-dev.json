@@ -1,0 +1,19 @@
+{
+ "agent": "startup-backend-python-dev",
+ "ts": "2026-08-05T17:59:35",
+ "meeting": false,
+ "title": "take work!",
+ "prompt": "take work!",
+ "messages": [
+  {
+   "who": "co-founder",
+   "kind": "say",
+   "text": "take work!"
+  },
+  {
+   "who": "startup-backend-python-dev",
+   "kind": "say",
+   "text": "Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-fNy7aB1Vt2bem0177dkjnnRp on tokens per min (TPM): Limit 200000, Used 200000, Requested 5013. Please try again in 1.503s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}"
+  }
+ ]
+}
