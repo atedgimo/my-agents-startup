@@ -1431,3 +1431,11 @@ This is related to bug #0050 but separate to track the import issue specifically
 
 ---
 
+## Bug: Import confusion due to obsolete ghost_ai.py file
+
+**Labels:** bug
+
+The old src/backend/ghost_ai.py file conflicts with the new ghost_visuals.py module, causing import errors and test failures. This blocks acceptance of bug #0050. We need to delete or archive ghost_ai.py to resolve this.
+
+---
+
