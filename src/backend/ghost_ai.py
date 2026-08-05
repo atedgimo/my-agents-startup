@@ -1,8 +1,5 @@
-# Placeholder for ghost AI logic
+# ghost_ai.py
+# Placeholder module to satisfy import in main.py
 
-class GhostAI:
-    def __init__(self):
-        pass
+# Actual ghost AI logic will be implemented in future cards
 
-    def update(self):
-        pass
