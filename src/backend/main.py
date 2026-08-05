@@ -22,15 +22,17 @@ class GhostManager:
 
     def set_ghost_state(self, identity, state):
         if identity in self.ghosts:
-            self.ghosts[identity].state = GhostState[state]
+            self.ghosts[identity].state = state
+            self.ghosts[identity].original_state = state
 
     def activate_power_pellet(self):
         for ghost in self.ghosts.values():
             ghost.update_state(player_powered_up=True)
 
     def deactivate_power_pellet(self):
-        # Assuming this method is needed as per previous code
-        pass
+        # Reset ghosts to their original states
+        for ghost in self.ghosts.values():
+            ghost.state = ghost.original_state
 
     def update(self):
         for ghost in self.ghosts.values():
