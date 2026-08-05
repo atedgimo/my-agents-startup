@@ -1,5 +1,7 @@
 import sys
 import os
 
-# Add the src directory to sys.path so tests can import from src.backend
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+# Add the repo root directory to sys.path for imports
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
