@@ -2,7 +2,7 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "in-progress"
+status: "todo"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -67,3 +67,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-05 — The acceptance test command is correct but the import path in tests/test_ghost_visuals.py was incorrect causing import errors. I fixed the import path to use relative import from backend.ghost_visuals instead of src.backend.ghost_visuals. Now rerunning tests locally to verify pass.
 
 > 2026-08-05 — The tests in tests/test_ghost_visuals.py already import correctly from src.backend.ghost_visuals. The previous acceptance test failure was due to a truncated error message. I will rerun the acceptance test to verify if the fix is now passing.
+
+> 2026-08-05 — The existing tests in tests/test_ghost_visuals.py require the implementation of GhostManager and GhostState logic, which is missing or inconsistent in ghost_ai.py. Created a new feature card #0094 to implement this properly. Moving #0050 back to todo for now.
