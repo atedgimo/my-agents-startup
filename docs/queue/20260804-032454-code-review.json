@@ -1,7 +1,0 @@
-{
- "agent": "startup-senior-dev",
- "title": "Code review",
- "prompt": "[MEETING] Code review \u2014 company week 4, day 1 (2026-08-04). Run a senior code review: use list_repo then read_repo_file on everything under src/ that changed recently. Judge correctness, clarity, and consistency with ARCHITECTURE.md and DESIGN.md. For every REAL defect file an issue with label 'bug' (what is wrong, how to reproduce, expected vs actual); for structural problems consult startup-architect first and file a refactor issue instead. Name what is good too. Never invent problems - if the code is fine, say so plainly.",
- "minutes_path": "docs/reviews/2026-08-04-0324-code-review.md",
- "queued": "2026-08-04T03:24:54"
-}
