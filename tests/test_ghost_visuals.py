@@ -1,19 +1,5 @@
 import pytest
-import time
-
-# Patch time.sleep to speed up tests
-import builtins
-original_sleep = time.sleep
-time.sleep = lambda x: None
-
-import atexit
-atexit.register(lambda: setattr(time, 'sleep', original_sleep))
-
-import pytest
-from src.backend.ghost_visuals import GhostManager, GhostState
-
-from src.backend.ghost_visuals import GhostManager, GhostState
-
+from backend.ghost_visuals import GhostManager, GhostState
 
 class GhostIdentity:
     BLINKY = 'Blinky'
@@ -26,10 +12,10 @@ def test_initial_ghost_states():
     gm = GhostManager()
     states = gm.get_all_states()
     assert states == {
-        'Blinky': 'chase',
-        'Pinky': 'ambush',
-        'Inky': 'patrol',
-        'Clyde': 'random'
+        'Blinky': GhostState.CHASE,
+        'Pinky': GhostState.AMBUSH,
+        'Inky': GhostState.PATROL,
+        'Clyde': GhostState.RANDOM
     }
 
 
@@ -38,12 +24,12 @@ def test_set_and_get_ghost_state():
     gm.set_ghost_state(GhostIdentity.BLINKY, GhostState.FLEE)
     assert gm.get_ghost_state(GhostIdentity.BLINKY) == GhostState.FLEE
     states = gm.get_all_states()
-    assert states['Blinky'] == 'flee'
+    assert states['Blinky'] == GhostState.FLEE
 
     gm.set_ghost_state(GhostIdentity.CLYDE, GhostState.EATEN)
     assert gm.get_ghost_state(GhostIdentity.CLYDE) == GhostState.EATEN
     states = gm.get_all_states()
-    assert states['Clyde'] == 'eaten'
+    assert states['Clyde'] == GhostState.EATEN
 
 
 @pytest.mark.parametrize("identity,state", [
