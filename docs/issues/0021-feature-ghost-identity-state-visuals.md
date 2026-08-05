@@ -2,12 +2,12 @@
 id: "0021"
 title: "Feature: Ghost Identity & State Visuals"
 type: "feature"
-status: "in-progress"
+status: "todo"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-04"
+updated: "2026-08-05"
 started: "2026-08-03T03:24:41"
 ---
 
@@ -52,3 +52,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Completed frontend implementation for ghost identity and state visuals. Added ghostVisuals.js module with drawing functions and colors. Updated game.js to draw ghosts with distinct colors and frightened state visuals. Ready for QA review.
 
 > 2026-08-04 — Card #0021 cannot be verified due to blocking bug #0060: missing src.backend.ghosts module causing import errors and test failures. Moving back to in-progress.
+
+> 2026-08-05 — Blocked on uncommitted local changes in docs/cofounder/inbox.jsonl preventing branch switch to card/0021 for editing src/game.js to integrate ghost visuals module.
