@@ -3,11 +3,11 @@ id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
 status: "in-progress"
-assignee: "startup-senior-dev"
+assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-04"
+updated: "2026-08-05"
 started: "2026-08-03T03:23:51"
 ---
 
@@ -69,3 +69,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Reopening card to continue development as it is still in review.
 
 > 2026-08-04 — Cannot verify due to blocking bug #0065: missing src.backend.ghosts module causing import errors and test failures. Moving card back to in-progress.
+
+> 2026-08-05 — Reassigned to balance workload among backend developers.
