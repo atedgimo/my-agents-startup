@@ -8,8 +8,14 @@ import { showGameOver, showLevelUp, hideOverlay } from './frontend/uiStateOverla
 function drawGhost(ctx, cx, cy, state, identity) {
     const colours = { Blinky: '#ff5555', Pinky: '#ff9ed8',
                       Inky: '#5ad2ff', Clyde: '#ffb852' };
-    ctx.fillStyle = (state === 'FRIGHTENED') ? '#3b4cff'
-                                             : (colours[identity] || '#ff5555');
+    // Determine fill color based on ghost state
+    if (state === 'FRIGHTENED' || state === 'FLEE') {
+        ctx.fillStyle = '#3b4cff';
+    } else if (state === 'EATEN') {
+        ctx.fillStyle = '#ffffff'; // white for eyes only
+    } else {
+        ctx.fillStyle = colours[identity] || '#ff5555';
+    }
     const r = TILE_SIZE / 2 - 2;
     ctx.beginPath();
     ctx.arc(cx, cy, r, Math.PI, 0);           // domed head
@@ -17,11 +23,22 @@ function drawGhost(ctx, cx, cy, state, identity) {
     ctx.lineTo(cx - r, cy + r);
     ctx.closePath();
     ctx.fill();
-    ctx.fillStyle = '#fff';                    // eyes
-    ctx.beginPath();
-    ctx.arc(cx - r / 2.5, cy - r / 5, r / 4, 0, Math.PI * 2);
-    ctx.arc(cx + r / 2.5, cy - r / 5, r / 4, 0, Math.PI * 2);
-    ctx.fill();
+
+    // Draw eyes differently if eaten
+    if (state === 'EATEN') {
+        ctx.fillStyle = '#000000'; // black eyes
+        const eyeRadius = r / 4;
+        ctx.beginPath();
+        ctx.arc(cx - r / 2.5, cy - r / 5, eyeRadius, 0, Math.PI * 2);
+        ctx.arc(cx + r / 2.5, cy - r / 5, eyeRadius, 0, Math.PI * 2);
+        ctx.fill();
+    } else {
+        ctx.fillStyle = '#fff';                    // eyes
+        ctx.beginPath();
+        ctx.arc(cx - r / 2.5, cy - r / 5, r / 4, 0, Math.PI * 2);
+        ctx.arc(cx + r / 2.5, cy - r / 5, r / 4, 0, Math.PI * 2);
+        ctx.fill();
+    }
 }
 
 // Added power_up state to track power pellet effect
