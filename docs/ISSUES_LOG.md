@@ -1449,3 +1449,23 @@ This bug addresses the missing src.backend.ghost_ai module which is causing impo
 
 ---
 
+## Implement GhostManager and GhostState logic for ghost visual identifiers and states
+
+**Labels:** feature
+
+The current ghost_ai.py has a Ghost class but the tests and implementation for ghost visual identifiers and state logic are incomplete or inconsistent with the existing ghost_visuals.py and its tests.
+
+We need to:
+- Implement or fix GhostManager and GhostState classes to manage multiple ghosts with their states and visual identifiers.
+- Ensure ghost states include IDLE, CHASE, FRIGHTENED, FLEE, EATEN, AMBUSH, PATROL, RANDOM.
+- Add or fix tests to cover ghost visual identifiers and state transitions, including power pellet activation and edible state timing.
+
+This serves the objective: "Ensure ghost visual identifiers and state logic are implemented and tested correctly".
+
+Acceptance:
+pytest -q tests/test_ghost_visuals.py
+
+This will unblock bug #0050 and align implementation with tests.
+
+---
+
