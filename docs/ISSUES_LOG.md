@@ -1699,3 +1699,11 @@ Value case: Improves usability and accessibility for all desktop players, includ
 
 ---
 
+## Rebalance backend bug fixes and module implementations among backend-python-dev, backend-full-stack-devel, and senior dev
+
+**Labels:** chore
+
+Distribute the workload of fixing backend bugs and implementing missing modules related to ghost AI and visuals among backend-python-dev, backend-full-stack-devel, and senior dev to reduce bottlenecks and speed up progress.
+
+---
+
