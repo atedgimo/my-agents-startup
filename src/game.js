@@ -25,6 +25,46 @@ let score = 0;
 let lives = 3;
 let power_up = false; // Track if player has a power-up for ghost logic
 
+// TODO: Add fetch calls to submit and retrieve scores from backend API
+// This is required to meet the persistence criterion in BOARD_BRIEF.md
+
+// Example placeholder function to submit score
+async function submitScore(score) {
+    try {
+        const response = await fetch('/submit-score', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ score })
+        });
+        if (!response.ok) throw new Error('Failed to submit score');
+        console.log('Score submitted successfully');
+    } catch (error) {
+        console.error('Error submitting score:', error);
+    }
+}
+
+// Example placeholder function to fetch high scores
+async function fetchHighScores() {
+    try {
+        const response = await fetch('/scores');
+        if (!response.ok) throw new Error('Failed to fetch scores');
+        const scores = await response.json();
+        console.log('High scores:', scores);
+        // TODO: Render scores in UI
+    } catch (error) {
+        console.error('Error fetching scores:', error);
+    }
+}
+
+// Call fetchHighScores on game load
+fetchHighScores();
+
+// Call submitScore when game ends (example, to be integrated with game state)
+// if (gameState === STATE.LOST || gameState === STATE.WON) {
+//     submitScore(score);
+// }
+
+
 // Overlay control
 let overlayActive = false;
 
