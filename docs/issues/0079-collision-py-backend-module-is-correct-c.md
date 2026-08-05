@@ -2,8 +2,8 @@
 id: "0079"
 title: "Collision.py backend module is correct, clear, and consistent"
 type: "feature"
-status: "backlog"
-assignee: ""
+status: "todo"
+assignee: "startup-backend-python-dev"
 labels: "review"
 due: ""
 created: "2026-08-05"
@@ -19,3 +19,5 @@ The code is clear, well-structured, and consistent with the game logic requireme
 This is a positive quality indicator for the backend collision detection logic.
 
 No action needed.
+
+> 2026-08-05 — Assigning to new backend/full-stack developer to ensure Collision.py backend module correctness and clarity.
