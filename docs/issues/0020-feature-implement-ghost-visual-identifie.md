@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
@@ -71,3 +71,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Cannot verify due to blocking bug #0065: missing src.backend.ghosts module causing import errors and test failures. Moving card back to in-progress.
 
 > 2026-08-05 — Reassigned to balance workload among backend developers.
+
+> 2026-08-05 — Implemented core ghost visual identifiers and state logic classes in src/backend/ghost_ai.py. Ready for review.
