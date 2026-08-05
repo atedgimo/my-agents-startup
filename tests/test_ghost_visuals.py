@@ -47,6 +47,46 @@ def test_power_pellet_activation_and_edible_state():
     gm.activate_power_pellet()
     states = gm.get_all_states()
     for state in states.values():
+        assert state == 'flee'
+
+    # Ghosts should be edible during power pellet
+    for ghost in gm.ghosts.values():
+        assert ghost.is_edible()
+
+
+def test_power_pellet_deactivation_and_revert_state():
+    gm = GhostManager()
+    gm.activate_power_pellet()
+    import time
+    time.sleep(0.1)  # short wait to simulate time passing
+    gm.deactivate_power_pellet()
+    gm.update()
+    states = gm.get_all_states()
+    # After deactivation and update, ghosts revert to original behaviour
+    assert states['Blinky'] == 'chase'
+    assert states['Pinky'] == 'ambush'
+    assert states['Inky'] == 'patrol'
+    assert states['Clyde'] == 'random'
+
+
+def test_edible_timeout():
+    gm = GhostManager()
+    gm.activate_power_pellet()
+    import time
+    # Wait for edible time to expire
+    time.sleep(10.1)
+    gm.update()
+    states = gm.get_all_states()
+    # Ghosts should revert to original behaviour after edible time
+    assert states['Blinky'] == 'chase'
+    assert states['Pinky'] == 'ambush'
+    assert states['Inky'] == 'patrol'
+    assert states['Clyde'] == 'random'
+
+    gm = GhostManager()
+    gm.activate_power_pellet()
+    states = gm.get_all_states()
+    for state in states.values():
         assert state == GhostState.FLEE
 
     # Ghosts should be edible during power pellet
