@@ -2,7 +2,7 @@
 id: "0056"
 title: "Bug: Missing module src.backend.ghost_ai causing test import errors"
 type: "bug"
-status: "todo"
+status: "in-progress"
 assignee: "startup-backend-python-dev"
 labels: "bug"
 due: ""
@@ -38,3 +38,5 @@ Please fix or provide the missing module or adjust imports to unblock testing.
 > 2026-08-05 — Bug #0056 cannot be fixed until the import line in src/backend/main.py referencing GhostIdentity is clarified or corrected. Created new bug #0074 to create ghost_ai.py module properly and fix import error. Moving back to todo.
 
 > 2026-08-05 — Prioritizing this critical bug fix for missing ghost_ai module to unblock backend and senior dev work.
+
+> 2026-08-05 — Claiming this bug to investigate and fix the missing src.backend.ghost_ai module causing test import errors.
