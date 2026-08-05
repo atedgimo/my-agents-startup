@@ -1419,3 +1419,15 @@ This is a prerequisite for verifying bug #0050 fix.
 
 ---
 
+## Bug: Missing module src.backend.ghost_ai causing test import errors
+
+**Labels:** bug
+
+The tests in tests/test_ghost_visuals.py import from src.backend.ghost_visuals but the implementation was in src/backend/ghost_ai.py, causing import errors.
+
+This bug tracks renaming ghost_ai.py to ghost_visuals.py to fix import errors and ensure tests run correctly.
+
+This is related to bug #0050 but separate to track the import issue specifically.
+
+---
+
