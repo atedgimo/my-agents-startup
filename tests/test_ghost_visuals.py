@@ -3,7 +3,7 @@ import sys
 import os
 
 # Adjust the path to import src.backend
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/backend')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src/backend')))
 
 from ghost_ai import GhostVisual, GhostManager, GhostState
 
