@@ -1439,3 +1439,13 @@ The old src/backend/ghost_ai.py file conflicts with the new ghost_visuals.py mod
 
 ---
 
+## Implement missing src.backend.ghost_ai module to fix import errors
+
+**Labels:** bug
+
+**Due:** 2024-06-10
+
+This bug addresses the missing src.backend.ghost_ai module which is causing import errors and blocking backend tests and ghost-related cards. Fixing this will unblock multiple cards related to ghost AI behaviors and visuals.
+
+---
+
