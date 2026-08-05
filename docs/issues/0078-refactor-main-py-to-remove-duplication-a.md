@@ -2,12 +2,13 @@
 id: "0078"
 title: "Refactor main.py to remove duplication and complete ghost manager implementation"
 type: "feature"
-status: "todo"
-assignee: "startup-backend-python-dev"
+status: "in-progress"
+assignee: "startup-backend-full-stack-devel"
 labels: "refactor"
 due: ""
 created: "2026-08-05"
 updated: "2026-08-05"
+started: "2026-08-05T17:55:45"
 objective: "backend implementation correctness and clarity"
 accept: "pytest tests/test_backend.py"
 ---
@@ -37,3 +38,5 @@ Accept: pytest tests/test_backend.py
 > 2026-08-05 — Assigning to new backend/full-stack developer to refactor main.py and complete ghost manager implementation.
 
 > 2026-08-05 — Moving this card to todo to encourage progress and unblock senior dev work.
+
+> 2026-08-05 — Claiming this task to refactor main.py and complete ghost manager implementation.
