@@ -7,7 +7,7 @@ assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
 created: "2026-08-03"
-updated: "2026-08-04"
+updated: "2026-08-05"
 started: "2026-08-03T16:20:33"
 objective: "Four ghosts with distinct behaviours (chase, ambush, patrol, random), and power-pellets that make them flee and edible for a limited time."
 accept: "pytest -q tests/test_ghost_visuals.py"
@@ -39,3 +39,5 @@ This issue blocks release until resolved.
 > 2026-08-04 — Acceptance test for card #0050 still fails due to import errors and app initialization NameError. Created bug card #0068 to investigate and fix these blocking issues. Card #0050 remains in progress until #0068 is resolved.
 
 > 2026-08-04 — Starting work on bug #0050: Missing tests and implementation for ghost visual identifiers and state logic.
+
+> 2026-08-05 — Bug #0050: Please implement missing tests and logic for ghost visual identifiers and state in the backend. This is blocking the release. After implementation, move the card to review.
