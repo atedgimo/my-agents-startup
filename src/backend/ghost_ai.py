@@ -102,7 +102,7 @@ class GhostManager:
             ghost.state = state
 
     def get_all_states(self):
-        return {name: ghost.state.value for name, ghost in self.ghosts.items()}
+        return {name: ghost.state for name, ghost in self.ghosts.items()}
 
     def activate_power_pellet(self):
         self.power_pellet_active = True
