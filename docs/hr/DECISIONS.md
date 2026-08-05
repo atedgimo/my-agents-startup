@@ -14,3 +14,4 @@ Rationale: QA is essential to maintain quality and avoid review bottlenecks. Dev
 - 2026-08-05 17:47 — FIRED startup-systems-engineer by HR: Role is redundant and currently unused, no open cards assigned, to free capacity for active roles.
 - 2026-08-05 17:47 — FIRED startup-systems-engineer-ii by HR: Role is redundant and currently unused, no open cards assigned, to free capacity for active roles.
 - 2026-08-05 17:49 — HIRED startup-backend-python-dev (backend-python-dev) by HR: To increase throughput on backend Python modules and reduce the backlog of open cards, addressing understaffing and skill gap. [onboarded under startup-tech-lead]
+- 2026-08-05 17:52 — HIRED startup-backend-full-stack-devel (backend/full-stack developer) by HR: Critical backend skill gap blocking progress on backend modules and ghost AI logic, balancing workload among builders. [onboarded under startup-tech-lead]
