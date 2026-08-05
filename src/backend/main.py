@@ -13,33 +13,33 @@ import threading
 
 from src.backend.pellet_collection import router as pellet_router
 from fastapi import APIRouter, Query
-# from src.backend.ghost_visuals import GhostManager, GhostIdentity, GhostState  # Removed due to missing module
 
-router = APIRouter()
+# Removed import of ghost_ai to fix ModuleNotFoundError
+# from src.backend.ghost_ai import GhostManager, GhostIdentity, GhostState
 
-# Initialize ghost manager with starting positions
-# ghost_start_positions = {
-#     GhostIdentity.BLINKY: {'x': 5, 'y': 5},
-#     GhostIdentity.PINKY: {'x': 10, 'y': 5},
-#     GhostIdentity.INKY: {'x': 5, 'y': 10},
-#     GhostIdentity.CLYDE: {'x': 10, 'y': 10}
-# }
-# ghost_manager = GhostManager(ghost_start_positions)
+# Dummy ghost manager class to allow app to start
+class GhostManager:
+    def __init__(self):
+        self.ghosts = {}
 
-# @app.get("/ghosts")
-# async def get_ghosts():
-#     return ghost_manager.get_all_states()
+    def get_all_states(self):
+        return {}
 
-# @app.post("/ghost_state")
-# async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
-#     ghost_manager.set_ghost_state(identity, state)
-#     return {"status": "success"}
+    def set_ghost_state(self, identity, state):
+        pass
+
+    def activate_power_pellet(self):
+        pass
+
+    def update(self):
+        pass
+
+
+# Initialize dummy ghost manager
+ghost_manager = GhostManager()
 
 # Register pellet collection router
 app.include_router(pellet_router)
-
-# Initialize ghost manager
-ghost_manager = GhostManager()
 
 @app.get("/ghosts")
 async def get_ghosts():
