@@ -6,28 +6,35 @@ Main backend FastAPI app integration for game logic including input buffer and m
 # Removed ghost_visuals import to fix ModuleNotFoundError
 # from src.backend.ghost_visuals import GhostManager, GhostState
 
-# Temporary dummy ghost manager to allow app to start
+from src.backend.ghost_ai import Ghost, GhostState, GhostIdentity
+
 class GhostManager:
     def __init__(self):
-        self.ghosts = {}
+        self.ghosts = {
+            'Blinky': Ghost('Blinky'),
+            'Pinky': Ghost('Pinky'),
+            'Inky': Ghost('Inky'),
+            'Clyde': Ghost('Clyde')
+        }
 
     def get_all_states(self):
-        return {}
+        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
 
     def set_ghost_state(self, identity, state):
-        pass
+        if identity in self.ghosts:
+            self.ghosts[identity].state = GhostState[state]
 
     def activate_power_pellet(self):
-        pass
+        for ghost in self.ghosts.values():
+            ghost.update_state(player_powered_up=True)
 
     def deactivate_power_pellet(self):
+        # Assuming this method is needed as per previous code
         pass
 
     def update(self):
-        pass
-
-# Initialize dummy ghost manager
-ghost_manager = GhostManager()
+        for ghost in self.ghosts.values():
+            ghost.update_state(player_powered_up=False)
 
 # Initialize ghost manager
 ghost_manager = GhostManager()
