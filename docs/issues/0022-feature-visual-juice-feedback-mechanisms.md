@@ -2,7 +2,7 @@
 id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
@@ -39,3 +39,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Moving card back to in-progress due to blocking bug #0056: missing src.backend.ghost_ai module causing import errors and test failures. Cannot verify until fixed.
 
 > 2026-08-05 — Reassigned to balance workload among backend developers.
+
+> 2026-08-05 — Implemented backend endpoints for score submission and retrieval with file persistence. Integrated frontend game.js with fetch calls to these endpoints for visual juice and feedback mechanisms.
