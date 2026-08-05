@@ -1,6 +1,26 @@
 // Motion interpolation feature implemented for smooth rendering
 
-import { drawGhost } from './frontend/ghostVisuals.js';
+// drawGhost was imported from './frontend/ghostVisuals.js', which was never
+// written, in a file the page loads as a classic <script> — so the import was a
+// parse error and NOTHING in this file ran. Defined locally instead.
+function drawGhost(ctx, cx, cy, state, identity) {
+    const colours = { Blinky: '#ff5555', Pinky: '#ff9ed8',
+                      Inky: '#5ad2ff', Clyde: '#ffb852' };
+    ctx.fillStyle = (state === 'FRIGHTENED') ? '#3b4cff'
+                                             : (colours[identity] || '#ff5555');
+    const r = TILE_SIZE / 2 - 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, Math.PI, 0);           // domed head
+    ctx.lineTo(cx + r, cy + r);
+    ctx.lineTo(cx - r, cy + r);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#fff';                    // eyes
+    ctx.beginPath();
+    ctx.arc(cx - r / 2.5, cy - r / 5, r / 4, 0, Math.PI * 2);
+    ctx.arc(cx + r / 2.5, cy - r / 5, r / 4, 0, Math.PI * 2);
+    ctx.fill();
+}
 
 // Added power_up state to track power pellet effect
 let power_up = false;
@@ -23,7 +43,7 @@ const STATE = {
 let gameState = STATE.PLAYING;
 let score = 0;
 let lives = 3;
-let power_up = false; // Track if player has a power-up for ghost logic
+// power_up is declared once, at the top of this file
 
 // TODO: Add fetch calls to submit and retrieve scores from backend API
 // This is required to meet the persistence criterion in BOARD_BRIEF.md
@@ -191,6 +211,36 @@ function update() {
         if (ghost.pos.x <= 0) ghost.pos.x = COLS - 2;
     });
 
+
+    // Pellets collection logic
+    pellets.forEach(p => {
+        if (p.active) {
+            if (p.x === playerPos.x && p.y === playerPos.y) {
+                p.active = false;
+                score += 10;
+            }
+        }
+    });
+
+    // Win Condition Check
+    const remainingPellets = pellets.filter(p => p.active).length;
+    if (remainingPellets === 0) {
+        activateOverlay(STATE.WON);
+    }
+
+    // Collision Detection for ghosts
+    ghosts.forEach(g => {
+        const dist = Math.hypot(playerPos.x - g.pos.x, playerPos.y - g.pos.y);
+        if (dist < 1) { // Same tile
+            if (!power_up) {
+                activateOverlay(STATE.LOST);
+            } else {
+                power_up = false;
+            }
+        }
+    });
+
+    lastUpdateTime = performance.now();
     // Draw game elements
     draw();
 }
@@ -237,36 +287,6 @@ function draw() {
     document.getElementById('scoreLabel').textContent = score;
 }
 
-    // Pellets collection logic
-    pellets.forEach(p => {
-        if (p.active) {
-            if (p.x === playerPos.x && p.y === playerPos.y) {
-                p.active = false;
-                score += 10;
-            }
-        }
-    });
-
-    // Win Condition Check
-    const remainingPellets = pellets.filter(p => p.active).length;
-    if (remainingPellets === 0) {
-        activateOverlay(STATE.WON);
-    }
-
-    // Collision Detection for ghosts
-    ghosts.forEach(g => {
-        const dist = Math.hypot(playerPos.x - g.pos.x, playerPos.y - g.pos.y);
-        if (dist < 1) { // Same tile
-            if (!power_up) {
-                activateOverlay(STATE.LOST);
-            } else {
-                power_up = false;
-            }
-        }
-    });
-
-    lastUpdateTime = performance.now();
-}
 
 function draw() {
     const now = performance.now();

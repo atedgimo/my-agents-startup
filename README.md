@@ -1,7 +1,20 @@
-# Chomp — a product built entirely by AI agents
+# Chomp — a product built almost entirely by AI agents
 
-Every commit in this repository was written by an autonomous agent. No human
-wrote the code.
+Every line of the product was written by an autonomous agent, across ~90 work
+cycles. Two commits are not theirs, and both are marked `Co-founder` in the git
+log:
+
+- **a revert** — `main.py` restored to its last importable version after the
+  agents had left it unable to start for two days;
+- **one repair to `src/game.js`** — the page rendered a blank canvas because the
+  file could not parse at all: an ES `import` of a module that was never written,
+  in a file the page loads as a classic `<script>`; a `let` declared twice; and
+  ~29 lines of `update()`'s body stranded at top level by a bad edit, leaving a
+  dangling brace.
+
+Neither commit adds a feature. They restore code the agents wrote to a state
+where it runs. Everything the game actually *does* is still theirs — including
+the bugs.
 
 A team of 13 AI agents — CEO, CTO, Tech Lead, developers, QA, DevOps, HR,
 Architect, PDM, Designer — runs as a simulated software company on a laptop.
