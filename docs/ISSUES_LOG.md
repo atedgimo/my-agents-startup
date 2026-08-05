@@ -1148,3 +1148,15 @@ Accept: "pytest tests/acceptance/test_ghost_ai.py"
 
 ---
 
+## Create ghost_ai.py module to fix import error
+
+**Labels:** bug
+
+Create the src/backend/ghost_ai.py module with ghost logic to fix the ModuleNotFoundError in main.py.
+
+This module must define GhostState enum and Ghost class with visual_identifier and state update methods as used in main.py.
+
+This card serves to unblock the import error preventing backend startup.
+
+---
+
