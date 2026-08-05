@@ -2,12 +2,12 @@
 id: "0066"
 title: "Finalize ghost AI behaviors and visuals"
 type: "feature"
-status: "backlog"
-assignee: "senior-dev"
+status: "todo"
+assignee: "startup-senior-dev"
 labels: "feature,ai"
 due: "2024-06-10"
 created: "2026-08-04"
-updated: "2026-08-04"
+updated: "2026-08-05"
 objective: "Finalize ghost AI behaviors and visuals"
 accept: "pytest tests/acceptance/test_ghost_ai.py"
 ---
@@ -15,3 +15,5 @@ accept: "pytest tests/acceptance/test_ghost_ai.py"
 Develop and polish ghost AI behaviors and their visual representations to improve gameplay dynamics and visual clarity.
 
 > 2026-08-04 — Focus on finalizing ghost AI behaviors and visuals as the key next step for the company this cycle, aligned with our OKRs and board priorities.
+
+> 2026-08-05 — This card is overdue and depends on fixing the missing src.backend.ghost_ai module. Created a new bug card #0093 to address this. Prioritize fixing that bug first.
