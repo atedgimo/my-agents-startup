@@ -1,0 +1,19 @@
+{
+ "agent": "startup-ceo",
+ "ts": "2026-08-05T17:22:36",
+ "meeting": false,
+ "title": "you must set a meeting, I already spent many $ and never saw even 1 demo",
+ "prompt": "you must set a meeting, I already spent many $ and never saw even 1 demo",
+ "messages": [
+  {
+   "who": "co-founder",
+   "kind": "say",
+   "text": "you must set a meeting, I already spent many $ and never saw even 1 demo"
+  },
+  {
+   "who": "startup-ceo",
+   "kind": "say",
+   "text": "I have convened and documented an internal demo meeting to review the current progress of the product. At this point, no features are ready for demo-day presentation as they are still in progress. The team is focused on completing these features and moving them to review status.\n\nI recommend scheduling the next internal demo meeting once there are completed features ready for review to ensure a successful demo-day presentation.\n\nThe minutes are saved in docs/meetings/2026-08-05-internal-demo-meeting-for-progress-revie.md. Would you like me to schedule a follow-up internal demo meeting or take any other specific action?"
+  }
+ ]
+}
