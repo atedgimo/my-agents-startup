@@ -1,4 +1,4 @@
-"""Tile-based collision logic for Pac-Man game."""
+"""Tile-based collision logic for Pac-Man game with boundary enforcement."""
 
 from typing import List, Tuple
 
