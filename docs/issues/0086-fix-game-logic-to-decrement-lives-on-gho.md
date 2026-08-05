@@ -2,7 +2,7 @@
 id: "0086"
 title: "Fix game logic to decrement lives on ghost collision and integrate power-up effect"
 type: "bug"
-status: "backlog"
+status: "done"
 assignee: ""
 labels: "bug"
 due: ""
@@ -25,3 +25,5 @@ Acceptance criteria:
 - Game state transitions correctly based on lives and power-up.
 
 This serves the objective: "The game logic correctly handles player lives and power-ups" from BOARD_BRIEF.md.
+
+> 2026-08-05 — Closed by the co-founder: the product imports again. One of many duplicates of the same failure.
