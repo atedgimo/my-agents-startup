@@ -1537,3 +1537,13 @@ Assign backlog cards such as #0078, #0079, #0080, #0081, #0094, and #0095 for ba
 
 ---
 
+## Critical: Implement missing ghost_ai and ghost_visuals modules to fix import errors
+
+**Labels:** bug
+
+**Due:** 2026-08-10
+
+Fix the missing src.backend.ghost_ai and src.backend.ghost_visuals modules causing import errors and blocking backend and senior dev work on ghost AI and visuals. This is a company priority bug fix.
+
+---
+
