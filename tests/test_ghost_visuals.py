@@ -1,4 +1,17 @@
 import pytest
+import time
+
+# Patch time.sleep to speed up tests
+import builtins
+original_sleep = time.sleep
+time.sleep = lambda x: None
+
+import atexit
+atexit.register(lambda: setattr(time, 'sleep', original_sleep))
+
+import pytest
+from src.backend.ghost_visuals import GhostManager, GhostState
+
 from src.backend.ghost_visuals import GhostManager, GhostState
 
 
