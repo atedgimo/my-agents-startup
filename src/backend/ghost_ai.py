@@ -82,7 +82,7 @@ class GhostManager:
             self.power_pellet_active = False
             for ghost in self.ghosts.values():
                 # Revert to original state if stored
-                if hasattr(ghost, 'original_state') and ghost.original_state:
+                if hasattr(ghost, 'original_state') and ghost.original_state is not None:
                     ghost.state = ghost.original_state
                 else:
                     ghost.state = GhostState.CHASE
