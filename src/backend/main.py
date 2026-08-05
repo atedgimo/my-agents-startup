@@ -27,21 +27,30 @@ app.add_middleware(
 
 @app.get("/ghosts")
 async def get_ghosts():
-    return ghost_manager.get_ghost_visuals()
+    return ghost_manager.get_all_states()
 
 @app.post("/ghost_state")
 async def set_ghost_state(identity: str = Query(...), state: str = Query(...)):
-    ghost_manager.set_ghost_state(identity, state)
+    try:
+        state_enum = GhostState[state.upper()]
+    except KeyError:
+        return {"error": "Invalid ghost state"}
+    ghost_manager.set_ghost_state(identity, state_enum)
     return {"status": "success"}
 
 @app.post("/activate_power_pellet")
 async def activate_power_pellet():
-    ghost_manager.update_ghosts(power_up_active=True)
+    ghost_manager.activate_power_pellet()
     return {"status": "power pellet activated"}
+
+@app.post("/deactivate_power_pellet")
+async def deactivate_power_pellet():
+    ghost_manager.deactivate_power_pellet()
+    return {"status": "power pellet deactivated"}
 
 @app.post("/update_ghosts")
 async def update_ghosts():
-    ghost_manager.update_ghosts(power_up_active=False)
+    ghost_manager.update()
     return {"status": "ghosts updated"}
 
 # Other existing backend code continues here...
