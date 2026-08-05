@@ -120,3 +120,9 @@ class GhostManager:
             for ghost in self.ghosts.values():
                 ghost.state = GhostState.CHASE
 
+    def is_edible(self, ghost_name):
+        ghost = self.ghosts.get(ghost_name)
+        if ghost:
+            return ghost.state == GhostState.FLEE
+        return False
+
