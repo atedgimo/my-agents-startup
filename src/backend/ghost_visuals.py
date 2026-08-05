@@ -1,26 +1,23 @@
 from enum import Enum, auto
 
-class GhostIdentity(Enum):
-    BLINKY = auto()
-    PINKY = auto()
-    INKY = auto()
-    CLYDE = auto()
-
 class GhostState(Enum):
-    CHASING = auto()
-    SCATTERING = auto()
+    CHASE = auto()
+    SCATTER = auto()
     FRIGHTENED = auto()
 
 class GhostManager:
     def __init__(self):
-        self.ghosts = {identity: GhostState.SCATTERING for identity in GhostIdentity}
+        self.ghosts = {}
 
-    def set_state(self, ghost_identity, state):
-        if ghost_identity in self.ghosts:
-            self.ghosts[ghost_identity] = state
+    def add_ghost(self, ghost_id, initial_state=GhostState.SCATTER):
+        self.ghosts[ghost_id] = initial_state
 
-    def get_state(self, ghost_identity):
-        return self.ghosts.get(ghost_identity, None)
+    def set_state(self, ghost_id, state):
+        if ghost_id in self.ghosts:
+            self.ghosts[ghost_id] = state
 
-    def all_states(self):
+    def get_state(self, ghost_id):
+        return self.ghosts.get(ghost_id, None)
+
+    def get_all_states(self):
         return self.ghosts.copy()
