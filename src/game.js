@@ -128,6 +128,41 @@ function dismissOverlay() {
 
 // Reset game state
 function resetGame() {
+  // Reset power_up state
+  power_up = false;
+
+  // Existing reset logic here (not shown in snippet)
+}
+
+// Function to draw the maze on the canvas
+function drawMaze(ctx, maze) {
+  const tileSize = TILE_SIZE; // Use the global tile size
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, maze[0].length * tileSize, maze.length * tileSize);
+
+  for (let row = 0; row < maze.length; row++) {
+    for (let col = 0; col < maze[row].length; col++) {
+      if (maze[row][col] === 1) { // Wall
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(col * tileSize, row * tileSize, tileSize, tileSize);
+      }
+    }
+  }
+}
+
+// Function to draw pellets on the canvas
+function drawPellets(ctx, pellets) {
+  const tileSize = TILE_SIZE;
+  ctx.fillStyle = 'white';
+  pellets.forEach(pellet => {
+    ctx.beginPath();
+    ctx.arc(pellet.x * tileSize + tileSize / 2, pellet.y * tileSize + tileSize / 2, 4, 0, 2 * Math.PI);
+    ctx.fill();
+  });
+}
+
+// Export functions for use in the main game loop
+export { drawMaze, drawPellets };
     score = 0;
     lives = 3;
     power_up = false;
