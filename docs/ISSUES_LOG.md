@@ -1477,3 +1477,20 @@ The existing tests in tests/test_ghost_visuals.py require a GhostManager class t
 
 ---
 
+## Bug: Missing module src.backend.ghost_visuals breaks ghost visuals tests
+
+**Labels:** bug
+
+The test suite fails to run tests/test_ghost_visuals.py due to a ModuleNotFoundError: No module named 'src.backend.ghost_visuals'. This prevents running the ghost visuals tests and blocks verification of related functionality.
+
+Reproduction:
+1. Run pytest on the tests folder.
+2. Observe the error about missing module src.backend.ghost_visuals.
+
+Actual: ImportError and test collection failure.
+Expected: Tests run without import errors.
+
+This is a regression blocking the quality gate for release.
+
+---
+
