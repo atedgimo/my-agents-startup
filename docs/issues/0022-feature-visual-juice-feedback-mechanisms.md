@@ -9,6 +9,7 @@ due: "2026-08-15"
 created: "2026-08-02"
 updated: "2026-08-05"
 started: "2026-08-03T03:28:00"
+accept: "pytest tests/acceptance/test_visual_juice.py"
 ---
 
 ### Value Case
@@ -41,3 +42,5 @@ Due date: 2026-08-15
 > 2026-08-05 — Reassigned to balance workload among backend developers.
 
 > 2026-08-05 — Implemented backend endpoints for score submission and retrieval with file persistence. Integrated frontend game.js with fetch calls to these endpoints for visual juice and feedback mechanisms.
+
+**2026-08-05 19:46** — acceptance repaired: `pytest tests/acceptance/test_visual_juice.py` — Add acceptance check using pytest to verify visual juice animations and feedback messages
