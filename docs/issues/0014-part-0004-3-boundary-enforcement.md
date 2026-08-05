@@ -2,12 +2,12 @@
 id: "0014"
 title: "[part] #0004.3 Boundary Enforcement"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: ""
 due: "2026-08-14"
 created: "2026-08-02"
-updated: "2026-08-04"
+updated: "2026-08-05"
 started: "2026-08-04T19:46:23"
 ---
 
@@ -18,3 +18,5 @@ Acceptance Criteria:
 Size: S
 
 > 2026-08-04 — Starting implementation of card #0014 Boundary Enforcement.
+
+> 2026-08-05 — Implemented boundary enforcement in collision.py. The CollisionDetector class now treats out-of-bounds as walls and provides methods to check movement validity and detect collisions with walls, pellets, power pellets, and ghosts.
