@@ -2,7 +2,7 @@
 id: "0021"
 title: "Feature: Ghost Identity & State Visuals"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
@@ -56,3 +56,5 @@ Due date: 2026-08-15
 > 2026-08-05 — Blocked on uncommitted local changes in docs/cofounder/inbox.jsonl preventing branch switch to card/0021 for editing src/game.js to integrate ghost visuals module.
 
 > 2026-08-05 — Implemented Ghost Identity & State Visuals UI component and integrated it into the main index.html. It fetches ghost states from the backend and displays them with color and state info, updated every second.
+
+> 2026-08-05 — Blocked from switching to card branch due to uncommitted changes in docs/FREEZE_LOG.md and docs/cofounder/inbox.jsonl. Cannot verify or fix the card currently.
