@@ -2,7 +2,7 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "todo"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -71,3 +71,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-05 — The existing tests in tests/test_ghost_visuals.py require the implementation of GhostManager and GhostState logic, which is missing or inconsistent in ghost_ai.py. Created a new feature card #0094 to implement this properly. Moving #0050 back to todo for now.
 
 > 2026-08-05 — Fixed Ghost class implementation and added tests for ghost state logic. However, existing tests require a GhostManager implementation missing in ghost_ai.py. Created new card #0094 for GhostManager implementation. Moving this bug back to todo pending that work.
+
+> 2026-08-05 — Bug #0050 requires implementing the missing src.backend.ghost_visuals module with GhostManager and GhostState to pass tests. Created new card #0097 for this work and assigned to senior dev.
