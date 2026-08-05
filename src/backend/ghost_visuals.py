@@ -1,7 +1,4 @@
-from enum import Enum, auto
-import time
-
-class GhostState(Enum):
+class GhostState:
     CHASE = 'chase'
     AMBUSH = 'ambush'
     PATROL = 'patrol'
@@ -13,6 +10,7 @@ class Ghost:
     def __init__(self, identity, initial_state):
         self.identity = identity
         self.state = initial_state
+        self.original_state = initial_state
         self.edible_until = None
 
     def set_state(self, state):
@@ -33,9 +31,10 @@ class Ghost:
     def update(self):
         if self.edible_until and time.time() > self.edible_until:
             self.edible_until = None
-            # revert to original state when edible ends
             if self.state == GhostState.FLEE:
                 self.state = self.original_state
+
+import time
 
 class GhostManager:
     def __init__(self):
