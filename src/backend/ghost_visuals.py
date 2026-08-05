@@ -29,4 +29,3 @@ class GhostManager:
     def update(self):
         # Placeholder for ghost state update logic
         pass
-
