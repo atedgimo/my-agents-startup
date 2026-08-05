@@ -1,4 +1,3 @@
-def test_ghost_ai_behaviors_exist():
-    # This test will be expanded to verify ghost AI behaviors
-    # For now, it passes to satisfy acceptance criteria
+def test_ghost_ai_behaviors():
+    # Placeholder test for ghost AI behaviors
     assert True
