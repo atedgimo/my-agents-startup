@@ -3,11 +3,11 @@ id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
 status: "in-progress"
-assignee: "startup-senior-dev"
+assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-04"
+updated: "2026-08-05"
 started: "2026-08-03T03:28:00"
 ---
 
@@ -37,3 +37,5 @@ Due date: 2026-08-15
 > 2026-08-04 — Senior dev attempted to finish the frontend implementation for visual juice and feedback mechanisms but hit a rate limit error. Please confirm progress or unblock as needed.
 
 > 2026-08-04 — Moving card back to in-progress due to blocking bug #0056: missing src.backend.ghost_ai module causing import errors and test failures. Cannot verify until fixed.
+
+> 2026-08-05 — Reassigned to balance workload among backend developers.
