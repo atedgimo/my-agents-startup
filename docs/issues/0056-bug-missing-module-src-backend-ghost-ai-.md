@@ -2,7 +2,7 @@
 id: "0056"
 title: "Bug: Missing module src.backend.ghost_ai causing test import errors"
 type: "bug"
-status: "in-progress"
+status: "todo"
 assignee: ""
 labels: "bug"
 due: ""
@@ -32,3 +32,5 @@ This issue blocks QA verification of features dependent on these modules and the
 Please fix or provide the missing module or adjust imports to unblock testing.
 
 > 2026-08-05 — Added __init__.py to tests directory to make it a package and fix import errors in pytest. Moving back to in-progress for retesting.
+
+> 2026-08-05 — Moved back to todo due to blocking issue #0083: missing import line for GhostIdentity in main.py prevents fixing import error.
