@@ -2,7 +2,7 @@
 id: "0074"
 title: "Create ghost_ai.py module to fix import error"
 type: "bug"
-status: "todo"
+status: "done"
 assignee: ""
 labels: "bug"
 due: ""
@@ -19,3 +19,5 @@ This module must define GhostState enum and Ghost class with visual_identifier a
 This card serves to unblock the import error preventing backend startup.
 
 > 2026-08-05 — Card created to fix ghost_ai.py missing module import error blocking backend startup. Ready to be picked up.
+
+> 2026-08-05 — Closed by the co-founder: main.py was restored to its last importable version and the product now imports. This bug was one of 19 duplicates of the same failure.
