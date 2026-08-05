@@ -2,7 +2,7 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "in-progress"
+status: "todo"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
@@ -77,3 +77,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-05 — Fixed import in test_ghost_visuals.py to import from ghost_ai instead of ghost_visuals.
 
 > 2026-08-05 — The tests fail due to a missing GhostVisual enum in src/backend/ghost_ai.py. A new bug card #0098 has been created to add this enum and fix the tests. We will address that next.
+
+> 2026-08-05 — Fixed syntax error in tests/test_ghost_visuals.py import statement that caused ImportError: incomplete import statement. The file now imports correctly and is ready for re-testing.
