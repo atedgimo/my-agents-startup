@@ -75,3 +75,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-05 — Bug #0050 requires implementing the missing src.backend.ghost_visuals module with GhostManager and GhostState to pass tests. Created new card #0097 for this work and assigned to senior dev.
 
 > 2026-08-05 — Fixed import in test_ghost_visuals.py to import from ghost_ai instead of ghost_visuals.
+
+> 2026-08-05 — The tests fail due to a missing GhostVisual enum in src/backend/ghost_ai.py. A new bug card #0098 has been created to add this enum and fix the tests. We will address that next.
