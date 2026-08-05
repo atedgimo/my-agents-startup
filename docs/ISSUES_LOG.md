@@ -1114,3 +1114,20 @@ The updated OKRs prioritize completing the UI state overlays for Game Over and L
 
 ---
 
+## Complete UI state overlays for Game Over and Level Up
+
+**Labels:** feature
+
+**Due:** 2024-07-05
+
+Implement and finalize the UI state overlays for Game Over and Level Up screens. This is essential to provide persistent feedback to players and support the playable core loop.
+
+- Design and implement Game Over overlay
+- Design and implement Level Up overlay
+- Ensure overlays integrate smoothly with game flow
+
+Objective: "playable core loop and persistent feedback"
+Accept: "pytest tests/acceptance/test_ui_overlays.py"
+
+---
+
