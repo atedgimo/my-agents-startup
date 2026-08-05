@@ -37,7 +37,7 @@ def test_ghost_visual_state_logic():
 
 
 # Retain existing tests below
-from src.backend.ghost_ai import GhostManager, GhostState
+from ghost_ai import GhostManager, GhostState
 
 class GhostIdentity:
     BLINKY = 'Blinky'
