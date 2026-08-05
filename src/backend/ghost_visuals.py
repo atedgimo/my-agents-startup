@@ -5,20 +5,28 @@ class GhostState(Enum):
     SCATTER = 'scatter'
     FRIGHTENED = 'frightened'
 
+class GhostIdentity(Enum):
+    BLINKY = 'blinky'
+    PINKY = 'pinky'
+    INKY = 'inky'
+    CLYDE = 'clyde'
+
 class GhostManager:
     def __init__(self):
-        self.ghosts = {}
+        self.ghosts = {identity: GhostState.SCATTER for identity in GhostIdentity}
 
-    def add_ghost(self, ghost_id, state=GhostState.SCATTER):
-        self.ghosts[ghost_id] = state
+    def get_all_states(self):
+        return {ghost.value: state.value for ghost, state in self.ghosts.items()}
 
-    def get_state(self, ghost_id):
-        return self.ghosts.get(ghost_id, None)
+    def set_ghost_state(self, identity, state):
+        if identity in self.ghosts:
+            self.ghosts[identity] = state
 
-    def set_state(self, ghost_id, state):
-        if ghost_id in self.ghosts:
-            self.ghosts[ghost_id] = state
+    def activate_power_pellet(self):
+        for ghost in self.ghosts:
+            self.ghosts[ghost] = GhostState.FRIGHTENED
 
-    def all_ghosts(self):
-        return self.ghosts.items()
+    def update(self):
+        # Placeholder for ghost state update logic
+        pass
 
