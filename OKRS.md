@@ -10,16 +10,13 @@
 - Key Result 2.1: High scores persisted in a backend database accessible via API. (In Progress)
 - Key Result 2.2: Clear UI states for "Game Over" and "Level Up" (prioritized next). (In Progress)
 
-## Objective 4: Enhance ghost AI and UI overlays collaboration and clarity.
-- Key Result 4.1: Team instructions updated to clarify roles and collaboration between UI and backend teams on overlays and ghost AI. (Done)
-- Key Result 4.2: Updated OKRs communicated to UI and Senior Dev teams with clear priorities. (Done)
-- Key Result 2.1: High scores persisted in a backend database accessible via API. (In Progress)
-- Key Result 2.2: Clear UI states for "Game Over" and "Level Up" (prioritized next). (Not Started)
-
 ## Objective 3: Ensure stability and quality of core systems.
 - Key Result 3.1: 0 critical bugs in collision detection or scoring logic. (In Progress, some overdue bugs)
 - Key Result 3.2: Successful internal demo meeting before requesting a co-founder review. (Not Started)
 
+## Objective 4: Enhance ghost AI and UI overlays collaboration and clarity.
+- Key Result 4.1: Team instructions updated to clarify roles and collaboration between UI and backend teams on overlays and ghost AI. (Done)
+- Key Result 4.2: Updated OKRs communicated to UI and Senior Dev teams with clear priorities. (Done)
 
 # Prioritized next step for current cycle
 - Complete UI state overlays for Game Over and Level Up.
