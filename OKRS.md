@@ -8,6 +8,12 @@
 
 ## Objective 2: Provide persistent feedback for the player.
 - Key Result 2.1: High scores persisted in a backend database accessible via API. (In Progress)
+- Key Result 2.2: Clear UI states for "Game Over" and "Level Up" (prioritized next). (In Progress)
+
+## Objective 4: Enhance ghost AI and UI overlays collaboration and clarity.
+- Key Result 4.1: Team instructions updated to clarify roles and collaboration between UI and backend teams on overlays and ghost AI. (Done)
+- Key Result 4.2: Updated OKRs communicated to UI and Senior Dev teams with clear priorities. (Done)
+- Key Result 2.1: High scores persisted in a backend database accessible via API. (In Progress)
 - Key Result 2.2: Clear UI states for "Game Over" and "Level Up" (prioritized next). (Not Started)
 
 ## Objective 3: Ensure stability and quality of core systems.
