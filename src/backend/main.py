@@ -12,8 +12,8 @@ import json
 import threading
 
 from src.backend.pellet_collection import router as pellet_router
-from src.backend.input_buffer import InputBuffer
-from src.backend.ghost_ai import GhostManager, GhostState
+from .input_buffer import InputBuffer
+from .ghost_ai import GhostManager, GhostState
 
 # Removed broken import of src.backend.api which does not exist
 # This fixes the ModuleNotFoundError blocking the product start
