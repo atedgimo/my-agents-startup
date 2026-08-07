@@ -2,7 +2,7 @@
 id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
-status: "review"
+status: "done"
 assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
@@ -48,3 +48,5 @@ Due date: 2026-08-15
 > 2026-08-07 — Acceptance test file tests/acceptance/test_visual_juice.py is missing, causing acceptance check failure. Moving card back to in-progress.
 
 > 2026-08-07 — Implemented backend support for ghost visual states and feedback mechanisms including API endpoints for ghost states and power pellet activation/deactivation. Added tests to verify ghost state transitions and API responses.
+
+> 2026-08-07 — Acceptance test for Visual Juice & Feedback Mechanisms passed successfully.
