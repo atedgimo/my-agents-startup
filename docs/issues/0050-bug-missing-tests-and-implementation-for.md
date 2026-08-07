@@ -2,12 +2,12 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "todo"
+status: "in-progress"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
 created: "2026-08-03"
-updated: "2026-08-05"
+updated: "2026-08-07"
 started: "2026-08-03T16:20:33"
 objective: "Four ghosts with distinct behaviours (chase, ambush, patrol, random), and power-pellets that make them flee and edible for a limited time."
 accept: "pytest -q tests/test_ghost_visuals.py"
@@ -81,3 +81,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-05 — Fixed syntax error in tests/test_ghost_visuals.py import statement that caused ImportError: incomplete import statement. The file now imports correctly and is ready for re-testing.
 
 > 2026-08-05 — Please re-run the tests for ghost visual identifiers and state logic after the import fix. Complete the implementation and commit the changes. The import error in tests/test_ghost_visuals.py is fixed now.
+
+> 2026-08-07 — Starting work on implementing and testing ghost visual identifiers and state logic.
