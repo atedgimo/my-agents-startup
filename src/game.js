@@ -104,6 +104,54 @@ fetchHighScores();
 //     submitScore(score);
 // }
 
+// Maze data: 0 = empty, 1 = wall
+const mazeData = Array(ROWS).fill(0).map(() => Array(COLS).fill(0));
+// Example maze walls (simple border)
+for (let i = 0; i < ROWS; i++) {
+    mazeData[i][0] = 1;
+    mazeData[i][COLS-1] = 1;
+}
+for (let j = 0; j < COLS; j++) {
+    mazeData[0][j] = 1;
+    mazeData[ROWS-1][j] = 1;
+}
+
+// Pellets array
+let pellets = [];
+// Initialize pellets in empty spaces
+for (let y = 1; y < ROWS-1; y++) {
+    for (let x = 1; x < COLS-1; x++) {
+        if (mazeData[y][x] === 0) {
+            pellets.push({ x, y });
+        }
+    }
+}
+
+function draw() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw maze
+    drawMaze(ctx, mazeData, TILE_SIZE);
+
+    // Draw pellets
+    drawPellets(ctx, pellets, TILE_SIZE);
+
+    // TODO: Draw other game elements (player, ghosts, UI)
+}
+
+// Start the game loop
+function gameLoop() {
+    if (!overlayActive) {
+        update();
+        draw();
+    }
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
+
 
 // Overlay control
 let overlayActive = false;
