@@ -13,6 +13,7 @@ class Ghost:
     def __init__(self, name, initial_state):
         self.name = name
         self.state = initial_state
+        self.initial_state = initial_state
         self.edible = False
         self.edible_start_time = None
 
@@ -33,12 +34,12 @@ class Ghost:
     def make_normal(self):
         self.edible = False
         self.edible_start_time = None
+        self.state = self.initial_state
 
     def update(self):
         if self.edible and self.edible_start_time:
             if time.time() - self.edible_start_time > 10:  # edible lasts 10 seconds
                 self.make_normal()
-                self.state = self.initial_state
 
 class GhostManager:
     def __init__(self):
@@ -72,3 +73,26 @@ class GhostManager:
     def update(self):
         for ghost in self.ghosts.values():
             ghost.update()
+
+    def get_visual_identifier(self, name):
+        """Return a string representing the visual identifier of the ghost based on its state."""
+        ghost = self.ghosts.get(name)
+        if not ghost:
+            return None
+        if ghost.is_edible():
+            return "blue"  # frightened visual
+        state = ghost.get_state()
+        if state == GhostState.CHASE:
+            return "red"
+        elif state == GhostState.AMBUSH:
+            return "pink"
+        elif state == GhostState.PATROL:
+            return "cyan"
+        elif state == GhostState.RANDOM:
+            return "orange"
+        elif state == GhostState.FLEE:
+            return "blue"
+        elif state == GhostState.EATEN:
+            return "white"
+        else:
+            return "unknown"

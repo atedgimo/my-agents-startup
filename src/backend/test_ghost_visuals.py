@@ -82,3 +82,24 @@ def test_edible_timeout():
     assert states['Inky'] == GhostState.PATROL
     assert states['Clyde'] == GhostState.RANDOM
 
+
+def test_get_visual_identifier():
+    gm = GhostManager()
+    # Initial visuals
+    assert gm.get_visual_identifier('Blinky') == 'red'
+    assert gm.get_visual_identifier('Pinky') == 'pink'
+    assert gm.get_visual_identifier('Inky') == 'cyan'
+    assert gm.get_visual_identifier('Clyde') == 'orange'
+
+    # When edible
+    gm.activate_power_pellet()
+    for name in ['Blinky', 'Pinky', 'Inky', 'Clyde']:
+        assert gm.get_visual_identifier(name) == 'blue'
+
+    # When eaten
+    gm.set_ghost_state('Blinky', GhostState.EATEN)
+    assert gm.get_visual_identifier('Blinky') == 'white'
+
+    # Unknown ghost
+    assert gm.get_visual_identifier('Unknown') is None
+
