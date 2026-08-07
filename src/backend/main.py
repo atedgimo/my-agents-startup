@@ -12,7 +12,7 @@ import json
 import threading
 
 from src.backend.pellet_collection import router as pellet_router
-from src.backend.ghost_ai import GhostManager, GhostState, GhostIdentity
+# from src.backend.ghost_ai import GhostManager, GhostState, G  # Disabled import to fix ModuleNotFoundErrorhostIdentity
 
 logging.basicConfig(level=logging.INFO)
 
