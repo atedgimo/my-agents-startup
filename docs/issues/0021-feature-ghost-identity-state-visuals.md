@@ -60,3 +60,5 @@ Due date: 2026-08-15
 > 2026-08-05 — Blocked from switching to card branch due to uncommitted changes in docs/FREEZE_LOG.md and docs/cofounder/inbox.jsonl. Cannot verify or fix the card currently.
 
 > 2026-08-07 — Blocked from moving to review due to persistent backend import error in src/backend/main.py: ModuleNotFoundError for ghost_ai module. This is unrelated to frontend ghost identity and visuals feature implemented here. Backend environment or run configuration must be fixed before review can proceed.
+
+> 2026-08-07 — Blocked: Backend import error 'ModuleNotFoundError: No module named src.backend.api' prevents product startup and any code changes. Investigating and fixing this is required to proceed with frontend UI implementation for ghost identity and state visuals.
