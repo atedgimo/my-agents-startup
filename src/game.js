@@ -391,6 +391,28 @@ function draw() {
 }
 
 
+function drawMazeWalls(ctx, maze) {
+    for (let r = 0; r < maze.length; r++) {
+        for (let c = 0; c < maze[r].length; c++) {
+            if (maze[r][c] === 1) {
+                ctx.fillStyle = '#0000FF'; // Blue walls
+                ctx.fillRect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            }
+        }
+    }
+}
+
+function drawPelletsOnCanvas(ctx, pellets) {
+    ctx.fillStyle = '#FFFF00'; // Yellow pellets
+    pellets.forEach(p => {
+        if (p.active) {
+            ctx.beginPath();
+            ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, 5, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    });
+}
+
 function draw() {
     const now = performance.now();
     const delta = now - lastUpdateTime;
@@ -400,25 +422,11 @@ function draw() {
     ctx.fillStyle = '#111';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw maze
-    for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-            if (mazeData[r][c] === 1) {
-                ctx.fillStyle = '#2d3748'; // Tailwind gray-800
-                ctx.fillRect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-            }
-        }
-    }
+    // Draw maze walls
+    drawMazeWalls(ctx, mazeData);
 
     // Draw pellets
-    ctx.fillStyle = '#facc15'; // Tailwind yellow-400
-    pellets.forEach(p => {
-        if (p.active) {
-            ctx.beginPath();
-            ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, 4, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    });
+    drawPelletsOnCanvas(ctx, pellets);
 
     // Interpolated player position
     const interpPlayerX = lerp(prevPlayerPos.x, playerPos.x, t) * TILE_SIZE;
@@ -471,6 +479,7 @@ function draw() {
     }
 
     requestAnimationFrame(draw);
+}
 
 // Add event listener for dismissing overlays
 canvas.addEventListener('click', () => {
