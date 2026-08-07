@@ -35,12 +35,12 @@ router = APIRouter()
 #     ghost_manager.set_ghost_state(identity, state)
 #     return {"status": "success"}
 
+app = FastAPI()
+
 # Register pellet collection router
 app.include_router(pellet_router)
 
 logging.basicConfig(level=logging.INFO)
-
-app = FastAPI()
 
 # Allow the browser frontend to call this API
 # allow_credentials=True together with allow_origins=["*"] is the classic CORS
