@@ -1,2 +1,8 @@
-fastapi
+# Pinned by the co-founder, 2026-08-07. The QA sandbox runs Python 3.13, and
+# pydantic 1.x cannot import there at all (ForwardRef._evaluate signature) —
+# five agents spent ~$1.30 "fixing imports" against that wall, because no code
+# change can repair an environment. fastapi must move with pydantic: the old
+# fastapi imports pydantic.fields.Undefined, which v2 removed.
+fastapi>=0.110
 uvicorn
+pydantic>=2,<3
