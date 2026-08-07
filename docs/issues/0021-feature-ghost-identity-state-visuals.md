@@ -2,12 +2,12 @@
 id: "0021"
 title: "Feature: Ghost Identity & State Visuals"
 type: "feature"
-status: "in-progress"
+status: "todo"
 assignee: "startup-ui-dev"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-05"
+updated: "2026-08-07"
 started: "2026-08-03T03:24:41"
 ---
 
@@ -58,3 +58,5 @@ Due date: 2026-08-15
 > 2026-08-05 — Implemented Ghost Identity & State Visuals UI component and integrated it into the main index.html. It fetches ghost states from the backend and displays them with color and state info, updated every second.
 
 > 2026-08-05 — Blocked from switching to card branch due to uncommitted changes in docs/FREEZE_LOG.md and docs/cofounder/inbox.jsonl. Cannot verify or fix the card currently.
+
+> 2026-08-07 — Blocked from moving to review due to persistent backend import error in src/backend/main.py: ModuleNotFoundError for ghost_ai module. This is unrelated to frontend ghost identity and visuals feature implemented here. Backend environment or run configuration must be fixed before review can proceed.
