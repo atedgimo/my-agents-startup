@@ -20,6 +20,41 @@ class GhostIdentity:
 class Ghost:
     def __init__(self, name):
         self.name = name
+        self.state = GhostState.CHASE
+        self.original_state = self.state
+        self.edible_until = 0
+
+    def update_state(self, player_powered_up: bool):
+        current_time = time.time()
+        if player_powered_up:
+            self.original_state = self.state
+            self.state = GhostState.FLEE
+            self.edible_until = current_time + 10
+        else:
+            if current_time > self.edible_until:
+                self.state = self.original_state
+
+    def visual_identifier(self):
+        return self.state.value
+
+    def is_edible(self) -> bool:
+        return self.state == GhostState.FLEE
+
+    def __repr__(self):
+        return f"<Ghost name={self.name} state={self.state.value}>"
+
+    def activate(self):
+        self.state = GhostState.CHASE
+        self.original_state = self.state
+
+    def sleep(self):
+        self.state = GhostState.FRIGHTENED
+
+    def is_active(self) -> bool:
+        return self.state == GhostState.CHASE
+
+    def __init__(self, name):
+        self.name = name
         self.state = GhostState.IDLE
         self.original_state = self.state
 
