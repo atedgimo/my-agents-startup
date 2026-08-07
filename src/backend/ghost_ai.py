@@ -16,6 +16,11 @@ class GhostVisual(Enum):
     PINKY = 'pink'
     INKY = 'cyan'
     CLYDE = 'orange'
+    FRIGHTENED = 'blue'
+    EYES_UP = 'eyes_up'
+    EYES_DOWN = 'eyes_down'
+    EYES_LEFT = 'eyes_left'
+    EYES_RIGHT = 'eyes_right'
 
 class GhostIdentity:
     BLINKY = 'Blinky'
@@ -29,6 +34,9 @@ class Ghost:
         self.state = GhostState.IDLE
         self.original_state = self.state
         self.visual = GhostVisual[name.upper()]
+
+    def visual_identifier(self):
+        return self.visual
 
     def activate(self):
         self.state = GhostState.CHASE
