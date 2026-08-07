@@ -23,6 +23,14 @@ let power_up = false; // Track if player has a power-up for ghost logic
 // Overlay control
 let overlayActive = false;
 
+// Visual juice state
+let visualJuice = {
+    pelletCollected: false,
+    powerPelletActive: false,
+    ghostHit: false,
+    ghostEaten: false,
+};
+
 // Function to activate overlay and pause game logic
 function activateOverlay(state) {
     gameState = state;
@@ -47,6 +55,12 @@ function resetGame() {
     score = 0;
     lives = 3;
     power_up = false;
+    visualJuice = {
+        pelletCollected: false,
+        powerPelletActive: false,
+        ghostHit: false,
+        ghostEaten: false,
+    };
     playerPos = { x: 5, y: 5 };
     ghosts.forEach(g => g.pos = { x: 10, y: 10 });
     pellets.forEach(p => p.active = true);
@@ -132,6 +146,8 @@ function update() {
             if (p.x === playerPos.x && p.y === playerPos.y) {
                 p.active = false;
                 score += 10;
+                visualJuice.pelletCollected = true;
+                // Trigger pellet collection animation or effect here
             }
         }
     });
@@ -148,8 +164,12 @@ function update() {
         if (dist < 1) { // Same tile
             if (!power_up) {
                 activateOverlay(STATE.LOST);
+                visualJuice.ghostHit = true;
+                // Trigger ghost hit animation or effect here
             } else {
                 power_up = false;
+                visualJuice.ghostEaten = true;
+                // Trigger ghost eaten animation or effect here
             }
         }
     });
@@ -211,6 +231,32 @@ function draw() {
     ctx.font = '16px Arial';
     ctx.fillText(`Score: ${score}`, 10, 20);
 
+    // Visual juice effects
+    if (visualJuice.pelletCollected) {
+        // Example: briefly flash the score text
+        ctx.fillStyle = '#34d399'; // Tailwind green-400
+        ctx.font = 'bold 18px Arial';
+        ctx.fillText(`+10!`, 60, 20);
+        // Reset after drawing
+        visualJuice.pelletCollected = false;
+    }
+
+    if (visualJuice.ghostHit) {
+        // Example: flash screen red briefly
+        ctx.fillStyle = 'rgba(220, 38, 38, 0.3)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Reset after drawing
+        visualJuice.ghostHit = false;
+    }
+
+    if (visualJuice.ghostEaten) {
+        // Example: flash screen blue briefly
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.3)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Reset after drawing
+        visualJuice.ghostEaten = false;
+    }
+
     // Draw Overlays
     if (gameState === STATE.WON) {
         // Draw Level Up overlay
@@ -237,6 +283,7 @@ function draw() {
     }
 
     requestAnimationFrame(draw);
+}
 
 // Add event listener for dismissing overlays
 canvas.addEventListener('click', () => {
@@ -244,7 +291,6 @@ canvas.addEventListener('click', () => {
         dismissOverlay();
     }
 });
-}
 
 // Game loop
 setInterval(update, LOGIC_UPDATE_INTERVAL);

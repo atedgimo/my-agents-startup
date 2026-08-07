@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 
-ghost_manager = None
+# Removed ghost_manager and ghost_ai import since ghost_ai module does not exist
 
 # Allow the browser frontend to call this API
 # allow_credentials=True together with allow_origins=["*"] is the classic CORS
@@ -131,22 +131,29 @@ async def submit_score(request: Request):
         logging.error(f"Error submitting score: {e}")
         return JSONResponse(status_code=500, content={"error": "Internal server error"})
 
+# Backend support for visual juice and feedback mechanisms
+
+# Store current ghost states and power pellet state
+ghost_states = []
+power_pellet_active = False
+
 @app.get("/ghost-states")
 async def get_ghost_states():
     """Return the current states of all ghosts."""
-    # Ghost manager not available, return empty list
-    return JSONResponse(content=[])
+    return JSONResponse(content=ghost_states)
 
 @app.post("/activate-power-pellet")
 async def activate_power_pellet():
     """Activate power pellet effects."""
-    # Ghost manager not available, no-op
+    global power_pellet_active
+    power_pellet_active = True
     return JSONResponse(content={"status": "power pellet activated"})
 
 @app.post("/deactivate-power-pellet")
 async def deactivate_power_pellet():
     """Deactivate power pellet effects."""
-    # Ghost manager not available, no-op
+    global power_pellet_active
+    power_pellet_active = False
     return JSONResponse(content={"status": "power pellet deactivated"})
 
 @app.get("/pellets")
@@ -165,6 +172,7 @@ async def collect_pellet(request: Request):
     if not position or 'x' not in position or 'y' not in position:
         return JSONResponse(status_code=400, content={"error": "Invalid position"})
     success = collect_pellet(position)
+    # Notify frontend of pellet collection success
     return JSONResponse(content={"success": success})
 
 # Serve static files
