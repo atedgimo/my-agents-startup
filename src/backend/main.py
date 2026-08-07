@@ -76,24 +76,7 @@ class Direction(str, Enum):
 # Game state placeholder
 current_position = {'x': 0, 'y': 0}
 
-class InputBuffer:
-    def __init__(self):
-        self.queue = []
-        self.current_direction = Direction.NONE
-
-    def queue_input(self, direction):
-        self.queue.append(direction)
-
-    def update_direction(self):
-        if self.queue:
-            self.current_direction = self.queue.pop(0)
-        else:
-            self.current_direction = Direction.NONE
-
-    def clear(self):
-        self.queue.clear()
-        self.current_direction = Direction.NONE
-
+from src.backend.input_buffer import InputBuffer
 
 input_buffer = InputBuffer()
 
