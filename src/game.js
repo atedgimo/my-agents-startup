@@ -1,4 +1,5 @@
 import { showGameOver, showLevelUp, hideOverlay } from './frontend/uiStateOverlays.js';
+import { drawMaze, drawPellets } from './maze_and_pellet_rendering.js';
 
 // Motion interpolation feature implemented for smooth rendering
 
