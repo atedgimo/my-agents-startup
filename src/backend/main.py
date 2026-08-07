@@ -95,6 +95,8 @@ class InputBuffer:
         self.current_direction = Direction.NONE
 
 
+input_buffer = InputBuffer()
+
 # from src.backend.boundary_enforcement import enforce_boundaries  # Temporarily commented out to avoid import error
 
 # from src.backend.boundary_enforcement import enforce_boundaries
