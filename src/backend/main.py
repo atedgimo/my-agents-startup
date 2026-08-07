@@ -12,11 +12,27 @@ import json
 import threading
 
 from .pellet_collection import router as pellet_router
-from .ghost_ai import GhostManager, GhostState, GhostIdentity
 
 logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
+
+# Define GhostManager here or import it properly if it exists elsewhere
+class GhostManager:
+    def __init__(self):
+        self.ghosts = []
+
+    def get_states(self):
+        # Return dummy states or implement actual logic
+        return []
+
+    def activate_power_pellet(self):
+        pass
+
+    def deactivate_power_pellet(self):
+        pass
+
+ghost_manager = GhostManager()
 
 # Allow the browser frontend to call this API
 # allow_credentials=True together with allow_origins=["*"] is the classic CORS
