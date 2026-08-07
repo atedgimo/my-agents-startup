@@ -1,0 +1,7 @@
+{
+ "agent": "startup-pdm",
+ "title": "Ideation session",
+ "prompt": "[MEETING] Ideation session \u2014 company week 7, day 5 (2026-08-07). FIRST call list_issues: if the backlog already holds more than 8 cards, create NOTHING new this cycle \u2014 instead improve, merge or sharpen existing cards and say so. A backlog nobody can build is waste. Then run the ideation session: read BOARD_BRIEF.md, VISION.md and the current src/, then convene the designer and architect (agent tools) around the question 'what would make this product noticeably better for its users?'. Bring at least 3 concrete ideas, argue them against the brief, keep the best one or two and file them with create_github_issue including the value case. Save the minutes.",
+ "minutes_path": "docs/meetings/2026-08-07-1605-ideation.md",
+ "queued": "2026-08-07T16:05:32"
+}
