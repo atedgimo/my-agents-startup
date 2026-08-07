@@ -2,7 +2,7 @@
 id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
-status: "done"
+status: "in-progress"
 assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
@@ -50,3 +50,5 @@ Due date: 2026-08-15
 > 2026-08-07 — Implemented backend support for ghost visual states and feedback mechanisms including API endpoints for ghost states and power pellet activation/deactivation. Added tests to verify ghost state transitions and API responses.
 
 > 2026-08-07 — Acceptance test for Visual Juice & Feedback Mechanisms passed successfully.
+
+> 2026-08-07 — Reopened by the co-founder: done now means SHIPPED, and this card closed before that rule. Its branch card/0022 no longer merges cleanly into main. Reconcile the branch with main (one edit_code call on card 0022), re-run the acceptance check, then close — this time the close merges.
