@@ -1,4 +1,5 @@
 import { showGameOver, showLevelUp, hideOverlay } from './frontend/uiStateOverlays.js';
+import { drawMaze, drawPellets } from './maze_and_pellet_rendering.js';
 
 // Motion interpolation feature implemented for smooth rendering
 
@@ -326,6 +327,54 @@ fetchHighScores();
 //     submitScore(score);
 // }
 
+// Maze data: 0 = empty, 1 = wall
+const mazeData = Array(ROWS).fill(0).map(() => Array(COLS).fill(0));
+// Example maze walls (simple border)
+for (let i = 0; i < ROWS; i++) {
+    mazeData[i][0] = 1;
+    mazeData[i][COLS-1] = 1;
+}
+for (let j = 0; j < COLS; j++) {
+    mazeData[0][j] = 1;
+    mazeData[ROWS-1][j] = 1;
+}
+
+// Pellets array
+let pellets = [];
+// Initialize pellets in empty spaces
+for (let y = 1; y < ROWS-1; y++) {
+    for (let x = 1; x < COLS-1; x++) {
+        if (mazeData[y][x] === 0) {
+            pellets.push({ x, y });
+        }
+    }
+}
+
+function draw() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw maze
+    drawMaze(ctx, mazeData, TILE_SIZE);
+
+    // Draw pellets
+    drawPellets(ctx, pellets, TILE_SIZE);
+
+    // TODO: Draw other game elements (player, ghosts, UI)
+}
+
+// Start the game loop
+function gameLoop() {
+    if (!overlayActive) {
+        update();
+        draw();
+    }
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
+
 
 // Overlay control
 let overlayActive = false;
@@ -351,6 +400,41 @@ function dismissOverlay() {
 
 // Reset game state
 function resetGame() {
+  // Reset power_up state
+  power_up = false;
+
+  // Existing reset logic here (not shown in snippet)
+}
+
+// Function to draw the maze on the canvas
+function drawMaze(ctx, maze) {
+  const tileSize = TILE_SIZE; // Use the global tile size
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, maze[0].length * tileSize, maze.length * tileSize);
+
+  for (let row = 0; row < maze.length; row++) {
+    for (let col = 0; col < maze[row].length; col++) {
+      if (maze[row][col] === 1) { // Wall
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(col * tileSize, row * tileSize, tileSize, tileSize);
+      }
+    }
+  }
+}
+
+// Function to draw pellets on the canvas
+function drawPellets(ctx, pellets) {
+  const tileSize = TILE_SIZE;
+  ctx.fillStyle = 'white';
+  pellets.forEach(pellet => {
+    ctx.beginPath();
+    ctx.arc(pellet.x * tileSize + tileSize / 2, pellet.y * tileSize + tileSize / 2, 4, 0, 2 * Math.PI);
+    ctx.fill();
+  });
+}
+
+// Export functions for use in the main game loop
+export { drawMaze, drawPellets };
     score = 0;
     lives = 3;
     power_up = false;
@@ -530,6 +614,28 @@ function draw() {
 }
 
 
+function drawMazeWalls(ctx, maze) {
+    for (let r = 0; r < maze.length; r++) {
+        for (let c = 0; c < maze[r].length; c++) {
+            if (maze[r][c] === 1) {
+                ctx.fillStyle = '#0000FF'; // Blue walls
+                ctx.fillRect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            }
+        }
+    }
+}
+
+function drawPelletsOnCanvas(ctx, pellets) {
+    ctx.fillStyle = '#FFFF00'; // Yellow pellets
+    pellets.forEach(p => {
+        if (p.active) {
+            ctx.beginPath();
+            ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, 5, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    });
+}
+
 function draw() {
     const now = performance.now();
     const delta = now - lastUpdateTime;
@@ -539,25 +645,11 @@ function draw() {
     ctx.fillStyle = '#111';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw maze
-    for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-            if (mazeData[r][c] === 1) {
-                ctx.fillStyle = '#2d3748'; // Tailwind gray-800
-                ctx.fillRect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-            }
-        }
-    }
+    // Draw maze walls
+    drawMazeWalls(ctx, mazeData);
 
     // Draw pellets
-    ctx.fillStyle = '#facc15'; // Tailwind yellow-400
-    pellets.forEach(p => {
-        if (p.active) {
-            ctx.beginPath();
-            ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, 4, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    });
+    drawPelletsOnCanvas(ctx, pellets);
 
     // Interpolated player position
     const interpPlayerX = lerp(prevPlayerPos.x, playerPos.x, t) * TILE_SIZE;
@@ -610,6 +702,7 @@ function draw() {
     }
 
     requestAnimationFrame(draw);
+}
 
 // Add event listener for dismissing overlays
 canvas.addEventListener('click', () => {
