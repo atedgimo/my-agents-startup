@@ -2,7 +2,7 @@
 id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
-status: "in-progress"
+status: "review"
 assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
@@ -46,3 +46,5 @@ Due date: 2026-08-15
 **2026-08-05 19:46** — acceptance repaired: `pytest tests/acceptance/test_visual_juice.py` — Add acceptance check using pytest to verify visual juice animations and feedback messages
 
 > 2026-08-07 — Acceptance test file tests/acceptance/test_visual_juice.py is missing, causing acceptance check failure. Moving card back to in-progress.
+
+> 2026-08-07 — Implemented backend support for ghost visual states and feedback mechanisms including API endpoints for ghost states and power pellet activation/deactivation. Added tests to verify ghost state transitions and API responses.
