@@ -124,28 +124,48 @@ async def submit_score(request: Request):
             return JSONResponse(status_code=400, content={"error": "Invalid score value"})
         with scores_lock:
             scores.append(score_value)
-            # Keep only top 10 scores descending
-            scores.sort(reverse=True)
-            scores = scores[:10]
-            # Save scores to file
-            try:
-                with open(SCORES_FILE, 'w') as f:
-                    json.dump(scores, f)
-            except Exception as e:
-                logging.error(f"Failed to save scores to {SCORES_FILE}: {e}")
+            with open(SCORES_FILE, 'w') as f:
+                json.dump(scores, f)
         return JSONResponse(status_code=200, content={"message": "Score submitted successfully"})
     except Exception as e:
-        logging.error(f"Error in submit_score: {e}")
+        logging.error(f"Error submitting score: {e}")
         return JSONResponse(status_code=500, content={"error": "Internal server error"})
 
-@app.get("/scores")
-async def get_scores():
-    """Return the top scores."""
-    with scores_lock:
-        return JSONResponse(content={"scores": scores})
+@app.get("/ghost-states")
+async def get_ghost_states():
+    """Return the current states of all ghosts."""
+    states = ghost_manager.get_states()
+    return JSONResponse(content=states)
 
-# Mount static files for frontend
+@app.post("/activate-power-pellet")
+async def activate_power_pellet():
+    """Activate power pellet effects."""
+    ghost_manager.activate_power_pellet()
+    return JSONResponse(content={"status": "power pellet activated"})
+
+@app.post("/deactivate-power-pellet")
+async def deactivate_power_pellet():
+    """Deactivate power pellet effects."""
+    ghost_manager.deactivate_power_pellet()
+    return JSONResponse(content={"status": "power pellet deactivated"})
+
+@app.get("/pellets")
+async def get_pellets():
+    """Return the current pellets on the board."""
+    from src.backend.pellet_collection import get_pellets
+    pellets = get_pellets()
+    return JSONResponse(content=pellets)
+
+@app.post("/collect_pellet")
+async def collect_pellet(request: Request):
+    """Collect a pellet at a given position."""
+    from src.backend.pellet_collection import collect_pellet
+    data = await request.json()
+    position = data.get('position')
+    if not position or 'x' not in position or 'y' not in position:
+        return JSONResponse(status_code=400, content={"error": "Invalid position"})
+    success = collect_pellet(position)
+    return JSONResponse(content={"success": success})
+
+# Serve static files
 app.mount("/static", StaticFiles(directory="src/frontend"), name="static")
-
-# TODO: Implement /ghost-states, /activate-power-pellet, /deactivate-power-pellet endpoints
-
