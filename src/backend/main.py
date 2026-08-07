@@ -29,21 +29,7 @@ router = APIRouter()
 
 input_buffer = InputBuffer()
 
-# ghost_manager = GhostManager()  # Disabled to fix import error
-
-# @app.on_event("startup")
-# async def startup_event():
-#     pass  # Placeholder for startup tasks
-
-
-# @app.get("/ghosts")
-# async def get_ghosts():
-#     return ghost_manager.get_all_states()
-
-# @app.post("/ghost_state")
-# async def set_ghost_state(identity: GhostIdentity = Query(...), state: GhostState = Query(...)):
-#     ghost_manager.set_ghost_state(identity, state)
-#     return {"status": "success"}
+ghost_manager = GhostManager()
 
 app = FastAPI()
 
@@ -72,7 +58,6 @@ class Direction(str, Enum):
     RIGHT = 'RIGHT'
     NONE = 'NONE'
 
-# Input buffer class to queue and smooth input directions
 # Game state placeholder
 current_position = {'x': 0, 'y': 0}
 
@@ -80,15 +65,8 @@ from src.backend.input_buffer import InputBuffer
 
 input_buffer = InputBuffer()
 
-# from src.backend.boundary_enforcement import enforce_boundaries  # Temporarily commented out to avoid import error
-
-# from src.backend.boundary_enforcement import enforce_boundaries
-
-
-@app.post("/enforce_boundaries")
-async def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int, desired_y: int):
+def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int, desired_y: int):
     """API endpoint to enforce boundaries on a desired position."""
-    # Implement boundary enforcement here directly
     MAZE_WIDTH = 28
     MAZE_HEIGHT = 31
 
@@ -108,14 +86,18 @@ async def api_enforce_boundaries(current_x: int, current_y: int, desired_x: int,
     return {"x": x, "y": y}
 
 
-# Maze dimensions placeholder (should be set from actual maze data)
+@app.post("/enforce_boundaries")
+async def enforce_boundaries_endpoint(current_x: int, current_y: int, desired_x: int, desired_y: int):
+    return api_enforce_boundaries(current_x, current_y, desired_x, desired_y)
+
+
 MAZE_WIDTH = 28
 MAZE_HEIGHT = 31
 
 @app.post("/move_player")
 async def move_player(new_x: int, new_y: int):
     global current_position
-    # Enforce boundary rules
+
     x = new_x
     y = new_y
 
