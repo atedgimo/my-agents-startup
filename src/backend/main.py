@@ -17,22 +17,7 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 
-# Define GhostManager here or import it properly if it exists elsewhere
-class GhostManager:
-    def __init__(self):
-        self.ghosts = []
-
-    def get_states(self):
-        # Return dummy states or implement actual logic
-        return []
-
-    def activate_power_pellet(self):
-        pass
-
-    def deactivate_power_pellet(self):
-        pass
-
-ghost_manager = GhostManager()
+ghost_manager = None
 
 # Allow the browser frontend to call this API
 # allow_credentials=True together with allow_origins=["*"] is the classic CORS
@@ -85,7 +70,6 @@ scores = []
 scores_lock = threading.Lock()
 
 input_buffer = InputBuffer()
-ghost_manager = GhostManager()
 
 @app.on_event("startup")
 async def startup_event():
@@ -150,19 +134,19 @@ async def submit_score(request: Request):
 @app.get("/ghost-states")
 async def get_ghost_states():
     """Return the current states of all ghosts."""
-    states = ghost_manager.get_states()
-    return JSONResponse(content=states)
+    # Ghost manager not available, return empty list
+    return JSONResponse(content=[])
 
 @app.post("/activate-power-pellet")
 async def activate_power_pellet():
     """Activate power pellet effects."""
-    ghost_manager.activate_power_pellet()
+    # Ghost manager not available, no-op
     return JSONResponse(content={"status": "power pellet activated"})
 
 @app.post("/deactivate-power-pellet")
 async def deactivate_power_pellet():
     """Deactivate power pellet effects."""
-    ghost_manager.deactivate_power_pellet()
+    # Ghost manager not available, no-op
     return JSONResponse(content={"status": "power pellet deactivated"})
 
 @app.get("/pellets")
