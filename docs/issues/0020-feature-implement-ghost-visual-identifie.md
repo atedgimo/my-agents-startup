@@ -2,7 +2,7 @@
 id: "0020"
 title: "Feature: Implement Ghost Visual Identifiers & State Logic"
 type: "feature"
-status: "done"
+status: "in-progress"
 assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
@@ -78,3 +78,5 @@ Due date: 2026-08-15
 > 2026-08-05 — Verified the feature 'Implement Ghost Visual Identifiers & State Logic' works as expected. The /ghosts endpoint returns the correct ghost names.
 
 **2026-08-07 18:56** — acceptance repaired: `pytest -q --tb=short tests/acceptance/test_ghost_visuals.py` — Run acceptance test for ghost visual identifiers and state logic to verify backend implementation.
+
+> 2026-08-07 — Reopened by the co-founder: done now means SHIPPED. This card closed before that rule; its branch card/0020 conflicts with main. Reconcile (one edit_code call on card 0020), re-run the check, close — the close then merges.
