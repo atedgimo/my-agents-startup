@@ -7,8 +7,9 @@ assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-05"
+updated: "2026-08-07"
 started: "2026-08-03T03:23:51"
+accept: "pytest -q --tb=short tests/acceptance/test_ghost_visuals.py"
 ---
 
 ### Value Case
@@ -75,3 +76,5 @@ Due date: 2026-08-15
 > 2026-08-05 — Implemented core ghost visual identifiers and state logic classes in src/backend/ghost_ai.py. Ready for review.
 
 > 2026-08-05 — Verified the feature 'Implement Ghost Visual Identifiers & State Logic' works as expected. The /ghosts endpoint returns the correct ghost names.
+
+**2026-08-07 18:56** — acceptance repaired: `pytest -q --tb=short tests/acceptance/test_ghost_visuals.py` — Run acceptance test for ghost visual identifiers and state logic to verify backend implementation.
