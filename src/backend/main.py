@@ -68,7 +68,7 @@ SCORES_FILE = os.path.join(DATA_DIR, 'scores.json')
 scores = []
 scores_lock = threading.Lock()
 
-input_buffer = InputBuffer()  # Ensure InputBuffer is defined before use
+# input_buffer = InputBuffer()  # Moved below InputBuffer class definition  # Ensure InputBuffer is defined before use
 ghost_manager = GhostManager()
 
 @app.on_event("startup")
