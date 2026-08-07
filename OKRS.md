@@ -16,8 +16,9 @@
 
 
 # Prioritized next step for current cycle
-- Complete UI state overlays for Game Over and Level Up, including tooltips and contextual help overlays.
-- Finalize ghost AI behaviors and visuals with focus on clarity and player understanding.
+- Complete UI state overlays for Game Over and Level Up, including tooltips and contextual help overlays. (In Progress)
+- Finalize ghost AI behaviors and visuals with focus on clarity and player understanding. (In Progress)
 - Update team instructions to emphasize UI overlays and ghost AI focus for this cycle.
+
 
 These are critical to meet the playable core loop and persistent feedback objectives and prepare for internal demo.
