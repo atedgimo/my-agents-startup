@@ -2,6 +2,14 @@ import { showGameOver, showLevelUp, hideOverlay } from './frontend/uiStateOverla
 
 // Motion interpolation feature implemented for smooth rendering
 
+import { fetchGhostStates } from './ghostIdentity.js';
+
+// Call fetchGhostStates periodically to update ghost visuals
+setInterval(fetchGhostStates, 1000);
+
+// Initial call to fetch ghost states
+fetchGhostStates();
+
 import { drawGhost, GhostState } from './frontend/ghost_identity.js';
 
 // power_up state already declared
