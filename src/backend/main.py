@@ -27,6 +27,15 @@ router = APIRouter()
 # }
 # ghost_manager = GhostManager(ghost_start_positions)
 
+input_buffer = InputBuffer()
+
+# ghost_manager = GhostManager()  # Disabled to fix import error
+
+# @app.on_event("startup")
+# async def startup_event():
+#     pass  # Placeholder for startup tasks
+
+
 # @app.get("/ghosts")
 # async def get_ghosts():
 #     return ghost_manager.get_all_states()
