@@ -27,7 +27,6 @@ router = APIRouter()
 # }
 # ghost_manager = GhostManager(ghost_start_positions)
 
-
 input_buffer = InputBuffer()
 
 # ghost_manager = GhostManager()  # Disabled to fix import error
