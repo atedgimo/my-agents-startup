@@ -11,8 +11,8 @@ from enum import Enum
 import json
 import threading
 
-from backend.pellet_collection import router as pellet_router
-from backend.ghost_ai import GhostManager, GhostState, GhostIdentity
+from .pellet_collection import router as pellet_router
+from .ghost_ai import GhostManager, GhostState, GhostIdentity
 
 logging.basicConfig(level=logging.INFO)
 
