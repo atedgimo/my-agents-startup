@@ -14,6 +14,10 @@
 - Key Result 3.1: 0 critical bugs in collision detection or scoring logic. (In Progress, some overdue bugs)
 - Key Result 3.2: Successful internal demo meeting before requesting a co-founder review. (Not Started)
 
+## Objective 4: Team Instructions and Communication
+- Ensure clear team instructions and collaboration on UI overlays and ghost AI behaviors.
+- Maintain updated documentation to guide development focus and acceptance criteria.
+- Facilitate regular syncs between UI and backend teams for integration and feedback.
 
 # Prioritized next step for current cycle
 - Complete UI state overlays for Game Over and Level Up.
