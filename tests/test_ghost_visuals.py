@@ -17,6 +17,16 @@ def test_ghost_visual_identifiers():
     for member in expected_members:
         assert hasattr(GhostVisual, member), f"GhostVisual missing member {member}"
 
+def test_ghost_visual_identifier_method():
+    gm = GhostManager()
+    for ghost_name in gm.ghosts:
+        ghost = gm.ghosts[ghost_name]
+        visual = ghost.visual_identifier()
+        assert visual in GhostVisual, f"Visual {visual} for ghost {ghost_name} not in GhostVisual enum"
+        # Check that visual matches expected mapping
+        expected_visual = getattr(GhostVisual, ghost_name.upper())
+        assert visual == expected_visual, f"Ghost {ghost_name} visual {visual} does not match expected {expected_visual}"
+
 
 def test_ghost_visual_state_logic():
     # Test the state logic of GhostVisual

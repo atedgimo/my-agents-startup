@@ -12,11 +12,11 @@ class GhostState(Enum):
     RANDOM = 'random'
 
 class GhostVisual(Enum):
-    BLINKY = 'red'
-    PINKY = 'pink'
-    INKY = 'cyan'
-    CLYDE = 'orange'
-    FRIGHTENED = 'blue'
+    BLINKY = 'blinky'
+    PINKY = 'pinky'
+    INKY = 'inky'
+    CLYDE = 'clyde'
+    FRIGHTENED = 'frightened'
     EYES_UP = 'eyes_up'
     EYES_DOWN = 'eyes_down'
     EYES_LEFT = 'eyes_left'
@@ -33,7 +33,14 @@ class Ghost:
         self.name = name
         self.state = GhostState.IDLE
         self.original_state = self.state
-        self.visual = GhostVisual[name.upper()]
+        # Map name to GhostVisual member exactly
+        visual_map = {
+            'Blinky': GhostVisual.BLINKY,
+            'Pinky': GhostVisual.PINKY,
+            'Inky': GhostVisual.INKY,
+            'Clyde': GhostVisual.CLYDE,
+        }
+        self.visual = visual_map.get(name, None)
 
     def visual_identifier(self):
         return self.visual
