@@ -8,6 +8,7 @@ due: "2026-08-05"
 created: "2026-08-01"
 updated: "2026-08-07"
 started: "2026-08-07T16:49:23"
+accept: "pytest tests/acceptance/test_maze_and_pellet_rendering.py"
 ---
 
 Implement the basic game environment: a maze grid, walls, and pellet entities. The player should be able to move through the maze using arrow keys.
@@ -25,3 +26,5 @@ Implement the basic game environment: a maze grid, walls, and pellet entities. T
 > 2026-08-07 — Implemented maze and pellet rendering in the frontend. Added maze data with walls and pellets initialization. Integrated drawMaze and drawPellets functions into the main game draw loop. Started the game loop to continuously render the maze and pellets.
 
 > 2026-08-07 — Test for /ghosts endpoint found but the route /ghosts does not exist in the current product map. The test will fail. Moving card back to in-progress for fix.
+
+**2026-08-07 19:53** — acceptance repaired: `pytest tests/acceptance/test_maze_and_pellet_rendering.py` — Run acceptance test that verifies maze and pellet rendering in the game frontend.
