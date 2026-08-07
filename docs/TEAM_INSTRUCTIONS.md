@@ -1,21 +1,25 @@
-# Team Instructions for Current Cycle
+# Team Instructions for UI Overlays and Ghost AI Focus
 
-## Focus Areas
-- UI overlays: Implement clear, contextual overlays for Game Over and Level Up states, including tooltips and player guidance.
-- Ghost AI: Finalize behaviors and visuals ensuring distinct, understandable opponent patterns.
+## Purpose
+This document clarifies team priorities and collaboration expectations for the current development cycle, focusing on UI overlays (Game Over, Level Up) and ghost AI behaviors.
 
-## Goals
-- Deliver a polished, distraction-free user experience with immediate player feedback.
-- Ensure ghost AI behaviors contribute to gameplay clarity and challenge.
+## Priorities
+- Complete UI state overlays for Game Over and Level Up.
+- Finalize ghost AI behaviors and visuals with distinct behaviors (Chase, Ambush, Patrol, Random).
 
 ## Collaboration
-- Coordinate closely between frontend and AI logic teams to synchronize visuals and behavior.
-- Prioritize bug fixes related to UI states and ghost AI responsiveness.
+- UI Developers and Senior Backend Developers must coordinate on API integration and visual feedback.
+- Regular syncs to ensure overlay states trigger correctly and ghost behaviors are visually represented.
 
-## Reporting
-- Update progress daily on the kanban board.
-- Flag blockers immediately to the CEO for arbitration.
+## References
+- Related cards: #0048 (UI State Overlays), #0049 (Ghost AI Behaviors), #0050 (Ghost Visual Identifiers and State Logic), #0070 (This card).
+- OKRs updated to include this focus area (see OKRs.md).
+
+## Acceptance Criteria
+- UI overlays appear correctly during Game Over and Level Up states.
+- Ghost AI behaviors operate as expected and are visually distinct.
+- Clear communication and documented collaboration between UI and backend teams.
 
 ---
 
-These instructions align with the updated OKRs and company vision for this cycle.
+This document is to guide team focus and ensure measurable progress on critical features for the next demo.
