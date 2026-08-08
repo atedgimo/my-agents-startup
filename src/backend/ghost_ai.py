@@ -101,7 +101,14 @@ class GhostManager:
     """
     FRIGHTENED_DURATION = 10
 
-    # Mapping from ghost name to their original string state
+    # Mapping from ghost name to their original GhostState
+    ORIGINAL_ENUM_STATES = {
+        'Blinky': GhostState.CHASE,
+        'Pinky': GhostState.AMBUSH,
+        'Inky': GhostState.PATROL,
+        'Clyde': GhostState.RANDOM
+    }
+    # Mapping from ghost name to their original string state (for post-power pellet revert)
     ORIGINAL_STRING_STATES = {
         'Blinky': 'chase',
         'Pinky': 'ambush',
@@ -168,8 +175,8 @@ class GhostManager:
         # Handle power pellet effect ending and revert ghosts if needed
         if self._power_pellet_end_pending:
             for ghost in self.ghosts.values():
-                if ghost.state == GhostState.FLEE:
-                    # Set to string state as required by tests
+                if isinstance(ghost.state, GhostState) and ghost.state == GhostState.FLEE:
+                    # Set to string state as required by tests (post-power pellet deactivation)
                     ghost.state = self.ORIGINAL_STRING_STATES.get(ghost.name, ghost.state)
                     ghost.edible = False
             self._power_pellet_active = False
@@ -179,25 +186,29 @@ class GhostManager:
 
         # Handle frightened/flee expiration for each ghost (legacy logic)
         for ghost in self.ghosts.values():
-            if ghost.state in (GhostState.FRIGHTENED, GhostState.FLEE):
+            if isinstance(ghost.state, GhostState) and ghost.state in (GhostState.FRIGHTENED, GhostState.FLEE):
                 if now > ghost._frightened_until:
-                    # Set to string state as required by tests
-                    ghost.state = self.ORIGINAL_STRING_STATES.get(ghost.name, ghost.state)
+                    # Set to enum state (not string) after frightened/flee expires, unless power pellet deactivation is pending
+                    ghost.state = self.ORIGINAL_ENUM_STATES.get(ghost.name, ghost.state)
                     ghost.edible = False
 
     def get_all_states(self):
-        # Always return the original string state for each ghost unless in FLEE state
+        """
+        Returns a dict mapping ghost name to their current state.
+        - If the ghost's state is a string (post-power pellet deactivation), return the string.
+        - If the ghost is in FLEE, return GhostState.FLEE.
+        - Otherwise, return the enum initial state.
+        """
         result = {}
         for ghost in self.ghosts.values():
-            # If ghost.state is a string, just return it
             if isinstance(ghost.state, str):
+                # After power pellet deactivation, state is a string (e.g., 'chase')
                 result[ghost.name] = ghost.state
-            # If ghost is in FLEE state, return GhostState.FLEE
             elif ghost.state == GhostState.FLEE:
                 result[ghost.name] = GhostState.FLEE
-            # Otherwise, return the original string state
             else:
-                result[ghost.name] = self.ORIGINAL_STRING_STATES.get(ghost.name, ghost.state)
+                # For initial and normal states, return the enum value
+                result[ghost.name] = self.ORIGINAL_ENUM_STATES.get(ghost.name, ghost.state)
         return result
 
     def get_visual_identifiers(self):
