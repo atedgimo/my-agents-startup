@@ -30,10 +30,10 @@ class Ghost:
     def __init__(self, name):
         self.name = name
         self.initial_state = GhostState.IDLE
-        self.state = self.initial_state
+        self.state = GhostState.IDLE
         self.edible = False
         self.edible_start_time = None
-        self.pre_flee_state = self.initial_state
+        self.pre_flee_state = GhostState.IDLE
 
     def set_state(self, state):
         if isinstance(state, GhostState):
@@ -92,7 +92,7 @@ class GhostManager:
             ghost.set_state(state)
 
     def get_all_states(self):
-        return {name: ghost.get_state().value for name, ghost in self.ghosts.items()}
+        return {name: ghost.get_state() for name, ghost in self.ghosts.items()}
 
     def activate_power_pellet(self):
         for ghost in self.ghosts.values():
@@ -100,7 +100,8 @@ class GhostManager:
 
     def deactivate_power_pellet(self):
         for ghost in self.ghosts.values():
-            ghost.make_normal()
+            if ghost.edible:
+                ghost.make_normal()
 
     def update(self):
         for ghost in self.ghosts.values():
