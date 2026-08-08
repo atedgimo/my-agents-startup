@@ -1785,3 +1785,18 @@ Please advise on how to proceed with acceptance testing environment or command.
 
 ---
 
+## Fix backend main.py imports and routing for ghost AI feature
+
+**Labels:** bug
+
+**Due:** 2024-08-15
+
+The current backend main.py references non-existent modules src.backend.api and src.backend.ghosts, causing import errors and blocking the ghost visual identifiers and state logic feature (#0020).
+
+This card will fix the imports and properly register the ghost AI routes and logic in main.py to unblock the feature implementation.
+
+objective: "Feature: Implement Ghost Visual Identifiers & State Logic"
+accept: "pytest tests/acceptance/test_ghost_visuals.py"
+
+---
+
