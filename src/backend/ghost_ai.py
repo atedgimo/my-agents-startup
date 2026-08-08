@@ -1,15 +1,6 @@
 from enum import Enum
 import time
 
-class GhostState(Enum):
-    IDLE = "idle"
-    NORMAL = "normal"
-    PATROL = "patrol"
-    AMBUSH = "ambush"
-    FRIGHTENED = "frightened"
-    EATEN = "eaten"
-    # Add any additional states used in code/tests if needed
-
 class GhostVisual(Enum):
     BLINKY = "BLINKY"
     PINKY = "PINKY"
@@ -20,6 +11,15 @@ class GhostVisual(Enum):
     EYES_DOWN = "EYES_DOWN"
     EYES_LEFT = "EYES_LEFT"
     EYES_RIGHT = "EYES_RIGHT"
+
+class GhostState(Enum):
+    IDLE = "idle"
+    NORMAL = "normal"
+    PATROL = "patrol"
+    AMBUSH = "ambush"
+    FRIGHTENED = "frightened"
+    EATEN = "eaten"
+    # Add any additional states used in code/tests if needed
 
 class Ghost:
     """
