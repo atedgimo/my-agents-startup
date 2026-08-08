@@ -1,7 +1,7 @@
 from enum import Enum
 import time
 
-class GhostVisual:
+class GhostVisual(Enum):
     BLINKY = "BLINKY"
     PINKY = "PINKY"
     INKY = "INKY"
