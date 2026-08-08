@@ -40,9 +40,10 @@ class Ghost:
     def get_state(self) -> GhostState:
         return self.state
 
-    def frighten(self, duration: float):
+    def frighten(self, duration: float, to_state=None):
         self._original_state = self.state
-        self.state = GhostState.FRIGHTENED
+        # Allow setting to FLEE or FRIGHTENED for flexibility
+        self.state = to_state if to_state is not None else GhostState.FRIGHTENED
         self._frightened_until = time.time() + duration
 
     def eat(self):
@@ -50,9 +51,9 @@ class Ghost:
 
     def update_state(self, current_time=None):
         """
-        Called periodically to update the ghost's state, e.g. after frightened expires.
+        Called periodically to update the ghost's state, e.g. after frightened/flee expires.
         """
-        if self.state == GhostState.FRIGHTENED:
+        if self.state in (GhostState.FRIGHTENED, GhostState.FLEE):
             now = current_time if current_time is not None else time.time()
             if now > self._frightened_until:
                 self.state = self._original_state
@@ -120,13 +121,13 @@ class GhostManager:
         if ghost:
             ghost.set_state(state)
 
-    def frighten_all(self, duration=None):
+    def frighten_all(self, duration=None, to_state=None):
         """
-        Sets all ghosts to FRIGHTENED state for the given duration.
+        Sets all ghosts to a frightened-like state (FRIGHTENED or FLEE) for the given duration.
         """
         duration = duration if duration is not None else self.FRIGHTENED_DURATION
         for ghost in self.ghosts.values():
-            ghost.frighten(duration)
+            ghost.frighten(duration, to_state=to_state)
 
     def eat_ghost(self, ghost_visual):
         ghost = self.ghosts.get(ghost_visual)
@@ -156,14 +157,14 @@ class GhostManager:
 
     def activate_power_pellet(self, duration=None):
         """
-        Activates the power pellet effect: all ghosts become frightened/edible.
+        Activates the power pellet effect: all ghosts become FLEE/edible.
         """
-        self.frighten_all(duration=duration)
+        self.frighten_all(duration=duration, to_state=GhostState.FLEE)
 
     def deactivate_power_pellet(self):
         """
-        Deactivates the power pellet effect: all frightened ghosts revert to their original state.
+        Deactivates the power pellet effect: all FLEE ghosts revert to their original state.
         """
         for ghost in self.ghosts.values():
-            if ghost.state == GhostState.FRIGHTENED:
+            if ghost.state == GhostState.FLEE:
                 ghost.state = ghost._original_state
