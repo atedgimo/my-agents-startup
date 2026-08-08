@@ -148,8 +148,7 @@ async def activate_power_pellet():
     global power_pellet_active
     power_pellet_active = True
     # Set all ghosts to frightened state
-    for ghost_id in ghost_manager.ghosts.keys():
-        ghost_manager.set_ghost_state(ghost_id, GhostState.FRIGHTENED)
+    ghost_manager.frighten_all()
     return JSONResponse(content={"status": "power pellet activated"})
 
 @app.post("/deactivate-power-pellet")
@@ -158,8 +157,7 @@ async def deactivate_power_pellet():
     global power_pellet_active
     power_pellet_active = False
     # Reset all ghosts to normal chasing state
-    for ghost_id in ghost_manager.ghosts.keys():
-        ghost_manager.set_ghost_state(ghost_id, GhostState.CHASING)
+    ghost_manager.chase_all()
     return JSONResponse(content={"status": "power pellet deactivated"})
 
 @app.get("/pellets")

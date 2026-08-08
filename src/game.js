@@ -1,3 +1,5 @@
+import { animatePelletCollection } from "./frontend/motionInterpolation.js";
+
 // Motion interpolation feature implemented for smooth rendering
 
 const canvas = document.getElementById('gameCanvas');
@@ -29,7 +31,13 @@ let visualJuice = {
     powerPelletActive: false,
     ghostHit: false,
     ghostEaten: false,
+    powerPelletEffect: 0, // 0 = off, 1 = activating, -1 = deactivating
+    powerPelletGlow: 0,   // 0..1 for glow animation
 };
+
+let ghostVisualStates = {}; // {ghost_id: {visual_state, position}}
+let ghostStateLastFetched = 0;
+let ghostStateFetchInterval = 100; // ms
 
 // Function to activate overlay and pause game logic
 function activateOverlay(state) {
@@ -107,14 +115,17 @@ for (let r = 0; r < ROWS; r++) {
     }
 }
 
-// Player and ghost positions for logic (discrete grid positions)
 let playerPos = { x: 5, y: 5 };
 let prevPlayerPos = { ...playerPos };
 
+// Ghosts: now use ghostVisualStates for rendering
 const ghosts = [
-    { pos: { x: 10, y: 10 }, prevPos: { x: 10, y: 10 } },
-    { pos: { x: 15, y: 15 }, prevPos: { x: 15, y: 15 } }
+    { id: "blinky", pos: { x: 10, y: 10 }, prevPos: { x: 10, y: 10 } },
+    { id: "pinky", pos: { x: 15, y: 15 }, prevPos: { x: 15, y: 15 } }
 ];
+ghosts.forEach(g => {
+    ghostVisualStates[g.id] = { visual_state: "normal", position: { ...g.pos } };
+});
 
 // Timing for interpolation
 let lastUpdateTime = performance.now();
@@ -142,12 +153,16 @@ function update() {
 
     // Pellets collection logic
     pellets.forEach(p => {
-        if (p.active) {
+        if (p.active && !p.animating) {
             if (p.x === playerPos.x && p.y === playerPos.y) {
-                p.active = false;
+                // Animate pellet collection
+                animatePelletCollection(p, 300);
                 score += 10;
                 visualJuice.pelletCollected = true;
-                // Trigger pellet collection animation or effect here
+                // If this is a power pellet, trigger effect
+                if (mazeData[p.y][p.x] === 2) {
+                    triggerPowerPelletEffect();
+                }
             }
         }
     });
@@ -170,6 +185,7 @@ function update() {
                 power_up = false;
                 visualJuice.ghostEaten = true;
                 // Trigger ghost eaten animation or effect here
+                triggerPowerPelletDeactivation();
             }
         }
     });
@@ -181,6 +197,15 @@ function draw() {
     const now = performance.now();
     const delta = now - lastUpdateTime;
     const t = Math.min(delta / LOGIC_UPDATE_INTERVAL, 1);
+
+    // Power pellet glow effect (background overlay)
+    if (visualJuice.powerPelletGlow > 0) {
+        ctx.save();
+        ctx.globalAlpha = 0.25 * visualJuice.powerPelletGlow;
+        ctx.fillStyle = '#60a5fa'; // Tailwind blue-400
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+    }
 
     // Clear canvas
     ctx.fillStyle = '#111';
@@ -196,13 +221,28 @@ function draw() {
         }
     }
 
-    // Draw pellets
-    ctx.fillStyle = '#facc15'; // Tailwind yellow-400
+    // Draw pellets (with animation)
     pellets.forEach(p => {
-        if (p.active) {
+        if (p.active || p.animating) {
+            let pelletAlpha = 1;
+            let pelletRadius = 4;
+            if (p.animating) {
+                const elapsed = now - p.animationStart;
+                const progress = Math.min(elapsed / p.animationDuration, 1);
+                pelletAlpha = 1 - progress;
+                pelletRadius = 4 * (1 - progress);
+                if (progress >= 1) {
+                    p.active = false;
+                    p.animating = false;
+                }
+            }
+            ctx.save();
+            ctx.globalAlpha = pelletAlpha;
+            ctx.fillStyle = (mazeData[p.y][p.x] === 2) ? '#38bdf8' : '#facc15'; // Power pellet blue, normal yellow
             ctx.beginPath();
-            ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, 4, 0, Math.PI * 2);
+            ctx.arc(p.x * TILE_SIZE + TILE_SIZE / 2, p.y * TILE_SIZE + TILE_SIZE / 2, pelletRadius, 0, Math.PI * 2);
             ctx.fill();
+            ctx.restore();
         }
     });
 
@@ -210,20 +250,57 @@ function draw() {
     const interpPlayerX = lerp(prevPlayerPos.x, playerPos.x, t) * TILE_SIZE;
     const interpPlayerY = lerp(prevPlayerPos.y, playerPos.y, t) * TILE_SIZE;
 
-    // Draw player
+    // Draw player (with power pellet effect)
+    ctx.save();
+    if (visualJuice.powerPelletGlow > 0) {
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 20 * visualJuice.powerPelletGlow;
+    }
     ctx.fillStyle = '#f59e0b'; // Tailwind amber-500
     ctx.beginPath();
     ctx.arc(interpPlayerX + TILE_SIZE / 2, interpPlayerY + TILE_SIZE / 2, TILE_SIZE / 2 - 2, 0, Math.PI * 2);
     ctx.fill();
+    ctx.restore();
 
-    // Draw ghosts with interpolation
+    // Draw ghosts with interpolation and visual state
     ghosts.forEach(g => {
-        const interpGhostX = lerp(g.prevPos.x, g.pos.x, t) * TILE_SIZE;
-        const interpGhostY = lerp(g.prevPos.y, g.pos.y, t) * TILE_SIZE;
-        ctx.fillStyle = '#ef4444'; // Tailwind red-500
+        // Use backend ghost visual state if available
+        let ghostState = ghostVisualStates[g.id]?.visual_state || "normal";
+        let ghostColor = "#ef4444"; // Tailwind red-500
+        let ghostAlpha = 1;
+        let ghostStroke = false;
+        switch (ghostState) {
+            case "frightened":
+                ghostColor = "#38bdf8"; // Tailwind blue-400
+                break;
+            case "eaten":
+                ghostColor = "#f3f4f6"; // Tailwind gray-100
+                ghostAlpha = 0.5;
+                break;
+            case "returning":
+                ghostColor = "#a1a1aa"; // Tailwind gray-400
+                ghostAlpha = 0.7;
+                ghostStroke = true;
+                break;
+            default:
+                ghostColor = "#ef4444";
+        }
+        // Interpolated position
+        let ghostPos = ghostVisualStates[g.id]?.position || g.pos;
+        const interpGhostX = lerp(g.prevPos.x, ghostPos.x, t) * TILE_SIZE;
+        const interpGhostY = lerp(g.prevPos.y, ghostPos.y, t) * TILE_SIZE;
+        ctx.save();
+        ctx.globalAlpha = ghostAlpha;
+        ctx.fillStyle = ghostColor;
         ctx.beginPath();
         ctx.arc(interpGhostX + TILE_SIZE / 2, interpGhostY + TILE_SIZE / 2, TILE_SIZE / 2 - 2, 0, Math.PI * 2);
         ctx.fill();
+        if (ghostStroke) {
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#fff";
+            ctx.stroke();
+        }
+        ctx.restore();
     });
 
     // Draw Score
@@ -257,6 +334,24 @@ function draw() {
         visualJuice.ghostEaten = false;
     }
 
+    // Power pellet activation/deactivation animation
+    if (visualJuice.powerPelletEffect !== 0) {
+        // Animate glow in/out
+        if (visualJuice.powerPelletEffect === 1) {
+            visualJuice.powerPelletGlow += 0.05;
+            if (visualJuice.powerPelletGlow >= 1) {
+                visualJuice.powerPelletGlow = 1;
+                visualJuice.powerPelletEffect = 0;
+            }
+        } else if (visualJuice.powerPelletEffect === -1) {
+            visualJuice.powerPelletGlow -= 0.05;
+            if (visualJuice.powerPelletGlow <= 0) {
+                visualJuice.powerPelletGlow = 0;
+                visualJuice.powerPelletEffect = 0;
+            }
+        }
+    }
+
     // Draw Overlays
     if (gameState === STATE.WON) {
         // Draw Level Up overlay
@@ -282,6 +377,16 @@ function draw() {
         ctx.fillText('Try again! Click to restart.', canvas.width / 2, canvas.height / 2 + 20);
     }
 
+    // Fetch ghost states from backend periodically
+    if (now - ghostStateLastFetched > ghostStateFetchInterval) {
+        fetch("/ghost-states")
+            .then(r => r.json())
+            .then(states => {
+                ghostVisualStates = states;
+                ghostStateLastFetched = now;
+            });
+    }
+
     requestAnimationFrame(draw);
 }
 
@@ -291,6 +396,17 @@ canvas.addEventListener('click', () => {
         dismissOverlay();
     }
 });
+
+// Power pellet effect triggers
+function triggerPowerPelletEffect() {
+    visualJuice.powerPelletEffect = 1;
+    // Optionally, call backend to activate power pellet
+    fetch("/activate-power-pellet", { method: "POST" });
+}
+function triggerPowerPelletDeactivation() {
+    visualJuice.powerPelletEffect = -1;
+    fetch("/deactivate-power-pellet", { method: "POST" });
+}
 
 // Game loop
 setInterval(update, LOGIC_UPDATE_INTERVAL);

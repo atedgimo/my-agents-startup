@@ -63,11 +63,15 @@ async def collect_pellet(request: Request):
         raise HTTPException(status_code=400, detail=f"Invalid request data: {str(e)}")
 
     pos = (x, y)
+    is_power_pellet = False
     with pellets_lock:
         if pos in pellets:
             pellets.remove(pos)
+            # Detect if this was a power pellet (mazeData not available here, so use a convention: power pellets at corners)
+            if (x, y) in [(1,1), (1,18), (18,1), (18,18)]:
+                is_power_pellet = True
             save_pellets()
-            return {"message": "Pellet collected", "position": {"x": x, "y": y}}
+            return {"message": "Pellet collected", "position": {"x": x, "y": y}, "power_pellet": is_power_pellet}
         else:
             raise HTTPException(status_code=404, detail="Pellet not found at given position")
 

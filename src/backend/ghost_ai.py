@@ -33,6 +33,8 @@ class Ghost:
                 self.visual_state = GhostVisualState.EATEN
             elif new_state == GhostState.RETURNING_HOME:
                 self.visual_state = GhostVisualState.RETURNING
+            elif new_state == GhostState.CHASING:
+                self.visual_state = GhostVisualState.NORMAL
             else:
                 self.visual_state = GhostVisualState.NORMAL
 
@@ -78,6 +80,16 @@ class GhostManager:
                 }
                 for ghost_id, ghost in self.ghosts.items()
             }
+
+    def frighten_all(self):
+        with self.lock:
+            for ghost in self.ghosts.values():
+                ghost.set_state(GhostState.FRIGHTENED)
+
+    def chase_all(self):
+        with self.lock:
+            for ghost in self.ghosts.values():
+                ghost.set_state(GhostState.CHASING)
 
 # Singleton instance for global use
 ghost_manager = GhostManager()
