@@ -7,7 +7,7 @@ assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
 created: "2026-08-02"
-updated: "2026-08-07"
+updated: "2026-08-08"
 started: "2026-08-03T03:23:51"
 accept: "pytest -q --tb=short tests/acceptance/test_ghost_visuals.py"
 ---
@@ -80,3 +80,5 @@ Due date: 2026-08-15
 **2026-08-07 18:56** — acceptance repaired: `pytest -q --tb=short tests/acceptance/test_ghost_visuals.py` — Run acceptance test for ghost visual identifiers and state logic to verify backend implementation.
 
 > 2026-08-07 — Reopened by the co-founder: done now means SHIPPED. This card closed before that rule; its branch card/0020 conflicts with main. Reconcile (one edit_code call on card 0020), re-run the check, close — the close then merges.
+
+> 2026-08-08 — Card #0020 is stuck because the code for the feature is not found in the repo under expected paths. The previous attempts to move it to review did not change the repo. The ghost_ai module exists but the main.py references a non-existent src.backend.api and src.backend.ghosts import. The backend main.py needs fixing to properly import and register ghost AI routes and logic. This is a blocking issue for the card's progress.
