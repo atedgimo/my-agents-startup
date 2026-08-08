@@ -55,34 +55,55 @@ class Ghost:
 
 class GhostManager:
     def __init__(self):
-        self.ghosts = [
-            Ghost("Blinky", GhostState.CHASE),
-            Ghost("Pinky", GhostState.AMBUSH),
-            Ghost("Inky", GhostState.PATROL),
-            Ghost("Clyde", GhostState.RANDOM),
-        ]
+        self.ghosts = {
+            "Blinky": Ghost("Blinky", GhostState.CHASE),
+            "Pinky": Ghost("Pinky", GhostState.AMBUSH),
+            "Inky": Ghost("Inky", GhostState.PATROL),
+            "Clyde": Ghost("Clyde", GhostState.RANDOM),
+        }
         self.power_pellet_active = False
 
     def activate_power_pellet(self):
         self.power_pellet_active = True
-        for ghost in self.ghosts:
+        for ghost in self.ghosts.values():
             ghost.update_state(True)
 
     def deactivate_power_pellet(self):
         self.power_pellet_active = False
-        for ghost in self.ghosts:
+        for ghost in self.ghosts.values():
             ghost.update_state(False)
 
     def update(self):
-        for ghost in self.ghosts:
+        for ghost in self.ghosts.values():
             ghost.update_state(self.power_pellet_active)
 
     def get_all_states(self):
-        return {ghost.name: ghost.state.name for ghost in self.ghosts}
+        return {name: ghost.state.name for name, ghost in self.ghosts.items()}
+
+    def get_ghost_state(self, name):
+        """Get the state of a ghost by name."""
+        ghost = self.ghosts.get(name)
+        if ghost is not None:
+            return ghost.state.name
+        raise KeyError(f"Ghost '{name}' not found")
+
+    def set_ghost_state(self, name, state):
+        """Set the state of a ghost by name."""
+        ghost = self.ghosts.get(name)
+        if ghost is not None:
+            if isinstance(state, GhostState):
+                ghost.state = state
+            elif isinstance(state, str):
+                # Allow setting by string name
+                ghost.state = GhostState[state]
+            else:
+                raise ValueError("State must be a GhostState or string")
+            return
+        raise KeyError(f"Ghost '{name}' not found")
 
     def get_ghost_states(self):
         # Deprecated, kept for backward compatibility
         return self.get_all_states()
 
     def get_ghost_visuals(self):
-        return {ghost.name: ghost.visual_identifier() for ghost in self.ghosts}
+        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
