@@ -127,8 +127,12 @@ class GhostManager:
         Deactivates power pellet mode (ghosts revert to original states).
         """
         self._power_pellet_active = False
+        # Force all ghosts out of FLEE state, back to their original state
         for ghost in self.ghosts.values():
-            ghost.update_state(current_time=self._power_pellet_end_time + 1)
+            if ghost.state == GhostState.FLEE:
+                ghost.state = ghost._original_state
+            # Also clear edible timer
+            ghost._edible_until = 0
 
     def update(self):
         """
@@ -136,9 +140,7 @@ class GhostManager:
         """
         now = time.time()
         if self._power_pellet_active and now > self._power_pellet_end_time:
-            self._power_pellet_active = False
-            for ghost in self.ghosts.values():
-                ghost.update_state(current_time=now)
+            self.deactivate_power_pellet()
         elif self._power_pellet_active:
             for ghost in self.ghosts.values():
                 ghost.update_state(current_time=now)
