@@ -108,6 +108,9 @@ class GhostManager:
             GhostVisual.INKY: Ghost("Inky", GhostState.IDLE),
             GhostVisual.CLYDE: Ghost("Clyde", GhostState.IDLE),
         }
+        self._power_pellet_active = False
+        self._power_pellet_end_pending = False
+        self._power_pellet_end_time = None
 
     def get_ghost_state(self, ghost_identity):
         """
@@ -151,10 +154,22 @@ class GhostManager:
         """
         Should be called periodically to update ghost states and handle frightened/FLEE expiration.
         If a ghost's frightened/flee timer has expired, revert to its original state and mark as not edible.
+        Also handles power pellet effect ending and reversion of ghost states.
         """
         now = time.time()
+        # Handle power pellet effect ending and revert ghosts if needed
+        if self._power_pellet_end_pending:
+            for ghost in self.ghosts.values():
+                if ghost.state == GhostState.FLEE:
+                    ghost.set_state(ghost._original_state)
+                    ghost.edible = False
+            self._power_pellet_active = False
+            self._power_pellet_end_pending = False
+            self._power_pellet_end_time = None
+            return  # Only revert once per call
+
+        # Handle frightened/flee expiration for each ghost (legacy logic)
         for ghost in self.ghosts.values():
-            # Only process if in FRIGHTENED or FLEE state
             if ghost.state in (GhostState.FRIGHTENED, GhostState.FLEE):
                 if now > ghost._frightened_until:
                     ghost.set_state(ghost._original_state)
@@ -182,13 +197,15 @@ class GhostManager:
             ghost.set_state(GhostState.FLEE)
             ghost._frightened_until = time.time() + duration
             ghost.edible = True
+        self._power_pellet_active = True
+        self._power_pellet_end_pending = False
+        self._power_pellet_end_time = time.time() + duration
 
     def deactivate_power_pellet(self):
         """
         Deactivates the power pellet effect: all FLEE ghosts revert to their original state.
         Edible flag is set to False only after state reversion.
+        Sets a flag so that update() will perform the actual revert.
         """
-        for ghost in self.ghosts.values():
-            if ghost.state == GhostState.FLEE:
-                ghost.set_state(ghost._original_state)
-                ghost.edible = False
+        if self._power_pellet_active:
+            self._power_pellet_end_pending = True
