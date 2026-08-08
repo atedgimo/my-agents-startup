@@ -3,6 +3,7 @@ import random
 import time
 
 class GhostState(Enum):
+    IDLE = auto()
     CHASE = auto()
     AMBUSH = auto()
     PATROL = auto()
@@ -14,7 +15,7 @@ class Ghost:
     def __init__(self, name, behaviour):
         self.name = name
         self.behaviour = behaviour
-        self.state = behaviour
+        self.state = GhostState.IDLE
         self.position = (0, 0)  # Default start position
         self.edible_timer = 0
 
@@ -76,8 +77,12 @@ class GhostManager:
         for ghost in self.ghosts:
             ghost.update_state(self.power_pellet_active)
 
-    def get_ghost_states(self):
+    def get_all_states(self):
         return {ghost.name: ghost.state.name for ghost in self.ghosts}
+
+    def get_ghost_states(self):
+        # Deprecated, kept for backward compatibility
+        return self.get_all_states()
 
     def get_ghost_visuals(self):
         return {ghost.name: ghost.visual_identifier() for ghost in self.ghosts}
