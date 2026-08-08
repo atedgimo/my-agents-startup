@@ -48,15 +48,30 @@ class Ghost:
         }
         self.visual = self.visual_map.get(name, None)
         self.original_state = self.state
+        self.last_direction = "UP"  # For EATEN state, could be set by movement logic
 
     def visual_identifier(self):
         # Return the correct visual identifier based on state
         if self.state in (GhostState.FLEE, GhostState.FRIGHTENED):
             return GhostVisual.FRIGHTENED
         elif self.state == GhostState.EATEN:
-            # For EATEN, you could return a direction-based eyes visual if needed
-            return GhostVisual.EYES_UP  # Default for test, could be dynamic
+            # For EATEN, return a direction-based eyes visual
+            # This could be dynamic; for now, use last_direction
+            if self.last_direction == "UP":
+                return GhostVisual.EYES_UP
+            elif self.last_direction == "DOWN":
+                return GhostVisual.EYES_DOWN
+            elif self.last_direction == "LEFT":
+                return GhostVisual.EYES_LEFT
+            elif self.last_direction == "RIGHT":
+                return GhostVisual.EYES_RIGHT
+            else:
+                return GhostVisual.EYES_UP  # Default
         return self.visual
+
+    def set_direction(self, direction):
+        # Set the last movement direction for EATEN visual
+        self.last_direction = direction
 
     def activate(self):
         self.state = self.behaviour
@@ -71,6 +86,7 @@ class Ghost:
     def reset(self):
         self.state = GhostState.IDLE
         self.original_state = GhostState.IDLE
+        self.last_direction = "UP"
 
     def __repr__(self):
         return f"<Ghost name={self.name} state={self.state.value} visual={self.visual.value}>"
@@ -113,6 +129,24 @@ class GhostManager:
             # Only return the state string for test compatibility
             result[name] = ghost.state.name if hasattr(ghost.state, "name") else str(ghost.state)
         return result
+
+    def get_all_visuals(self):
+        # Return a dict with visual identifier for each ghost
+        result = {}
+        for name, ghost in self.ghosts.items():
+            result[name] = ghost.visual_identifier().name if hasattr(ghost.visual_identifier(), "name") else str(ghost.visual_identifier())
+        return result
+
+    def get_ghost_visual(self, ghost_name):
+        ghost = self.ghosts.get(ghost_name)
+        if ghost:
+            return ghost.visual_identifier()
+        return None
+
+    def set_ghost_direction(self, ghost_name, direction):
+        ghost = self.ghosts.get(ghost_name)
+        if ghost:
+            ghost.set_direction(direction)
 
     def activate_power_pellet(self):
         self.power_pellet_active = True

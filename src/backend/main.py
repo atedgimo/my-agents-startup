@@ -22,15 +22,22 @@ ghost_manager = GhostManager()
 @app.get("/ghosts")
 async def get_ghosts():
     states = ghost_manager.get_all_states()
+    visuals = ghost_manager.get_all_visuals()
     print("[DEBUG] /ghosts endpoint returning:")
     for k, v in states.items():
-        print(f"  [DEBUG] {k}: {v}")
-    return states
+        print(f"  [DEBUG] {k}: {v} (visual: {visuals[k]})")
+    # Return both state and visual for each ghost
+    return {k: {"state": states[k], "visual": visuals[k]} for k in states}
 
 @app.get("/ghost-states")
 async def get_ghost_states():
     # Alias for /ghosts for test compatibility
     return ghost_manager.get_all_states()
+
+@app.get("/ghost-visuals")
+async def get_ghost_visuals():
+    # API endpoint to get all ghost visuals
+    return ghost_manager.get_all_visuals()
 
 @app.post("/ghost_state")
 async def set_ghost_state(identity: str = Query(...), state: str = Query(...)):
