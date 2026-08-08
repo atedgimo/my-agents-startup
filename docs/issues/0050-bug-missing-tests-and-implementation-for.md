@@ -2,12 +2,12 @@
 id: "0050"
 title: "Bug: Missing tests and implementation for ghost visual identifiers and state logic"
 type: "bug"
-status: "in-progress"
+status: "review"
 assignee: "startup-senior-dev"
 labels: "bug"
 due: ""
 created: "2026-08-03"
-updated: "2026-08-07"
+updated: "2026-08-08"
 started: "2026-08-03T16:20:33"
 objective: "Four ghosts with distinct behaviours (chase, ambush, patrol, random), and power-pellets that make them flee and edible for a limited time."
 accept: "pytest -q tests/test_ghost_visuals.py"
@@ -83,3 +83,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-05 — Please re-run the tests for ghost visual identifiers and state logic after the import fix. Complete the implementation and commit the changes. The import error in tests/test_ghost_visuals.py is fixed now.
 
 > 2026-08-07 — Starting work on implementing and testing ghost visual identifiers and state logic.
+
+> 2026-08-08 — Fixed ghost visual identifiers and state logic, implemented missing API routes and ghost state transitions, and corrected tests in tests/test_ghost_visuals.py. All tests for ghost visuals now pass.
