@@ -73,3 +73,5 @@ Due date: 2026-08-15
 > 2026-08-08 — Added acceptance check command in the card description to prove the feature works: `curl -s http://localhost:8000/ghost-states | jq '.ghosts | length > 0'`. Now moving the card to review.
 
 **2026-08-08 08:47** — acceptance repaired: `pytest -v tests/acceptance/test_ghost_visuals.py`
+
+> 2026-08-08 — Card #0021 is blocked because the backend ghost_ai module is missing or broken, causing import errors that prevent ghost identity and state visuals from being implemented. Recommend prioritizing bug #0056 or #0057 to fix the backend first.
