@@ -27,6 +27,11 @@ async def get_ghosts():
         print(f"  [DEBUG] {k}: {v}")
     return states
 
+@app.get("/ghost-states")
+async def get_ghost_states():
+    # Alias for /ghosts for test compatibility
+    return ghost_manager.get_all_states()
+
 @app.post("/ghost_state")
 async def set_ghost_state(identity: str = Query(...), state: str = Query(...)):
     try:
@@ -43,10 +48,24 @@ async def activate_power_pellet():
     print("[DEBUG] /activate_power_pellet called")
     return {"status": "power pellet activated"}
 
+@app.post("/activate-power-pellet")
+async def activate_power_pellet_alias():
+    # Alias for test compatibility
+    ghost_manager.activate_power_pellet()
+    print("[DEBUG] /activate-power-pellet called")
+    return {"status": "power pellet activated"}
+
 @app.post("/deactivate_power_pellet")
 async def deactivate_power_pellet():
     ghost_manager.deactivate_power_pellet()
     print("[DEBUG] /deactivate_power_pellet called")
+    return {"status": "power pellet deactivated"}
+
+@app.post("/deactivate-power-pellet")
+async def deactivate_power_pellet_alias():
+    # Alias for test compatibility
+    ghost_manager.deactivate_power_pellet()
+    print("[DEBUG] /deactivate-power-pellet called")
     return {"status": "power pellet deactivated"}
 
 @app.post("/update_ghosts")

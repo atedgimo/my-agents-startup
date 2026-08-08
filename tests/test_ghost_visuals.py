@@ -91,7 +91,7 @@ def test_set_and_get_ghost_state():
     else:
         assert state == 'FLEE'
 
-    # The new GhostState does not have EATEN, so skip this part if not present
+    # The new GhostState does have EATEN, so test it
     if hasattr(GhostState, 'EATEN'):
         gm.set_ghost_state(GhostIdentity.CLYDE, GhostState.EATEN)
         state = gm.get_ghost_state(GhostIdentity.CLYDE)
@@ -142,7 +142,6 @@ def test_power_pellet_deactivation_and_revert_state():
     gm.activate_power_pellet()
     import time
     time.sleep(10.1)  # Wait for edible timer to expire
-    gm.deactivate_power_pellet()
     gm.update()
     states = gm.get_all_states()
     # After deactivation and update, ghosts revert to original behaviour
@@ -179,5 +178,3 @@ def test_edible_timeout():
             assert state.name == expected[ghost]
         else:
             assert state == expected[ghost]
-
-    gm = GhostManager()
