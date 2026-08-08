@@ -19,6 +19,9 @@ class GhostState(Enum):
     AMBUSH = "ambush"
     FRIGHTENED = "frightened"
     EATEN = "eaten"
+    FLEE = "flee"
+    CHASE = "chase"
+    SCATTER = "scatter"
     # Add any additional states used in code/tests if needed
 
 class Ghost:
