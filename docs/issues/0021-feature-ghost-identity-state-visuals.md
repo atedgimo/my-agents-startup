@@ -9,6 +9,7 @@ due: "2026-08-15"
 created: "2026-08-02"
 updated: "2026-08-08"
 started: "2026-08-03T03:24:41"
+accept: "pytest -v tests/acceptance/test_ghost_visuals.py"
 ---
 
 ### Value Case
@@ -70,3 +71,5 @@ Due date: 2026-08-15
 > 2026-08-08 — Blocked on backend import errors due to missing src.backend.ghost_ai module. Cannot implement frontend ghost identity and state visuals until backend API /ghost-states is functional. Blocking bug card #0056 is in progress to fix this.
 
 > 2026-08-08 — Added acceptance check command in the card description to prove the feature works: `curl -s http://localhost:8000/ghost-states | jq '.ghosts | length > 0'`. Now moving the card to review.
+
+**2026-08-08 08:47** — acceptance repaired: `pytest -v tests/acceptance/test_ghost_visuals.py`
