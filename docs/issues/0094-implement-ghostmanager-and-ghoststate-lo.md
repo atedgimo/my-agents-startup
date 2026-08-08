@@ -2,7 +2,7 @@
 id: "0094"
 title: "Implement GhostManager and GhostState logic for ghost visual identifiers and states"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-backend-python-dev"
 labels: "feature"
 due: ""
@@ -34,3 +34,5 @@ This will unblock bug #0050 and align implementation with tests.
 > 2026-08-08 — Acceptance test passed but merge conflict detected in tests/test_ghost_visuals.py. Moving back to in-progress to resolve conflict.
 
 > 2026-08-08 — Completed the implementation of GhostManager and GhostState logic for ghost visual identifiers and states. Acceptance check failed due to missing pytest_asyncio dependency in test environment, blocking acceptance tests. Created bug card #0116 to add pytest_asyncio to test dependencies to unblock acceptance testing.
+
+> 2026-08-08 — Acceptance test fails due to missing pytest_asyncio dependency causing test environment failure. Created bug #0117 to track this blocking issue. Card cannot be verified until this is resolved.
