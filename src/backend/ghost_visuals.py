@@ -1,24 +1,43 @@
-from enum import Enum, auto
+from enum import Enum
 import time
 
-class GhostState(Enum):
-    CHASE = 'chase'
-    AMBUSH = 'ambush'
-    PATROL = 'patrol'
-    RANDOM = 'random'
-    FLEE = 'flee'
-    EATEN = 'eaten'
+class GhostState(str, Enum):
+    IDLE = "idle"
+    CHASE = "chase"
+    AMBUSH = "ambush"
+    PATROL = "patrol"
+    RANDOM = "random"
+    FLEE = "flee"
+    EATEN = "eaten"
+
+class GhostVisual(str, Enum):
+    BLINKY = "red"
+    PINKY = "pink"
+    INKY = "cyan"
+    CLYDE = "orange"
+    FRIGHTENED = "blue"
+    EATEN = "white"
+    UNKNOWN = "unknown"
+
+GHOST_VISUAL_MAP = {
+    "Blinky": GhostVisual.BLINKY,
+    "Pinky": GhostVisual.PINKY,
+    "Inky": GhostVisual.INKY,
+    "Clyde": GhostVisual.CLYDE,
+}
 
 class Ghost:
-    def __init__(self, name, initial_state):
+    def __init__(self, name):
         self.name = name
-        self.state = initial_state
-        self.initial_state = initial_state
+        self.initial_state = GhostState.IDLE
+        self.state = self.initial_state
         self.edible = False
         self.edible_start_time = None
+        self.pre_flee_state = self.initial_state
 
     def set_state(self, state):
-        self.state = state
+        if isinstance(state, GhostState):
+            self.state = state
 
     def get_state(self):
         return self.state
@@ -27,6 +46,8 @@ class Ghost:
         return self.edible
 
     def make_edible(self):
+        if not self.edible:
+            self.pre_flee_state = self.state
         self.edible = True
         self.edible_start_time = time.time()
         self.state = GhostState.FLEE
@@ -34,33 +55,44 @@ class Ghost:
     def make_normal(self):
         self.edible = False
         self.edible_start_time = None
-        self.state = self.initial_state
+        # Revert to pre-flee state if available, else initial
+        self.state = self.pre_flee_state if self.pre_flee_state else self.initial_state
 
     def update(self):
         if self.edible and self.edible_start_time:
-            if time.time() - self.edible_start_time > 10:  # edible lasts 10 seconds
+            if time.time() - self.edible_start_time > 10:
                 self.make_normal()
+
+    def visual_identifier(self):
+        if self.state == GhostState.FLEE or self.edible:
+            return GhostVisual.FRIGHTENED.value
+        elif self.state == GhostState.EATEN:
+            return GhostVisual.EATEN.value
+        else:
+            return GHOST_VISUAL_MAP.get(self.name, GhostVisual.UNKNOWN).value
 
 class GhostManager:
     def __init__(self):
         self.ghosts = {
-            'Blinky': Ghost('Blinky', GhostState.CHASE),
-            'Pinky': Ghost('Pinky', GhostState.AMBUSH),
-            'Inky': Ghost('Inky', GhostState.PATROL),
-            'Clyde': Ghost('Clyde', GhostState.RANDOM),
+            "Blinky": Ghost("Blinky"),
+            "Pinky": Ghost("Pinky"),
+            "Inky": Ghost("Inky"),
+            "Clyde": Ghost("Clyde"),
         }
+
+    def get_ghost_state(self, name):
+        ghost = self.ghosts.get(name)
+        if ghost:
+            return ghost.get_state()
+        return None
+
+    def set_ghost_state(self, name, state):
+        ghost = self.ghosts.get(name)
+        if ghost and isinstance(state, GhostState):
+            ghost.set_state(state)
 
     def get_all_states(self):
         return {name: ghost.get_state().value for name, ghost in self.ghosts.items()}
-
-    def set_ghost_state(self, name, state):
-        if name in self.ghosts and isinstance(state, GhostState):
-            self.ghosts[name].set_state(state)
-
-    def get_ghost_state(self, name):
-        if name in self.ghosts:
-            return self.ghosts[name].get_state()
-        return None
 
     def activate_power_pellet(self):
         for ghost in self.ghosts.values():
@@ -74,25 +106,14 @@ class GhostManager:
         for ghost in self.ghosts.values():
             ghost.update()
 
-    def get_visual_identifier(self, name):
-        """Return a string representing the visual identifier of the ghost based on its state."""
+    def is_edible(self, name):
         ghost = self.ghosts.get(name)
-        if not ghost:
-            return None
-        if ghost.is_edible():
-            return "blue"  # frightened visual
-        state = ghost.get_state()
-        if state == GhostState.CHASE:
-            return "red"
-        elif state == GhostState.AMBUSH:
-            return "pink"
-        elif state == GhostState.PATROL:
-            return "cyan"
-        elif state == GhostState.RANDOM:
-            return "orange"
-        elif state == GhostState.FLEE:
-            return "blue"
-        elif state == GhostState.EATEN:
-            return "white"
-        else:
-            return "unknown"
+        if ghost:
+            return ghost.is_edible()
+        return False
+
+    def get_visual_identifier(self, name):
+        ghost = self.ghosts.get(name)
+        if ghost:
+            return ghost.visual_identifier()
+        return GhostVisual.UNKNOWN.value
