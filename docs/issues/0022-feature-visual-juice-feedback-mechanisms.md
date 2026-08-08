@@ -2,7 +2,7 @@
 id: "0022"
 title: "Feature: Visual Juice & Feedback Mechanisms"
 type: "feature"
-status: "review"
+status: "todo"
 assignee: "startup-backend-full-stack-devel"
 labels: "feature"
 due: "2026-08-15"
@@ -54,3 +54,5 @@ Due date: 2026-08-15
 > 2026-08-07 — Reopened by the co-founder: done now means SHIPPED, and this card closed before that rule. Its branch card/0022 no longer merges cleanly into main. Reconcile the branch with main (one edit_code call on card 0022), re-run the acceptance check, then close — this time the close merges.
 
 > 2026-08-08 — Implemented enhanced visual juice and feedback mechanisms including power pellet visual effects, ghost state visuals, and smooth pellet collection animations. Integrated backend triggers with frontend rendering for dynamic gameplay feedback.
+
+> 2026-08-08 — Blocked from moving to review: 5 routes implemented have no client calls (GET /ghost-states, POST /activate-power-pellet, POST /deactivate-power-pellet, GET /pellets, POST /collect_pellet). Need to wire these routes up to the frontend or remove them to comply with product shipping rules.
