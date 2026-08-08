@@ -2,15 +2,15 @@ from enum import Enum
 import time
 
 class GhostVisual(Enum):
-    BLINKY = 'Blinky'
-    PINKY = 'Pinky'
-    INKY = 'Inky'
-    CLYDE = 'Clyde'
-    FRIGHTENED = 'frightened'
-    EYES_UP = 'eyes_up'
-    EYES_DOWN = 'eyes_down'
-    EYES_LEFT = 'eyes_left'
-    EYES_RIGHT = 'eyes_right'
+    BLINKY = 1
+    PINKY = 2
+    INKY = 3
+    CLYDE = 4
+    FRIGHTENED = 5
+    EYES_UP = 6
+    EYES_DOWN = 7
+    EYES_LEFT = 8
+    EYES_RIGHT = 9
 
 class GhostState(Enum):
     IDLE = 'idle'
