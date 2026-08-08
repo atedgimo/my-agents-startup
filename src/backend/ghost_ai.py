@@ -153,3 +153,17 @@ class GhostManager:
     def is_edible(self, ghost_visual):
         ghost = self.ghosts.get(ghost_visual)
         return ghost.is_edible() if ghost else False
+
+    def activate_power_pellet(self, duration=None):
+        """
+        Activates the power pellet effect: all ghosts become frightened/edible.
+        """
+        self.frighten_all(duration=duration)
+
+    def deactivate_power_pellet(self):
+        """
+        Deactivates the power pellet effect: all frightened ghosts revert to their original state.
+        """
+        for ghost in self.ghosts.values():
+            if ghost.state == GhostState.FRIGHTENED:
+                ghost.state = ghost._original_state
