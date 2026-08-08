@@ -5,18 +5,7 @@ import os
 # Adjust the path to import src.backend
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/backend')))
 
-from ghost_ai import GhostManager, GhostState
-
-class GhostVisual:
-    def __init__(self, ghost_name):
-        self.ghost_name = ghost_name
-        self.state = GhostState.IDLE
-
-    def update_state(self, new_state):
-        self.state = new_state
-
-    def __repr__(self):
-        return f"<GhostVisual ghost_name={self.ghost_name} state={self.state.name}>"
+from ghost_ai import GhostManager, GhostState, GhostVisual
 
 
 
