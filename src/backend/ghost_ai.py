@@ -123,7 +123,9 @@ class GhostManager:
             ghost = self.ghosts.get(ghost_identity)
         else:
             ghost = next((g for g in self.ghosts.values() if g.name.lower() == str(ghost_identity).lower()), None)
-        return ghost.state if ghost else None
+        if ghost:
+            return ghost.state
+        return None
 
     def set_ghost_state(self, ghost_identity, state):
         """
@@ -135,7 +137,7 @@ class GhostManager:
         else:
             ghost = next((g for g in self.ghosts.values() if g.name.lower() == str(ghost_identity).lower()), None)
         if ghost:
-            ghost.state = state
+            ghost.set_state(state)
 
     def frighten_all(self, duration=None):
         """
@@ -144,6 +146,8 @@ class GhostManager:
         duration = duration if duration is not None else self.FRIGHTENED_DURATION
         for ghost in self.ghosts.values():
             ghost.frighten(duration)
+        self._power_pellet_active = True
+        self._power_pellet_end_time = time.time() + duration
 
     def eat_ghost(self, ghost_visual):
         ghost = self.ghosts.get(ghost_visual)
@@ -161,8 +165,7 @@ class GhostManager:
         if self._power_pellet_active and self._power_pellet_end_time is not None and now > self._power_pellet_end_time:
             for ghost in self.ghosts.values():
                 if ghost.state == GhostState.FLEE:
-                    ghost.state = self.ORIGINAL_ENUM_STATES.get(ghost.name, GhostState.IDLE)
-                    ghost.edible = False
+                    ghost.set_state(self.ORIGINAL_ENUM_STATES.get(ghost.name, GhostState.IDLE))
             self._power_pellet_active = False
             self._power_pellet_end_time = None
 
@@ -174,10 +177,7 @@ class GhostManager:
         """
         Returns a dict mapping ghost name to their current state (always GhostState enum).
         """
-        result = {}
-        for ghost in self.ghosts.values():
-            result[ghost.name] = ghost.state
-        return result
+        return {ghost.name: ghost.state for ghost in self.ghosts.values()}
 
     def get_visual_identifiers(self):
         """
@@ -196,11 +196,7 @@ class GhostManager:
         """
         Activates the power pellet effect: all ghosts become FLEE/edible and store their original state.
         """
-        duration = duration if duration is not None else self.FRIGHTENED_DURATION
-        for ghost in self.ghosts.values():
-            ghost.frighten(duration)
-        self._power_pellet_active = True
-        self._power_pellet_end_time = time.time() + duration
+        self.frighten_all(duration)
 
     def deactivate_power_pellet(self):
         """
@@ -209,7 +205,6 @@ class GhostManager:
         if self._power_pellet_active:
             for ghost in self.ghosts.values():
                 if ghost.state == GhostState.FLEE:
-                    ghost.state = self.ORIGINAL_ENUM_STATES.get(ghost.name, GhostState.IDLE)
-                    ghost.edible = False
+                    ghost.set_state(self.ORIGINAL_ENUM_STATES.get(ghost.name, GhostState.IDLE))
             self._power_pellet_active = False
             self._power_pellet_end_time = None
