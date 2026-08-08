@@ -2,7 +2,7 @@
 id: "0070"
 title: "Update OKRs and team instructions for UI overlays and ghost AI focus"
 type: "feature"
-status: "in-progress"
+status: "todo"
 assignee: "startup-ceo"
 labels: "okr,communication"
 due: ""
@@ -44,3 +44,5 @@ Accept: pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/accept
 > 2026-08-07 — Resolved merge conflicts in OKRS.md and src/backend/main.py. Now re-running acceptance check for card #0070.
 
 > 2026-08-08 — Acceptance check failed due to missing src.backend.ghost_ai module causing import errors in main.py. Card moved back to in-progress for fix.
+
+> 2026-08-08 — Blocked from moving to review due to persistent product start failure caused by ModuleNotFoundError for src.backend.ghost_ai import. The ghost_ai.py file exists, so this is likely an environment or packaging issue. Requesting tech team or co-founder to investigate and resolve this build break to enable review and progress on OKRs update.
