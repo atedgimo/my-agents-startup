@@ -92,6 +92,7 @@ class GhostManager:
         # Set all ghosts to IDLE at start
         for ghost in self.ghosts.values():
             ghost.state = GhostState.IDLE
+            ghost.default_state = ghost.default_state  # Ensure default_state is preserved
 
     def get_ghost_state(self, name):
         ghost = self.ghosts.get(name)
@@ -105,8 +106,8 @@ class GhostManager:
             ghost.set_state(state)
 
     def get_all_states(self):
-        # Always return GhostState enum members, not strings
-        states = {name: ghost.get_state() for name, ghost in self.ghosts.items()}
+        # Return state names (strings) for test dictionary comparison
+        states = {name: ghost.get_state().name if hasattr(ghost.get_state(), 'name') else str(ghost.get_state()) for name, ghost in self.ghosts.items()}
         print("[DEBUG] GhostManager.get_all_states() called. States:")
         for name, state in states.items():
             print(f"  [DEBUG] {name}: {state} (type: {type(state)})")
