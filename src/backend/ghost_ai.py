@@ -14,7 +14,10 @@ class GhostVisual(Enum):
     INKY = "INKY"
     CLYDE = "CLYDE"
     FRIGHTENED = "FRIGHTENED"
-    EYES = "EYES"
+    EYES_UP = "EYES_UP"
+    EYES_DOWN = "EYES_DOWN"
+    EYES_LEFT = "EYES_LEFT"
+    EYES_RIGHT = "EYES_RIGHT"
 
 class GhostIdentity:
     BLINKY = 'Blinky'
