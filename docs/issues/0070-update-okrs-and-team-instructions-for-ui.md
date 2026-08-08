@@ -2,12 +2,12 @@
 id: "0070"
 title: "Update OKRs and team instructions for UI overlays and ghost AI focus"
 type: "feature"
-status: "review"
+status: "in-progress"
 assignee: "startup-ceo"
 labels: "okr,communication"
 due: ""
 created: "2026-08-04"
-updated: "2026-08-07"
+updated: "2026-08-08"
 started: "2026-08-05T17:23:28"
 objective: "Complete UI state overlays for Game Over and Level Up and finalize ghost AI behaviors and visuals to meet playable core loop and persistent feedback objectives."
 accept: "pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/acceptance/test_ghost_ai_behaviors.py"
@@ -42,3 +42,5 @@ Accept: pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/accept
 > 2026-08-07 — Disabled import and usage of ghost_ai in src/backend/main.py to unblock product startup. Kept import and usage of input_buffer. Preserved all other code and comments. This allows the product to start without ghost AI features temporarily. Ready for review and acceptance check.
 
 > 2026-08-07 — Resolved merge conflicts in OKRS.md and src/backend/main.py. Now re-running acceptance check for card #0070.
+
+> 2026-08-08 — Acceptance check failed due to missing src.backend.ghost_ai module causing import errors in main.py. Card moved back to in-progress for fix.
