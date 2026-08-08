@@ -1873,3 +1873,17 @@ Suggested fix:
 
 ---
 
+## Verify and move card #0050 to done if ghost visual identifiers and state logic tests pass
+
+**Labels:** chore
+
+Acceptance tests for ghost visual identifiers and state logic exist in tests/acceptance/test_ghost_visuals.py and test the /ghosts API routes.
+
+I have implemented the missing /ghosts API routes in src/backend/main.py to match the tests.
+
+Objective: Ensure the ghost visual identifiers and state logic feature is fully implemented and tested.
+
+Acceptance: pytest tests/acceptance/test_ghost_visuals.py
+
+---
+
