@@ -30,14 +30,20 @@ class Ghost:
     def __init__(self, name):
         self.name = name
         self.initial_state = GhostState.IDLE
-        self.state = GhostState.IDLE  # Ensure this is always the enum, not a string
+        self.state = GhostState.IDLE  # Always store as GhostState enum
         self.edible = False
         self.edible_start_time = None
         self.pre_flee_state = GhostState.IDLE
 
     def set_state(self, state):
+        # Accept both GhostState enum and string, but always store as enum
         if isinstance(state, GhostState):
             self.state = state
+        elif isinstance(state, str):
+            try:
+                self.state = GhostState(state)
+            except ValueError:
+                pass  # Ignore invalid state
 
     def get_state(self):
         return self.state
@@ -88,7 +94,7 @@ class GhostManager:
 
     def set_ghost_state(self, name, state):
         ghost = self.ghosts.get(name)
-        if ghost and isinstance(state, GhostState):
+        if ghost:
             ghost.set_state(state)
 
     def get_all_states(self):
