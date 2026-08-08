@@ -118,6 +118,29 @@ async def startup_event():
 # Register pellet collection router
 app.include_router(pellet_router)
 
+# Ghosts API routes
+from fastapi import APIRouter, HTTPException
+
+router = APIRouter()
+
+@router.get("/ghosts")
+async def get_ghosts():
+    return ghost_manager.get_all_ghosts()
+
+@router.post("/ghosts/{ghost_name}/state")
+async def set_ghost_state(ghost_name: str, state: dict):
+    new_state = state.get("state")
+    if not new_state:
+        raise HTTPException(status_code=400, detail="Missing 'state' in request body")
+    try:
+        ghost_manager.set_ghost_state(ghost_name, new_state)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    return {"message": "State updated"}
+
+app.include_router(router)
+
+
 @app.post("/submit-score")
 async def submit_score(request: Request):
     """Submit a new score to be saved."""
