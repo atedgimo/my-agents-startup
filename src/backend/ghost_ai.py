@@ -1,16 +1,16 @@
 from enum import Enum
 import time
 
-class GhostVisual(Enum):
-    BLINKY = 1
-    PINKY = 2
-    INKY = 3
-    CLYDE = 4
-    FRIGHTENED = 5
-    EYES_UP = 6
-    EYES_DOWN = 7
-    EYES_LEFT = 8
-    EYES_RIGHT = 9
+class GhostVisual:
+    BLINKY = "BLINKY"
+    PINKY = "PINKY"
+    INKY = "INKY"
+    CLYDE = "CLYDE"
+    FRIGHTENED = "FRIGHTENED"
+    EYES_UP = "EYES_UP"
+    EYES_DOWN = "EYES_DOWN"
+    EYES_LEFT = "EYES_LEFT"
+    EYES_RIGHT = "EYES_RIGHT"
 
 class GhostState(Enum):
     IDLE = 'idle'
@@ -60,16 +60,14 @@ class Ghost:
 
     def visual_identifier(self):
         """
-        Returns a GhostVisual enum member for rendering.
+        Returns a GhostVisual class attribute (string) for rendering.
         """
-        # Map ghost state to visual
         if self.state == GhostState.FLEE:
             return GhostVisual.FRIGHTENED
         elif self.state == GhostState.EATEN:
             # For simplicity, default to EYES_UP when eaten; could be directional
             return GhostVisual.EYES_UP
         else:
-            # Map ghost name to GhostVisual
             name_map = {
                 'Blinky': GhostVisual.BLINKY,
                 'Pinky': GhostVisual.PINKY,
