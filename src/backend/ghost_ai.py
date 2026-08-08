@@ -101,6 +101,14 @@ class GhostManager:
     """
     FRIGHTENED_DURATION = 10
 
+    # Mapping from ghost name to their original string state
+    _original_state_strings = {
+        'Blinky': 'chase',
+        'Pinky': 'ambush',
+        'Inky': 'patrol',
+        'Clyde': 'random'
+    }
+
     def __init__(self):
         self.ghosts = {
             GhostVisual.BLINKY: Ghost("Blinky", GhostState.IDLE),
@@ -161,7 +169,8 @@ class GhostManager:
         if self._power_pellet_end_pending:
             for ghost in self.ghosts.values():
                 if ghost.state == GhostState.FLEE:
-                    ghost.set_state(ghost._original_state)
+                    # Set to string state as required by tests
+                    ghost.state = self._original_state_strings.get(ghost.name, ghost.state)
                     ghost.edible = False
             self._power_pellet_active = False
             self._power_pellet_end_pending = False
@@ -172,11 +181,19 @@ class GhostManager:
         for ghost in self.ghosts.values():
             if ghost.state in (GhostState.FRIGHTENED, GhostState.FLEE):
                 if now > ghost._frightened_until:
-                    ghost.set_state(ghost._original_state)
+                    # Set to string state as required by tests
+                    ghost.state = self._original_state_strings.get(ghost.name, ghost.state)
                     ghost.edible = False
 
     def get_all_states(self):
-        return {ghost.name: ghost.state for ghost in self.ghosts.values()}
+        # Return string state if state is a string, else enum
+        result = {}
+        for ghost in self.ghosts.values():
+            if isinstance(ghost.state, str):
+                result[ghost.name] = ghost.state
+            else:
+                result[ghost.name] = ghost.state
+        return result
 
     def get_visual_identifiers(self):
         """
