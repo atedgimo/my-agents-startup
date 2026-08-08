@@ -2,6 +2,7 @@ from enum import Enum
 import time
 
 class GhostState(Enum):
+    IDLE = "idle"
     NORMAL = "normal"
     PATROL = "patrol"
     AMBUSH = "ambush"
@@ -24,7 +25,7 @@ class Ghost:
     """
     Represents a single ghost and its state logic.
     """
-    def __init__(self, name, initial_state=GhostState.NORMAL):
+    def __init__(self, name, initial_state=GhostState.IDLE):
         self.name = name
         self.state = initial_state
         self._original_state = initial_state
@@ -85,10 +86,10 @@ class GhostManager:
 
     def __init__(self):
         self.ghosts = {
-            GhostVisual.BLINKY: Ghost("Blinky", GhostState.NORMAL),
-            GhostVisual.PINKY: Ghost("Pinky", GhostState.NORMAL),
-            GhostVisual.INKY: Ghost("Inky", GhostState.NORMAL),
-            GhostVisual.CLYDE: Ghost("Clyde", GhostState.NORMAL),
+            GhostVisual.BLINKY: Ghost("Blinky", GhostState.IDLE),
+            GhostVisual.PINKY: Ghost("Pinky", GhostState.IDLE),
+            GhostVisual.INKY: Ghost("Inky", GhostState.IDLE),
+            GhostVisual.CLYDE: Ghost("Clyde", GhostState.IDLE),
         }
 
     def get_ghost_state(self, ghost_visual):
