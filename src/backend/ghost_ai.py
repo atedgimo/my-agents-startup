@@ -85,18 +85,18 @@ class GhostManager:
 
     def __init__(self):
         self.ghosts = {
-            GhostVisual.BLINKY.value: Ghost("Blinky", GhostState.NORMAL),
-            GhostVisual.PINKY.value: Ghost("Pinky", GhostState.NORMAL),
-            GhostVisual.INKY.value: Ghost("Inky", GhostState.NORMAL),
-            GhostVisual.CLYDE.value: Ghost("Clyde", GhostState.NORMAL),
+            GhostVisual.BLINKY: Ghost("Blinky", GhostState.NORMAL),
+            GhostVisual.PINKY: Ghost("Pinky", GhostState.NORMAL),
+            GhostVisual.INKY: Ghost("Inky", GhostState.NORMAL),
+            GhostVisual.CLYDE: Ghost("Clyde", GhostState.NORMAL),
         }
 
-    def get_ghost_state(self, ghost_name):
-        ghost = self.ghosts.get(ghost_name)
+    def get_ghost_state(self, ghost_visual):
+        ghost = self.ghosts.get(ghost_visual)
         return ghost.get_state() if ghost else None
 
-    def set_ghost_state(self, ghost_name, state):
-        ghost = self.ghosts.get(ghost_name)
+    def set_ghost_state(self, ghost_visual, state):
+        ghost = self.ghosts.get(ghost_visual)
         if ghost:
             ghost.set_state(state)
 
@@ -108,8 +108,8 @@ class GhostManager:
         for ghost in self.ghosts.values():
             ghost.frighten(duration)
 
-    def eat_ghost(self, ghost_name):
-        ghost = self.ghosts.get(ghost_name)
+    def eat_ghost(self, ghost_visual):
+        ghost = self.ghosts.get(ghost_visual)
         if ghost:
             ghost.eat()
 
@@ -122,14 +122,14 @@ class GhostManager:
             ghost.update_state(current_time=now)
 
     def get_all_states(self):
-        return {name: ghost.get_state() for name, ghost in self.ghosts.items()}
+        return {visual: ghost.get_state() for visual, ghost in self.ghosts.items()}
 
     def get_visual_identifiers(self):
         """
-        Returns a dict of ghost name to their visual identifier (for rendering).
+        Returns a dict of ghost visual enum to their visual identifier (for rendering).
         """
-        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
+        return {visual: ghost.visual_identifier() for visual, ghost in self.ghosts.items()}
 
-    def is_edible(self, ghost_name):
-        ghost = self.ghosts.get(ghost_name)
+    def is_edible(self, ghost_visual):
+        ghost = self.ghosts.get(ghost_visual)
         return ghost.is_edible() if ghost else False
