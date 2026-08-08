@@ -33,24 +33,32 @@ class Ghost:
         self.name = name
         # Set initial state based on ghost name
         initial_state_map = {
+            'Blinky': GhostState.IDLE,
+            'Pinky': GhostState.IDLE,
+            'Inky': GhostState.IDLE,
+            'Clyde': GhostState.IDLE,
+        }
+        self.state = initial_state_map.get(name, GhostState.IDLE)
+        self.behaviour_map = {
             'Blinky': GhostState.CHASE,
             'Pinky': GhostState.AMBUSH,
             'Inky': GhostState.PATROL,
             'Clyde': GhostState.RANDOM,
         }
-        self.state = initial_state_map.get(name, GhostState.IDLE)
-        self.original_state = self.state
-        visual_map = {
+        self.behaviour = self.behaviour_map.get(name, GhostState.CHASE)
+        self.visual_map = {
             'Blinky': GhostVisual.BLINKY,
             'Pinky': GhostVisual.PINKY,
             'Inky': GhostVisual.INKY,
             'Clyde': GhostVisual.CLYDE,
         }
-        self.visual = visual_map.get(name, None)
+        self.visual = self.visual_map.get(name, None)
+        self.original_state = self.state
+        self._debug("Initialized")
 
     def visual_identifier(self):
         # Return the correct visual identifier based on state
-        if self.state == GhostState.FLEE or self.state == GhostState.FRIGHTENED:
+        if self.state in (GhostState.FLEE, GhostState.FRIGHTENED):
             return GhostVisual.FRIGHTENED
         # Eyes logic (not implemented in state machine, but placeholder for extensibility)
         # if self.state == GhostState.EATEN:
@@ -58,14 +66,19 @@ class Ghost:
         return self.visual
 
     def activate(self):
-        self.state = GhostState.CHASE
+        self.state = self.behaviour
         self.original_state = self.state
+        self._debug("Activated")
 
     def sleep(self):
         self.state = GhostState.FRIGHTENED
+        self._debug("Slept (frightened)")
 
     def is_active(self) -> bool:
-        return self.state == GhostState.CHASE
+        return self.state == self.behaviour
+
+    def _debug(self, msg):
+        print(f"[DEBUG] Ghost {self.name}: {msg} | state={self.state} behaviour={self.behaviour}")
 
     def __repr__(self):
         return f"<Ghost name={self.name} state={self.state.name} visual={self.visual.value}>"
@@ -80,10 +93,12 @@ class GhostManager:
         }
         self.power_pellet_active = False
         self.power_pellet_end_time = 0
+        self._debug("Initialized GhostManager")
 
     def get_ghost_state(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
         if ghost:
+            self._debug(f"get_ghost_state({ghost_name}) = {ghost.state}")
             return ghost.state
         return None
 
@@ -92,9 +107,18 @@ class GhostManager:
         if ghost:
             ghost.state = state
             ghost.original_state = state
+            self._debug(f"set_ghost_state({ghost_name}, {state})")
 
     def get_all_states(self):
-        return {name: ghost.state for name, ghost in self.ghosts.items()}
+        # Return a dict with state name and visual identifier for each ghost
+        result = {}
+        for name, ghost in self.ghosts.items():
+            result[name] = {
+                "state": ghost.state.name if hasattr(ghost.state, "name") else str(ghost.state),
+                "visual": ghost.visual_identifier().name if hasattr(ghost.visual_identifier(), "name") else str(ghost.visual_identifier())
+            }
+            self._debug(f"get_all_states: {name} -> {result[name]}")
+        return result
 
     def activate_power_pellet(self):
         self.power_pellet_active = True
@@ -102,9 +126,11 @@ class GhostManager:
         for ghost in self.ghosts.values():
             ghost.original_state = ghost.state
             ghost.state = GhostState.FLEE
+            ghost._debug("Power pellet activated (FLEE)")
 
     def deactivate_power_pellet(self):
         self.power_pellet_active = False
+        self._debug("Power pellet deactivated")
         # Do not revert immediately; let update() handle revert after timer
 
     def update(self):
@@ -112,21 +138,17 @@ class GhostManager:
         if self.power_pellet_active and current_time > self.power_pellet_end_time:
             self.power_pellet_active = False
             for ghost in self.ghosts.values():
-                # Revert to original state if stored
-                if hasattr(ghost, 'original_state') and ghost.original_state is not None:
-                    ghost.state = ghost.original_state
-                else:
-                    # Fallback: assign initial state based on ghost name
-                    initial_state_map = {
-                        'Blinky': GhostState.CHASE,
-                        'Pinky': GhostState.AMBUSH,
-                        'Inky': GhostState.PATROL,
-                        'Clyde': GhostState.RANDOM,
-                    }
-                    ghost.state = initial_state_map.get(ghost.name, GhostState.IDLE)
+                # Revert to behaviour state
+                ghost.state = ghost.behaviour
+                ghost._debug("Power pellet expired, reverting to behaviour")
 
     def is_edible(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
         if ghost:
-            return ghost.state == GhostState.FLEE or ghost.state == GhostState.FRIGHTENED
+            edible = ghost.state in (GhostState.FLEE, GhostState.FRIGHTENED)
+            self._debug(f"is_edible({ghost_name}) = {edible}")
+            return edible
         return False
+
+    def _debug(self, msg):
+        print(f"[DEBUG] GhostManager: {msg}")
