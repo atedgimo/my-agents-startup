@@ -18,23 +18,39 @@ class GhostIdentity:
     CLYDE = 'Clyde'
 
 class Ghost:
-    def __init__(self, name):
+    """
+    Represents a single ghost and its state logic.
+    """
+    def __init__(self, name, initial_state=GhostState.IDLE):
         self.name = name
-        self.state = GhostState.CHASE
-        self.original_state = self.state
-        self.edible_until = 0
+        self.state = initial_state
+        self._original_state = initial_state
+        self._edible_until = 0
 
-    def update_state(self, player_powered_up: bool):
-        current_time = time.time()
-        if player_powered_up:
-            self.original_state = self.state
-            self.state = GhostState.FLEE
-            self.edible_until = current_time + 10
-        else:
-            if current_time > self.edible_until:
-                self.state = self.original_state
+    def set_state(self, state: GhostState):
+        self.state = state
+
+    def get_state(self) -> GhostState:
+        return self.state
+
+    def update_for_power_pellet(self, duration: float):
+        self._original_state = self.state
+        self.state = GhostState.FLEE
+        self._edible_until = time.time() + duration
+
+    def update_state(self, current_time=None):
+        """
+        Called periodically to update the ghost's state, e.g. after power pellet expires.
+        """
+        if self.state == GhostState.FLEE:
+            now = current_time if current_time is not None else time.time()
+            if now > self._edible_until:
+                self.state = self._original_state
 
     def visual_identifier(self):
+        """
+        Returns a string identifier for rendering (e.g. state name).
+        """
         return self.state.value
 
     def is_edible(self) -> bool:
@@ -43,87 +59,71 @@ class Ghost:
     def __repr__(self):
         return f"<Ghost name={self.name} state={self.state.value}>"
 
-    def activate(self):
-        self.state = GhostState.CHASE
-        self.original_state = self.state
-
-    def sleep(self):
-        self.state = GhostState.FRIGHTENED
-
-    def is_active(self) -> bool:
-        return self.state == GhostState.CHASE
-
-    def __init__(self, name):
-        self.name = name
-        self.state = GhostState.IDLE
-        self.original_state = self.state
-
-    def activate(self):
-        self.state = GhostState.CHASE
-        self.original_state = self.state
-
-    def sleep(self):
-        self.state = GhostState.FRIGHTENED
-
-    def is_active(self) -> bool:
-        return self.state == GhostState.CHASE
-
-    def __repr__(self):
-        return f"<Ghost name={self.name} state={self.state.name}>"
-
 class GhostManager:
+    """
+    Manages all ghosts and their state transitions, including power pellet logic.
+    """
+    POWER_PELLET_DURATION = 10
+
     def __init__(self):
         self.ghosts = {
-            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY),
-            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY),
-            GhostIdentity.INKY: Ghost(GhostIdentity.INKY),
-            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE),
+            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY, GhostState.CHASE),
+            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY, GhostState.AMBUSH),
+            GhostIdentity.INKY: Ghost(GhostIdentity.INKY, GhostState.PATROL),
+            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE, GhostState.RANDOM),
         }
-        # Initialize ghosts to expected initial states
-        self.ghosts[GhostIdentity.BLINKY].state = GhostState.CHASE
-        self.ghosts[GhostIdentity.PINKY].state = GhostState.AMBUSH
-        self.ghosts[GhostIdentity.INKY].state = GhostState.PATROL
-        self.ghosts[GhostIdentity.CLYDE].state = GhostState.RANDOM
-        self.power_pellet_active = False
-        self.power_pellet_end_time = 0
+        self._power_pellet_active = False
+        self._power_pellet_end_time = 0
 
     def get_ghost_state(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
-        if ghost:
-            return ghost.state
-        return None
+        return ghost.get_state() if ghost else None
 
     def set_ghost_state(self, ghost_name, state):
         ghost = self.ghosts.get(ghost_name)
         if ghost:
-            ghost.state = state
+            ghost.set_state(state)
 
     def get_all_states(self):
-        return {name: ghost.state for name, ghost in self.ghosts.items()}
+        return {name: ghost.get_state() for name, ghost in self.ghosts.items()}
 
-    def activate_power_pellet(self):
-        self.power_pellet_active = True
-        self.power_pellet_end_time = time.time() + 10
+    def activate_power_pellet(self, duration=None):
+        """
+        Activates power pellet mode for all ghosts.
+        """
+        duration = duration if duration is not None else self.POWER_PELLET_DURATION
+        self._power_pellet_active = True
+        self._power_pellet_end_time = time.time() + duration
         for ghost in self.ghosts.values():
-            ghost.original_state = ghost.state
-            ghost.state = GhostState.FLEE
+            ghost.update_for_power_pellet(duration)
 
     def deactivate_power_pellet(self):
-        self.power_pellet_active = False
+        """
+        Deactivates power pellet mode (ghosts revert to original states).
+        """
+        self._power_pellet_active = False
+        for ghost in self.ghosts.values():
+            ghost.update_state(current_time=self._power_pellet_end_time + 1)
 
     def update(self):
-        current_time = time.time()
-        if self.power_pellet_active and current_time > self.power_pellet_end_time:
-            self.power_pellet_active = False
+        """
+        Should be called periodically to update ghost states and handle power pellet expiration.
+        """
+        now = time.time()
+        if self._power_pellet_active and now > self._power_pellet_end_time:
+            self._power_pellet_active = False
             for ghost in self.ghosts.values():
-                # Revert to original state if stored
-                if hasattr(ghost, 'original_state') and ghost.original_state is not None:
-                    ghost.state = ghost.original_state
-                else:
-                    ghost.state = GhostState.CHASE
+                ghost.update_state(current_time=now)
+        elif self._power_pellet_active:
+            for ghost in self.ghosts.values():
+                ghost.update_state(current_time=now)
 
     def is_edible(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
-        if ghost:
-            return ghost.state == GhostState.FLEE
-        return False
+        return ghost.is_edible() if ghost else False
+
+    def get_visual_identifiers(self):
+        """
+        Returns a dict of ghost name to their visual identifier (for rendering).
+        """
+        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
