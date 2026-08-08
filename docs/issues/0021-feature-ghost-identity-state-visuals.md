@@ -66,3 +66,5 @@ Due date: 2026-08-15
 > 2026-08-07 — Blocked by critical ImportError in src/backend/main.py: cannot import 'router' from 'src.backend.api'. This prevents the product from starting and causes all code changes to be refused. Backend fix needed before UI integration can proceed.
 
 > 2026-08-08 — Blocked by backend import error in src/backend/main.py preventing product startup and API availability. Cannot integrate ghost identity and state visuals UI until backend is fixed.
+
+> 2026-08-08 — Blocked on backend import errors due to missing src.backend.ghost_ai module. Cannot implement frontend ghost identity and state visuals until backend API /ghost-states is functional. Blocking bug card #0056 is in progress to fix this.
