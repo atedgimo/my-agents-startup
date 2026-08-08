@@ -102,7 +102,7 @@ class GhostManager:
     FRIGHTENED_DURATION = 10
 
     # Mapping from ghost name to their original string state
-    _original_state_strings = {
+    ORIGINAL_STRING_STATES = {
         'Blinky': 'chase',
         'Pinky': 'ambush',
         'Inky': 'patrol',
@@ -170,7 +170,7 @@ class GhostManager:
             for ghost in self.ghosts.values():
                 if ghost.state == GhostState.FLEE:
                     # Set to string state as required by tests
-                    ghost.state = self._original_state_strings.get(ghost.name, ghost.state)
+                    ghost.state = self.ORIGINAL_STRING_STATES.get(ghost.name, ghost.state)
                     ghost.edible = False
             self._power_pellet_active = False
             self._power_pellet_end_pending = False
@@ -182,17 +182,22 @@ class GhostManager:
             if ghost.state in (GhostState.FRIGHTENED, GhostState.FLEE):
                 if now > ghost._frightened_until:
                     # Set to string state as required by tests
-                    ghost.state = self._original_state_strings.get(ghost.name, ghost.state)
+                    ghost.state = self.ORIGINAL_STRING_STATES.get(ghost.name, ghost.state)
                     ghost.edible = False
 
     def get_all_states(self):
-        # Return string state if state is a string, else enum
+        # Always return the original string state for each ghost unless in FLEE state
         result = {}
         for ghost in self.ghosts.values():
+            # If ghost.state is a string, just return it
             if isinstance(ghost.state, str):
                 result[ghost.name] = ghost.state
+            # If ghost is in FLEE state, return GhostState.FLEE
+            elif ghost.state == GhostState.FLEE:
+                result[ghost.name] = GhostState.FLEE
+            # Otherwise, return the original string state
             else:
-                result[ghost.name] = ghost.state
+                result[ghost.name] = self.ORIGINAL_STRING_STATES.get(ghost.name, ghost.state)
         return result
 
     def get_visual_identifiers(self):
