@@ -2,7 +2,7 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 from src.backend.main import app
-from src.backend.ghosts import GhostIdentity, GhostState
+from src.backend.ghost_ai import GhostIdentity, GhostState
 
 @pytest.mark.asyncio
 async def test_get_ghosts_initial_state():
