@@ -2,12 +2,12 @@
 id: "0094"
 title: "Implement GhostManager and GhostState logic for ghost visual identifiers and states"
 type: "feature"
-status: "todo"
+status: "review"
 assignee: "startup-backend-python-dev"
 labels: "feature"
 due: ""
 created: "2026-08-05"
-updated: "2026-08-05"
+updated: "2026-08-08"
 objective: "Ensure ghost visual identifiers and state logic are implemented and tested correctly"
 accept: "pytest -q tests/test_ghost_visuals.py"
 ---
@@ -27,3 +27,5 @@ pytest -q tests/test_ghost_visuals.py
 This will unblock bug #0050 and align implementation with tests.
 
 > 2026-08-05 — Assigning to new backend/full-stack developer to implement GhostManager and GhostState logic for ghost visual identifiers and states.
+
+> 2026-08-08 — Set all ghost initial states to GhostState.IDLE in GhostManager initialization to pass test_initial_ghost_states.
