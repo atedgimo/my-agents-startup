@@ -3,6 +3,7 @@ import time
 
 class GhostState(Enum):
     NORMAL = "normal"
+    PATROL = "patrol"
     FRIGHTENED = "frightened"
     EATEN = "eaten"
 
