@@ -122,7 +122,7 @@ class GhostManager:
             ghost.update_state(current_time=now)
 
     def get_all_states(self):
-        return {visual: ghost.get_state() for visual, ghost in self.ghosts.items()}
+        return {ghost.name: ghost.state for ghost in self.ghosts.values()}
 
     def get_visual_identifiers(self):
         """
