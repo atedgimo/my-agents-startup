@@ -67,13 +67,11 @@ class GhostIdentity:
 def test_initial_ghost_states():
     gm = GhostManager()
     states = gm.get_all_states()
-    # Accept both string and enum for state values
+    # Accept only enum for state values
     for ghost in ['Blinky', 'Pinky', 'Inky', 'Clyde']:
         state = states[ghost]
-        if hasattr(state, 'name'):
-            assert state.name == 'IDLE'
-        else:
-            assert state == 'IDLE'
+        assert isinstance(state, GhostState)
+        assert state == GhostState.IDLE
 
 
 def test_set_and_get_ghost_state():

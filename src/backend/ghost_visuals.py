@@ -30,7 +30,7 @@ class Ghost:
     def __init__(self, name):
         self.name = name
         self.initial_state = GhostState.IDLE
-        self.state = GhostState.IDLE
+        self.state = GhostState.IDLE  # Ensure this is always the enum, not a string
         self.edible = False
         self.edible_start_time = None
         self.pre_flee_state = GhostState.IDLE
@@ -92,6 +92,7 @@ class GhostManager:
             ghost.set_state(state)
 
     def get_all_states(self):
+        # Always return GhostState enum members, not strings
         return {name: ghost.get_state() for name, ghost in self.ghosts.items()}
 
     def activate_power_pellet(self):
