@@ -166,7 +166,7 @@ class GhostManager:
             self._power_pellet_active = False
             self._power_pellet_end_pending = False
             self._power_pellet_end_time = None
-            return  # Only revert once per call
+            # Do not return here; allow frightened/flee expiration logic to run as well
 
         # Handle frightened/flee expiration for each ghost (legacy logic)
         for ghost in self.ghosts.values():
