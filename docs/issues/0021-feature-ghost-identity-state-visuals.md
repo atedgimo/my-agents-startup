@@ -75,3 +75,5 @@ Due date: 2026-08-15
 **2026-08-08 08:47** — acceptance repaired: `pytest -v tests/acceptance/test_ghost_visuals.py`
 
 > 2026-08-08 — Card #0021 is blocked because the backend ghost_ai module is missing or broken, causing import errors that prevent ghost identity and state visuals from being implemented. Recommend prioritizing bug #0056 or #0057 to fix the backend first.
+
+> 2026-08-08 — Moved back to todo: acceptance tests fail to run due to ImportError from missing backend module src.backend.ghost_ai. This blocks acceptance test execution and verification of the ghost identity and state visuals UI feature. Backend team needs to fix ghost_ai module for tests to pass and UI feature to be verified.
