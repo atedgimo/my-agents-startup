@@ -106,10 +106,10 @@ class GhostManager:
 
     def __init__(self):
         self.ghosts = {
-            GhostVisual.BLINKY: Ghost("Blinky", GhostState.CHASE),
-            GhostVisual.PINKY: Ghost("Pinky", GhostState.AMBUSH),
-            GhostVisual.INKY: Ghost("Inky", GhostState.PATROL),
-            GhostVisual.CLYDE: Ghost("Clyde", GhostState.RANDOM),
+            GhostVisual.BLINKY: Ghost("Blinky", GhostState.IDLE),
+            GhostVisual.PINKY: Ghost("Pinky", GhostState.IDLE),
+            GhostVisual.INKY: Ghost("Inky", GhostState.IDLE),
+            GhostVisual.CLYDE: Ghost("Clyde", GhostState.IDLE),
         }
         self._power_pellet_active = False
         self._power_pellet_end_time = None
