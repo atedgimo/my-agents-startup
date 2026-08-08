@@ -89,3 +89,5 @@ Created bug card to track and escalate the problem.
 > 2026-08-08 — Card #0050 in review fails: no implementation or tests found for ghost visual identifiers and state logic. Moving back to in-progress for fix.
 
 > 2026-08-08 — Implemented ghost visual identifiers and state logic in the backend, added API endpoints, and comprehensive tests for ghost visuals and state transitions. All tests pass.
+
+> 2026-08-08 — Implemented missing ghost visual identifiers and state logic in the backend and ensured tests in tests/test_ghost_visuals.py pass. The acceptance check is green.
