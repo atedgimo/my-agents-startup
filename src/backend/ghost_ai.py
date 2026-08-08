@@ -22,6 +22,7 @@ class GhostState(Enum):
     FLEE = "flee"
     CHASE = "chase"
     SCATTER = "scatter"
+    RANDOM = "random"
     # Add any additional states used in code/tests if needed
 
 class Ghost:
@@ -148,11 +149,16 @@ class GhostManager:
 
     def update(self):
         """
-        Should be called periodically to update ghost states and handle frightened expiration.
+        Should be called periodically to update ghost states and handle frightened/FLEE expiration.
+        If a ghost's frightened/flee timer has expired, revert to its original state and mark as not edible.
         """
         now = time.time()
         for ghost in self.ghosts.values():
-            ghost.update_state(current_time=now)
+            # Only process if in FRIGHTENED or FLEE state
+            if ghost.state in (GhostState.FRIGHTENED, GhostState.FLEE):
+                if now > ghost._frightened_until:
+                    ghost.set_state(ghost._original_state)
+                    ghost.edible = False
 
     def get_all_states(self):
         return {ghost.name: ghost.state for ghost in self.ghosts.values()}
@@ -180,8 +186,9 @@ class GhostManager:
     def deactivate_power_pellet(self):
         """
         Deactivates the power pellet effect: all FLEE ghosts revert to their original state.
+        Edible flag is set to False only after state reversion.
         """
         for ghost in self.ghosts.values():
             if ghost.state == GhostState.FLEE:
                 ghost.set_state(ghost._original_state)
-            ghost.edible = False
+                ghost.edible = False
