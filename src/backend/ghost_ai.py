@@ -129,20 +129,18 @@ class GhostManager:
 
     def get_ghost_state(self, ghost_identity):
         """
-        Returns the GhostState for a given ghost identity (e.g., "Blinky", "Pinky", etc).
+        Returns the current state attribute for a given ghost identity (e.g., "Blinky", "Pinky", etc).
         Accepts either a GhostVisual enum or a string name.
         """
-        # Accept both GhostVisual and string
         if isinstance(ghost_identity, GhostVisual):
             ghost = self.ghosts.get(ghost_identity)
         else:
-            # Try to find by name (case-insensitive)
             ghost = next((g for g in self.ghosts.values() if g.name.lower() == str(ghost_identity).lower()), None)
-        return ghost.get_state() if ghost else None
+        return ghost.state if ghost else None
 
     def set_ghost_state(self, ghost_identity, state):
         """
-        Sets the GhostState for a given ghost identity (e.g., "Blinky", "Pinky", etc).
+        Sets the state attribute for a given ghost identity (e.g., "Blinky", "Pinky", etc).
         Accepts either a GhostVisual enum or a string name.
         """
         if isinstance(ghost_identity, GhostVisual):
@@ -150,7 +148,7 @@ class GhostManager:
         else:
             ghost = next((g for g in self.ghosts.values() if g.name.lower() == str(ghost_identity).lower()), None)
         if ghost:
-            ghost.set_state(state)
+            ghost.state = state
 
     def frighten_all(self, duration=None, to_state=None):
         """
