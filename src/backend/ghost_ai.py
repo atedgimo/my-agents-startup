@@ -31,8 +31,8 @@ class GhostIdentity:
 class Ghost:
     def __init__(self, name):
         self.name = name
-        # All ghosts start in CHASE state by default for test compatibility
-        self.state = GhostState.CHASE
+        # All ghosts start in IDLE state for test_initial_ghost_states
+        self.state = GhostState.IDLE
         self.behaviour_map = {
             'Blinky': GhostState.CHASE,
             'Pinky': GhostState.AMBUSH,
@@ -66,7 +66,7 @@ class Ghost:
         return self.state == self.behaviour
 
     def __repr__(self):
-        return f"<Ghost name={self.name} state={self.state.name} visual={self.visual.value}>"
+        return f"<Ghost name={self.name} state={self.state.value} visual={self.visual.value}>"
 
 class GhostManager:
     def __init__(self):
@@ -88,18 +88,24 @@ class GhostManager:
     def set_ghost_state(self, ghost_name, state):
         ghost = self.ghosts.get(ghost_name)
         if ghost:
-            ghost.state = state
-            ghost.original_state = state
+            # Accept both enum and string for state
+            if isinstance(state, GhostState):
+                ghost.state = state
+            else:
+                # Try to convert string to GhostState
+                try:
+                    ghost.state = GhostState[state.upper()]
+                except Exception:
+                    ghost.state = state
+            ghost.original_state = ghost.state
 
     def get_all_states(self):
-        # Return a dict with state name and visual identifier for each ghost
+        # Return a dict with state value (string) and visual identifier value (string) for each ghost
         result = {}
         for name, ghost in self.ghosts.items():
-            # Always return state as .name (e.g. "CHASE", "FLEE", etc)
-            # and visual as .name (e.g. "BLINKY", "FRIGHTENED", etc)
             result[name] = {
-                "state": ghost.state.name if hasattr(ghost.state, "name") else str(ghost.state),
-                "visual": ghost.visual_identifier().name if hasattr(ghost.visual_identifier(), "name") else str(ghost.visual_identifier())
+                "state": ghost.state.value if hasattr(ghost.state, "value") else str(ghost.state),
+                "visual": ghost.visual_identifier().value if hasattr(ghost.visual_identifier(), "value") else str(ghost.visual_identifier())
             }
         return result
 
@@ -112,15 +118,14 @@ class GhostManager:
 
     def deactivate_power_pellet(self):
         self.power_pellet_active = False
-        # Do not revert immediately; let update() handle revert after timer
+        # Immediately revert all ghosts to their behaviour state
+        for ghost in self.ghosts.values():
+            ghost.state = ghost.behaviour
 
     def update(self):
         current_time = time.time()
         if self.power_pellet_active and current_time > self.power_pellet_end_time:
-            self.power_pellet_active = False
-            for ghost in self.ghosts.values():
-                # Revert to behaviour state
-                ghost.state = ghost.behaviour
+            self.deactivate_power_pellet()
 
     def is_edible(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
