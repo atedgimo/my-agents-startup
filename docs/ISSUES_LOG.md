@@ -1842,3 +1842,11 @@ This blocks the release of card 0094 until fixed.
 
 ---
 
+## Add pytest_asyncio to test dependencies to fix acceptance check for card 0094
+
+**Labels:** bug,test
+
+The acceptance tests for card 0094 fail due to missing pytest_asyncio dependency, causing import errors. Add pytest_asyncio to the test requirements to enable async test support and unblock acceptance testing for ghost state management.
+
+---
+
