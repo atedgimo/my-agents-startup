@@ -1,7 +1,7 @@
 from enum import Enum
 import time
 
-class GhostVisual:
+class GhostVisual(Enum):
     BLINKY = "BLINKY"
     PINKY = "PINKY"
     INKY = "INKY"
@@ -60,7 +60,7 @@ class Ghost:
 
     def visual_identifier(self):
         """
-        Returns a GhostVisual class attribute (string) for rendering.
+        Returns a GhostVisual enum member for rendering.
         """
         if self.state == GhostState.FLEE:
             return GhostVisual.FRIGHTENED
