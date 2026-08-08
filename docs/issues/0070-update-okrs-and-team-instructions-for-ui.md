@@ -48,3 +48,5 @@ Accept: pytest tests/acceptance/test_ui_state_overlays.py && pytest tests/accept
 > 2026-08-08 — Blocked from moving to review due to persistent product start failure caused by ModuleNotFoundError for src.backend.ghost_ai import. The ghost_ai.py file exists, so this is likely an environment or packaging issue. Requesting tech team or co-founder to investigate and resolve this build break to enable review and progress on OKRs update.
 
 > 2026-08-08 — Blocked by missing module 'src.backend.ghost_ai' causing import errors and preventing the product from starting. This blocks all ghost AI related work including OKRs update. Recommend prioritizing fixing this module first.
+
+> 2026-08-08 — Blocked by missing backend module 'src.backend.ghost_ai' causing import errors and preventing the product from starting. Recommend prioritizing bug cards #0057, #0058, and #0100 to fix this issue before updating OKRs and team instructions for ghost AI focus.
