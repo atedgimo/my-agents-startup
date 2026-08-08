@@ -31,9 +31,15 @@ class GhostIdentity:
 class Ghost:
     def __init__(self, name):
         self.name = name
-        self.state = GhostState.IDLE
+        # Set initial state based on ghost name
+        initial_state_map = {
+            'Blinky': GhostState.CHASE,
+            'Pinky': GhostState.AMBUSH,
+            'Inky': GhostState.PATROL,
+            'Clyde': GhostState.RANDOM,
+        }
+        self.state = initial_state_map.get(name, GhostState.IDLE)
         self.original_state = self.state
-        # Map name to GhostVisual member exactly
         visual_map = {
             'Blinky': GhostVisual.BLINKY,
             'Pinky': GhostVisual.PINKY,
@@ -43,6 +49,12 @@ class Ghost:
         self.visual = visual_map.get(name, None)
 
     def visual_identifier(self):
+        # Return the correct visual identifier based on state
+        if self.state == GhostState.FLEE or self.state == GhostState.FRIGHTENED:
+            return GhostVisual.FRIGHTENED
+        # Eyes logic (not implemented in state machine, but placeholder for extensibility)
+        # if self.state == GhostState.EATEN:
+        #     return GhostVisual.EYES_UP  # Example, could be direction-based
         return self.visual
 
     def activate(self):
@@ -66,11 +78,6 @@ class GhostManager:
             GhostIdentity.INKY: Ghost(GhostIdentity.INKY),
             GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE),
         }
-        # Initialize ghosts to expected initial states
-        self.ghosts[GhostIdentity.BLINKY].state = GhostState.CHASE
-        self.ghosts[GhostIdentity.PINKY].state = GhostState.AMBUSH
-        self.ghosts[GhostIdentity.INKY].state = GhostState.PATROL
-        self.ghosts[GhostIdentity.CLYDE].state = GhostState.RANDOM
         self.power_pellet_active = False
         self.power_pellet_end_time = 0
 
@@ -84,6 +91,7 @@ class GhostManager:
         ghost = self.ghosts.get(ghost_name)
         if ghost:
             ghost.state = state
+            ghost.original_state = state
 
     def get_all_states(self):
         return {name: ghost.state for name, ghost in self.ghosts.items()}
@@ -97,6 +105,7 @@ class GhostManager:
 
     def deactivate_power_pellet(self):
         self.power_pellet_active = False
+        # Do not revert immediately; let update() handle revert after timer
 
     def update(self):
         current_time = time.time()
@@ -107,10 +116,17 @@ class GhostManager:
                 if hasattr(ghost, 'original_state') and ghost.original_state is not None:
                     ghost.state = ghost.original_state
                 else:
-                    ghost.state = GhostState.CHASE
+                    # Fallback: assign initial state based on ghost name
+                    initial_state_map = {
+                        'Blinky': GhostState.CHASE,
+                        'Pinky': GhostState.AMBUSH,
+                        'Inky': GhostState.PATROL,
+                        'Clyde': GhostState.RANDOM,
+                    }
+                    ghost.state = initial_state_map.get(ghost.name, GhostState.IDLE)
 
     def is_edible(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
         if ghost:
-            return ghost.state == GhostState.FLEE
+            return ghost.state == GhostState.FLEE or ghost.state == GhostState.FRIGHTENED
         return False

@@ -1,39 +1,11 @@
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.backend.ghost_ai import Ghost, GhostState
+from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
+
+from src.backend.ghost_ai import GhostManager, GhostState, GhostIdentity
 from src.backend.pellet_collection import router as pellet_router
-from src.backend.ghost_ai import Ghost, GhostIdentity, GhostState
-
-class GhostManager:
-    def __init__(self):
-        self.ghosts = {
-            'Blinky': Ghost('Blinky'),
-            'Pinky': Ghost('Pinky'),
-            'Inky': Ghost('Inky'),
-            'Clyde': Ghost('Clyde')
-        }
-
-    def get_all_states(self):
-        # Return {ghost.name: ghost.state} (enum members, not strings)
-        return {ghost.name: ghost.state for ghost in self.ghosts.values()}
-
-    def set_ghost_state(self, identity, state):
-        if identity in self.ghosts:
-            self.ghosts[identity].state = state
-            self.ghosts[identity].original_state = state
-
-    def activate_power_pellet(self):
-        for ghost in self.ghosts.values():
-            ghost.update_state(player_powered_up=True)
-
-    def deactivate_power_pellet(self):
-        for ghost in self.ghosts.values():
-            ghost.state = ghost.original_state
-
-    def update(self):
-        for ghost in self.ghosts.values():
-            ghost.update_state(player_powered_up=False)
 
 app = FastAPI()
 app.include_router(pellet_router)
