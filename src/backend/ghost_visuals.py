@@ -99,7 +99,11 @@ class GhostManager:
 
     def get_all_states(self):
         # Always return GhostState enum members, not strings
-        return {name: ghost.get_state() for name, ghost in self.ghosts.items()}
+        states = {name: ghost.get_state() for name, ghost in self.ghosts.items()}
+        print("[DEBUG] GhostManager.get_all_states() called. States:")
+        for name, state in states.items():
+            print(f"  [DEBUG] {name}: {state} (type: {type(state)})")
+        return states
 
     def activate_power_pellet(self):
         for ghost in self.ghosts.values():
