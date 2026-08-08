@@ -7,6 +7,7 @@ class GhostState(Enum):
     AMBUSH = "ambush"
     FRIGHTENED = "frightened"
     EATEN = "eaten"
+    # Add any additional states used in code/tests if needed
 
 class GhostVisual(Enum):
     BLINKY = "BLINKY"
@@ -18,12 +19,6 @@ class GhostVisual(Enum):
     EYES_DOWN = "EYES_DOWN"
     EYES_LEFT = "EYES_LEFT"
     EYES_RIGHT = "EYES_RIGHT"
-
-class GhostIdentity:
-    BLINKY = 'Blinky'
-    PINKY = 'Pinky'
-    INKY = 'Inky'
-    CLYDE = 'Clyde'
 
 class Ghost:
     """
@@ -65,7 +60,8 @@ class Ghost:
         if self.state == GhostState.FRIGHTENED:
             return GhostVisual.FRIGHTENED
         elif self.state == GhostState.EATEN:
-            return GhostVisual.EYES
+            # Default to EYES_UP for EATEN state, can be extended for direction
+            return GhostVisual.EYES_UP
         else:
             name_map = {
                 'Blinky': GhostVisual.BLINKY,
@@ -89,10 +85,10 @@ class GhostManager:
 
     def __init__(self):
         self.ghosts = {
-            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY, GhostState.NORMAL),
-            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY, GhostState.NORMAL),
-            GhostIdentity.INKY: Ghost(GhostIdentity.INKY, GhostState.NORMAL),
-            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE, GhostState.NORMAL),
+            GhostVisual.BLINKY.value: Ghost("Blinky", GhostState.NORMAL),
+            GhostVisual.PINKY.value: Ghost("Pinky", GhostState.NORMAL),
+            GhostVisual.INKY.value: Ghost("Inky", GhostState.NORMAL),
+            GhostVisual.CLYDE.value: Ghost("Clyde", GhostState.NORMAL),
         }
 
     def get_ghost_state(self, ghost_name):
