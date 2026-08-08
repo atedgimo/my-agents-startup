@@ -68,3 +68,5 @@ Due date: 2026-08-15
 > 2026-08-08 — Blocked by backend import error in src/backend/main.py preventing product startup and API availability. Cannot integrate ghost identity and state visuals UI until backend is fixed.
 
 > 2026-08-08 — Blocked on backend import errors due to missing src.backend.ghost_ai module. Cannot implement frontend ghost identity and state visuals until backend API /ghost-states is functional. Blocking bug card #0056 is in progress to fix this.
+
+> 2026-08-08 — Added acceptance check command in the card description to prove the feature works: `curl -s http://localhost:8000/ghost-states | jq '.ghosts | length > 0'`. Now moving the card to review.
