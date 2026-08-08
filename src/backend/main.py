@@ -14,9 +14,6 @@ import threading
 from src.backend.pellet_collection import router as pellet_router
 from src.backend.ghost_ai import GhostManager, GhostState, GhostVisual
 
-# Removed broken import of src.backend.api which does not exist
-# This fixes the ModuleNotFoundError blocking the product start
-
 logging.basicConfig(level=logging.INFO)
 
 logging.basicConfig(level=logging.INFO)
@@ -144,6 +141,45 @@ async def submit_score(request: Request):
     except Exception as e:
         logging.error(f"Error processing submit-score request: {e}")
         return JSONResponse(status_code=500, content={"error": "Internal server error"})
+
+@app.get("/ghosts")
+async def get_ghosts():
+    """
+    Returns a dict of all ghosts with their state and visual identifier.
+    Keys are ghost names in lowercase.
+    """
+    ghost_manager.update()
+    ghosts = {}
+    for ghost_name, state in ghost_manager.get_all_states().items():
+        visual = ghost_manager.ghosts[GhostVisual[ghost_name.upper()]].visual_identifier()
+        ghosts[ghost_name.lower()] = {
+            "state": state.value,
+            "visual_identifier": visual.value
+        }
+    return ghosts
+
+@app.post("/ghosts/{ghost_name}/state")
+async def set_ghost_state(ghost_name: str, request: Request):
+    """
+    Set the state of a ghost by name.
+    """
+    data = await request.json()
+    new_state = data.get("state")
+    # Accept both enum value and string
+    try:
+        state_enum = GhostState(new_state)
+    except Exception:
+        # fallback: try upper/lower
+        try:
+            state_enum = GhostState[new_state.upper()]
+        except Exception:
+            return JSONResponse(status_code=400, content={"error": "Invalid state"})
+    # Find the ghost by name (case-insensitive)
+    ghost = next((g for g in ghost_manager.ghosts.values() if g.name.lower() == ghost_name.lower()), None)
+    if not ghost:
+        return JSONResponse(status_code=404, content={"error": "Ghost not found"})
+    ghost.set_state(state_enum)
+    return {"message": f"State of {ghost_name} set to {state_enum.value}"}
 
 @app.get("/ghost-states")
 async def get_ghost_states():
