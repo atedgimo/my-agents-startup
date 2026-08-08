@@ -15,7 +15,8 @@ class GhostManager:
         }
 
     def get_all_states(self):
-        return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
+        # Return {ghost.name: ghost.state} (enum members, not strings)
+        return {ghost.name: ghost.state for ghost in self.ghosts.values()}
 
     def set_ghost_state(self, identity, state):
         if identity in self.ghosts:
