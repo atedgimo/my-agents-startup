@@ -1,26 +1,18 @@
 from enum import Enum
 import time
 
+class GhostState(Enum):
+    NORMAL = "normal"
+    FRIGHTENED = "frightened"
+    EATEN = "eaten"
+
 class GhostVisual(Enum):
     BLINKY = "BLINKY"
     PINKY = "PINKY"
     INKY = "INKY"
     CLYDE = "CLYDE"
     FRIGHTENED = "FRIGHTENED"
-    EYES_UP = "EYES_UP"
-    EYES_DOWN = "EYES_DOWN"
-    EYES_LEFT = "EYES_LEFT"
-    EYES_RIGHT = "EYES_RIGHT"
-
-class GhostState(Enum):
-    IDLE = 'idle'
-    CHASE = 'chase'
-    FRIGHTENED = 'frightened'
-    FLEE = 'flee'
-    EATEN = 'eaten'
-    AMBUSH = 'ambush'
-    PATROL = 'patrol'
-    RANDOM = 'random'
+    EYES = "EYES"
 
 class GhostIdentity:
     BLINKY = 'Blinky'
@@ -32,11 +24,11 @@ class Ghost:
     """
     Represents a single ghost and its state logic.
     """
-    def __init__(self, name, initial_state=GhostState.IDLE):
+    def __init__(self, name, initial_state=GhostState.NORMAL):
         self.name = name
         self.state = initial_state
         self._original_state = initial_state
-        self._edible_until = 0
+        self._frightened_until = 0
 
     def set_state(self, state: GhostState):
         self.state = state
@@ -44,29 +36,31 @@ class Ghost:
     def get_state(self) -> GhostState:
         return self.state
 
-    def update_for_power_pellet(self, duration: float):
+    def frighten(self, duration: float):
         self._original_state = self.state
-        self.state = GhostState.FLEE
-        self._edible_until = time.time() + duration
+        self.state = GhostState.FRIGHTENED
+        self._frightened_until = time.time() + duration
+
+    def eat(self):
+        self.state = GhostState.EATEN
 
     def update_state(self, current_time=None):
         """
-        Called periodically to update the ghost's state, e.g. after power pellet expires.
+        Called periodically to update the ghost's state, e.g. after frightened expires.
         """
-        if self.state == GhostState.FLEE:
+        if self.state == GhostState.FRIGHTENED:
             now = current_time if current_time is not None else time.time()
-            if now > self._edible_until:
+            if now > self._frightened_until:
                 self.state = self._original_state
 
     def visual_identifier(self):
         """
         Returns a GhostVisual enum member for rendering.
         """
-        if self.state == GhostState.FLEE:
+        if self.state == GhostState.FRIGHTENED:
             return GhostVisual.FRIGHTENED
         elif self.state == GhostState.EATEN:
-            # For simplicity, default to EYES_UP when eaten; could be directional
-            return GhostVisual.EYES_UP
+            return GhostVisual.EYES
         else:
             name_map = {
                 'Blinky': GhostVisual.BLINKY,
@@ -77,26 +71,24 @@ class Ghost:
             return name_map.get(self.name, GhostVisual.BLINKY)
 
     def is_edible(self) -> bool:
-        return self.state == GhostState.FLEE
+        return self.state == GhostState.FRIGHTENED
 
     def __repr__(self):
         return f"<Ghost name={self.name} state={self.state.value}>"
 
 class GhostManager:
     """
-    Manages all ghosts and their state transitions, including power pellet logic.
+    Manages all ghosts and their state transitions, including frightened and eaten logic.
     """
-    POWER_PELLET_DURATION = 10
+    FRIGHTENED_DURATION = 10
 
     def __init__(self):
         self.ghosts = {
-            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY, GhostState.CHASE),
-            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY, GhostState.AMBUSH),
-            GhostIdentity.INKY: Ghost(GhostIdentity.INKY, GhostState.PATROL),
-            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE, GhostState.RANDOM),
+            GhostIdentity.BLINKY: Ghost(GhostIdentity.BLINKY, GhostState.NORMAL),
+            GhostIdentity.PINKY: Ghost(GhostIdentity.PINKY, GhostState.NORMAL),
+            GhostIdentity.INKY: Ghost(GhostIdentity.INKY, GhostState.NORMAL),
+            GhostIdentity.CLYDE: Ghost(GhostIdentity.CLYDE, GhostState.NORMAL),
         }
-        self._power_pellet_active = False
-        self._power_pellet_end_time = 0
 
     def get_ghost_state(self, ghost_name):
         ghost = self.ghosts.get(ghost_name)
@@ -107,48 +99,36 @@ class GhostManager:
         if ghost:
             ghost.set_state(state)
 
-    def get_all_states(self):
-        return {name: ghost.get_state() for name, ghost in self.ghosts.items()}
-
-    def activate_power_pellet(self, duration=None):
+    def frighten_all(self, duration=None):
         """
-        Activates power pellet mode for all ghosts.
+        Sets all ghosts to FRIGHTENED state for the given duration.
         """
-        duration = duration if duration is not None else self.POWER_PELLET_DURATION
-        self._power_pellet_active = True
-        self._power_pellet_end_time = time.time() + duration
+        duration = duration if duration is not None else self.FRIGHTENED_DURATION
         for ghost in self.ghosts.values():
-            ghost.update_for_power_pellet(duration)
+            ghost.frighten(duration)
 
-    def deactivate_power_pellet(self):
-        """
-        Deactivates power pellet mode (ghosts revert to original states).
-        """
-        self._power_pellet_active = False
-        # Force all ghosts out of FLEE state, back to their original state
-        for ghost in self.ghosts.values():
-            if ghost.state == GhostState.FLEE:
-                ghost.state = ghost._original_state
-            # Also clear edible timer
-            ghost._edible_until = 0
+    def eat_ghost(self, ghost_name):
+        ghost = self.ghosts.get(ghost_name)
+        if ghost:
+            ghost.eat()
 
     def update(self):
         """
-        Should be called periodically to update ghost states and handle power pellet expiration.
+        Should be called periodically to update ghost states and handle frightened expiration.
         """
         now = time.time()
-        if self._power_pellet_active and now > self._power_pellet_end_time:
-            self.deactivate_power_pellet()
-        elif self._power_pellet_active:
-            for ghost in self.ghosts.values():
-                ghost.update_state(current_time=now)
+        for ghost in self.ghosts.values():
+            ghost.update_state(current_time=now)
 
-    def is_edible(self, ghost_name):
-        ghost = self.ghosts.get(ghost_name)
-        return ghost.is_edible() if ghost else False
+    def get_all_states(self):
+        return {name: ghost.get_state() for name, ghost in self.ghosts.items()}
 
     def get_visual_identifiers(self):
         """
         Returns a dict of ghost name to their visual identifier (for rendering).
         """
         return {name: ghost.visual_identifier() for name, ghost in self.ghosts.items()}
+
+    def is_edible(self, ghost_name):
+        ghost = self.ghosts.get(ghost_name)
+        return ghost.is_edible() if ghost else False
